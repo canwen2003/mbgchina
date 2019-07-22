@@ -17,12 +17,9 @@ package com.mbg.module.common.core.cache;
 
 import android.content.Context;
 
-import com.blued.international.core.arch.tools.Encryption;
+import com.mbg.module.common.tool.Encryption;
 
 
-/**
- * Created by YanZhenjie on 2017/12/21.
- */
 public abstract class BasicCacheStore implements CacheStore<CacheEntity> {
 
     private Context mContext;

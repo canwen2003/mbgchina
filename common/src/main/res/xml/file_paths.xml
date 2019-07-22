@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource xmlns:android="http://schemas.android.com/apk/res/android">
+    <root-path name="mbg" path="/"/>
+    <!--Context.getFilesDir().-->
+    <files-path name="mbg-files" path="files/"/>
+    <!-- getCacheDir().-->
+    <cache-path name="mbg-cache" path="cache/" />
+    <!-- Environment.getExternalStorageDirectory().-->
+    <external-path name="mbg-external" path="/" />
+    <!--Context#getExternalFilesDir(String) Context.getExternalFilesDir(null).   -->
+    <external-files-path name="mbg-external-files" path="files/" />
+    <external-files-path name="mbg-img" path="files/img/" />
+    <!-- Context.getExternalCacheDir().  -->
+    <external-cache-path name="mbg-external-cache" path="cache/" />
+</resource>
