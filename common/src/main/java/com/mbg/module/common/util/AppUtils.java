@@ -20,7 +20,7 @@ public class AppUtils {
     /**
      * 设置全局 Application
      */
-    public static void setupApplication(@NonNull Application application) {
+    public static void setApplication(@NonNull Application application) {
         sApplication = application;
     }
 
