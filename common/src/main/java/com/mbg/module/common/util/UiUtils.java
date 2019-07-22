@@ -130,7 +130,7 @@ public class UiUtils {
             method.invoke(display, dm);
             height = dm.heightPixels;
         } catch (Exception e) {
-            LogUtil.d( e.toString());
+            LogUtils.d( e.toString());
         }
         return height;
     }

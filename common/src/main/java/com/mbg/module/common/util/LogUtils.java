@@ -8,8 +8,8 @@ import com.mbg.module.common.BuildConfig;
  * Log打印类，用户log打印
  * created by gap
  */
-public class LogUtil {
-    private LogUtil(){}
+public class LogUtils {
+    private LogUtils(){}
 
     private final static String TAG="Logger";
     private final static boolean mIsLoggable= BuildConfig.DEBUG;
