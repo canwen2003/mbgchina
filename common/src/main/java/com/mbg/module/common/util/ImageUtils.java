@@ -1,12 +1,7 @@
 package com.mbg.module.common.util;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.view.View;
-
-import androidx.annotation.NonNull;
 
 
 public class ImageUtils {
