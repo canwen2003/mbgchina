@@ -1,10 +1,11 @@
 package com.mbg.module.common.core.view.layout;
 
 import android.content.Context;
+import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import androidx.customview.widget.ViewDragHelper;
+
 
 import com.mbg.module.common.core.view.callback.DragViewCallback;
 

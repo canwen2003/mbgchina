@@ -3,18 +3,19 @@ package com.mbg.module.ui.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
-import com.mbg.module.ui.activity.BaseActivity;
+
+import com.mbg.module.ui.activity.BaseFragmentActivity;
 
 
 public abstract class BaseFragment extends Fragment {
@@ -27,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void showContent(Class<? extends BaseFragment> fragmentClass, Bundle bundle) {
-        BaseActivity activity = (BaseActivity) getActivity();
+        BaseFragmentActivity activity = (BaseFragmentActivity) getActivity();
         if (activity != null) {
             activity.showContent(fragmentClass, bundle);
         }
@@ -112,7 +113,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void finish() {
-        BaseActivity activity = (BaseActivity) getActivity();
+        BaseFragmentActivity activity = (BaseFragmentActivity) getActivity();
         if (activity != null) {
             activity.doBack(this);
         }

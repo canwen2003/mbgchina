@@ -7,13 +7,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
 
 import java.lang.reflect.Method;
 

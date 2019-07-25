@@ -2,8 +2,8 @@ package com.mbg.module.common.util;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
-import androidx.annotation.NonNull;
 
 /***
  * 线程管理类

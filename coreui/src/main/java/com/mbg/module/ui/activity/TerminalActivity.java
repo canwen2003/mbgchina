@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.mbg.module.ui.fragment.BaseFragment;
 
-public class TerminalActivity extends BaseActivity {
+public class TerminalActivity extends BaseFragmentActivity {
 
 
     public static void show(Context context, Class<? extends BaseFragment> baseFragment,Bundle bundle){

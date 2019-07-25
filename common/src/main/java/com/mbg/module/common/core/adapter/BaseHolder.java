@@ -3,13 +3,14 @@ package com.mbg.module.common.core.adapter;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.mbg.module.common.core.listener.OnItemClickListener;
 import com.mbg.module.common.core.manager.ThreadPoolManager;

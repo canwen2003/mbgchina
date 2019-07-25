@@ -34,13 +34,14 @@ public class DragFragment extends BaseFragment implements View.OnClickListener{
         }
         switch (viewId){
             case R.id.btn_test1:
-                show(getContext());
+                show(getActivity());
                 break;
             case R.id.btn_test2:
                 break;
             case R.id.btn_test3:
                 break;
             case R.id.btn_test4:
+                finish();
                 break;
         }
 

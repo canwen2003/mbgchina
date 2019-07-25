@@ -1,14 +1,14 @@
 package com.mbg.mbgsupport;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import com.mbg.mbgsupport.fragment.DragFragment;
+import com.mbg.module.ui.activity.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Context context;
     @Override
