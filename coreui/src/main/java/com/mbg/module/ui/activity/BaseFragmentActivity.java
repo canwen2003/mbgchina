@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import com.mbg.module.ui.fragment.BaseFragment;
 
 import java.util.ArrayDeque;
 
 
-public abstract class BaseFragmentActivity extends AppCompatActivity {
+public abstract class BaseFragmentActivity extends BaseActivity {
 
     protected static final String ARG_FRAGMENT_CLASS_NAME="arg_fragment_class_name";
     protected static final String ARG_FRAGMENT_ARGS="arg_fragment_args";

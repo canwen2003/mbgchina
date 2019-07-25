@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
+import com.jaeger.library.StatusBarUtil;
 import com.mbg.module.ui.activity.BaseFragmentActivity;
 
 
@@ -32,6 +32,10 @@ public abstract class BaseFragment extends Fragment {
         if (activity != null) {
             activity.showContent(fragmentClass, bundle);
         }
+    }
+
+    public void setStatusBarColor(int color,int statusBarAlpha){
+        StatusBarUtil.setColor(getActivity(),color,statusBarAlpha);
     }
 
     @LayoutRes

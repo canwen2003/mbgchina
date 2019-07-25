@@ -15,6 +15,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setStatusBarColor(getResources().getColor(R.color.design_default_color_primary),0);
         context=this;
         initView();
     }
