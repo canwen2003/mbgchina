@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mbg.module.common">
-    <!--<application tools:node="merge">
-        &lt;!&ndash; Android N 文件共享 &ndash;&gt;
+    <application tools:node="merge">
+        <!-- Android N 文件共享 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -12,6 +12,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-    </application>-->
+    </application>
 
 </manifest>
