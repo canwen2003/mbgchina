@@ -1,350 +1,182 @@
 package com.mbg.module.common.core.cache;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
-
+/**
+ * A general purpose size limited cache that evicts items using an LRU algorithm. By default every
+ * item is assumed to have a size of one. Subclasses can override getSize(Object) to
+ * change the size on a per item basis.
+ *
+ * @param <K> The type of the keys.
+ * @param <V> The type of the values.
+ */
 public class LruCache<K, V> {
-    private final LinkedHashMap<K, V> map;
-
-    private int size;
-    private int maxSize;
-
-    private int putCount;
-    private int createCount;
-    private int evictionCount;
-    private int hitCount;
-    private int missCount;
+    private final Map<K, V> cache = new LinkedHashMap<>(100, 0.75f, true);
+    private final long initialMaxSize;
+    private long maxSize;
+    private long currentSize;
 
     /**
-     * @param maxSize for caches that do not override {@link #sizeOf}, this is
-     *                the maximum number of entries in the cache. For all other caches,
-     *                this is the maximum sum of the sizes of the entries in this cache.
-     */
-    public LruCache(int maxSize) {
-        if (maxSize <= 0) {
-            throw new IllegalArgumentException("maxSize <= 0");
-        }
-        this.maxSize = maxSize;
-        this.map = new LinkedHashMap<>(0, 0.75f, true);
-    }
-
-    /**
-     * Sets the size of the cache.
+     * Constructor for LruCache.
      *
-     * @param maxSize The new maximum size.
+     * @param size The maximum size of the cache, the units must match the units used in
+     *     getSize(Object).
      */
-    public void reSize(int maxSize) {
-        if (maxSize <= 0) {
-            throw new IllegalArgumentException("maxSize <= 0");
-        }
-
-        synchronized (this) {
-            this.maxSize = maxSize;
-        }
-        trimToSize(maxSize);
+    public LruCache(long size) {
+        this.initialMaxSize = size;
+        this.maxSize = size;
     }
 
     /**
-     * Returns the value for {@code key} if it exists in the cache or can be
-     * created by {@code #create}. If a value was returned, it is moved to the
-     * head of the queue. This returns null if a value is not cached and cannot
-     * be created.
+     * Sets a size multiplier that will be applied to the size provided in the constructor to put the
+     * new size of the cache. If the new size is less than the current size, entries will be evicted
+     * until the current size is less than or equal to the new size.
      *
-     * @param key Key
-     * @return Value
+     * @param multiplier The multiplier to apply.
      */
-    public final V get(K key) {
-        if (key == null) {
-            throw new NullPointerException("key == null");
+    public synchronized void setSizeMultiplier(float multiplier) {
+        if (multiplier < 0) {
+            throw new IllegalArgumentException("Multiplier must be >= 0");
         }
-
-        V mapValue;
-        synchronized (this) {
-            mapValue = map.get(key);
-            if (mapValue != null) {
-                hitCount++;
-                return mapValue;
-            }
-            missCount++;
-        }
-
-		/*
-         * Attempt to create a value. This may take a long time, and the map
-		 * may be different when create() returns. If a conflicting value was
-		 * added to the map while create() was working, we leave that value in
-		 * the map and release the created value.
-		 */
-
-        V createdValue = create(key);
-        if (createdValue == null) {
-            return null;
-        }
-
-        synchronized (this) {
-            createCount++;
-            mapValue = map.put(key, createdValue);
-
-            if (mapValue != null) {
-                // There was a conflict so undo that last put
-                map.put(key, mapValue);
-            } else {
-                size += safeSizeOf(key, createdValue);
-            }
-        }
-
-        if (mapValue != null) {
-            entryRemoved(false, key, createdValue, mapValue);
-            return mapValue;
-        } else {
-            trimToSize(maxSize);
-            return createdValue;
-        }
+        maxSize = Math.round(initialMaxSize * multiplier);
+        evict();
     }
 
     /**
-     * Caches {@code value} for {@code key}. The value is moved to the head of
-     * the queue.
+     * Returns the size of a given item, defaulting to one. The units must match those used in the
+     * size passed in to the constructor. Subclasses can override this method to return sizes in
+     * various units, usually bytes.
      *
-     * @param key   Key
-     * @param value Value
-     * @return the previous value mapped by {@code key}.
+     * @param item The item to get the size of.
      */
-    public final V put(K key, V value) {
-        if (key == null || value == null) {
-            throw new NullPointerException("key == null || value == null");
-        }
-
-        V previous;
-        synchronized (this) {
-            putCount++;
-            size += safeSizeOf(key, value);
-            previous = map.put(key, value);
-            if (previous != null) {
-                size -= safeSizeOf(key, previous);
-            }
-        }
-
-        if (previous != null) {
-            entryRemoved(false, key, previous, value);
-        }
-
-        trimToSize(maxSize);
-        return previous;
-    }
-
-    /**
-     * Remove the eldest entries until the total of remaining entries is at or
-     * below the requested size.
-     *
-     * @param maxSize the maximum size of the cache before returning. May be -1
-     *                to evict even 0-sized elements.
-     */
-    public void trimToSize(int maxSize) {
-        while (true) {
-            K key;
-            V value;
-            synchronized (this) {
-                if (size < 0 || (map.isEmpty() && size != 0)) {
-                    throw new IllegalStateException(getClass().getName() + ".sizeOf() is reporting inconsistent " +
-                            "results!");
-                }
-
-                if (size <= maxSize || map.isEmpty()) {
-                    break;
-                }
-
-                Map.Entry<K, V> toEvict = map.entrySet().iterator().next();
-                key = toEvict.getKey();
-                value = toEvict.getValue();
-                map.remove(key);
-                size -= safeSizeOf(key, value);
-                evictionCount++;
-            }
-
-            entryRemoved(true, key, value, null);
-        }
-    }
-
-    /**
-     * Removes the entry for {@code key} if it exists.
-     *
-     * @param key Key
-     * @return the previous value mapped by {@code key}.
-     */
-    public final V remove(K key) {
-        if (key == null) {
-            throw new NullPointerException("key == null");
-        }
-
-        V previous;
-        synchronized (this) {
-            previous = map.remove(key);
-            if (previous != null) {
-                size -= safeSizeOf(key, previous);
-            }
-        }
-
-        if (previous != null) {
-            entryRemoved(false, key, previous, null);
-        }
-
-        return previous;
-    }
-
-    /**
-     * <p>Called for entries that have been evicted or removed. This method is
-     * invoked when a value is evicted to make space, removed by a call to
-     * {@link #remove}, or replaced by a call to {@link #put}. The default
-     * implementation does nothing.</p>
-     * <p>The method is called without synchronization: other threads may
-     * access the cache while this method is executing.</p>
-     *
-     * @param evicted  true if the entry is being removed to make space, false
-     *                 if the removal was caused by a {@link #put} or {@link #remove}.
-     * @param key      Key
-     * @param oldValue Old Value
-     * @param newValue the new value for {@code key}, if it exists. If non-null,
-     *                 this removal was caused by a {@link #put}. Otherwise it was caused by
-     *                 an eviction or a {@link #remove}.
-     */
-    protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue) {
-    }
-
-    /**
-     * <p>Called after a cache miss to compute a value for the corresponding key.
-     * Returns the computed value or null if no value can be computed. The
-     * default implementation returns null.
-     * The method is called without synchronization: other threads may
-     * access the cache while this method is executing.</p>
-     * <p>If a value for {@code key} exists in the cache when this method
-     * returns, the created value will be released with {@link #entryRemoved}
-     * and discarded. This can occur when multiple threads handle the same key
-     * at the same time (causing multiple values to be created), or when one
-     * thread calls {@link #put} while another is creating a value for the same
-     * key.</p>
-     *
-     * @param key Key
-     * @return Value
-     */
-    protected V create(K key) {
-        return null;
-    }
-
-    private int safeSizeOf(K key, V value) {
-        int result = sizeOf(key, value);
-        if (result < 0) {
-            throw new IllegalStateException("Negative size: " + key + "=" + value);
-        }
-        return result;
-    }
-
-    /**
-     * <p>Returns the size of the entry for {@code key} and {@code value} in
-     * user-defined units. The default implementation returns 1 so that size
-     * is the number of entries and max size is the maximum number of entries.</p>
-     * <p>An entry's size must not change while it is in the cache.</p>
-     *
-     * @param key   Key
-     * @param value Value
-     * @return size
-     */
-    protected int sizeOf(K key, V value) {
+    protected int getSize(@Nullable V item) {
         return 1;
     }
 
-    /**
-     * Clear the cache, calling {@link #entryRemoved} on each removed entry.
-     */
-    public final void evictAll() {
-        trimToSize(-1); // -1 will evict 0-sized elements
+    /** Returns the number of entries stored in cache. */
+    protected synchronized int getCount() {
+        return cache.size();
     }
 
     /**
-     * For caches that do not override {@link #sizeOf}, this returns the number
-     * of entries in the cache. For all other caches, this returns the sum of
-     * the sizes of the entries in this cache.
+     * A callback called whenever an item is evicted from the cache. Subclasses can override.
      *
-     * @return size
+     * @param key The key of the evicted item.
+     * @param item The evicted item.
      */
-    public synchronized final int size() {
-        return size;
+    protected void onItemEvicted(@NonNull K key, @Nullable V item) {
+        // optional override
     }
 
-    /**
-     * For caches that do not override {@link #sizeOf}, this returns the maximum
-     * number of entries in the cache. For all other caches, this returns the
-     * maximum sum of the sizes of the entries in this cache.
-     *
-     * @return Max size
-     */
-    public synchronized final int maxSize() {
+    /** Returns the current maximum size of the cache in bytes. */
+    public synchronized long getMaxSize() {
         return maxSize;
     }
 
-    /**
-     * Returns the number of times {@link #get} returned a value that was
-     * already present in the cache.
-     *
-     * @return count
-     */
-    public synchronized final int hitCount() {
-        return hitCount;
+    /** Returns the sum of the sizes of all items in the cache. */
+    public synchronized long getCurrentSize() {
+        return currentSize;
     }
 
     /**
-     * Returns the number of times {@link #get} returned null or required a new
-     * value to be created.
+     * Returns true if there is a value for the given key in the cache.
      *
-     * @return count
+     * @param key The key to check.
      */
-    public synchronized final int missCount() {
-        return missCount;
+    public synchronized boolean contains(@NonNull K key) {
+        return cache.containsKey(key);
     }
 
     /**
-     * Returns the number of times returned a value.
+     * Returns the item in the cache for the given key or null if no such item exists.
      *
-     * @return count
+     * @param key The key to check.
      */
-    public synchronized final int createCount() {
-        return createCount;
+    @Nullable
+    public synchronized V get(@NonNull K key) {
+        return cache.get(key);
     }
 
     /**
-     * Returns the number of times {@link #put} was called.
+     * Adds the given item to the cache with the given key and returns any previous entry for the
+     * given key that may have already been in the cache.
      *
-     * @return count
+     * <p>If the size of the item is larger than the total cache size, the item will not be added to
+     * the cache and instead onItemEvicted(Object, Object) will be called synchronously with
+     * the given key and item.
+     *
+     * @param key The key to add the item at.
+     * @param item The item to add.
      */
-    public synchronized final int putCount() {
-        return putCount;
+    @Nullable
+    public synchronized V put(@NonNull K key, @Nullable V item) {
+        final int itemSize = getSize(item);
+        if (itemSize >= maxSize) {
+            onItemEvicted(key, item);
+            return null;
+        }
+
+        if (item != null) {
+            currentSize += itemSize;
+        }
+        @Nullable final V old = cache.put(key, item);
+        if (old != null) {
+            currentSize -= getSize(old);
+
+            if (!old.equals(item)) {
+                onItemEvicted(key, old);
+            }
+        }
+        evict();
+
+        return old;
     }
 
     /**
-     * Returns the number of values that have been evicted.
+     * Removes the item at the given key and returns the removed item if present, and null otherwise.
      *
-     * @return count
+     * @param key The key to remove the item at.
      */
-    public synchronized final int evictionCount() {
-        return evictionCount;
+    @Nullable
+    public synchronized V remove(@NonNull K key) {
+        final V value = cache.remove(key);
+        if (value != null) {
+            currentSize -= getSize(value);
+        }
+        return value;
+    }
+
+    /** Clears all items in the cache. */
+    public void clearMemory() {
+        trimToSize(0);
     }
 
     /**
-     * Returns a copy of the current contents of the cache, ordered from least
-     * recently accessed to most recently accessed.
+     * Removes the least recently used items from the cache until the current size is less than the
+     * given size.
      *
-     * @return Map
+     * @param size The size the cache should be less than.
      */
-    public synchronized final Map<K, V> snapshot() {
-        return new LinkedHashMap<K, V>(map);
+    protected synchronized void trimToSize(long size) {
+        Map.Entry<K, V> last;
+        Iterator<Map.Entry<K, V>> cacheIterator;
+        while (currentSize > size) {
+            cacheIterator = cache.entrySet().iterator();
+            last = cacheIterator.next();
+            final V toRemove = last.getValue();
+            currentSize -= getSize(toRemove);
+            final K key = last.getKey();
+            cacheIterator.remove();
+            onItemEvicted(key, toRemove);
+        }
     }
 
-    @Override
-    public synchronized final String toString() {
-        int accesses = hitCount + missCount;
-        int hitPercent = accesses != 0 ? (100 * hitCount / accesses) : 0;
-        return String.format(Locale.getDefault(), "LruCache[maxSize=%d,hits=%d,misses=%d,hitRate=%d%%]", maxSize,
-                hitCount, missCount, hitPercent);
+    private void evict() {
+        trimToSize(maxSize);
     }
 }
