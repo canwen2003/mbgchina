@@ -1,70 +1,87 @@
+/*******************************************************************************
+ * Copyright 2014 Sergey Tarasevich
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 package com.mbg.module.ui.image.cache.disk;
 
+import android.graphics.Bitmap;
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import com.mbg.module.ui.image.cache.common.Key;
+import com.mbg.module.ui.image.cache.engine.listener.CopyListener;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
-/** An interface for writing to and reading from a disk cache. */
+/**
+ * Interface for disk cache
+ *
+ * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
+ * @since 1.9.2
+ */
 public interface DiskCache {
+	/**
+	 * Returns root directory of disk cache
+	 *
+	 * @return Root directory of disk cache
+	 */
+	File getDirectory();
 
-  /** An interface for lazily creating a disk cache. */
-  interface Factory {
-    /** 250 MB of cache. */
-    int DEFAULT_DISK_CACHE_SIZE = 250 * 1024 * 1024;
+	/**
+	 * Returns file of cached image
+	 *
+	 * @param imageUri Original image URI
+	 * @return File of cached image or <b>null</b> if image wasn't cached
+	 */
+	File get(String imageUri);
 
-    String DEFAULT_DISK_CACHE_DIR = "image_manager_disk_cache";
+	/**
+	 * Saves image stream in disk cache.
+	 * Incoming image stream shouldn't be closed in this method.
+	 *
+	 * @param imageUri    Original image URI
+	 * @param imageStream Input stream of image (shouldn't be closed in this method)
+	 * @param listener    Listener for saving progress, can be ignored if you don't use
+	 *                    { com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener
+	 *                    progress listener} in ImageLoader calls
+	 * @return <b>true</b> - if image was saved successfully; <b>false</b> - if image wasn't saved in disk cache.
+	 * @throws IOException
+	 */
+	boolean save(String imageUri, InputStream imageStream, CopyListener listener) throws IOException;
 
-    /** Returns a new disk cache, or {@code null} if no disk cache could be created. */
-    @Nullable
-    DiskCache build();
-  }
+	/**
+	 * Saves image bitmap in disk cache.
+	 *
+	 * @param imageUri Original image URI
+	 * @param bitmap   Image bitmap
+	 * @return <b>true</b> - if bitmap was saved successfully; <b>false</b> - if bitmap wasn't saved in disk cache.
+	 * @throws IOException
+	 */
+	boolean save(String imageUri, Bitmap bitmap) throws IOException;
 
-  /** An interface to actually write data to a key in the disk cache. */
-  interface Writer {
-    /**
-     * Writes data to the file and returns true if the write was successful and should be committed,
-     * and false if the write should be aborted.
-     *
-     * @param file The File the Writer should write to.
-     */
-    boolean write(@NonNull File file);
-  }
+	/**
+	 * Removes image file associated with incoming URI
+	 *
+	 * @param imageUri Image URI
+	 * @return <b>true</b> - if image file is deleted successfully; <b>false</b> - if image file doesn't exist for
+	 * incoming URI or image file can't be deleted.
+	 */
+	boolean remove(String imageUri);
 
-  /**
-   * Get the cache for the value at the given key.
-   *
-   * <p>Note - This is potentially dangerous, someone may write a new value to the file at any point
-   * in time and we won't know about it.
-   *
-   * @param key The key in the cache.
-   * @return An InputStream representing the data at key at the time get is called.
-   */
-  @Nullable
-  File get(Key key);
+	/** Closes disk cache, releases resources. */
+	void close();
 
-  /**
-   * Write to a key in the cache. {@link Writer} is used so that the cache implementation can
-   * perform actions after the write finishes, like commit (via atomic file rename).
-   *
-   * @param key The key to write to.
-   * @param writer An interface that will write data given an OutputStream for the key.
-   */
-  void put(Key key, Writer writer);
-
-  /**
-   * Remove the key and value from the cache.
-   *
-   * @param key The key to remove.
-   */
-  // Public API.
-  @SuppressWarnings("unused")
-  void delete(Key key);
-
-  /** Clear the cache. */
-  void clear();
+	/** Clears disk cache. */
+	void clear();
 }

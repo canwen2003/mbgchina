@@ -62,4 +62,24 @@ public class LogUtils {
         }
         return clsName + "->" + st.getMethodName() + "()"+"("+st.getLineNumber()+"):";
     }
+
+    public static void v(String message, Object... args) {
+        v(String.format(message,args));
+    }
+
+
+    public static void d(String message, Object... args) {
+        d(String.format(message,args));
+    }
+
+    public static void i(String message, Object... args) {
+        i(String.format(message,args));
+    }
+
+    public static void w(String message, Object... args) {
+        w(String.format(message,args));
+    }
+    public static void e(String message, Object... args) {
+        e(String.format(message,args));
+    }
 }

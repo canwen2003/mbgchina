@@ -18,7 +18,7 @@ public abstract class StateVerifier {
     }
   }
 
-  private StateVerifier() {}
+  protected StateVerifier() {}
 
   /**
    * Throws an exception if we believe our object is recycled and inactive (i.e. is currently in an
