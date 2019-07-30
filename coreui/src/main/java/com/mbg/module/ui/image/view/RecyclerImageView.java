@@ -17,13 +17,20 @@
 package com.mbg.module.ui.image.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.mbg.module.ui.image.cache.common.ImageScaleType;
+import com.mbg.module.ui.image.cache.display.SimpleBitmapDisplayer;
+import com.mbg.module.ui.image.cache.engine.DisplayImageOptions;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
 import com.mbg.module.ui.image.cache.engine.imageloader.ImageLoader;
 
@@ -84,21 +91,7 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
 
     @Override
     public void setImageResource(int resId) {
-        // 在xml文件预览时, 使用系统资源加载, 只有运行时才使用代码处理
-        if (isInEditMode() || !LoadOptions.getDefault().isSystemResourceLoad()) {
-            setImageResourceInner(resId);
-        } else {
-            setImageResourceOverload(resId);
-        }
-    }
-
-    // 调用系统默认的资源加载方式, 因为感觉系统默认的资源加载方式更高效
-    public void setImageResourceInner(int resId) {
-    	super.setImageResource(resId);
-    }
-
-    public void setImageResourceOverload(int resId) {
-       // RecyclingImageLoader.loadLocalResSync(this, resId, null);
+        super.setImageResource(resId);
     }
 
     @Override
@@ -109,7 +102,20 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
         }
     }
 
-    // 需要找到图片被释放的真正原因
+    @Override
+    public void loadImage(String uri, @NonNull LoadOptions options) {
+        //如果为空直接显示默认图片
+        if (TextUtils.isEmpty(uri)){
+            setImageResource(options.getDefaultImageResId());
+            return;
+        }
+
+        ImageLoader imageLoader=ImageLoader.getInstance();
+        if (imageLoader!=null) {
+            imageLoader.displayImage(uri, this,getImageOptions(options));
+        }
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
     	try {
@@ -117,5 +123,24 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
+    }
+
+    private DisplayImageOptions getImageOptions(LoadOptions options){
+        DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(options.getDefaultImageResId())
+                .showImageForEmptyUri(options.getDefaultImageResId())
+                .showImageOnFail(options.getImageOnFail())
+                .resetViewBeforeLoading(false)
+                .delayBeforeLoading(1000)
+                .cacheInMemory(options.isEnableCache())
+                .cacheOnDisk(options.isEnableCache()) // default
+                .considerExifParams(false) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .displayer(new SimpleBitmapDisplayer()) // default
+                .handler(new Handler()) // default
+                .build();
+
+        return displayImageOptions;
     }
 }
