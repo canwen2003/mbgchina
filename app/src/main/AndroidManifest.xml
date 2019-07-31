@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mbg.module.ui.activity.TerminalActivity"/>
+        <activity android:name="com.mbg.module.ui.activity.TerminalActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

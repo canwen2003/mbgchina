@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
     <Button
         android:id="@+id/btn_test1"
         android:layout_width="wrap_content"
@@ -43,9 +53,24 @@
 
     <com.mbg.module.ui.image.view.RecyclerImageView
         android:id="@+id/img_test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_launcher_foreground"/>
+    <com.mbg.module.ui.image.view.RecyclerImageView
+        android:id="@+id/img_test1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_launcher_foreground"/>
+
+    <com.mbg.module.ui.image.view.RecyclerImageView
+        android:id="@+id/img_test2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_launcher_foreground"/>
+    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

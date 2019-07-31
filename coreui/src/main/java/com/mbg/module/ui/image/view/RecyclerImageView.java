@@ -17,26 +17,21 @@
 package com.mbg.module.ui.image.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.mbg.module.ui.image.cache.common.ImageScaleType;
-import com.mbg.module.ui.image.cache.display.SimpleBitmapDisplayer;
-import com.mbg.module.ui.image.cache.engine.DisplayImageOptions;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
+import com.mbg.module.ui.image.cache.engine.factory.DisplayImageOptionsFactory;
 import com.mbg.module.ui.image.cache.engine.imageloader.ImageLoader;
 
 
 public class RecyclerImageView extends AppCompatImageView implements ILoadImage {
-
 	public RecyclerImageView(Context context) {
         super(context);
     }
@@ -112,7 +107,7 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
 
         ImageLoader imageLoader=ImageLoader.getInstance();
         if (imageLoader!=null) {
-            imageLoader.displayImage(uri, this,getImageOptions(options));
+            imageLoader.displayImage(uri, this, DisplayImageOptionsFactory.get().getImageOptions(options));
         }
     }
 
@@ -125,22 +120,4 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
     	}
     }
 
-    private DisplayImageOptions getImageOptions(LoadOptions options){
-        DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
-                .showImageOnLoading(options.getDefaultImageResId())
-                .showImageForEmptyUri(options.getDefaultImageResId())
-                .showImageOnFail(options.getImageOnFail())
-                .resetViewBeforeLoading(false)
-                .delayBeforeLoading(1000)
-                .cacheInMemory(options.isEnableCache())
-                .cacheOnDisk(options.isEnableCache()) // default
-                .considerExifParams(false) // default
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
-                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
-                .displayer(new SimpleBitmapDisplayer()) // default
-                .handler(new Handler()) // default
-                .build();
-
-        return displayImageOptions;
-    }
 }
