@@ -58,10 +58,10 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
     public RecyclerImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerImageView, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundedImageView, defStyle, 0);
 
-        mCornerRadius = a.getDimensionPixelSize(R.styleable.RecyclerImageView_corner_radius, -1);
-        mBorderWidth = a.getDimensionPixelSize(R.styleable.RecyclerImageView_border_width, -1);
+        mCornerRadius = a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius, -1);
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.RoundedImageView_border_width, -1);
         if (mCornerRadius < 0) {
             mCornerRadius = DEFAULT_RADIUS;
         }
@@ -69,9 +69,9 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
             mBorderWidth = DEFAULT_BORDER;
         }
 
-        mBorderColor = a.getColor(R.styleable.RecyclerImageView_border_color, DEFAULT_BORDER_COLOR);
+        mBorderColor = a.getColor(R.styleable.RoundedImageView_border_color, DEFAULT_BORDER_COLOR);
 
-        roundBackground = a.getBoolean(R.styleable.RecyclerImageView_round_background, false);
+        roundBackground = a.getBoolean(R.styleable.RoundedImageView_round_background, false);
 
         a.recycle();
     }

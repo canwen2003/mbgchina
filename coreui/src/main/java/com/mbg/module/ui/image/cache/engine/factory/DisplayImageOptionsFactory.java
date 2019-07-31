@@ -41,7 +41,7 @@ public class DisplayImageOptionsFactory {
                 .showImageForEmptyUri(options.getDefaultImageResId())
                 .showImageOnFail(options.getImageOnFail())
                 .resetViewBeforeLoading(false)
-                .delayBeforeLoading(0)
+                .delayBeforeLoading(100)
                 .cacheInMemory(options.isEnableCache())
                 .cacheOnDisk(options.isEnableCache()) // default
                 .considerExifParams(false) // default
@@ -52,19 +52,33 @@ public class DisplayImageOptionsFactory {
                 .build();
     }
 
-    public DisplayImageOptions getImageOptions(LoadOptions options,int cornerRadiusDp){
+    public DisplayImageOptions getImageOptions(boolean enableCache){
+        return new DisplayImageOptions.Builder()
+                .resetViewBeforeLoading(false)
+                .delayBeforeLoading(100)
+                .cacheInMemory(enableCache)
+                .cacheOnDisk(enableCache) // default
+                .considerExifParams(false) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+                .bitmapConfig(mBitmapConfig) // default
+                .displayer(mBitmapDisplayer) // default
+                .handler(mLoadingHandler) // default
+                .build();
+    }
+
+    public DisplayImageOptions getImageOptions(LoadOptions options,int cornerRadiusPixels){
         return new DisplayImageOptions.Builder()
                 .showImageOnLoading(options.getDefaultImageResId())
                 .showImageForEmptyUri(options.getDefaultImageResId())
                 .showImageOnFail(options.getImageOnFail())
                 .resetViewBeforeLoading(false)
-                .delayBeforeLoading(0)
+                .delayBeforeLoading(100)
                 .cacheInMemory(options.isEnableCache())
                 .cacheOnDisk(options.isEnableCache()) // default
                 .considerExifParams(false) // default
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
                 .bitmapConfig(mBitmapConfig) // default
-                .displayer(new RoundedBitmapDisplayer(cornerRadiusDp)) // default
+                .displayer(new RoundedBitmapDisplayer(cornerRadiusPixels)) // default
                 .handler(mLoadingHandler) // default
                 .build();
     }

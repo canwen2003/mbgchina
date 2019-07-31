@@ -9,6 +9,7 @@ import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
 import com.mbg.module.ui.image.view.RecyclerImageView;
+import com.mbg.module.ui.image.view.RoundedImageView;
 
 public class DragFragment extends BaseFragment implements View.OnClickListener{
 
@@ -36,7 +37,26 @@ public class DragFragment extends BaseFragment implements View.OnClickListener{
         LoadOptions options= LoadOptions.get().setEnableCache(true).setDefaultImageResId(R.drawable.icon_common_empty).setImageOnFail(R.drawable.icon_common_empty);
         imgView.loadImage(uri,options);
         imgView1.loadImage(uri1,options);
-        imgView2.loadImage(uri2,options);
+        imgView2.loadImage(uri,options);
+
+
+        RoundedImageView roundedImageView1=findViewById(R.id.img_test3);
+        RoundedImageView roundedImageView2=findViewById(R.id.img_test4);
+        RoundedImageView roundedImageView3=findViewById(R.id.img_test5);
+        RoundedImageView roundedImageView4=findViewById(R.id.img_test6);
+        final RoundedImageView roundedImageView5=findViewById(R.id.img_test7);
+        final String uri3="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564565361478&di=81576c9c9acbdda02e967b26f7488807&imgtype=0&src=http%3A%2F%2Ftvax4.sinaimg.cn%2Fcrop.0.0.512.512.1024%2F007azY3dly8fykbthnagdj30e80e80tm.jpg%3FExpires%3D1562678507%26ssig%3DEcWVulc6xh%26KID%3Dimgbed%2Ctva";
+        roundedImageView1.loadImage(uri);
+        roundedImageView2.loadImage(uri1);
+        roundedImageView3.loadImage(uri2);
+        roundedImageView4.loadImage(uri3);
+        roundedImageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                roundedImageView5.loadImage(uri3);
+            }
+        });
+        roundedImageView5.loadImage(uri3);
     }
 
     @Override

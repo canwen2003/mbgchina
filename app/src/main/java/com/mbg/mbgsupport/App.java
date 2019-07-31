@@ -79,15 +79,15 @@ public class App extends Application {
 
         File cacheDir = StorageUtils.getCacheDirectory(context);
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                .memoryCacheExtraOptions(UiUtils.getScreenWidth(context), UiUtils.getScreenHeight(context)) // default = device screen dimensions
-                .diskCacheExtraOptions(UiUtils.getScreenWidth(context), UiUtils.getScreenHeight(context), null)
+                .memoryCacheExtraOptions(UiUtils.getScreenWidth(context), UiUtils.getScreenHeight(context)) // 即保存的每个缓存文件的最大长宽
+                .diskCacheExtraOptions(UiUtils.getScreenWidth(context), UiUtils.getScreenHeight(context), null)//
                 //.taskExecutor(...)
 		//.taskExecutorForCachedImages(...)
-		        .threadPoolSize(3) // default
-                .threadPriority(Thread.NORM_PRIORITY - 2) // default
+		        .threadPoolSize(4) // /线程池内加载的数量
+                .threadPriority(Thread.NORM_PRIORITY - 2) // /当同一个Uri获取不同大小的图片，缓存到内存时，只缓存一个。默认会缓存多个不同的大小的相同图片
                 .tasksProcessingOrder(QueueProcessingType.FIFO) // default
-                .denyCacheImageMultipleSizesInMemory()
-                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+                .denyCacheImageMultipleSizesInMemory()////拒绝缓存多个图片。
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))////缓存策略你可以通过自己的内存缓存实现 ，这里用弱引用，缺点是太容易被回收了，不是很好！
                 .memoryCacheSize(2 * 1024 * 1024)
                 .memoryCacheSizePercentage(13) // default
                 .diskCache(new UnlimitedDiskCache(cacheDir)) // default
