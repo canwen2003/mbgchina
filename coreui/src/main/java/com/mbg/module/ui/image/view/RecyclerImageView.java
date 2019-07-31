@@ -28,7 +28,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.R;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
 import com.mbg.module.ui.image.cache.engine.factory.DisplayImageOptionsFactory;
@@ -63,15 +62,11 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
 
         mCornerRadius = a.getDimensionPixelSize(R.styleable.RecyclerImageView_corner_radius, -1);
         mBorderWidth = a.getDimensionPixelSize(R.styleable.RecyclerImageView_border_width, -1);
-        if (mCornerRadius <= 0) {
+        if (mCornerRadius < 0) {
             mCornerRadius = DEFAULT_RADIUS;
-        }else {
-            mCornerRadius= UiUtils.px2dip(context,mCornerRadius);
         }
-        if (mBorderWidth <= 0) {
+        if (mBorderWidth < 0) {
             mBorderWidth = DEFAULT_BORDER;
-        }else {
-            mBorderWidth=UiUtils.px2dip(context,mBorderWidth);
         }
 
         mBorderColor = a.getColor(R.styleable.RecyclerImageView_border_color, DEFAULT_BORDER_COLOR);
