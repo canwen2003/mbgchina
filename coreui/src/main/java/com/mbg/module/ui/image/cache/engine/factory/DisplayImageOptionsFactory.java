@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.mbg.module.ui.image.cache.common.BitmapDisplayer;
 import com.mbg.module.ui.image.cache.common.ImageScaleType;
+import com.mbg.module.ui.image.cache.display.RoundedBitmapDisplayer;
 import com.mbg.module.ui.image.cache.display.SimpleBitmapDisplayer;
 import com.mbg.module.ui.image.cache.engine.DisplayImageOptions;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
@@ -47,6 +48,23 @@ public class DisplayImageOptionsFactory {
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
                 .bitmapConfig(mBitmapConfig) // default
                 .displayer(mBitmapDisplayer) // default
+                .handler(mLoadingHandler) // default
+                .build();
+    }
+
+    public DisplayImageOptions getImageOptions(LoadOptions options,int cornerRadiusDp){
+        return new DisplayImageOptions.Builder()
+                .showImageOnLoading(options.getDefaultImageResId())
+                .showImageForEmptyUri(options.getDefaultImageResId())
+                .showImageOnFail(options.getImageOnFail())
+                .resetViewBeforeLoading(false)
+                .delayBeforeLoading(0)
+                .cacheInMemory(options.isEnableCache())
+                .cacheOnDisk(options.isEnableCache()) // default
+                .considerExifParams(false) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+                .bitmapConfig(mBitmapConfig) // default
+                .displayer(new RoundedBitmapDisplayer(cornerRadiusDp)) // default
                 .handler(mLoadingHandler) // default
                 .build();
     }
