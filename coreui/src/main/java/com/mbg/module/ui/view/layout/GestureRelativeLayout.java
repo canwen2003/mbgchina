@@ -1,12 +1,12 @@
-package com.mbg.module.common.core.view.layout;
+package com.mbg.module.ui.view.layout;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
-import com.mbg.module.common.core.view.detector.GestureDetector;
-import com.mbg.module.common.core.view.listener.OnScrollListener;
+import com.mbg.module.ui.view.detector.GestureDetector;
+import com.mbg.module.ui.view.listener.OnScrollListener;
 
 /**
  * created by Gap

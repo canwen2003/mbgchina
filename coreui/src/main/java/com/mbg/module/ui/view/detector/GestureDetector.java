@@ -1,10 +1,10 @@
-package com.mbg.module.common.core.view.detector;
+package com.mbg.module.ui.view.detector;
 
 import android.content.Context;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
-import com.mbg.module.common.core.view.listener.OnScrollListener;
+import com.mbg.module.ui.view.listener.OnScrollListener;
 
 /**
  * Created by Gap

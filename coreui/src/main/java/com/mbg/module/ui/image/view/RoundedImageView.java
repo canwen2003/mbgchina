@@ -39,7 +39,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.mbg.module.ui.R;
-import com.mbg.module.ui.image.cache.engine.DisplayImageOptions;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
 import com.mbg.module.ui.image.cache.engine.factory.DisplayImageOptionsFactory;
 import com.mbg.module.ui.image.cache.engine.imageloader.ImageLoader;

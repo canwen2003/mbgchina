@@ -1,9 +1,8 @@
-package com.mbg.module.common.core.view.callback;
+package com.mbg.module.ui.view.callback;
 
 import android.support.annotation.NonNull;
 import android.support.v4.widget.ViewDragHelper;
 import android.view.View;
-
 
 
 public class DragViewCallback extends ViewDragHelper.Callback {

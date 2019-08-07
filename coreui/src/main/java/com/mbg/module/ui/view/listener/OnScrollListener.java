@@ -1,4 +1,4 @@
-package com.mbg.module.common.core.view.listener;
+package com.mbg.module.ui.view.listener;
 
 /***
  * 控件滑动监控类
