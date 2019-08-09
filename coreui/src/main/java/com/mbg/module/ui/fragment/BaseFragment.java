@@ -19,7 +19,7 @@ import com.mbg.module.ui.activity.BaseFragmentActivity;
 
 
 public abstract class BaseFragment extends Fragment {
-    private View mRootView;
+    public View mRootView;
     private int mContainer;
 
 

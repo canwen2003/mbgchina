@@ -1,4 +1,4 @@
-package com.mbg.mbgsupport;
+package com.mbg.mbgsupport.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
 
+import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.StorageUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.image.cache.common.HashCodeFileNameGenerator;
