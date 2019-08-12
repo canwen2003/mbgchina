@@ -8,6 +8,7 @@ import android.view.View;
 import com.mbg.mbgsupport.fragment.DragFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
+import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.module.ui.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity {
@@ -41,6 +42,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SnapShotFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_text_banner).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextBannerFragment.show(context);
             }
         });
     }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.mbg.module.ui.view.banner.TextBannerView
+        android:id="@+id/tb_left_right"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/common_black"
+        app:interval="1000"
+        app:textSize="36sp"
+        app:textColor="#FF0000"
+        app:direction="left_to_right"
+        app:gravity="center"
+        app:flags="underline"/>
+
+    <com.mbg.module.ui.view.banner.TextBannerView
+        android:id="@+id/tb_right_left"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        app:direction="right_to_left"
+        app:gravity="center"
+        app:textColor="#FFFF00"
+        app:flags="strike"/>
+
+    <com.mbg.module.ui.view.banner.TextBannerView
+        android:id="@+id/tb_top_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        app:direction="top_to_bottom"
+        app:gravity="center"
+        app:typeface="bold"
+        app:textColor="#00FF00"/>
+
+    <com.mbg.module.ui.view.banner.TextBannerView
+        android:id="@+id/tb_bottom_top"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        app:direction="bottom_to_top"
+        app:gravity="center"
+        app:typeface="italic"
+        app:textColor="#00FFFF"/>
+
+</LinearLayout>
