@@ -50,6 +50,15 @@ public class AppUtils {
     }
 
 
+    /**
+     * 获取 App 的版本名
+     *
+     * @return app的版本名 默认为""
+     */
+    public static String getPackageName() {
+        Context context = getApplication();
+        return context.getPackageName();
+    }
 
     /**
      * 获取 App 的版本名

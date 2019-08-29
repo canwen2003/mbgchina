@@ -138,7 +138,7 @@ public class TextBannerView extends RelativeLayout {
                 mFlags = Paint.UNDERLINE_TEXT_FLAG| Paint.ANTI_ALIAS_FLAG;
                 break;
             default:
-                mFlags = 0| Paint.ANTI_ALIAS_FLAG;
+                mFlags = Paint.ANTI_ALIAS_FLAG;
                 break;
         }
         mTypeface = typedArray.getInt(R.styleable.TextBannerViewStyle_typeface, mTypeface);//字体样式

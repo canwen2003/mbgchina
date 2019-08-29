@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resource xmlns:android="http://schemas.android.com/apk/res/android">
-    <root-path name="mbg" path="/"/>
-    <!--Context.getFilesDir().-->
-    <files-path name="mbg-files" path="files/"/>
-    <!-- getCacheDir().-->
-    <cache-path name="mbg-cache" path="cache/" />
-    <!-- Environment.getExternalStorageDirectory().-->
-    <external-path name="mbg-external" path="/" />
-    <!--Context#getExternalFilesDir(String) Context.getExternalFilesDir(null).   -->
-    <external-files-path name="mbg-external-files" path="files/" />
-    <external-files-path name="mbg-img" path="files/img/" />
-    <!-- Context.getExternalCacheDir().  -->
-    <external-cache-path name="mbg-external-cache" path="cache/" />
+    <!--配置root-path。这样子可以读取到sd卡和一些应用分身的目录，否则微信分身保存的图片，
+    就会导致 java.lang.IllegalArgumentException:
+    Failed to find configured root that contains /storage/emulated/999/tencent/MicroMsg/WeiXin/export1544062754693.jpg，
+    在小米6的手机上微信分身有这个crash，华为没有-->
+    <root-path
+        name="root-path"
+        path="" />
+
+    <!--/data/data/<包名>/files-->
+    <files-path
+        name="files-path"
+        path="." />
+
+    <!--/data/data/<包名>/cache-->
+    <cache-path
+        name="cache-path"
+        path="." />
+
+    <!--/storage/emulate/0-->
+    <external-path
+        name="external_storage_root"
+        path="." />
+
+    <!--storage/emulate/0/Android/data/<包名>/files-->
+    <external-files-path
+        name="external_file_path"
+        path="." />
+    <!--代表app 外部存储区域根目录下的文件 Context.getExternalCacheDir目录下的目录-->
+    <!--/storage/emulate/0/Android/data/<包名>/cache-->
+
+    <external-cache-path
+        name="external_cache_path"
+        path="." />
 </resource>
