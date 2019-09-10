@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -170,6 +171,16 @@ public class SuperButton extends LinearLayout {
     private int mShadowSize = ResourceId.VALUE_NULL;
 
 
+    /**
+     * 记录点击时的位置坐标，防止点击后滑动不返回
+     */
+    private int mCurrentColor;
+    private float mXPos=0f;
+    private float mYPos =0f;
+    private float mMovingThreshold;//滑动阀值
+
+
+
     public SuperButton(Context context) {
         this(context, null);
     }
@@ -188,6 +199,9 @@ public class SuperButton extends LinearLayout {
      * 初始化按钮
      */
     private void initButton(Context context, @Nullable AttributeSet attrs) {
+
+        mMovingThreshold= ViewConfiguration.get(context).getScaledTouchSlop();
+
         setClickable(true);
         setGravity(Gravity.CENTER);
         mTextIconContainer = new TextView(context);
@@ -368,9 +382,16 @@ public class SuperButton extends LinearLayout {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
+                mXPos=event.getX();
+                mXPos=event.getY();
                 break;
             case MotionEvent.ACTION_UP:
                 setButtonBackgroundColor(mColorNormal);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if ((mCurrentColor!=mColorNormal)&&(Math.abs(event.getX()-mXPos)>mMovingThreshold||Math.abs(event.getX()- mYPos)>mMovingThreshold)) {
+                    setButtonBackgroundColor(mColorNormal);
+                }
                 break;
             default:
                 break;
@@ -388,6 +409,7 @@ public class SuperButton extends LinearLayout {
             mButtonBackground.setColor(color);
         }
         setBackground(mButtonBackground);
+        mCurrentColor=color;
     }
 
 
