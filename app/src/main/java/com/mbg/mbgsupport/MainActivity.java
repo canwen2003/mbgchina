@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mbg.mbgsupport.fragment.BubbleViewFragment;
 import com.mbg.mbgsupport.fragment.DragFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
@@ -65,6 +66,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SupperButtonFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_bubble).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BubbleViewFragment.show(context);
             }
         });
     }

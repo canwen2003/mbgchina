@@ -188,4 +188,32 @@
         <attr name="shadow_size" format="dimension" />
 
     </declare-styleable>
+
+    <declare-styleable name="BubbleView">
+        <!--原件-->
+        <attr name="corner"/>
+
+        <!--箭头的高度-->
+        <attr name="arrowHeight" format="dimension" />
+
+        <!--箭头的高度-->
+        <attr name="arrowWidth" format="dimension" />
+
+        <!--背景色-->
+        <attr name="bubbleColor" format="color" />
+
+        <!--箭头的距离起始位置的距离-->
+        <attr name="arrowPosition" format="dimension" />
+
+        <!--箭头是否在中间-->
+        <attr name="arrowCenter" format="boolean" />
+
+        <!--箭头方向-->
+        <attr name="arrowLocation" format="enum">
+            <enum name="left" value="0x00" />
+            <enum name="right" value="0x01" />
+            <enum name="top" value="0x02" />
+            <enum name="bottom" value="0x03" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.mbg.module.ui.view.bubble.BubbleTextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello BubbleTextVew"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        app:bubbleColor="#7EC0EE"
+        app:arrowLocation="right"
+        app:arrowWidth="8dp"
+        app:corner="8dp"
+        app:arrowHeight="10dp"
+        app:arrowPosition="14dp"
+        />
+
+    <com.mbg.module.ui.view.bubble.BubbleImageView
+        android:id="@+id/bubble_image"
+        android:src="@drawable/icon_girl"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:arrowWidth="10dp"
+        app:corner="6dp"
+        app:arrowHeight="8dp"
+        app:arrowLocation="top"
+        app:arrowCenter="true"/>
+
+    <com.mbg.module.ui.view.bubble.BubbleLinearLayout
+        android:id="@+id/bubble_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        app:arrowWidth="8dp"
+        app:corner="4dp"
+        app:arrowHeight="10dp"
+        app:arrowPosition="10dp"
+        app:arrowLocation="bottom"
+        app:bubbleColor="#7EC0EE"
+        app:arrowCenter="true">
+
+        <ImageView
+            android:layout_marginBottom="10dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_vertical"
+            android:text="BubbleLinearLayout Text"
+             android:padding="10dp"/>
+
+    </com.mbg.module.ui.view.bubble.BubbleLinearLayout>
+
+    <com.mbg.module.ui.view.bubble.BubbleTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello BubbleTextVew"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        app:corner="10dp"
+        app:arrowWidth="20dp"
+        app:arrowHeight="10dp"
+        app:arrowPosition="100dp"
+        app:arrowLocation="bottom"
+        app:bubbleColor="#ff4444"/>
+
+</LinearLayout>
