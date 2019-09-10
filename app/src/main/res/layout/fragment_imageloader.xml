@@ -63,7 +63,7 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_launcher_foreground"
-                app:corner_radius="5dp" />
+                app:corner="5dp" />
 
             <com.mbg.module.ui.image.view.RecyclerImageView
                 android:id="@+id/img_test1"
@@ -71,7 +71,7 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_launcher_foreground"
-                app:corner_radius="100dp" />
+                app:corner="100dp" />
 
             <com.mbg.module.ui.image.view.RecyclerImageView
                 android:id="@+id/img_test2"
@@ -85,7 +85,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
-                app:corner_radius="10dp"
+                app:corner="10dp"
                 android:src="@drawable/ic_launcher_foreground" />
 
             <com.mbg.module.ui.image.view.RoundedImageView
@@ -102,10 +102,10 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
-                app:corner_radius_top_left="20dp"
-                app:corner_radius_top_right="20dp"
-                app:corner_radius_bottom_left="20dp"
-                app:corner_radius_bottom_right="20dp"
+                app:corner_left_top="20dp"
+                app:corner_right_top="20dp"
+                app:corner_left_bottom="20dp"
+                app:corner_right_bottom="20dp"
                 android:src="@drawable/ic_launcher_foreground" />
 
             <com.mbg.module.ui.image.view.RoundedImageView

@@ -16,16 +16,35 @@
 
     <!--边框颜色-->
     <attr name="border_color" format="color" />
+
+    <!--按钮圆角，如果单独设置会覆盖此设置-->
+    <attr name="corner" format="dimension" />
+    <!--左上角圆角半径-->
+    <attr name="corner_left_top" format="dimension" />
+    <!--左下角圆角半径-->
+    <attr name="corner_left_bottom" format="dimension" />
+    <!--右上角圆角半径-->
+    <attr name="corner_right_top" format="dimension" />
+    <!--右下角圆角半径-->
+    <attr name="corner_right_bottom" format="dimension" />
+
     <!--通用属性定义结束-->
 
     <declare-styleable name="RoundedImageView">
         <attr name="border_width"/>
         <attr name="border_color"/>
-        <attr name="corner_radius" format="dimension" />
-        <attr name="corner_radius_top_left" format="dimension" />
-        <attr name="corner_radius_top_right" format="dimension" />
-        <attr name="corner_radius_bottom_left" format="dimension" />
-        <attr name="corner_radius_bottom_right" format="dimension" />
+        <!--按钮圆角，如果单独设置会覆盖此设置-->
+        <attr name="corner" />
+        <!--左上角圆角半径-->
+        <attr name="corner_left_top" />
+        <!--左下角圆角半径-->
+        <attr name="corner_left_bottom" />
+        <!--右上角圆角半径-->
+        <attr name="corner_right_top"/>
+        <!--右下角圆角半径-->
+        <attr name="corner_right_bottom"/>
+
+
         <attr name="round_background" format="boolean" />
         <attr name="mutate_background" format="boolean" />
         <attr name="oval" format="boolean" />
@@ -148,15 +167,15 @@
         </attr>
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->
-        <attr name="corner" format="dimension" />
+        <attr name="corner" />
         <!--左上角圆角半径-->
-        <attr name="corner_left_top" format="dimension" />
+        <attr name="corner_left_top" />
         <!--左下角圆角半径-->
-        <attr name="corner_left_bottom" format="dimension" />
+        <attr name="corner_left_bottom" />
         <!--右上角圆角半径-->
-        <attr name="corner_right_top" format="dimension" />
+        <attr name="corner_right_top"/>
         <!--右下角圆角半径-->
-        <attr name="corner_right_bottom" format="dimension" />
+        <attr name="corner_right_bottom"/>
 
         <!--按钮是否可以点击-->
         <attr name="button_click_able" format="boolean" />

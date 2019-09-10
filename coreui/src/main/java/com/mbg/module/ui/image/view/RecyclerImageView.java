@@ -60,7 +60,7 @@ public class RecyclerImageView extends AppCompatImageView implements ILoadImage 
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundedImageView, defStyle, 0);
 
-        mCornerRadius = a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius, -1);
+        mCornerRadius = a.getDimensionPixelSize(R.styleable.RoundedImageView_corner, -1);
         mBorderWidth = a.getDimensionPixelSize(R.styleable.RoundedImageView_border_width, -1);
         if (mCornerRadius < 0) {
             mCornerRadius = DEFAULT_RADIUS;

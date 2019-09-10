@@ -107,16 +107,16 @@ public class RoundedImageView extends AppCompatImageView implements ILoadImage{
     }
 
     float cornerRadiusOverride =
-        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius, -1);
+        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner, -1);
 
     mCornerRadii[Corner.TOP_LEFT] =
-        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius_top_left, -1);
+        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_left_top, -1);
     mCornerRadii[Corner.TOP_RIGHT] =
-        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius_top_right, -1);
+        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_right_top, -1);
     mCornerRadii[Corner.BOTTOM_RIGHT] =
-        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius_bottom_right, -1);
+        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_right_bottom, -1);
     mCornerRadii[Corner.BOTTOM_LEFT] =
-        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_radius_bottom_left, -1);
+        a.getDimensionPixelSize(R.styleable.RoundedImageView_corner_left_bottom, -1);
 
     boolean any = false;
     for (int i = 0, len = mCornerRadii.length; i < len; i++) {
