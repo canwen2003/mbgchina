@@ -8,6 +8,7 @@ import android.view.View;
 import com.mbg.mbgsupport.fragment.DragFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
+import com.mbg.mbgsupport.fragment.SupperButtonFragment;
 import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
 import com.mbg.module.ui.activity.BaseActivity;
@@ -57,6 +58,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 UtilsDemoFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_supper).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SupperButtonFragment.show(context);
             }
         });
     }
