@@ -8,6 +8,7 @@ import android.view.View;
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.PermissionUtils;
+import com.mbg.module.common.util.ToastUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.pudding.Pudding;
@@ -109,15 +110,32 @@ public class PuddingFragment extends BaseFragment implements View.OnClickListene
         pudding.setText("This is a Text");
         pudding.setIcon(R.drawable.ic_event_available_black_24dp);
         pudding.setTextTypeface(Typeface.DEFAULT_BOLD);
+        pudding.setBackgroundColor(getResources().getColor(R.color.color_14c7de));
         pudding.show();
     }
 
     private void onTest6() {
-        Pudding pudding=Pudding.create((AppCompatActivity)getActivity());
+        final Pudding pudding=Pudding.create((AppCompatActivity)getActivity());
         pudding.setText("This is a Text");
         pudding.setIcon(R.drawable.ic_event_available_black_24dp);
         pudding.setEnabledVibration(true);
         pudding.setBackgroundColor(getResources().getColor(R.color.color_14c7de));
+        pudding.addButton("OK", R.style.PuddingButton, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show("OK");
+                pudding.showIcon(false);
+            }
+        });
+        pudding.addButton("NO", R.style.PuddingButton, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show("No");
+                pudding.hide();
+            }
+        });
+        pudding.enableSwipeToDismiss();
+        pudding.setInfiniteDuration(true);
         pudding.show();
     }
 

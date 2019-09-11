@@ -71,6 +71,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:orientation="horizontal"
-            android:layout_below="@+id/content"/>
+            android:layout_below="@id/root_icon"
+            android:paddingTop="40dp"/>
     </RelativeLayout>
 </FrameLayout>

@@ -1,6 +1,5 @@
 package com.mbg.module.ui.view.pudding;
 
-import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
@@ -24,12 +23,11 @@ import android.view.WindowManager;
 
 import com.mbg.module.common.util.ThreadUtils;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Pudding implements LifecycleObserver {
     private WindowManager mWindowManager;
-    private Choco choco;
+    private Choco mChoco;
 
 
 
@@ -41,7 +39,7 @@ public class Pudding implements LifecycleObserver {
     public void show() {
         if (mWindowManager!=null){
             try {
-                mWindowManager.addView(choco,initLayoutParameter());
+                mWindowManager.addView(mChoco,initLayoutParameter());
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -49,21 +47,21 @@ public class Pudding implements LifecycleObserver {
         }
 
         // time over dismiss
-        choco.postDelayed(new Runnable() {
+        mChoco.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (choco.enableInfiniteDuration) {
+                if (mChoco.enableInfiniteDuration) {
                     return;
                 }
-                choco.hide(false);
+                mChoco.hide(false);
             }
         },Choco.DISPLAY_TIME);
 
         // click dismiss
-        choco.setOnClickListener(new View.OnClickListener() {
+        mChoco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choco.hide(false);
+                mChoco.hide(false);
             }
         });
 
@@ -93,7 +91,7 @@ public class Pudding implements LifecycleObserver {
     // must invoke first
     private void setActivity(AppCompatActivity activity) {
 
-        choco = new  Choco(activity);
+        mChoco = new  Choco(activity);
         mWindowManager= activity.getWindowManager();
 
         activity.getLifecycle().addObserver(this);
@@ -107,12 +105,12 @@ public class Pudding implements LifecycleObserver {
             @Override
             public void run() {
                  final Pudding item=puddingMapX.get(activity.toString());
-                 if (item!=null&&item.choco!=null&&item.choco.isAttachedToWindow){
+                 if (item!=null&&item.mChoco !=null&&item.mChoco.isAttachedToWindow){
 
-                     ViewCompat.animate(item.choco).alpha(0F).withEndAction(new Runnable() {
+                     ViewCompat.animate(item.mChoco).alpha(0F).withEndAction(new Runnable() {
                          @Override
                          public void run() {
-                             activity.getWindowManager().removeViewImmediate(item.choco);
+                             activity.getWindowManager().removeViewImmediate(item.mChoco);
                          }
                      });
 
@@ -126,35 +124,35 @@ public class Pudding implements LifecycleObserver {
     }
 
     public void setTitle(String title){
-        choco.setTitle(title);
+        mChoco.setTitle(title);
     }
 
     public void setTitle(@StringRes int  resId){
-        choco.setTitle(resId);
+        mChoco.setTitle(resId);
     }
 
     public void setTitleAppearance(@StyleRes int textAppearance ){
-        choco.setTitleAppearance(textAppearance);
+        mChoco.setTitleAppearance(textAppearance);
     }
 
     public void setTitleTypeface(Typeface typeface ){
-        choco.setTitleTypeface(typeface);
+        mChoco.setTitleTypeface(typeface);
     }
 
     public void setText(String title){
-        choco.setText(title);
+        mChoco.setText(title);
     }
 
     public void setText(@StringRes int  resId){
-        choco.setText(resId);
+        mChoco.setText(resId);
     }
 
     public void setTextAppearance(@StyleRes int textAppearance ){
-        choco.setTextAppearance(textAppearance);
+        mChoco.setTextAppearance(textAppearance);
     }
 
     public void setTextTypeface(Typeface typeface ){
-        choco.setTextTypeface(typeface);
+        mChoco.setTextTypeface(typeface);
     }
 
     /**
@@ -163,7 +161,7 @@ public class Pudding implements LifecycleObserver {
      * @param iconId Drawable resource id of the icon to use in the Choco
      */
     public void setIcon(@DrawableRes int iconId) {
-        choco.setIcon(iconId);
+        mChoco.setIcon(iconId);
     }
 
     /**
@@ -172,7 +170,7 @@ public class Pudding implements LifecycleObserver {
      * @param color Color int
      */
     public void setIconColorFilter(@ColorInt int  color) {
-        choco.setIconColorFilter(color);
+        mChoco.setIconColorFilter(color);
     }
 
     /**
@@ -181,7 +179,7 @@ public class Pudding implements LifecycleObserver {
      * @param colorFilter ColorFilter
      */
     public void setIconColorFilter(ColorFilter colorFilter) {
-        choco.setIconColorFilter(colorFilter);
+        mChoco.setIconColorFilter(colorFilter);
 
     }
 
@@ -193,7 +191,7 @@ public class Pudding implements LifecycleObserver {
      * @param mode  PorterDuff.Mode
      */
     public void setIconColorFilter(@ColorInt int color, PorterDuff.Mode mode ) {
-        choco.setIconColorFilter(color, mode);
+        mChoco.setIconColorFilter(color, mode);
     }
 
     /**
@@ -202,7 +200,7 @@ public class Pudding implements LifecycleObserver {
      * @param bitmap Bitmap image of the icon to use in the Choco.
      */
     public void setIcon(Bitmap bitmap) {
-        choco.setIcon(bitmap);
+        mChoco.setIcon(bitmap);
     }
 
     /**
@@ -211,7 +209,7 @@ public class Pudding implements LifecycleObserver {
      * @param drawable Drawable image of the icon to use in the Choco.
      */
     public void setIcon(Drawable drawable) {
-        choco.setIcon(drawable);
+        mChoco.setIcon(drawable);
     }
 
     /**
@@ -220,7 +218,7 @@ public class Pudding implements LifecycleObserver {
      * @param showIcon True to show the icon, false otherwise
      */
     public void showIcon(boolean showIcon) {
-        choco.showIcon(showIcon);
+        mChoco.showIcon(showIcon);
     }
 
     /**
@@ -229,7 +227,7 @@ public class Pudding implements LifecycleObserver {
      * @param shouldPulse True if the icon should be animated
      */
     public void pulseIcon(boolean shouldPulse) {
-        choco.pulseIcon(shouldPulse);
+        mChoco.pulseIcon(shouldPulse);
     }
 
     /**
@@ -238,7 +236,7 @@ public class Pudding implements LifecycleObserver {
      * @param enableProgress True to enable, False to disable
      */
     public void setEnableProgress(boolean enableProgress) {
-        choco.setEnableProgress(enableProgress);
+        mChoco.setEnableProgress(enableProgress);
     }
 
     /**
@@ -247,7 +245,7 @@ public class Pudding implements LifecycleObserver {
      * @param color The color resource
      */
     public void setProgressColorRes(@ColorRes int color) {
-        choco.setProgressColorRes(color);
+        mChoco.setProgressColorRes(color);
     }
 
     /**
@@ -256,7 +254,7 @@ public class Pudding implements LifecycleObserver {
      * @param color The color resource
      */
     public void setProgressColorInt(@ColorInt int color) {
-        choco.setProgressColorInt(color);
+        mChoco.setProgressColorInt(color);
     }
 
     /**
@@ -265,7 +263,7 @@ public class Pudding implements LifecycleObserver {
      * @param enabledVibration True to enable, false to disable
      */
     public void setEnabledVibration(boolean enabledVibration) {
-        choco.setEnabledVibration(enabledVibration);
+        mChoco.setEnabledVibration(enabledVibration);
     }
 
 
@@ -276,19 +274,19 @@ public class Pudding implements LifecycleObserver {
      * @param onClick The on click listener
      */
     public void addButton(String text, @StyleRes int style, View.OnClickListener onClick) {
-        choco.addButton(text,style,onClick);
+        mChoco.addButton(text,style,onClick);
     }
 
     /**
      * Set whether to enable swipe to dismiss or not
      */
     public void enableSwipeToDismiss() {
-        choco.enableSwipeToDismiss();
+        mChoco.enableSwipeToDismiss();
     }
 
 
     public void setBackgroundColor(@ColorInt int color) {
-        choco.setChocoBackgroundColor(color);
+        mChoco.setChocoBackgroundColor(color);
     }
 
     /**
@@ -297,7 +295,7 @@ public class Pudding implements LifecycleObserver {
      * @param resource The qualified drawable integer
      */
     public void setBackgroundResource(@DrawableRes int resource) {
-        choco.setChocoBackgroundResource(resource);
+        mChoco.setChocoBackgroundResource(resource);
     }
 
     /**
@@ -306,14 +304,26 @@ public class Pudding implements LifecycleObserver {
      * @param drawable The qualified drawable
      */
     public void setBackgroundDrawable(Drawable drawable) {
-        choco.setChocoBackgroundDrawable(drawable);
+        mChoco.setChocoBackgroundDrawable(drawable);
+    }
+
+    /***
+     * 设置是否永久显示
+     * @param enableInfiniteDuration 是否
+     */
+    public void setInfiniteDuration(boolean enableInfiniteDuration) {
+        mChoco.enableInfiniteDuration=enableInfiniteDuration;
+    }
+
+    public void hide(){
+        mChoco.hide(false);
     }
 
     // window manager must associate activity's lifecycle
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy(LifecycleOwner lifecycleOwner) {
         // this owner is your activity instance
-        choco.hide(true);
+        mChoco.hide(true);
         if (lifecycleOwner!=null) {
             lifecycleOwner.getLifecycle().removeObserver(this);
         }

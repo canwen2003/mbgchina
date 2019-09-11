@@ -11,4 +11,5 @@
         <item name="android:textAllCaps">false</item><!--英文字符大小写控制，默认大小写-->
     </style>
 
+    <style name="PuddingButton" parent="@style/Widget.AppCompat.Button.Colored" />
 </resources>

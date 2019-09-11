@@ -16,20 +16,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="URI 测试"/>
+            android:text="测试1"/>
 
         <Button
             android:id="@+id/btn_test2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ImageLoader"/>
+            android:text="测试2"/>
         <Button
             android:id="@+id/btn_test3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SnapShot"/>
+            android:text="测试3"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,25 +43,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Text Banner"/>
+            android:text="测试4"/>
 
         <Button
             android:id="@+id/btn_test5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="test1"/>
+            android:text="测试5"/>
         <Button
             android:id="@+id/btn_test6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="test2"/>
+            android:text="测试6"/>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/img_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
 </LinearLayout>
