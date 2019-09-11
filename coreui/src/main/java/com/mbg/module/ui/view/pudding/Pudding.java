@@ -117,7 +117,7 @@ public class Pudding implements LifecycleObserver {
                      });
 
                  }
-                puddingMapX.putIfAbsent(activity.toString(),pudding);
+                puddingMapX.put(activity.toString(),pudding);
             }
         });
 
