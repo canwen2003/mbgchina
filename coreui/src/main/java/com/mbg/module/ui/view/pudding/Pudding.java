@@ -11,7 +11,6 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -32,7 +31,7 @@ public class Pudding implements LifecycleObserver {
     private WindowManager mWindowManager;
     private Choco choco;
 
-    private static WeakReference<Activity> activityWeakReference= null;
+
 
     // each Activity hold itself pudding list
     private static ConcurrentHashMap<String, Pudding> puddingMapX= new ConcurrentHashMap<>();
@@ -93,7 +92,7 @@ public class Pudding implements LifecycleObserver {
 
     // must invoke first
     private void setActivity(AppCompatActivity activity) {
-        activityWeakReference = new WeakReference(activity);
+
         choco = new  Choco(activity);
         mWindowManager= activity.getWindowManager();
 

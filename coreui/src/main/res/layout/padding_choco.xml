@@ -20,19 +20,18 @@
         <FrameLayout
             android:id="@+id/root_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
             <ImageView
                 android:id="@+id/img_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:src="@drawable/alerter_ic_notifications" />
 
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_centerVertical="true"
                 android:visibility="visible" />
         </FrameLayout>
 
