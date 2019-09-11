@@ -7,7 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.mbg.module.ui.activity.BaseFragmentActivity;
 
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends AppCompatDialogFragment {
     public View mRootView;
     private int mContainer;
 

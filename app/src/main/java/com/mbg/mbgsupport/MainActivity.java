@@ -8,6 +8,7 @@ import android.view.View;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
 import com.mbg.mbgsupport.fragment.DragFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
+import com.mbg.mbgsupport.fragment.PuddingFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
 import com.mbg.mbgsupport.fragment.SupperButtonFragment;
 import com.mbg.mbgsupport.fragment.TextBannerFragment;
@@ -73,6 +74,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 BubbleViewFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_pudding).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PuddingFragment.show(context);
             }
         });
     }
