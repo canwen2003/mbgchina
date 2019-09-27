@@ -9,7 +9,11 @@ public class HashCodeUtils {
     private HashCodeUtils(){}
 
 
-    public static int hashCode(int value) {
+    public static long hashCode(String value) {
+        return hashCode(value, HASH_ACCUMULATOR);
+    }
+
+    public static long hashCode(int value) {
         return hashCode(value, HASH_ACCUMULATOR);
     }
 
@@ -17,23 +21,23 @@ public class HashCodeUtils {
         return accumulator * HASH_MULTIPLIER + value;
     }
 
-    public static int hashCode(float value) {
+    public static long hashCode(float value) {
         return hashCode(value, HASH_ACCUMULATOR);
     }
 
-    public static int hashCode(float value, int accumulator) {
+    public static long hashCode(float value, int accumulator) {
         return hashCode(Float.floatToIntBits(value), accumulator);
     }
 
-    public static int hashCode(@Nullable Object object, int accumulator) {
+    public static long hashCode(@Nullable Object object, int accumulator) {
         return hashCode(object == null ? 0 : object.hashCode(), accumulator);
     }
 
-    public static int hashCode(boolean value, int accumulator) {
+    public static long hashCode(boolean value, int accumulator) {
         return hashCode(value ? 1 : 0, accumulator);
     }
 
-    public static int hashCode(boolean value) {
+    public static long hashCode(boolean value) {
         return hashCode(value, HASH_ACCUMULATOR);
     }
 }

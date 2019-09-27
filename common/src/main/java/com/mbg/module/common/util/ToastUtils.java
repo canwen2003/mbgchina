@@ -9,7 +9,7 @@ public class ToastUtils {
     private static final Toast sToast;
 
     static {
-        sToast = Toast.makeText(AppUtils.getApplication(), "", Toast.LENGTH_LONG);
+        sToast = Toast.makeText(AppUtils.getApplication(), "", Toast.LENGTH_SHORT);
     }
 
     /**

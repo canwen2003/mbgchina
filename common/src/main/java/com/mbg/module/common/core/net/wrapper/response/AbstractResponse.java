@@ -28,6 +28,9 @@ public abstract class AbstractResponse<D> implements IResponse<D> {
     }
 
 
+    protected abstract void onFailure(Throwable error, int statusCode, String content);
+
+    protected abstract void onSuccess(int statusCode, String content);
 
     private void sendResponse(final MessageType type,final Object obj){
 

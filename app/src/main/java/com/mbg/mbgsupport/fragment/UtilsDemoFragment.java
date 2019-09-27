@@ -1,15 +1,24 @@
 package com.mbg.mbgsupport.fragment;
 
+import android.app.IntentService;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.blued.android.module.serviceloader.Router;
 import com.mbg.mbgsupport.R;
+import com.mbg.mbgsupport.router.service.IBaseService;
+import com.mbg.mbgsupport.router.service.ServiceDemoImpl;
+import com.mbg.mbgsupport.router.service.ServiceKey;
 import com.mbg.module.common.util.ClickUtils;
+import com.mbg.module.common.util.FileCacheUtils;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.PermissionUtils;
+import com.mbg.module.common.util.StringUtils;
+import com.mbg.module.common.util.ToastUtils;
 import com.mbg.module.common.util.UriUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
@@ -85,10 +94,24 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         mShowImageView.setImageURI(uri);
      }
     private void onTest2(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IBaseService service= Router.getService(IBaseService.class, ServiceKey.KEY_SERVICE);
+                service.doInBackground();
+            }
+        }).start();
 
     }
-    private void onTest3(){
-
+    private void onTest3() {
+        String key="Test";
+        String str = FileCacheUtils.getContent(key);
+        if (StringUtils.isEmpty(str)) {
+            FileCacheUtils.saveContent(key,"Fisrt save,大中国。。");
+            ToastUtils.show("Cache is empty!");
+        } else {
+            ToastUtils.show("Cache:" + str);
+        }
     }
     private void onTest4(){
 
