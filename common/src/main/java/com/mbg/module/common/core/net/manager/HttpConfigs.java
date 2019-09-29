@@ -16,4 +16,9 @@ class HttpConfigs {
      */
     public static final boolean httpDnsFailedRetry = true;
 
+    /**
+     * 是否使用OkHttp进行网络请求
+     */
+    public static final boolean usrOkHttp=true;
+
 }

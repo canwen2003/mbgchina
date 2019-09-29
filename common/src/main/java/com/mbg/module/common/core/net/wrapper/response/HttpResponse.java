@@ -3,7 +3,9 @@ package com.mbg.module.common.core.net.wrapper.response;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.mbg.module.common.core.net.common.NetStatus;
 import com.mbg.module.common.core.net.model.HttpModel;
+import com.mbg.module.common.core.net.tool.StatusCodeUtils;
 import com.mbg.module.common.util.FileCacheUtils;
 import com.mbg.module.common.util.JsonUtils;
 import com.mbg.module.common.util.ThreadUtils;
@@ -11,11 +13,15 @@ import com.mbg.module.common.util.ThreadUtils;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-public abstract class HttpResponse<D extends HttpModel> extends AbstractResponse{
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
+public abstract class HttpResponse<D extends HttpModel> extends AbstractResponse<D>{
     private Type mDataType;
     private String mCacheKey;
     private boolean mReadCache = false; // 是否已经读取缓存
     private boolean mWriteCache = false; // 是否已经存储了缓存
+
 
     public HttpResponse() {
         Type superClass = getClass().getGenericSuperclass();
@@ -36,47 +42,55 @@ public abstract class HttpResponse<D extends HttpModel> extends AbstractResponse
         mCacheKey=cacheKey;
     }
 
-    @Override
-    public void onUIStart() {
-
-    }
-
-    public void onUIUpdate(D data){}
-
-    public void onUICache(D data) {}
 
     @Override
-    public void onUIError(Exception error) {
-
+    public void onFailure(Exception e, int statusCode, String content) {
+        StatusCodeUtils.pareHttpFailure(e,statusCode,content,mUrl);
+        onError(e);
     }
 
     @Override
-    public void onUIFinish() {
+    public void onUIUpdate(D data) {
 
     }
 
     @Override
-    protected void onFailure(Throwable error, int statusCode, String content) {
-
-    }
-
-    @Override
-    protected void onSuccess(int statusCode, String content) {
-        Exception exception = null;
-        D data = null;
+    public void onSuccess(int statusCode, String content) {
+        D data;
         try {
             data = parseData(content);
             if (data == null && mDataType != null) {
-                // response为空或不能正确解析数据, 抛出异常触发onFailure阶段
-                throw new RuntimeException("response is null or parse data failed");
+                onFailure(new Exception("parseData is null!"), NetStatus.PARSEDATA_ERROR, null);
+                return;
             }
         } catch (Exception e) {
-            exception = e;
+            onFailure(new Exception("Parse Data is null!"), NetStatus.PARSEDATA_ERROR, null);
+            return;
         }
 
+        onUpdate(data);
         onSaveCache(content);
-        final D dataCopy = data;
-        onUpdate(dataCopy);
+    }
+
+    @Override
+    public void onSuccess(int statusCode, Response response) {
+            if (response == null) {
+                onFailure(new Exception("response is null!"), NetStatus.RESPONSE_EMPTY, null);
+                return;
+            }
+
+            ResponseBody body = response.body();
+            if (body!=null){
+                try {
+                    String content=body.string();
+                    onSuccess(response.code(),content);
+                }catch (Exception e){
+                    onFailure(new Exception("Parse Body is null!"), NetStatus.PARSEDATA_ERROR, null);
+                }
+
+            }else {
+                onFailure(new Exception("response Body is null!"), NetStatus.RESPONSE_BODY_EMPTY, null);
+            }
     }
 
     /**
@@ -127,10 +141,7 @@ public abstract class HttpResponse<D extends HttpModel> extends AbstractResponse
      * 在非ui线程回调, 用于数据解析
      */
     protected D parseData(String response) {
-        if (mDataType == null) {
-            return null;
-        }
-        if (TextUtils.isEmpty(response)) {
+        if (mDataType == null||TextUtils.isEmpty(response)) {
             return null;
         }
 

@@ -5,7 +5,10 @@ import com.mbg.module.common.core.net.common.MessageType;
 import com.mbg.module.common.util.ThreadUtils;
 import com.mbg.module.common.util.TypeUtils;
 
+import okhttp3.Response;
+
 public abstract class AbstractResponse<D> implements IResponse<D> {
+    protected String mUrl;
 
     public void onStart(){
         sendResponse(MessageType.START,null);
@@ -15,11 +18,11 @@ public abstract class AbstractResponse<D> implements IResponse<D> {
         sendResponse(MessageType.CACHE,obj);
     }
 
-    public void onUpdate(D obj){
+    protected void onUpdate(D obj){
         sendResponse(MessageType.UPDATE,obj);
     }
 
-    public void onError(Exception e){
+    protected void onError(Exception e){
         sendResponse(MessageType.ERROR,e);
     }
 
@@ -27,10 +30,41 @@ public abstract class AbstractResponse<D> implements IResponse<D> {
         sendResponse(MessageType.FINISH,null);
     }
 
+    @Override
+    public void onUIStart() {
 
-    protected abstract void onFailure(Throwable error, int statusCode, String content);
+    }
 
-    protected abstract void onSuccess(int statusCode, String content);
+    @Override
+    public void onUICache(D data) {
+
+    }
+
+
+    @Override
+    public void onUIUpdate(D data) {
+
+    }
+
+    @Override
+    public void onUIError(Exception error) {
+
+    }
+
+    @Override
+    public void onUIFinish() {
+
+    }
+
+    public abstract void onFailure(Exception error, int statusCode, String content);
+
+    public abstract void onSuccess(int statusCode, String content);
+
+    public abstract void onSuccess(int statusCode, Response response);
+
+    public void setUrl(String url){
+        mUrl=url;
+    }
 
     private void sendResponse(final MessageType type,final Object obj){
 
@@ -50,8 +84,13 @@ public abstract class AbstractResponse<D> implements IResponse<D> {
                         onUIUpdate(updateData);
                         break;
                     case ERROR:
-                        Exception exception=TypeUtils.cast(obj);
-                        onUIError(exception);
+                        if (obj instanceof Exception) {
+                            Exception exception = TypeUtils.cast(obj);
+                            onUIError(exception);
+                        }else {
+                            onUIError(new Exception("unKnow Error"));
+                        }
+                        break;
                     case FINISH:
                         onUIFinish();
                         break;

@@ -1,17 +1,11 @@
 package com.mbg.module.common.core.net.manager;
 
 import com.mbg.module.common.core.net.common.HttpType;
-import com.mbg.module.common.core.net.tool.OkHttpUtils;
 import com.mbg.module.common.core.net.wrapper.request.HttpRequest;
 import com.mbg.module.common.core.net.wrapper.response.HttpResponse;
 import com.mbg.module.common.util.LogUtils;
 
 public class HttpManager {
-
-	static {
-		OkHttpUtils.init();
-	}
-
 	public static HttpRequest get(String url) {
 		return get(url, null);
 	}
@@ -42,6 +36,10 @@ public class HttpManager {
 
 	public static boolean isDnsForce() {
 		return HttpConfigs.httpDnsForce;
+	}
+
+	public static boolean isUserOkHttp(){
+		return HttpConfigs.usrOkHttp;
 	}
 
 }
