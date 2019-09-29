@@ -2,7 +2,7 @@ package com.mbg.module.common.core.net.manager;
 
 import com.mbg.module.common.core.net.common.HttpType;
 import com.mbg.module.common.core.net.wrapper.request.HttpRequest;
-import com.mbg.module.common.core.net.wrapper.response.HttpResponse;
+import com.mbg.module.common.core.net.wrapper.response.AbstractResponse;
 import com.mbg.module.common.util.LogUtils;
 
 public class HttpManager {
@@ -10,7 +10,7 @@ public class HttpManager {
 		return get(url, null);
 	}
 
-	public static HttpRequest get(String url, HttpResponse<?> responseHandler) {
+	public static HttpRequest get(String url, AbstractResponse<?> responseHandler) {
 		if (HttpConfigs.debug) {
 			LogUtils.d("Url="+url);
 		}
@@ -23,7 +23,7 @@ public class HttpManager {
 		return post(url, null);
 	}
 
-	public static HttpRequest post(String url, HttpResponse<?> responseHandler) {
+	public static HttpRequest post(String url, AbstractResponse<?> responseHandler) {
 		HttpRequest requestWrapper = new HttpRequest(HttpType.POST, url);
 		requestWrapper.setResponseHandler(responseHandler);
 		return requestWrapper;

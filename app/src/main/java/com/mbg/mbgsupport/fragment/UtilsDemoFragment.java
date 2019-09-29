@@ -1,18 +1,18 @@
 package com.mbg.mbgsupport.fragment;
 
-import android.app.IntentService;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.blued.android.module.serviceloader.Router;
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.router.service.IBaseService;
-import com.mbg.mbgsupport.router.service.ServiceDemoImpl;
 import com.mbg.mbgsupport.router.service.ServiceKey;
+import com.mbg.module.common.core.net.manager.HttpManager;
+import com.mbg.module.common.core.net.tool.HttpUtils;
+import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.FileCacheUtils;
 import com.mbg.module.common.util.LogUtils;
@@ -115,7 +115,43 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     }
     private void onTest4(){
 
+        DefaultHttpResponse response=new DefaultHttpResponse() {
+            @Override
+            protected void onUpdate(String data) {
+                super.onUpdate(data);
+                LogUtils.e("onUpdate:"+data);
+            }
+
+            @Override
+            public void onUIStart() {
+                super.onUIStart();
+                LogUtils.e("onUIStart");
+            }
+
+            @Override
+            public void onUICache(String data) {
+                super.onUICache(data);
+                LogUtils.e("onUICache:"+data);
+            }
+
+            @Override
+            public void onUIError(Exception error) {
+                super.onUIError(error);
+                LogUtils.e("onUIError:"+error.getMessage());
+            }
+
+            @Override
+            public void onUIFinish() {
+                super.onUIFinish();
+                LogUtils.e("onUIFinish");
+            }
+        };
+
+        String url="http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=18701539645";
+        HttpManager.get(url,response).addHeader(HttpUtils.buildBaseHeader(false)).execute();
     }
+
+
     private void onTest5(){
 
     }

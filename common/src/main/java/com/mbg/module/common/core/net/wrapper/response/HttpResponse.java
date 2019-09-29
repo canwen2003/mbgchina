@@ -60,11 +60,11 @@ public abstract class HttpResponse<D extends HttpModel> extends AbstractResponse
         try {
             data = parseData(content);
             if (data == null && mDataType != null) {
-                onFailure(new Exception("parseData is null!"), NetStatus.PARSEDATA_ERROR, null);
+                onFailure(new Exception("parseData is null!"), NetStatus.PARSEDATA_ERROR, content);
                 return;
             }
         } catch (Exception e) {
-            onFailure(new Exception("Parse Data is null!"), NetStatus.PARSEDATA_ERROR, null);
+            onFailure(new Exception("Parse Data is null!"), NetStatus.PARSEDATA_ERROR, content);
             return;
         }
 
