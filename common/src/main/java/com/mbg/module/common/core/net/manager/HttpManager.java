@@ -42,4 +42,9 @@ public class HttpManager {
 		return HttpConfigs.usrOkHttp;
 	}
 
+	public static void stopAll(){
+		if (isUserOkHttp()){
+			OkHttpManager.get().stopAll();
+		}
+	}
 }

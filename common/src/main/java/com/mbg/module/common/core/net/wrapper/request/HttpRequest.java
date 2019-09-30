@@ -3,7 +3,7 @@ package com.mbg.module.common.core.net.wrapper.request;
 
 import com.mbg.module.common.core.net.common.HttpType;
 import com.mbg.module.common.core.net.manager.HttpManager;
-import com.mbg.module.common.core.net.tool.OkHttpUtils;
+import com.mbg.module.common.core.net.manager.OkHttpManager;
 import com.mbg.module.common.core.net.wrapper.response.AbstractResponse;
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
 import com.mbg.module.common.util.StringUtils;
@@ -21,10 +21,9 @@ public class HttpRequest implements IRequest{
 	private RequestParams mRequestParams;
 	private Map<String, String> mHeaderMap = new HashMap<>();
 	private AbstractResponse<?> mHttpResponse;
-	private Call request = null;
-
-	private Object data = null;
-	private boolean httpDnsEnable;//是否启用httpdns
+	private Call mHttpExecutor = null;
+	private Object mData = null;
+	private boolean mHttpDnsEnable;
 
 	public HttpRequest(HttpType type, String url) {
 		this.mHttpType = type;
@@ -43,17 +42,17 @@ public class HttpRequest implements IRequest{
 
 
 	public HttpRequest setCall(Call request) {
-		this.request = request;
+		this.mHttpExecutor = request;
 		return this;
 	}
 
 	public HttpRequest setData(Object data) {
-		this.data = data;
+		this.mData = data;
 		return this;
 	}
 
 	public Object getData() {
-		return data;
+		return mData;
 	}
 
 	public String getRealUrl() {
@@ -197,28 +196,28 @@ public class HttpRequest implements IRequest{
 
 	@Override
 	public HttpRequest setHttpDnsEnable(boolean enable) {
-		this.httpDnsEnable = enable;
+		this.mHttpDnsEnable = enable;
 		return this;
 	}
 
 	@Override
 	public boolean getHttpDnsEnable() {
-		return this.httpDnsEnable;
+		return this.mHttpDnsEnable;
 	}
 
 	@Override
 	public HttpRequest execute() {
 		if (HttpManager.isUserOkHttp()){
-			OkHttpUtils.execute(this);
+			OkHttpManager.get().execute(this);
 		}
 		return this;
 	}
 
 	@Override
 	public synchronized void cancel() {
-		if (request != null) {
-			request.cancel();
-			request = null;
+		if (mHttpExecutor != null) {
+			mHttpExecutor.cancel();
+			mHttpExecutor = null;
 		}
 	}
 
