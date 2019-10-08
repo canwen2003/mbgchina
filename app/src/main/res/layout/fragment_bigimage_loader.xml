@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.mbg.module.ui.view.subscaleview.SubsamplingScaleImageView
+        android:id="@+id/img_scale"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:panEnabled="true"
+        app:tileBackgroundColor="#FF0000"
+        app:zoomEnabled="true"
+        app:quickScaleEnabled="false"/>
+
+</LinearLayout>

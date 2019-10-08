@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
 import com.mbg.mbgsupport.fragment.DragFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
@@ -81,6 +82,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 PuddingFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_big_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BigImageLoaderFragment.show(context);
             }
         });
     }

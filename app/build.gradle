@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.github.canwen2003:module_interfaces:v1.0.0.0'
     implementation 'com.github.canwen2003:module_serviceloader:v1.0.0.0'
     annotationProcessor 'com.github.canwen2003:module_compiler:v1.0.0.0'
+
     implementation project(path:':common')
     implementation project(path:':coreui')
 }
