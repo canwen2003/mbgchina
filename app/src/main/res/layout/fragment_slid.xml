@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <com.mbg.module.ui.view.layout.SlidFrameLayout
+   <com.mbg.module.ui.view.viewPager.VViewPager
        android:id="@+id/viewPager"
        android:layout_width="match_parent"
        android:layout_height="match_parent"/>

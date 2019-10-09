@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.layout;
+package com.mbg.module.ui.view.viewPager;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -30,9 +30,12 @@ import com.mbg.module.ui.view.listener.OnAnimatorListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.v4.view.ViewCompat.TYPE_NON_TOUCH;
-
-public class SlidFrameLayout extends FrameLayout implements NestedScrollingChild2 {
+/*****
+ *
+ * created by Gap
+ * 实现垂直方向的滑动切换页面的功能
+ */
+public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
     private final static float MIN_FLING_VELOCITY = 400; // dips
     private final static int MAX_DURATION = 800; //最大滑行时间ms
     private NestedScrollingChildHelper mNestedScrollingChildHelper;
@@ -57,15 +60,15 @@ public class SlidFrameLayout extends FrameLayout implements NestedScrollingChild
     private MyOnGestureListener mGestureCallback;
 
 
-    public SlidFrameLayout(Context context) {
+    public VViewPager(Context context) {
         this(context, null);
     }
 
-    public SlidFrameLayout(Context context, AttributeSet attrs) {
+    public VViewPager(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SlidFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VViewPager(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -301,9 +304,9 @@ public class SlidFrameLayout extends FrameLayout implements NestedScrollingChild
             int unconsumedX = (int) dx;
             int consumedY = (int) dy;
             if (!dispatchNestedPreScroll(unconsumedX, consumedY, mScrollConsumed,
-                    mScrollOffset, TYPE_NON_TOUCH)) {
+                    mScrollOffset, ViewCompat.TYPE_NON_TOUCH)) {
                 dispatchNestedScroll(0, consumedY, unconsumedX, 0,
-                        mScrollOffset, TYPE_NON_TOUCH);
+                        mScrollOffset, ViewCompat.TYPE_NON_TOUCH);
             }
             return true;
         }
@@ -535,7 +538,7 @@ private class ViewHolderDelegate<T extends SlideViewHolder> {
 
     T prepareCurrent(SlideDirection direction) {
         if (currentViewHolder == null) {
-            currentViewHolder = adapter.onCreateViewHolder(context, SlidFrameLayout.this, mInflater);
+            currentViewHolder = adapter.onCreateViewHolder(context, VViewPager.this, mInflater);
         }
         if (currentViewHolder.view.getParent() == null) {
             addView(currentViewHolder.view, 0);
@@ -546,7 +549,7 @@ private class ViewHolderDelegate<T extends SlideViewHolder> {
 
     T prepareBackup(SlideDirection direction) {
         if (backupViewHolder == null) {
-            backupViewHolder = adapter.onCreateViewHolder(context, SlidFrameLayout.this, mInflater);
+            backupViewHolder = adapter.onCreateViewHolder(context, VViewPager.this, mInflater);
         }
         if (backupViewHolder.view.getParent() == null) {
             addView(backupViewHolder.view, 0);
@@ -580,7 +583,7 @@ private class ViewHolderDelegate<T extends SlideViewHolder> {
 
     public void onDismissBackup(SlideDirection direction) {
         if (backupViewHolder != null) {
-            adapter.onViewDismiss(backupViewHolder, SlidFrameLayout.this, direction);
+            adapter.onViewDismiss(backupViewHolder, VViewPager.this, direction);
         }
     }
 
