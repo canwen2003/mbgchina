@@ -10,6 +10,7 @@ import com.mbg.mbgsupport.fragment.BubbleViewFragment;
 import com.mbg.mbgsupport.fragment.DragFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.PuddingFragment;
+import com.mbg.mbgsupport.fragment.SlidingFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
 import com.mbg.mbgsupport.fragment.SupperButtonFragment;
 import com.mbg.mbgsupport.fragment.TextBannerFragment;
@@ -89,6 +90,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 BigImageLoaderFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_slid).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SlidingFragment.show(context);
             }
         });
     }
