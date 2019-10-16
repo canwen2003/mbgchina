@@ -1,6 +1,10 @@
 package com.mbg.module.ui.view.viewPager.common;
 
-
+/**
+ *
+ * created by Gap
+ * 定义状态类型
+ */
 public enum State {
     /**
      * 静止状态
