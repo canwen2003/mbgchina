@@ -9,14 +9,16 @@ import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
-import com.mbg.module.ui.view.common.SlideDirection;
-import com.mbg.module.ui.view.viewPager.VViewPager;
+import com.mbg.module.ui.view.viewPager.HViewPager;
+import com.mbg.module.ui.view.viewPager.adapter.SlideFragmentAdapter;
+import com.mbg.module.ui.view.viewPager.common.SlideDirection;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SlidingFragment extends BaseFragment implements View.OnClickListener{
-    private VViewPager mViewPager;
+    private HViewPager mViewPager;
     private MyFragmentAdapter mFragmentAdapter;
     private List<String> mData=new ArrayList<>();
     public static void show(Context context){
@@ -46,7 +48,7 @@ public class SlidingFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
-    private class MyFragmentAdapter extends VViewPager.SlideFragmentAdapter {
+    private class MyFragmentAdapter extends SlideFragmentAdapter {
         private int currentIndex = 0;
         public MyFragmentAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);

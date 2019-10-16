@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.common;
+package com.mbg.module.ui.view.viewPager.common;
 
 public enum SlideDirection {
     /**

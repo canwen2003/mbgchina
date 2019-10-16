@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.holder;
+package com.mbg.module.ui.view.viewPager.holder;
 
 import android.view.View;
 

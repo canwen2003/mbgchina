@@ -16,13 +16,12 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
-
+import com.mbg.module.ui.view.listener.OnAnimatorListener;
 import com.mbg.module.ui.view.viewPager.adapter.SlideAdapter;
 import com.mbg.module.ui.view.viewPager.common.Mask;
 import com.mbg.module.ui.view.viewPager.common.SlideDirection;
 import com.mbg.module.ui.view.viewPager.common.State;
 import com.mbg.module.ui.view.viewPager.holder.SlideViewHolder;
-import com.mbg.module.ui.view.listener.OnAnimatorListener;
 import com.mbg.module.ui.view.viewPager.holder.ViewHolderDelegate;
 
 
@@ -31,7 +30,7 @@ import com.mbg.module.ui.view.viewPager.holder.ViewHolderDelegate;
  * created by Gap
  * 实现垂直方向的滑动切换页面的功能
  */
-public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
+public class HViewPager extends FrameLayout implements NestedScrollingChild2 {
     private final static float MIN_FLING_VELOCITY = 400; // dips
     private final static int MAX_DURATION = 800; //最大滑行时间ms
     private NestedScrollingChildHelper mNestedScrollingChildHelper;
@@ -55,15 +54,15 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
     private MyOnGestureListener mGestureCallback;
 
 
-    public VViewPager(Context context) {
+    public HViewPager(Context context) {
         this(context, null);
     }
 
-    public VViewPager(Context context, AttributeSet attrs) {
+    public HViewPager(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public VViewPager(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HViewPager(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -115,18 +114,19 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
             float dyFromDownY = e2.getY() - downY;
             float dxFromDownX = e2.getX() - downX;
             SlideDirection direction;
-            if (dyFromDownY < 0) {
+
+            if (dxFromDownX < 0) {
                 direction = SlideDirection.Next;
-            } else if (dyFromDownY > 0) {
+            } else if (dxFromDownX > 0) {
                 direction = SlideDirection.Prev;
             } else {
                 direction = SlideDirection.Origin;
             }
 
 
-            boolean startToMove = mState.satisfy(Mask.IDLE) && Math.abs(dyFromDownY) > 2 * Math.abs(dxFromDownX);
-            boolean changeDirectionToNext = mState.satisfy(Mask.PREV) && dyFromDownY < 0;
-            boolean changeDirectionToPrev = mState.satisfy(Mask.NEXT) && dyFromDownY > 0;
+            boolean startToMove = mState.satisfy(Mask.IDLE) && Math.abs(dxFromDownX) > 2 * Math.abs(dyFromDownY);
+            boolean changeDirectionToNext = mState.satisfy(Mask.PREV) && dxFromDownX < 0;
+            boolean changeDirectionToPrev = mState.satisfy(Mask.NEXT) && dxFromDownX > 0;
 
             int dx = (int) distanceX;
             int dy = (int) distanceY;
@@ -163,11 +163,11 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
                 if (mBackupView == null) {
                     return false;
                 }
-                topView.setY(dyFromDownY);
+                topView.setX(dxFromDownX);
                 if (mState.satisfy(Mask.NEXT)) {
-                    mBackupView.setY(dyFromDownY + getMeasuredHeight());
+                    mBackupView.setX(dxFromDownX + getMeasuredWidth());
                 } else {
-                    mBackupView.setY(dyFromDownY - getMeasuredHeight());
+                    mBackupView.setX(dxFromDownX - getMeasuredWidth());
                 }
                 return dispatchNestedScroll(0, dy, dx, 0, mScrollOffset);
             }
@@ -190,9 +190,9 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
             if (topView == null) {
                 return resetTouch();
             }
-            int currentOffsetY = (int) topView.getY();
+            int currentOffsetX = (int) topView.getX();
             // if state is reject, don't consume the fling.
-            boolean consumedFling = !(mState.satisfy(Mask.REJECT)) || currentOffsetY != 0;
+            boolean consumedFling = !(mState.satisfy(Mask.REJECT)) || currentOffsetX != 0;
             if (!dispatchNestedPreFling(velocityX, velocityY)) {
                 dispatchNestedFling(velocityX, velocityY, consumedFling);
             }
@@ -209,29 +209,29 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
             SlideDirection direction = null;
             int duration = 0;
 
-            final int widgetHeight = getMeasuredHeight();
+            final int widgetWidth = getMeasuredWidth();
             if (consumedFling) {
-                int dy = 0;
+                int dx = 0;
                 boolean highSpeed = Math.abs(velocityY) >= mMinFlingSpeed;
                 boolean sameDirection = (mState == State.SLIDE_NEXT && velocityY < 0) ||
                         (mState == State.SLIDE_PREV && velocityY > 0);
-                boolean moveLongDistance = Math.abs(currentOffsetY) > widgetHeight / 3;
+                boolean moveLongDistance = Math.abs(currentOffsetX) > widgetWidth / 3;
                 if ((highSpeed && sameDirection) || (!highSpeed && moveLongDistance)) { //fling
                     if (mState == State.SLIDE_NEXT) {
                         direction = SlideDirection.Next;
-                        dy = -currentOffsetY - widgetHeight;
+                        dx = -currentOffsetX - widgetWidth;
                     } else if (mState == State.SLIDE_PREV) {
                         direction = SlideDirection.Prev;
-                        dy = widgetHeight - currentOffsetY;
+                        dx = widgetWidth - currentOffsetX;
                     }
                 } else { //back to origin
                     direction = SlideDirection.Origin;
-                    dy = -currentOffsetY;
+                    dx = -currentOffsetX;
                 }
 
-                if (dy != 0) {
-                    duration = calculateDuration(velocityY, widgetHeight, dy);
-                    mScroller.startScroll(0, currentOffsetY, 0, dy, duration);
+                if (dx != 0) {
+                    duration = calculateDuration(velocityY, widgetWidth, dx);
+                    mScroller.startScroll(currentOffsetX,0 , dx, 0, duration);
                 }
             }
 
@@ -244,12 +244,12 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
                     @Override
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         if (mScroller.computeScrollOffset()) {
-                            float offset = mScroller.getCurrY();
-                            topView.setY(offset);
+                            float offset = mScroller.getCurrX();
+                            topView.setX(offset);
                             if (mState == State.FLING_NEXT)
-                                backView.setY(offset + widgetHeight);
+                                backView.setX(offset + widgetWidth);
                             else
-                                backView.setY(offset - widgetHeight);
+                                backView.setX(offset - widgetWidth);
                         }
                     }
                 });
@@ -305,13 +305,11 @@ public class VViewPager extends FrameLayout implements NestedScrollingChild2 {
 
 
         private boolean waitForFling(float dx, float dy) {
-            //eat all the dy
-            int unconsumedX = (int) dx;
-            int consumedY = (int) dy;
-            if (!dispatchNestedPreScroll(unconsumedX, consumedY, mScrollConsumed,
-                    mScrollOffset, ViewCompat.TYPE_NON_TOUCH)) {
-                dispatchNestedScroll(0, consumedY, unconsumedX, 0,
-                        mScrollOffset, ViewCompat.TYPE_NON_TOUCH);
+            //eat all the dx
+            int consumedX = (int) dx;
+            int unconsumedY = (int) dy;
+            if (!dispatchNestedPreScroll(consumedX, unconsumedY, mScrollConsumed, mScrollOffset, ViewCompat.TYPE_NON_TOUCH)) {
+                dispatchNestedScroll(consumedX, 0, 0, unconsumedY, mScrollOffset, ViewCompat.TYPE_NON_TOUCH);
             }
             return true;
         }

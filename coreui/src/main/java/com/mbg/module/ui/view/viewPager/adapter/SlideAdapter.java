@@ -1,11 +1,11 @@
-package com.mbg.module.ui.view.adapter;
+package com.mbg.module.ui.view.viewPager.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.mbg.module.ui.view.common.SlideDirection;
-import com.mbg.module.ui.view.holder.SlideViewHolder;
+import com.mbg.module.ui.view.viewPager.common.SlideDirection;
+import com.mbg.module.ui.view.viewPager.holder.SlideViewHolder;
 
 /**
  * 适配 [SlidFrameLayout] 以及布局中滑动的 [View] 。

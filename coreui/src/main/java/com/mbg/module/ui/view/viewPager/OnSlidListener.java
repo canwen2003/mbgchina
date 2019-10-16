@@ -1,6 +1,6 @@
-package com.mbg.module.ui.view.listener;
+package com.mbg.module.ui.view.viewPager;
 
-import com.mbg.module.ui.view.common.SlideDirection;
+import com.mbg.module.ui.view.viewPager.common.SlideDirection;
 
 public interface OnSlidListener {
 

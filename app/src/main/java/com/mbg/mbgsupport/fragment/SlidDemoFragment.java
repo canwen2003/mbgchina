@@ -6,8 +6,8 @@ import android.widget.TextView;
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.fragment.BaseFragment;
-import com.mbg.module.ui.view.listener.OnSlidListener;
-import com.mbg.module.ui.view.common.SlideDirection;
+import com.mbg.module.ui.view.viewPager.OnSlidListener;
+import com.mbg.module.ui.view.viewPager.common.SlideDirection;
 
 public class SlidDemoFragment extends BaseFragment implements OnSlidListener {
 
