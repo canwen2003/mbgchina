@@ -1,6 +1,8 @@
 package com.mbg.module.common.util;
 
-import android.support.annotation.NonNull;
+
+
+import androidx.annotation.NonNull;
 
 import com.mbg.module.common.core.cache.CacheEntity;
 import com.mbg.module.common.core.cache.DiskCacheStore;

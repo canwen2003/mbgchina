@@ -1,10 +1,12 @@
 package com.mbg.module.ui.adapter;
 
-import android.support.v7.widget.RecyclerView;
+
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.module.common.core.listener.OnItemClickListener;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;

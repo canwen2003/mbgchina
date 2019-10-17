@@ -5,9 +5,10 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+
+import androidx.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

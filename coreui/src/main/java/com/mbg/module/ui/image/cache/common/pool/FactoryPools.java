@@ -1,7 +1,7 @@
 package com.mbg.module.ui.image.cache.common.pool;
 
-import android.support.annotation.NonNull;
-import android.support.v4.util.Pools;
+import androidx.annotation.NonNull;
+import androidx.core.util.Pools;
 import android.util.Log;
 
 

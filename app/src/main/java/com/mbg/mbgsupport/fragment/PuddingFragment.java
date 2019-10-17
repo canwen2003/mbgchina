@@ -2,8 +2,10 @@ package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;

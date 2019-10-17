@@ -1,9 +1,11 @@
 package com.mbg.module.ui.view.viewPager.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.viewPager.common.SlideDirection;
@@ -15,7 +17,7 @@ public final class SampleFragmentAdapter extends SlideFragmentAdapter {
     private Class<? extends BaseFragment> fragmentClass;
     private List<?> mData;
 
-    public SampleFragmentAdapter(FragmentManager fragmentManager, Class<? extends SampleSlidFragment> fragmentClass ,@NonNull List<?> data) {
+    public SampleFragmentAdapter(FragmentManager fragmentManager, Class<? extends SampleSlidFragment> fragmentClass , @NonNull List<?> data) {
         super(fragmentManager);
         this.fragmentClass=fragmentClass;
         this.mData=data;

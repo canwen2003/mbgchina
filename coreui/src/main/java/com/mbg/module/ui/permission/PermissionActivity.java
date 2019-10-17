@@ -1,7 +1,7 @@
 package com.mbg.module.ui.permission;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.mbg.module.common.util.ThreadUtils;

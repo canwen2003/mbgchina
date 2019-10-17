@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 
 /**
  * Interface for image decoding classes, allowing the default {@link android.graphics.BitmapRegionDecoder}
@@ -27,7 +29,8 @@ public interface ImageRegionDecoder {
      * @return Dimensions of the image.
      *  if initialisation fails.
      */
-    @NonNull Point init(Context context, @NonNull Uri uri) throws Exception;
+    @NonNull
+    Point init(Context context, @NonNull Uri uri) throws Exception;
 
     /**
      * <p>

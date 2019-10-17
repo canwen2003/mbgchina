@@ -3,12 +3,14 @@ package com.mbg.module.ui.view.pudding;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+
+import androidx.annotation.RequiresApi;
 
 import com.mbg.module.common.util.TypeUtils;
 import com.mbg.module.ui.view.listener.OnAnimatorListener;

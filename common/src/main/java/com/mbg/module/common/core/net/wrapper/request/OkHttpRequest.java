@@ -1,7 +1,9 @@
 package com.mbg.module.common.core.net.wrapper.request;
 
-import android.support.annotation.NonNull;
+
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.mbg.module.common.core.net.common.HttpType;
 import com.mbg.module.common.core.net.common.NetStatus;

@@ -16,7 +16,9 @@
 
 package com.mbg.module.ui.image.cache.common;
 
-import android.support.annotation.NonNull;
+
+
+import androidx.annotation.NonNull;
 
 import java.io.Closeable;
 import java.io.File;

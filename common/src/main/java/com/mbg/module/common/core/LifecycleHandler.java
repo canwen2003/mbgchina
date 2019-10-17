@@ -1,13 +1,13 @@
 package com.mbg.module.common.core;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.OnLifecycleEvent;
+
 import android.os.Looper;
 import android.os.Handler;
 
-
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 
 
 public final class LifecycleHandler extends Handler implements LifecycleObserver {

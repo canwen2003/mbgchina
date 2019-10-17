@@ -1,6 +1,8 @@
 package com.mbg.module.ui.image.view;
 
-import android.support.annotation.NonNull;
+
+
+import androidx.annotation.NonNull;
 
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
 

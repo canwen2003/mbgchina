@@ -1,6 +1,8 @@
 package com.mbg.module.common.core.net.tool;
 
-import android.support.v4.util.ArrayMap;
+
+
+import androidx.collection.ArrayMap;
 
 import java.util.Map;
 

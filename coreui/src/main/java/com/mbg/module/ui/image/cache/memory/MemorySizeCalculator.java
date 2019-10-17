@@ -4,8 +4,9 @@ import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.util.Preconditions;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.util.Preconditions;
 import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.util.Log;

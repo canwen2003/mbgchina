@@ -2,9 +2,9 @@ package com.mbg.module.ui.image.cache.common;
 
 
 
-import android.support.annotation.NonNull;
-import android.support.v4.util.Pools;
-import android.support.v4.util.Preconditions;
+import androidx.annotation.NonNull;
+import androidx.core.util.Pools;
+import androidx.core.util.Preconditions;
 
 import com.mbg.module.common.core.cache.LruCache;
 import com.mbg.module.ui.image.cache.common.pool.FactoryPools;

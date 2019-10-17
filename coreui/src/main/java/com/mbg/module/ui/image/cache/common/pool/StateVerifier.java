@@ -1,7 +1,7 @@
 package com.mbg.module.ui.image.cache.common.pool;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /** Verifies that the job is not in the recycled state. */
 public abstract class StateVerifier {

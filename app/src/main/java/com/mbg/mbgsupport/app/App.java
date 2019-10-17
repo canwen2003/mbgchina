@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
-import android.support.multidex.MultiDex;
+
+
+import androidx.multidex.MultiDex;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.StorageUtils;

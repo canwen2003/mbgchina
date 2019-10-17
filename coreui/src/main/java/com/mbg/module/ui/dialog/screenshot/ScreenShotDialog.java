@@ -1,15 +1,17 @@
 package com.mbg.module.ui.dialog.screenshot;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.AlertDialog;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import androidx.annotation.LayoutRes;
 
 import com.mbg.module.common.util.RingtoneUtils;
 import com.mbg.module.ui.R;

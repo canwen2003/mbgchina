@@ -1,6 +1,7 @@
 package com.mbg.module.common.util;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 public class HashCodeUtils {
     private static final int HASH_MULTIPLIER = 31;//倍数、乘数

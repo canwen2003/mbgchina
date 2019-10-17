@@ -15,14 +15,12 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.ExifInterface;
-import android.support.annotation.Nullable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.annotation.AnyThread;
-import android.support.annotation.NonNull;
+
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,6 +30,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
+
+import androidx.annotation.AnyThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.mbg.module.ui.R;
 import com.mbg.module.ui.view.subscaleview.decoder.CompatDecoderFactory;

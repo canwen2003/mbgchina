@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.AnimRes;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import androidx.annotation.AnimRes;
 
 import com.mbg.module.common.util.StringUtils;
 import com.mbg.module.common.util.UiUtils;
