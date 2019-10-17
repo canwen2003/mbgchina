@@ -5,11 +5,12 @@ import android.widget.TextView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.LogUtils;
-import com.mbg.module.ui.fragment.BaseFragment;
+import com.mbg.module.common.util.TypeUtils;
 import com.mbg.module.ui.view.viewPager.OnSlidListener;
 import com.mbg.module.ui.view.viewPager.common.SlideDirection;
+import com.mbg.module.ui.view.viewPager.fragment.SampleSlidFragment;
 
-public class SlidDemoFragment extends BaseFragment implements OnSlidListener {
+public class SlidDemoFragment extends SampleSlidFragment implements OnSlidListener {
 
     TextView textView;
     String mTitle="";
@@ -63,7 +64,8 @@ public class SlidDemoFragment extends BaseFragment implements OnSlidListener {
         LogUtils.e(":"+mTitle);
     }
 
-    public void setTitle(String title){
-        mTitle=title;
+    @Override
+    public void setData(Object data) {
+        mTitle= TypeUtils.cast(data);
     }
 }

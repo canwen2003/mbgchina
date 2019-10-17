@@ -17,6 +17,7 @@ import java.util.List;
 
 public abstract class SlideFragmentAdapter implements SlideAdapter<FragmentViewHolder> {
     private FragmentManager fm;
+    protected int mCurrentPosition=0;
 
     public SlideFragmentAdapter(FragmentManager fragmentManager) {
         fm = fragmentManager;
@@ -35,6 +36,17 @@ public abstract class SlideFragmentAdapter implements SlideAdapter<FragmentViewH
     }
 
     protected void finishSlide(SlideDirection direction) {
+        // 修正当前的索引
+        switch (direction){
+            case Next:
+                mCurrentPosition++;
+                break;
+            case Prev:
+                mCurrentPosition--;
+                break;
+            case Origin:
+                break;
+        }
     }
 
     @Override
