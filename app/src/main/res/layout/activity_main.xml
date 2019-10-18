@@ -99,11 +99,11 @@
             android:text="Sliding Layout"/>
 
         <Button
-            android:id="@+id/btn_test1"
+            android:id="@+id/btn_viewpager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="test1"/>
+            android:text="ViewPager2"/>
         <Button
             android:id="@+id/btn_test2"
             android:layout_width="0dp"

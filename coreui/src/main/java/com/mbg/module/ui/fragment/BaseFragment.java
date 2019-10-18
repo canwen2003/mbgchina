@@ -2,26 +2,22 @@ package com.mbg.module.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDialogFragment;
-
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.jaeger.library.StatusBarUtil;
 import com.mbg.module.ui.activity.BaseFragmentActivity;
 
 
-public abstract class BaseFragment extends AppCompatDialogFragment {
+public abstract class BaseFragment extends Fragment {
     public View mRootView;
     private int mContainer;
 
@@ -54,8 +50,9 @@ public abstract class BaseFragment extends AppCompatDialogFragment {
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                                    @Nullable Bundle savedInstanceState) {
+        mRootView=super.onCreateView(inflater,container,savedInstanceState);
         int id = onRequestLayout();
-        if (id > 0) {
+        if (id > 0&&mRootView==null) {
             mRootView = inflater.inflate(id, container, false);
             initView();
         }

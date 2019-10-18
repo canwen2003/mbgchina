@@ -15,6 +15,7 @@ import com.mbg.mbgsupport.fragment.SnapShotFragment;
 import com.mbg.mbgsupport.fragment.SupperButtonFragment;
 import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
+import com.mbg.mbgsupport.fragment.ViewPager2Fragment;
 import com.mbg.module.ui.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity {
@@ -97,6 +98,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SlidingFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_viewpager).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPager2Fragment.show(context);
             }
         });
     }
