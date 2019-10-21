@@ -50,13 +50,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="test1"/>
+            android:text="Change to Chinese"/>
         <Button
             android:id="@+id/btn_test6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="test2"/>
+            android:text="Change to English"/>
     </LinearLayout>
 
     <ImageView

@@ -25,6 +25,20 @@ public class JsonUtils {
    }
 
    /***
+    * 将map对象转换为json字符串
+    *
+    * @param params Object对象
+    * @return json字符串
+    */
+   public static String toJson(Object params) {
+      if (params == null) {
+         return null;
+      }
+
+      return mExecuter.toJson(params);
+   }
+
+   /***
     * 将Json字符串转换为对象类型
     * @param json 字符串
     * @param type 对象类型

@@ -1,20 +1,24 @@
 package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.blued.android.module.serviceloader.Router;
+import com.mbg.mbgsupport.MainActivity;
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.router.service.IBaseService;
 import com.mbg.mbgsupport.router.service.ServiceKey;
 import com.mbg.module.common.core.net.manager.HttpManager;
 import com.mbg.module.common.core.net.tool.HttpUtils;
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
+import com.mbg.module.common.util.AppUtils;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.FileCacheUtils;
+import com.mbg.module.common.util.LocaleUtils;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.PermissionUtils;
 import com.mbg.module.common.util.StringUtils;
@@ -24,6 +28,7 @@ import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 
 import java.util.List;
+import java.util.Locale;
 
 public class UtilsDemoFragment extends BaseFragment implements View.OnClickListener{
     private ImageView mShowImageView;
@@ -153,10 +158,21 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
 
     private void onTest5(){
+        LocaleUtils.setLocale(AppUtils.getApplication(),new Locale(LocaleUtils.Language.ZH.getCode(),LocaleUtils.CountryArea.China.getCode()));
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
+
+        getActivity().finish();
 
     }
     private void onTest6(){
+        LocaleUtils.setLocale(AppUtils.getApplication(),new Locale(LocaleUtils.Language.EN.getCode(),LocaleUtils.CountryArea.America.getCode()));
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
 
+        getActivity().finish();
     }
 
 }
