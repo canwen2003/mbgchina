@@ -4,7 +4,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.mbg.module.ui.adapter.holder.BaseViewHolder;
 import com.mbg.module.ui.adapter.model.MultiBaseItem;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * 创建默认的多Item的adapter
  *
  */
-public abstract class BaseMultiItemAdapter extends BaseMultiItemQuickAdapter<MultiBaseItem, BaseViewHolder> {
+public abstract class BaseMultiItemAdapter<T extends MultiBaseItem> extends BaseMultiItemQuickAdapter<MultiBaseItem, BaseViewHolder> {
     public BaseMultiItemAdapter(List<MultiBaseItem> data) {
         super(data);
     }
