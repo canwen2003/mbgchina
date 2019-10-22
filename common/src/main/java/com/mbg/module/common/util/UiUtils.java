@@ -24,6 +24,16 @@ public class UiUtils {
 
     /**
      * 将dp转换为px
+     * @param dpValue dp值
+     * @return px值
+     */
+    public static int dip2px(float dpValue) {
+        float scale = AppUtils.getApplication().getResources().getDisplayMetrics().density;
+        return (int)(dpValue * scale + 0.5F);
+    }
+
+    /**
+     * 将dp转换为px
      * @param context 对象
      * @param dpValue dp值
      * @return px值
@@ -31,6 +41,16 @@ public class UiUtils {
     public static int dip2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int)(dpValue * scale + 0.5F);
+    }
+
+    /**
+     * 将px转换为dp
+     * @param pxValue px值
+     * @return dp值
+     */
+    public static int px2dip(float pxValue) {
+        float scale = AppUtils.getApplication().getResources().getDisplayMetrics().density;
+        return (int)(pxValue / scale + 0.5F);
     }
 
     /**
@@ -46,6 +66,16 @@ public class UiUtils {
 
     /**
      * 将px转换为sp
+     * @param pxValue px值
+     * @return sp值
+     */
+    public static int px2sp(float pxValue) {
+        float fontScale = AppUtils.getApplication().getResources().getDisplayMetrics().scaledDensity;
+        return (int)(pxValue / fontScale + 0.5F);
+    }
+
+    /**
+     * 将px转换为sp
      * @param context 对象
      * @param pxValue px值
      * @return sp值
@@ -53,6 +83,16 @@ public class UiUtils {
     public static int px2sp(Context context, float pxValue) {
         float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int)(pxValue / fontScale + 0.5F);
+    }
+
+    /**
+     * 将sp转换为px
+     * @param spValue sp 值
+     * @return px值
+     */
+    public static int sp2px(float spValue) {
+        float fontScale = AppUtils.getApplication().getResources().getDisplayMetrics().scaledDensity;
+        return (int)(spValue * fontScale + 0.5F);
     }
 
     /**
