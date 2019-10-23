@@ -14,6 +14,7 @@ import com.mbg.mbgsupport.fragment.SlidingFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
 import com.mbg.mbgsupport.fragment.SupperButtonFragment;
 import com.mbg.mbgsupport.fragment.TextBannerFragment;
+import com.mbg.mbgsupport.fragment.TimeLineFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
 import com.mbg.mbgsupport.fragment.ViewPager2Fragment;
 import com.mbg.module.common.util.LocaleUtils;
@@ -107,6 +108,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 ViewPager2Fragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_timeline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimeLineFragment.show(context);
             }
         });
     }
