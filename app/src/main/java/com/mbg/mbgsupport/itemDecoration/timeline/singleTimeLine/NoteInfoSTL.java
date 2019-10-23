@@ -1,4 +1,4 @@
-package com.mbg.mbgsupport.itemDecoration.timeline.stl;
+package com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 
 
-import com.mbg.mbgsupport.itemDecoration.timeline.dtl.DateInfo;
+import com.mbg.mbgsupport.model.DateInfo;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.view.itemDecoration.timeline.SingleTimeLineDecoration;
 

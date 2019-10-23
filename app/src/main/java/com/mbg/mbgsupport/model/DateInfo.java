@@ -1,8 +1,9 @@
-package com.mbg.mbgsupport.itemDecoration.timeline.dtl;
+package com.mbg.mbgsupport.model;
 
 import android.graphics.Color;
 
 
+import com.mbg.mbgsupport.R;
 import com.mbg.module.ui.view.itemDecoration.timeline.data.ITimeItem;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class DateInfo implements ITimeItem {
 
     @Override
     public int getResource() {
-        return 0;
+        return R.drawable.common_orange_bg;
     }
 
     public static List<DateInfo> initDateInfo() {

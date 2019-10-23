@@ -4,7 +4,12 @@ import android.content.Context;
 import android.view.View;
 
 import com.mbg.mbgsupport.R;
-import com.mbg.mbgsupport.fragment.timeline.stl.WeekPlanSTLFragment;
+import com.mbg.mbgsupport.fragment.timeline.DoubleTimeLine.DateInfoDTLFragment;
+import com.mbg.mbgsupport.fragment.timeline.DoubleTimeLine.WeekPlanDTLFragment;
+import com.mbg.mbgsupport.fragment.timeline.SingleTimeLine.NoteInfoSTLFragment;
+import com.mbg.mbgsupport.fragment.timeline.SingleTimeLine.SocialMediaSTLFragment;
+import com.mbg.mbgsupport.fragment.timeline.SingleTimeLine.StepSTLFragment;
+import com.mbg.mbgsupport.fragment.timeline.SingleTimeLine.WeekPlanSTLFragment;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
@@ -64,19 +69,20 @@ public class TimeLineFragment extends BaseFragment implements View.OnClickListen
         WeekPlanSTLFragment.show(getActivity());
     }
     private void onTest2(){
-
+        StepSTLFragment.show(getActivity());
     }
     private void onTest3() {
-
+        SocialMediaSTLFragment.show(getActivity());
     }
     private void onTest4(){
-
+        NoteInfoSTLFragment.show(getActivity());
     }
 
     private void onTest5(){
-
+        DateInfoDTLFragment.show(getActivity());
     }
     private void onTest6(){
+        WeekPlanDTLFragment.show(getActivity());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.mbg.mbgsupport.itemDecoration.timeline.stl;
+package com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine;
 
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;

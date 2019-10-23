@@ -16,20 +16,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="URI 测试"/>
+            android:text="单边时间轴无title"/>
 
         <Button
             android:id="@+id/btn_test2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="service loader"/>
+            android:text="步幅时间轴"/>
         <Button
             android:id="@+id/btn_test3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="File cache"/>
+            android:text="日历社交时间轴"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,20 +43,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Http test"/>
+            android:text="警告时间组"/>
 
         <Button
             android:id="@+id/btn_test5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change to Chinese"/>
+            android:text="双边时间轴-时间信息"/>
         <Button
             android:id="@+id/btn_test6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change to English"/>
+            android:text="双边时间轴--计划信息"/>
     </LinearLayout>
 
 </LinearLayout>

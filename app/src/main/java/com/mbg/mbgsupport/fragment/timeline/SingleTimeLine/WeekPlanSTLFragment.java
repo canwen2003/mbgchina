@@ -1,4 +1,4 @@
-package com.mbg.mbgsupport.fragment.timeline.stl;
+package com.mbg.mbgsupport.fragment.timeline.SingleTimeLine;
 
 
 import android.content.Context;
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.WeekPlanSTLAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.stl.WeekPlanSTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.WeekPlanSTL;
 import com.mbg.mbgsupport.model.TimeItem;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
