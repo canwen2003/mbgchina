@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.SocicalMediaInfoAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.SocialMediaSTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.SocialMediaTimeLineDecoration;
 import com.mbg.mbgsupport.model.SocialMediaInfo;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
@@ -48,6 +48,6 @@ public class SocialMediaSTLFragment extends BaseFragment {
                 .setLine(TimeLine.FLAG_LINE_DIVIDE, 80, Color.parseColor("#757575"), 1)
                 .setDot(TimeLine.FLAG_DOT_DRAW)
                 .setSameTitleHide()
-                .build(SocialMediaSTL.class);
+                .build(SocialMediaTimeLineDecoration.class);
     }
 }

@@ -11,9 +11,9 @@ import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.view.itemDecoration.timeline.SingleTimeLineDecoration;
 import com.mbg.module.ui.view.itemDecoration.timeline.data.ITimeItem;
 
-public class WeekPlanSTL extends SingleTimeLineDecoration {
+public class WeekPlanTimeLineDecoration extends SingleTimeLineDecoration {
 
-    public WeekPlanSTL(Config config) {
+    public WeekPlanTimeLineDecoration(Config config) {
         super(config);
     }
 

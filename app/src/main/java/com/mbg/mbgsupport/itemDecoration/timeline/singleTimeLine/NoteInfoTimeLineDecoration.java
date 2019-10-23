@@ -14,13 +14,13 @@ import com.mbg.module.ui.view.itemDecoration.timeline.SingleTimeLineDecoration;
 import java.util.Calendar;
 import java.util.Date;
 
-public class NoteInfoSTL extends SingleTimeLineDecoration {
+public class NoteInfoTimeLineDecoration extends SingleTimeLineDecoration {
 
     private Paint strTextPaint;
     private Paint dayTextPaint;
     private int space;
 
-    public NoteInfoSTL(Config config) {
+    public NoteInfoTimeLineDecoration(Config config) {
         super(config);
 
         strTextPaint = new Paint();

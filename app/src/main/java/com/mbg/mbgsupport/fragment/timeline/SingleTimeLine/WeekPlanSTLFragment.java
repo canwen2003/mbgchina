@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.WeekPlanSTLAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.WeekPlanSTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.WeekPlanTimeLineDecoration;
 import com.mbg.mbgsupport.model.TimeItem;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
@@ -56,7 +56,7 @@ public class WeekPlanSTLFragment extends BaseFragment {
                 .setTitleStyle(TimeLine.FLAG_TITLE_DRAW_BG, 50)
                 .setLine(TimeLine.FLAG_LINE_BEGIN_TO_END, 40, Color.parseColor("#757575"),2)
                 .setDot(TimeLine.FLAG_DOT_RES)
-                .build(WeekPlanSTL.class);
+                .build(WeekPlanTimeLineDecoration.class);
     }
 
 }

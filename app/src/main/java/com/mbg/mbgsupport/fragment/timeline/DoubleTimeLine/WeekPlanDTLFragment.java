@@ -3,13 +3,11 @@ package com.mbg.mbgsupport.fragment.timeline.DoubleTimeLine;
 import android.content.Context;
 import android.graphics.Color;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.WeekPlanDTLAdapter;
-import com.mbg.mbgsupport.adapter.WeekPlanSTLAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.dtl.WeekPlanDTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.doubleTimeLine.WeekPlanTimeLineDecoration;
 import com.mbg.mbgsupport.model.TimeItem;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
@@ -54,7 +52,7 @@ public class WeekPlanDTLFragment extends BaseFragment {
                 .setTitleStyle(TimeLine.FLAG_TITLE_TYPE_LEFT, 0)
                 .setLine(TimeLine.FLAG_LINE_BEGIN_TO_END, 60, Color.parseColor("#757575"),3)
                 .setDot(TimeLine.FLAG_DOT_RES)
-                .build(WeekPlanDTL.class);
+                .build(WeekPlanTimeLineDecoration.class);
     }
 
 }

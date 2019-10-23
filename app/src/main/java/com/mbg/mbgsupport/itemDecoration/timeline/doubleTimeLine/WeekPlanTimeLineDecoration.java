@@ -1,4 +1,4 @@
-package com.mbg.mbgsupport.itemDecoration.timeline.dtl;
+package com.mbg.mbgsupport.itemDecoration.timeline.doubleTimeLine;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,9 +12,9 @@ import com.mbg.module.ui.view.itemDecoration.timeline.DoubleTimeLineDecoration;
 import com.mbg.module.ui.view.itemDecoration.timeline.data.ITimeItem;
 
 
-public class WeekPlanDTL extends DoubleTimeLineDecoration {
+public class WeekPlanTimeLineDecoration extends DoubleTimeLineDecoration {
 
-    public WeekPlanDTL(Config config) {
+    public WeekPlanTimeLineDecoration(Config config) {
         super(config);
     }
 

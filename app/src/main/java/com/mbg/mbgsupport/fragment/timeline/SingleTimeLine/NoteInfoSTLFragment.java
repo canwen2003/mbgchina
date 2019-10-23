@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.NoteInfoAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.NoteInfoSTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.NoteInfoTimeLineDecoration;
 import com.mbg.mbgsupport.model.NoteInfo;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
@@ -50,7 +50,7 @@ public class NoteInfoSTLFragment extends BaseFragment {
                 .setLine(SingleTimeLineDecoration.FLAG_LINE_CONSISTENT, 0, Color.parseColor("#00000000"))
                 .setDot(SingleTimeLineDecoration.FLAG_DOT_DRAW)
                 .setSameTitleHide()
-                .build(NoteInfoSTL.class);
+                .build(NoteInfoTimeLineDecoration.class);
     }
 
 }

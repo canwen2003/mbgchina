@@ -1,4 +1,4 @@
-package com.mbg.mbgsupport.itemDecoration.timeline.dtl;
+package com.mbg.mbgsupport.itemDecoration.timeline.doubleTimeLine;
 
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -14,7 +14,7 @@ import com.mbg.module.ui.view.itemDecoration.timeline.DoubleTimeLineDecoration;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateInfoDTL extends DoubleTimeLineDecoration {
+public class DateInfoTimeLineDecoration extends DoubleTimeLineDecoration {
 
     private static final String[] MONTHS = new String[]{
             "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
@@ -25,7 +25,7 @@ public class DateInfoDTL extends DoubleTimeLineDecoration {
     private Paint dayTextPaint;
     private int space;
 
-    public DateInfoDTL(Config config) {
+    public DateInfoTimeLineDecoration(Config config) {
         super(config);
 
         r = UiUtils.dip2px(24);

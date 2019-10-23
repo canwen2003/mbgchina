@@ -3,12 +3,11 @@ package com.mbg.mbgsupport.fragment.timeline.DoubleTimeLine;
 import android.content.Context;
 import android.graphics.Color;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.DateInfoAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.dtl.DateInfoDTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.doubleTimeLine.DateInfoTimeLineDecoration;
 import com.mbg.mbgsupport.model.DateInfo;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
@@ -52,6 +51,6 @@ public class DateInfoDTLFragment extends BaseFragment {
                 .setTitleStyle(TimeLine.FLAG_TITLE_POS_NONE, 0)
                 .setLine(TimeLine.FLAG_LINE_BEGIN_TO_END, 60, Color.parseColor("#757575"), 2)
                 .setDot(TimeLine.FLAG_DOT_DRAW)
-                .build(DateInfoDTL.class);
+                .build(DateInfoTimeLineDecoration.class);
     }
 }

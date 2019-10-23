@@ -17,7 +17,7 @@ import com.mbg.module.ui.view.itemDecoration.timeline.data.ITimeItem;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SocialMediaSTL extends SingleTimeLineDecoration {
+public class SocialMediaTimeLineDecoration extends SingleTimeLineDecoration {
 
     private static final String[] MONTHS = new String[]{
             "/1月", "/2月", "/2月", "/4月", "/5月", "/6月", "/7月", "/8月", "/9月", "/10月", "/11月", "/12月"
@@ -28,7 +28,7 @@ public class SocialMediaSTL extends SingleTimeLineDecoration {
     private Paint dayTextPaint;
     private int space;
 
-    public SocialMediaSTL(Config config) {
+    public SocialMediaTimeLineDecoration(Config config) {
         super(config);
 
         r = UiUtils.dip2px(24);

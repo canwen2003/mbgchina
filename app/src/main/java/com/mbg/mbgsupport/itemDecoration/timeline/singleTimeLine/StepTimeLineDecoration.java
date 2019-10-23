@@ -11,11 +11,11 @@ import com.mbg.module.ui.view.itemDecoration.timeline.SingleTimeLineDecoration;
 import com.mbg.module.ui.view.itemDecoration.timeline.data.ITimeItem;
 
 
-public class StepSTL extends SingleTimeLineDecoration {
+public class StepTimeLineDecoration extends SingleTimeLineDecoration {
 
     private Paint mRectPaint;
 
-    public StepSTL(SingleTimeLineDecoration.Config config) {
+    public StepTimeLineDecoration(SingleTimeLineDecoration.Config config) {
         super(config);
 
         mRectPaint = new Paint();

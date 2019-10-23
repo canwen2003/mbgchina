@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.adapter.WeekPlanSTLAdapter;
-import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.StepSTL;
+import com.mbg.mbgsupport.itemDecoration.timeline.singleTimeLine.StepTimeLineDecoration;
 import com.mbg.mbgsupport.model.TimeItem;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
@@ -52,6 +52,6 @@ public class StepSTLFragment extends BaseFragment {
                 .setLine(SingleTimeLineDecoration.FLAG_LINE_DIVIDE, 50, Color.parseColor("#8d9ca9"))
                 .setDot(SingleTimeLineDecoration.FLAG_DOT_DRAW)
                 .setSameTitleHide()
-                .build(StepSTL.class);
+                .build(StepTimeLineDecoration.class);
     }
 }
