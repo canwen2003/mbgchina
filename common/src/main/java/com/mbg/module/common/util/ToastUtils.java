@@ -35,7 +35,7 @@ public class ToastUtils {
      * @param msg 显示的内容
      */
     public static void debugShow(final CharSequence msg) {
-        if (AppUtils.isAppDebugable()) {
+        if (AppUtils.isAppDebuggable()) {
             show(msg);
         }
     }

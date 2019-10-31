@@ -3,9 +3,11 @@ package com.mbg.module.common.util;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.webkit.WebView;
+
 
 import java.util.Locale;
 
@@ -13,6 +15,36 @@ public class LocaleUtils {
     private static final String TAG = "LocaleUtils";
     private static final String SHARED_KEY_LOCALE = "_shared_key_locale_";
     private static Locale defaultLocale = new Locale(Language.EN.getCode(),CountryArea.America.getCode());
+
+
+    /**
+     * 根据sp数据设置本地化语言
+     *
+     * @param context 设置语言的context
+     */
+    public static void setLocale(Context context) {
+        setLocale(context,false);
+    }
+
+    /**
+     * 根据sp数据设置本地化语言
+     *
+     * @param context 设置语言的context
+     * @param isFollowSystem 是否和系统语言一致，true系统语言，false App自己的语言
+     */
+    public static void setLocale(Context context,boolean isFollowSystem) {
+
+        if (isFollowSystem) {
+            Locale sysLocale = Resources.getSystem().getConfiguration().locale;
+            updateLanguage(AppUtils.getApplication(), sysLocale);
+            updateLanguage(context, sysLocale);
+            return;
+        }
+
+        Locale locale = getLocale();
+        updateLanguage(AppUtils.getApplication(), locale);
+        updateLanguage(context, locale);
+    }
 
     /**
      * 设置本地化语言
@@ -24,28 +56,8 @@ public class LocaleUtils {
         if (locale==null||context==null){
             return;
         }
-        // 解决webview所在的activity语言没有切换问题
-        new WebView(context).destroy();
-
-        // 切换语言
-        Resources resources = context.getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        Configuration config = resources.getConfiguration();
-        config.locale = locale;
-        Log.d(TAG, "setLocale: " + config.locale.toString());
-        resources.updateConfiguration(config, dm);
-
-        putLocale(locale);
-    }
-
-    /**
-     * 根据sp数据设置本地化语言
-     *
-     * @param context 设置语言的context
-     */
-    public static void setLocale(Context context) {
-        Locale locale = getLocale();
-        setLocale(context, locale);
+        updateLanguage(AppUtils.getApplication(), locale);
+        updateLanguage(context, locale);
     }
 
     /**
@@ -96,6 +108,33 @@ public class LocaleUtils {
         }
         return jsonToLocale(type);
     }
+
+    private static void updateLanguage(Context context, Locale locale) {
+        Resources resources = context.getResources();
+        Configuration config = resources.getConfiguration();
+        Locale contextLocale = config.locale;
+
+        if (StringUtils.equals(contextLocale.getLanguage(), locale.getLanguage())
+                && StringUtils.equals(contextLocale.getCountry(), locale.getCountry())) {
+            return;
+        }
+
+        // 解决webview所在的activity语言没有切换问题
+        new WebView(context).destroy();
+
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            config.setLocale(locale);
+            context.createConfigurationContext(config);
+        } else {
+            config.locale = locale;
+        }
+        resources.updateConfiguration(config, dm);
+
+
+        putLocale(locale);
+    }
+
 
     /***
      * 定义语言

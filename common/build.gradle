@@ -27,9 +27,11 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    //LiveEventBus生命周期感知，消息随时订阅，自动取消订阅
+    api 'com.jeremyliao:live-event-bus-x:1.5.3'
     implementation("com.squareup.okhttp3:okhttp:4.0.1")
     implementation'org.apache.httpcomponents:httpclient:4.5.10'
 }
