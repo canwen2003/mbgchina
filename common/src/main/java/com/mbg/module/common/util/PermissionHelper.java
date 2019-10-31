@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.AppOpsManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.mbg.module.common.util.consts.PermissionConsts;
@@ -76,12 +77,13 @@ public class PermissionHelper {
     /**
      * Return whether <em>you</em> have been granted the permissions.
      *
-     * @param permissions The permissions.
+     * @param permission The permissions.
      * @return {@code true}: yes<br>{@code false}: no
      */
-    public static boolean isGranted(final String... permissions) {
-        for (String permission : permissions) {
-            if (!isGranted(permission)) {
+    public static synchronized boolean isPermissionGranted(final @PermissionConsts.Permission String permission) {
+        String[] permissions=PermissionConsts.getPermissions(permission);
+        for (String childPermission : permissions) {
+            if (!isGranted(childPermission)) {
                 return false;
             }
         }
@@ -89,9 +91,26 @@ public class PermissionHelper {
     }
 
     private static boolean isGranted(final String permission) {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
-                || PackageManager.PERMISSION_GRANTED
-                == ContextCompat.checkSelfPermission(AppUtils.getApplication(), permission);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return true;
+        }
+
+        if (AppUtils.getApplication().checkPermission(permission, android.os.Process.myPid(), android.os.Process.myUid()) == PackageManager.PERMISSION_DENIED) {
+            return false;
+        }
+
+        String op = AppOpsManagerCompat.permissionToOp(permission);
+        if (op == null) {
+            return true;
+        }
+
+
+        if (AppOpsManagerCompat.noteProxyOpNoThrow(AppUtils.getApplication(), op, AppUtils.getPackageName())
+                != AppOpsManagerCompat.MODE_ALLOWED) {
+            return false;
+        }
+
+        return PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(AppUtils.getApplication(), permission);
     }
 
     /**

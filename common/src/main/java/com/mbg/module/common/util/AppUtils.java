@@ -1,10 +1,8 @@
 package com.mbg.module.common.util;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -18,6 +16,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -243,7 +242,7 @@ public class AppUtils {
      * 重启系统让配置生效
      * @param homeActivity 主页
      */
-    public void rebootApplication(Class<Activity> homeActivity){
+    public static void rebootApplication(Class<? extends AppCompatActivity> homeActivity){
         Intent intent = new Intent(AppUtils.getApplication(),homeActivity);
         intent.addFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK

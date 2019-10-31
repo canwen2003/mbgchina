@@ -20,10 +20,12 @@ import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.FileCacheUtils;
 import com.mbg.module.common.util.LocaleUtils;
 import com.mbg.module.common.util.LogUtils;
+import com.mbg.module.common.util.PermissionHelper;
 import com.mbg.module.common.util.PermissionUtils;
 import com.mbg.module.common.util.StringUtils;
 import com.mbg.module.common.util.ToastUtils;
 import com.mbg.module.common.util.UriUtils;
+import com.mbg.module.common.util.consts.PermissionConsts;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 
@@ -53,6 +55,39 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
             }
         });
+
+        if(!PermissionHelper.isPermissionGranted(PermissionConsts.CAMERA)){
+            PermissionHelper
+                    .permission(PermissionConsts.CAMERA)
+                    .callback(new PermissionHelper.SimpleCallback() {
+                        @Override
+                        public void onGranted() {
+                            LogUtils.d("onGranted");
+                        }
+
+                        @Override
+                        public void onDenied() {
+                            LogUtils.d("onGranted");
+                        }
+                    }).request();
+        }
+
+        if(!PermissionHelper.isPermissionGranted(PermissionConsts.LOCATION)){
+            PermissionHelper
+                    .permission(PermissionConsts.LOCATION)
+                    .callback(new PermissionHelper.SimpleCallback() {
+                        @Override
+                        public void onGranted() {
+                            LogUtils.d("onGranted");
+                        }
+
+                        @Override
+                        public void onDenied() {
+                            LogUtils.d("onGranted");
+                        }
+                    }).request();
+        }
+
         findViewById(R.id.btn_test1).setOnClickListener(this);
         findViewById(R.id.btn_test2).setOnClickListener(this);
         findViewById(R.id.btn_test3).setOnClickListener(this);
@@ -159,20 +194,12 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
     private void onTest5(){
         LocaleUtils.setLocale(AppUtils.getApplication(),new Locale(LocaleUtils.Language.ZH.getCode(),LocaleUtils.CountryArea.China.getCode()));
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        getActivity().startActivity(intent);
-
-        getActivity().finish();
+        AppUtils.rebootApplication(MainActivity.class);
 
     }
     private void onTest6(){
         LocaleUtils.setLocale(AppUtils.getApplication(),new Locale(LocaleUtils.Language.EN.getCode(),LocaleUtils.CountryArea.America.getCode()));
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        getActivity().startActivity(intent);
-
-        getActivity().finish();
+        AppUtils.rebootApplication(MainActivity.class);
     }
 
 }
