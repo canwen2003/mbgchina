@@ -193,12 +193,12 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
 
     private void onTest5(){
-        LocaleUtils.setLocale(AppUtils.getApplication(),new Locale(LocaleUtils.Language.ZH.getCode(),LocaleUtils.CountryArea.China.getCode()));
+        LocaleUtils.setLocale(getActivity(),new Locale(LocaleUtils.Language.ZH.getCode(),LocaleUtils.CountryArea.China.getCode()));
         AppUtils.rebootApplication(MainActivity.class);
 
     }
     private void onTest6(){
-        LocaleUtils.setLocale(AppUtils.getApplication(),new Locale(LocaleUtils.Language.EN.getCode(),LocaleUtils.CountryArea.America.getCode()));
+        LocaleUtils.setLocale(getActivity(),new Locale(LocaleUtils.Language.EN.getCode(),LocaleUtils.CountryArea.America.getCode()));
         AppUtils.rebootApplication(MainActivity.class);
     }
 

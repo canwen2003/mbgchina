@@ -39,7 +39,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        LocaleUtils.setLocale(this);
         //
         initImageLoader(this);
 

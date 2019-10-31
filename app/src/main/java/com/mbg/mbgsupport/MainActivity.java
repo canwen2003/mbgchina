@@ -17,19 +17,19 @@ import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.mbgsupport.fragment.TimeLineFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
 import com.mbg.mbgsupport.fragment.ViewPager2Fragment;
-import com.mbg.module.common.util.LocaleUtils;
 import com.mbg.module.ui.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
     private Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //setStatusBarColor(getResources().getColor(R.color.design_default_color_primary),0);
         context=this;
-        LocaleUtils.setLocale(this);
         initView();
     }
 
