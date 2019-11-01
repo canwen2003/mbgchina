@@ -4,7 +4,10 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-
+    <ImageView
+        android:id="@+id/img_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,9 +62,32 @@
             android:text="Change to English"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="3">
+        <Button
+            android:id="@+id/btn_test7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="显示输入法"/>
+
+        <Button
+            android:id="@+id/btn_test8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="隐藏输入法"/>
+        <Button
+            android:id="@+id/btn_test9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="test9"/>
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -18,6 +18,7 @@ import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
 import com.mbg.module.common.util.AppUtils;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.FileCacheUtils;
+import com.mbg.module.common.util.KeyboardUtils;
 import com.mbg.module.common.util.LocaleUtils;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.PermissionHelper;
@@ -94,7 +95,16 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         findViewById(R.id.btn_test4).setOnClickListener(this);
         findViewById(R.id.btn_test5).setOnClickListener(this);
         findViewById(R.id.btn_test6).setOnClickListener(this);
+        findViewById(R.id.btn_test7).setOnClickListener(this);
+        findViewById(R.id.btn_test8).setOnClickListener(this);
+        findViewById(R.id.btn_test9).setOnClickListener(this);
         mShowImageView=findViewById(R.id.img_show);
+        KeyboardUtils.registerSoftInputChangedListener(getActivity(), new KeyboardUtils.OnSoftInputChangedListener() {
+            @Override
+            public void onSoftInputChanged(int height) {
+                ToastUtils.debugShow("onSoftInputChanged:height="+height);
+            }
+        });
     }
 
     @Override
@@ -121,6 +131,14 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.btn_test6:
                 onTest6();
+            case R.id.btn_test7:
+                onTest7();
+                break;
+            case R.id.btn_test8:
+                onTest8();
+                break;
+            case R.id.btn_test9:
+                onTest9();
                 break;
         }
 
@@ -200,6 +218,16 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     private void onTest6(){
         LocaleUtils.setLocale(getActivity(),new Locale(LocaleUtils.Language.EN.getCode(),LocaleUtils.CountryArea.America.getCode()));
         AppUtils.rebootApplication(MainActivity.class);
+    }
+
+    private void onTest7(){
+        KeyboardUtils.showSoftInput(getActivity());
+    }
+    private void onTest8(){
+       KeyboardUtils.hideSoftInput(getActivity());
+    }
+    private void onTest9(){
+
     }
 
 }
