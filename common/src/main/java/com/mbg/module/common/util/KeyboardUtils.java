@@ -20,7 +20,20 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 
 public class KeyboardUtils {
+    //输入法的高度
+    private static int sKeyBoardHeight = 0;
+
     private KeyboardUtils() { }
+
+    /**
+     * 获取输入法键盘的高度
+     */
+    public static int getSoftInputHeight(){
+        if(sKeyBoardHeight<=0){
+            sKeyBoardHeight=getNavBarHeight();
+        }
+        return sKeyBoardHeight;
+    }
 
     /**
      * 显示软件盘
@@ -169,6 +182,9 @@ public class KeyboardUtils {
                         if (decorViewInvisibleHeightPre[0] != height) {
                             listener.onSoftInputChanged(height);
                             decorViewInvisibleHeightPre[0] = height;
+                            if (height>0) {
+                                sKeyBoardHeight = height;
+                            }
                         }
                     }
                 });

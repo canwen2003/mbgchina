@@ -1,11 +1,11 @@
 package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blued.android.module.serviceloader.Router;
 import com.mbg.mbgsupport.MainActivity;
@@ -25,6 +25,7 @@ import com.mbg.module.common.util.PermissionHelper;
 import com.mbg.module.common.util.PermissionUtils;
 import com.mbg.module.common.util.StringUtils;
 import com.mbg.module.common.util.ToastUtils;
+import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.common.util.UriUtils;
 import com.mbg.module.common.util.consts.PermissionConsts;
 import com.mbg.module.ui.activity.TerminalActivity;
@@ -98,11 +99,19 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         findViewById(R.id.btn_test7).setOnClickListener(this);
         findViewById(R.id.btn_test8).setOnClickListener(this);
         findViewById(R.id.btn_test9).setOnClickListener(this);
+
+        final TextView inputRoot=findViewById(R.id.tv_test_input);
+
         mShowImageView=findViewById(R.id.img_show);
+
+
         KeyboardUtils.registerSoftInputChangedListener(getActivity(), new KeyboardUtils.OnSoftInputChangedListener() {
             @Override
             public void onSoftInputChanged(int height) {
                 ToastUtils.debugShow("onSoftInputChanged:height="+height);
+                if (height>0){
+                    inputRoot.setTranslationY(-height);
+                }
             }
         });
     }
