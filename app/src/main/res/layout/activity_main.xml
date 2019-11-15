@@ -113,4 +113,32 @@
             android:text="TimeLine"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="3">
+        <Button
+            android:id="@+id/btn_flowlayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Flow Layout"/>
+
+        <Button
+            android:id="@+id/btn_system_flowlayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="System Flow layout"/>
+
+        <Button
+            android:id="@+id/btn_test2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="test"/>
+    </LinearLayout>
+
 </LinearLayout>

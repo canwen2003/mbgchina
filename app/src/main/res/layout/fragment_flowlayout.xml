@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="20dp">
+
+    <LinearLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.mbg.module.ui.view.layout.FlowLayout
+            android:id="@+id/flow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:flChildSpacing="auto"
+            app:flRowSpacing="8dp" />
+
+        <com.mbg.module.ui.view.layout.FlowLayout
+            android:id="@+id/flow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:flChildSpacing="auto"
+            app:flChildSpacingForLastRow="align"
+            app:flRowSpacing="8dp"
+            app:flMaxRows="1">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="sun" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="mon" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="tue" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="wed" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="thu" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="fri" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="sat" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="sat" />
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_selected_bg"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/color_6596ff"
+                android:text="sat" />
+
+        </com.mbg.module.ui.view.layout.FlowLayout>
+
+
+        <com.mbg.module.ui.view.layout.FlowLayout
+            android:id="@+id/gravity_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/common_box_bg"
+            app:flChildSpacing="8dp"
+            app:flChildSpacingForLastRow="align"
+            app:flRowSpacing="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:text="gravity"
+                android:textColor="@color/color_6596ff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:text="top/def" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:layout_margin="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:padding="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-padding" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:text="gravity"
+                android:textColor="@color/color_6596ff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:text="default" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:layout_margin="4dp"
+                android:text="add-margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:padding="4dp"
+                android:text="add-padding" />
+        </com.mbg.module.ui.view.layout.FlowLayout>
+
+        <com.mbg.module.ui.view.layout.FlowLayout
+            android:id="@+id/gravity_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/common_box_bg"
+            app:flRowVerticalGravity="center"
+            app:flChildSpacing="8dp"
+            app:flChildSpacingForLastRow="align"
+            app:flRowSpacing="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:text="gravity"
+                android:textColor="@color/color_6596ff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:text="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:layout_margin="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:padding="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-padding" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:text="gravity"
+                android:textColor="@color/color_6596ff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:text="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:layout_margin="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:padding="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-padding" />
+        </com.mbg.module.ui.view.layout.FlowLayout>
+
+        <com.mbg.module.ui.view.layout.FlowLayout
+            android:id="@+id/gravity_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/common_box_bg"
+            app:flRowVerticalGravity="bottom"
+            app:flChildSpacing="8dp"
+            app:flChildSpacingForLastRow="align"
+            app:flRowSpacing="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:text="gravity"
+                android:textColor="@color/color_6596ff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:text="bottom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:layout_margin="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:padding="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-padding" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:text="gravity"
+                android:textColor="@color/color_6596ff"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:textColor="@color/color_6596ff"
+                android:text="bottom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:layout_margin="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_label_unselected_bg"
+                android:padding="4dp"
+                android:textColor="@color/color_6596ff"
+                android:text="add-padding" />
+        </com.mbg.module.ui.view.layout.FlowLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

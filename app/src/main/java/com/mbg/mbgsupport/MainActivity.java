@@ -8,11 +8,13 @@ import android.view.View;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
 import com.mbg.mbgsupport.fragment.DragFragment;
+import com.mbg.mbgsupport.fragment.FlowLayoutFragment;
 import com.mbg.mbgsupport.fragment.ImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.PuddingFragment;
 import com.mbg.mbgsupport.fragment.SlidingFragment;
 import com.mbg.mbgsupport.fragment.SnapShotFragment;
 import com.mbg.mbgsupport.fragment.SupperButtonFragment;
+import com.mbg.mbgsupport.fragment.SystemFlowLayoutFragment;
 import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.mbgsupport.fragment.TimeLineFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
@@ -115,6 +117,19 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 TimeLineFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_flowlayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FlowLayoutFragment.show(context);
+            }
+        });
+        findViewById(R.id.btn_system_flowlayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SystemFlowLayoutFragment.show(context);
             }
         });
     }
