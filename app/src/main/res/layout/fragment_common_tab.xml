@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eeeeee"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            tl:indicator_color="#2C97DE"
+            tl:textSelectColor="#2C97DE"
+            tl:textUnSelectColor="#66000000"
+            tl:underline_color="#DDDDDD"
+            tl:underline_height="1dp"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_2"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"/>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_2"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#ffffff"
+            tl:iconHeight="23dp"
+            tl:iconWidth="23dp"
+            tl:indicator_color="#2C97DE"
+            tl:indicator_height="0dp"
+            tl:textSelectColor="#2C97DE"
+            tl:textUnSelectColor="#66000000"
+            tl:textSize="12sp"
+            tl:underline_color="#DDDDDD"
+            tl:underline_height="1dp"/>
+
+        <FrameLayout
+            android:id="@+id/fl_change"
+            android:layout_width="match_parent"
+            android:layout_height="84dp">
+        </FrameLayout>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#ffffff"
+            tl:icon_Gravity="LEFT"
+            tl:iconHeight="18dp"
+            tl:iconMargin="5dp"
+            tl:iconWidth="18dp"
+            tl:indicator_bounce_enable="false"
+            tl:indicator_color="#2C97DE"
+            tl:indicator_gravity="TOP"
+            tl:textSelectColor="#2C97DE"
+            tl:textUnSelectColor="#66000000"
+            tl:textSize="15sp"
+            tl:underline_color="#DDDDDD"
+            tl:underline_gravity="TOP"
+            tl:underline_height="1dp"/>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#F6CE59"
+            tl:iconVisible="false"
+            tl:textBold="SELECT"
+            tl:indicator_width="10dp"
+            tl:textSize="14sp"/>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            tl:textBold="BOTH"
+            android:id="@+id/tl_5"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#EC7263"
+            tl:iconVisible="false"
+            tl:indicator_corner_radius="2dp"
+            tl:indicator_height="4dp"
+            tl:indicator_width="4dp"
+            tl:textSize="14sp"/>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_6"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#57385C"
+            tl:iconVisible="false"
+            tl:indicator_corner_radius="1.5dp"
+            tl:indicator_height="3dp"
+            tl:indicator_width="10dp"
+            tl:textSize="14sp"/>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_7"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#E45171"
+            tl:iconVisible="false"
+            tl:indicator_color="#eeeeee"
+            tl:indicator_corner_radius="1.5dp"
+            tl:indicator_height="3dp"
+            tl:indicator_style="TRIANGLE"
+            tl:indicator_width="10dp"
+            tl:textSize="14sp"/>
+
+        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+            android:id="@+id/tl_8"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#6D8FB0"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            tl:iconVisible="false"
+            tl:indicator_margin_left="5dp"
+            tl:indicator_margin_right="5dp"
+            tl:indicator_style="BLOCK"
+            tl:textSize="14sp"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

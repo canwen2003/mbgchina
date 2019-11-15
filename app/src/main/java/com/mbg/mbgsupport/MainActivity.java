@@ -19,6 +19,9 @@ import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.mbgsupport.fragment.TimeLineFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
 import com.mbg.mbgsupport.fragment.ViewPager2Fragment;
+import com.mbg.mbgsupport.fragment.tab.CommonTabFragment;
+import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
+import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.module.ui.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity {
@@ -130,6 +133,27 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SystemFlowLayoutFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_common_tab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommonTabFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_segment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SegmentTabFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_sliding).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SlidingTabFragment.show(context);
             }
         });
     }

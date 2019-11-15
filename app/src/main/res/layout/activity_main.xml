@@ -134,7 +134,35 @@
             android:text="System Flow layout"/>
 
         <Button
-            android:id="@+id/btn_test2"
+            android:id="@+id/btn_common_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Common Tab"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="3">
+        <Button
+            android:id="@+id/btn_segment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SegmentTab"/>
+
+        <Button
+            android:id="@+id/btn_sliding"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sliding tab"/>
+
+        <Button
+            android:id="@+id/btn_test1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
