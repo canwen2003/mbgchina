@@ -46,7 +46,7 @@
             tl:underline_height="1dp"/>
 
         <FrameLayout
-            android:id="@+id/fl_change"
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="84dp">
         </FrameLayout>

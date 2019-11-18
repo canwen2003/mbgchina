@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
-import com.mbg.module.common.util.ViewFindUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.layout.tablayout.SegmentTabLayout;
@@ -50,16 +49,16 @@ public class SegmentTabFragment extends BaseFragment implements View.OnClickList
         }
         
 
-        SegmentTabLayout tabLayout_1 = ViewFindUtils.find(mRootView, R.id.tl_1);
-        SegmentTabLayout tabLayout_2 = ViewFindUtils.find(mRootView, R.id.tl_2);
-        mTabLayout_3 = ViewFindUtils.find(mRootView, R.id.tl_3);
-        SegmentTabLayout tabLayout_4 = ViewFindUtils.find(mRootView, R.id.tl_4);
-        SegmentTabLayout tabLayout_5 = ViewFindUtils.find(mRootView, R.id.tl_5);
+        SegmentTabLayout tabLayout_1 = findViewById( R.id.tl_1);
+        SegmentTabLayout tabLayout_2 = findViewById( R.id.tl_2);
+        mTabLayout_3 = findViewById( R.id.tl_3);
+        SegmentTabLayout tabLayout_4 = findViewById( R.id.tl_4);
+        SegmentTabLayout tabLayout_5 = findViewById( R.id.tl_5);
 
         tabLayout_1.setTabData(mTitles);
         tabLayout_2.setTabData(mTitles_2);
         tl_3();
-        tabLayout_4.setTabData(mTitles_2, getActivity(), R.id.fl_change, mFragments2);
+        tabLayout_4.setTabData(mTitles_2, getChildFragmentManager(), R.id.fl_change, mFragments2);
         tabLayout_5.setTabData(mTitles_3);
 
         //显示未读红点
@@ -77,7 +76,7 @@ public class SegmentTabFragment extends BaseFragment implements View.OnClickList
     }
 
     private void tl_3() {
-        final ViewPager vp_3 = ViewFindUtils.find(mRootView, R.id.vp_2);
+        final ViewPager vp_3 = findViewById( R.id.vp_2);
         vp_3.setAdapter(new MyPagerAdapter(getFragmentManager()));
 
         mTabLayout_3.setTabData(mTitles_3);

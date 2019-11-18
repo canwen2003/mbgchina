@@ -1,7 +1,7 @@
 package com.mbg.mbgsupport.fragment.tab;
 
 
-import com.mbg.module.ui.view.layout.tablayout.listener.CustomTabEntity;
+import com.mbg.module.ui.view.layout.tablayout.model.CustomTabEntity;
 
 public class TabEntity implements CustomTabEntity {
     public String title;

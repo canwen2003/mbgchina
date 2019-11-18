@@ -12,7 +12,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
-import com.mbg.module.common.util.ViewFindUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout;
@@ -28,7 +27,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
             "热门", "iOS", "Android"
             , "前端", "后端", "设计", "工具资源"
     };
-    private MyPagerAdapter mAdapter;
+   
     public static void show(Context context){
         TerminalActivity.show(context, SlidingTabFragment.class,null);
     }
@@ -45,44 +44,44 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         }
 
         
-        ViewPager vp = ViewFindUtils.find(mRootView, R.id.vp);
-        mAdapter = new MyPagerAdapter(getFragmentManager());
-        vp.setAdapter(mAdapter);
+        ViewPager viewPager = findViewById(R.id.vp);
+        MyPagerAdapter mAdapter = new MyPagerAdapter(getFragmentManager());
+        viewPager.setAdapter(mAdapter);
 
         /** 默认 */
-        SlidingTabLayout tabLayout_1 = ViewFindUtils.find(mRootView, R.id.tl_1);
+        SlidingTabLayout tabLayout_1 = findViewById( R.id.tl_1);
         /**自定义部分属性*/
-        SlidingTabLayout tabLayout_2 = ViewFindUtils.find(mRootView, R.id.tl_2);
+        SlidingTabLayout tabLayout_2 = findViewById( R.id.tl_2);
         /** 字体加粗,大写 */
-        SlidingTabLayout tabLayout_3 = ViewFindUtils.find(mRootView, R.id.tl_3);
+        SlidingTabLayout tabLayout_3 = findViewById( R.id.tl_3);
         /** tab固定宽度 */
-        SlidingTabLayout tabLayout_4 = ViewFindUtils.find(mRootView, R.id.tl_4);
+        SlidingTabLayout tabLayout_4 = findViewById( R.id.tl_4);
         /** indicator固定宽度 */
-        SlidingTabLayout tabLayout_5 = ViewFindUtils.find(mRootView, R.id.tl_5);
+        SlidingTabLayout tabLayout_5 = findViewById( R.id.tl_5);
         /** indicator圆 */
-        SlidingTabLayout tabLayout_6 = ViewFindUtils.find(mRootView, R.id.tl_6);
+        SlidingTabLayout tabLayout_6 = findViewById( R.id.tl_6);
         /** indicator矩形圆角 */
-        final SlidingTabLayout tabLayout_7 = ViewFindUtils.find(mRootView, R.id.tl_7);
+        final SlidingTabLayout tabLayout_7 = findViewById( R.id.tl_7);
         /** indicator三角形 */
-        SlidingTabLayout tabLayout_8 = ViewFindUtils.find(mRootView, R.id.tl_8);
+        SlidingTabLayout tabLayout_8 = findViewById( R.id.tl_8);
         /** indicator圆角色块 */
-        SlidingTabLayout tabLayout_9 = ViewFindUtils.find(mRootView, R.id.tl_9);
+        SlidingTabLayout tabLayout_9 = findViewById( R.id.tl_9);
         /** indicator圆角色块 */
-        SlidingTabLayout tabLayout_10 = ViewFindUtils.find(mRootView, R.id.tl_10);
+        SlidingTabLayout tabLayout_10 = findViewById( R.id.tl_10);
 
-        tabLayout_1.setViewPager(vp);
-        tabLayout_2.setViewPager(vp);
+        tabLayout_1.setViewPager(viewPager);
+        tabLayout_2.setViewPager(viewPager);
         tabLayout_2.setOnTabSelectListener(this);
-        tabLayout_3.setViewPager(vp);
-        tabLayout_4.setViewPager(vp);
-        tabLayout_5.setViewPager(vp);
-        tabLayout_6.setViewPager(vp);
-        tabLayout_7.setViewPager(vp, mTitles);
-        tabLayout_8.setViewPager(vp, mTitles, getActivity(), mFragments);
-        tabLayout_9.setViewPager(vp);
-        tabLayout_10.setViewPager(vp);
+        tabLayout_3.setViewPager(viewPager);
+        tabLayout_4.setViewPager(viewPager);
+        tabLayout_5.setViewPager(viewPager);
+        tabLayout_6.setViewPager(viewPager);
+        tabLayout_7.setViewPager(viewPager, mTitles);
+        tabLayout_8.setViewPager(viewPager, mTitles, getChildFragmentManager(), mFragments);
+        tabLayout_9.setViewPager(viewPager);
+        tabLayout_10.setViewPager(viewPager);
 
-        vp.setCurrentItem(4);
+        viewPager.setCurrentItem(4);
 
         tabLayout_1.showDot(4);
         tabLayout_3.showDot(4);
@@ -125,7 +124,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override

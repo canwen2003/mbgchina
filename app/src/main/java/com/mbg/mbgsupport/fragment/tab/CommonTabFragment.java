@@ -12,11 +12,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
-import com.mbg.module.common.util.ViewFindUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.layout.tablayout.CommonTabLayout;
-import com.mbg.module.ui.view.layout.tablayout.listener.CustomTabEntity;
+import com.mbg.module.ui.view.layout.tablayout.model.CustomTabEntity;
 import com.mbg.module.ui.view.layout.tablayout.listener.OnTabSelectListener;
 import com.mbg.module.ui.view.layout.tablayout.utils.UnreadMsgUtils;
 import com.mbg.module.ui.view.layout.tablayout.widget.MsgView;
@@ -67,28 +66,30 @@ public class CommonTabFragment extends BaseFragment implements View.OnClickListe
         }
 
      
-        mViewPager = ViewFindUtils.find(mRootView, R.id.vp_2);
+        mViewPager = findViewById( R.id.vp_2);
         mViewPager.setAdapter(new MyPagerAdapter(getFragmentManager()));
         /** with nothing */
-        mTabLayout_1 = ViewFindUtils.find(mRootView, R.id.tl_1);
+        mTabLayout_1 = findViewById( R.id.tl_1);
         /** with ViewPager */
-        mTabLayout_2 = ViewFindUtils.find(mRootView, R.id.tl_2);
+        mTabLayout_2 = findViewById( R.id.tl_2);
         /** with Fragments */
-        mTabLayout_3 = ViewFindUtils.find(mRootView, R.id.tl_3);
+        mTabLayout_3 = findViewById( R.id.tl_3);
         /** indicator固定宽度 */
-        mTabLayout_4 = ViewFindUtils.find(mRootView, R.id.tl_4);
+        mTabLayout_4 = findViewById( R.id.tl_4);
         /** indicator固定宽度 */
-        mTabLayout_5 = ViewFindUtils.find(mRootView, R.id.tl_5);
+        mTabLayout_5 = findViewById( R.id.tl_5);
         /** indicator矩形圆角 */
-        mTabLayout_6 = ViewFindUtils.find(mRootView, R.id.tl_6);
+        mTabLayout_6 = findViewById( R.id.tl_6);
         /** indicator三角形 */
-        mTabLayout_7 = ViewFindUtils.find(mRootView, R.id.tl_7);
+        mTabLayout_7 = findViewById( R.id.tl_7);
         /** indicator圆角色块 */
-        mTabLayout_8 = ViewFindUtils.find(mRootView, R.id.tl_8);
+        mTabLayout_8 = findViewById( R.id.tl_8);
 
         mTabLayout_1.setTabData(mTabEntities);
         tl_2();
-        mTabLayout_3.setTabData(mTabEntities, getActivity(), R.id.fl_change, mFragments2);
+
+        //这种方式由于需要List持有Fragment对象会导致对象不会释放
+        mTabLayout_3.setTabData(mTabEntities,getFragmentManager(), R.id.fragment_container, mFragments2);
         mTabLayout_4.setTabData(mTabEntities);
         mTabLayout_5.setTabData(mTabEntities);
         mTabLayout_6.setTabData(mTabEntities);

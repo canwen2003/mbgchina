@@ -25,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.mbg.module.ui.R;
-import com.mbg.module.ui.view.layout.tablayout.listener.CustomTabEntity;
+import com.mbg.module.ui.view.layout.tablayout.model.CustomTabEntity;
 import com.mbg.module.ui.view.layout.tablayout.listener.OnTabSelectListener;
 import com.mbg.module.ui.view.layout.tablayout.utils.FragmentChangeManager;
 import com.mbg.module.ui.view.layout.tablayout.utils.UnreadMsgUtils;
@@ -40,11 +42,12 @@ import java.util.ArrayList;
 /** 没有继承HorizontalScrollView不能滑动,对于ViewPager无依赖 */
 public class CommonTabLayout extends FrameLayout implements ValueAnimator.AnimatorUpdateListener {
     private Context mContext;
-    private ArrayList<CustomTabEntity> mTabEntitys = new ArrayList<>();
+    private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private LinearLayout mTabsContainer;
     private int mCurrentTab;
     private int mLastTab;
     private int mTabCount;
+
     /** 用于绘制显示器 */
     private Rect mIndicatorRect = new Rect();
     private GradientDrawable mIndicatorDrawable = new GradientDrawable();
@@ -90,9 +93,9 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     private static final int TEXT_BOLD_NONE = 0;
     private static final int TEXT_BOLD_WHEN_SELECT = 1;
     private static final int TEXT_BOLD_BOTH = 2;
-    private float mTextsize;
+    private float mTextSize;
     private int mTextSelectColor;
-    private int mTextUnselectColor;
+    private int mTextUnSelectColor;
     private int mTextBold;
     private boolean mTextAllCaps;
 
@@ -139,9 +142,11 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         } else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + "")) {
         } else {
             int[] systemAttrs = {android.R.attr.layout_height};
-            TypedArray a = context.obtainStyledAttributes(attrs, systemAttrs);
-            mHeight = a.getDimensionPixelSize(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-            a.recycle();
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, systemAttrs);
+            if (typedArray!=null) {
+                mHeight = typedArray.getDimensionPixelSize(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+                typedArray.recycle();
+            }
         }
 
         mValueAnimator = ValueAnimator.ofObject(new PointEvaluator(), mLastP, mCurrentP);
@@ -149,71 +154,73 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     }
 
     private void obtainAttributes(Context context, AttributeSet attrs) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CommonTabLayout);
+        TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.CommonTabLayout);
 
-        mIndicatorStyle = ta.getInt(R.styleable.CommonTabLayout_indicator_style, 0);
-        mIndicatorColor = ta.getColor(R.styleable.CommonTabLayout_indicator_color, Color.parseColor(mIndicatorStyle == STYLE_BLOCK ? "#4B6A87" : "#ffffff"));
-        mIndicatorHeight = ta.getDimension(R.styleable.CommonTabLayout_indicator_height,
-                dp2px(mIndicatorStyle == STYLE_TRIANGLE ? 4 : (mIndicatorStyle == STYLE_BLOCK ? -1 : 2)));
-        mIndicatorWidth = ta.getDimension(R.styleable.CommonTabLayout_indicator_width, dp2px(mIndicatorStyle == STYLE_TRIANGLE ? 10 : -1));
-        mIndicatorCornerRadius = ta.getDimension(R.styleable.CommonTabLayout_indicator_corner_radius, dp2px(mIndicatorStyle == STYLE_BLOCK ? -1 : 0));
-        mIndicatorMarginLeft = ta.getDimension(R.styleable.CommonTabLayout_indicator_margin_left, dp2px(0));
-        mIndicatorMarginTop = ta.getDimension(R.styleable.CommonTabLayout_indicator_margin_top, dp2px(mIndicatorStyle == STYLE_BLOCK ? 7 : 0));
-        mIndicatorMarginRight = ta.getDimension(R.styleable.CommonTabLayout_indicator_margin_right, dp2px(0));
-        mIndicatorMarginBottom = ta.getDimension(R.styleable.CommonTabLayout_indicator_margin_bottom, dp2px(mIndicatorStyle == STYLE_BLOCK ? 7 : 0));
-        mIndicatorAnimEnable = ta.getBoolean(R.styleable.CommonTabLayout_indicator_anim_enable, true);
-        mIndicatorBounceEnable = ta.getBoolean(R.styleable.CommonTabLayout_indicator_bounce_enable, true);
-        mIndicatorAnimDuration = ta.getInt(R.styleable.CommonTabLayout_indicator_anim_duration, -1);
-        mIndicatorGravity = ta.getInt(R.styleable.CommonTabLayout_indicator_gravity, Gravity.BOTTOM);
+        if (typeArray!=null) {
+            mIndicatorStyle = typeArray.getInt(R.styleable.CommonTabLayout_indicator_style, 0);
+            mIndicatorColor = typeArray.getColor(R.styleable.CommonTabLayout_indicator_color, Color.parseColor(mIndicatorStyle == STYLE_BLOCK ? "#4B6A87" : "#ffffff"));
+            mIndicatorHeight = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_height,
+                    dp2px(mIndicatorStyle == STYLE_TRIANGLE ? 4 : (mIndicatorStyle == STYLE_BLOCK ? -1 : 2)));
+            mIndicatorWidth = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_width, dp2px(mIndicatorStyle == STYLE_TRIANGLE ? 10 : -1));
+            mIndicatorCornerRadius = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_corner_radius, dp2px(mIndicatorStyle == STYLE_BLOCK ? -1 : 0));
+            mIndicatorMarginLeft = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_margin_left, dp2px(0));
+            mIndicatorMarginTop = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_margin_top, dp2px(mIndicatorStyle == STYLE_BLOCK ? 7 : 0));
+            mIndicatorMarginRight = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_margin_right, dp2px(0));
+            mIndicatorMarginBottom = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_margin_bottom, dp2px(mIndicatorStyle == STYLE_BLOCK ? 7 : 0));
+            mIndicatorAnimEnable = typeArray.getBoolean(R.styleable.CommonTabLayout_indicator_anim_enable, true);
+            mIndicatorBounceEnable = typeArray.getBoolean(R.styleable.CommonTabLayout_indicator_bounce_enable, true);
+            mIndicatorAnimDuration = typeArray.getInt(R.styleable.CommonTabLayout_indicator_anim_duration, -1);
+            mIndicatorGravity = typeArray.getInt(R.styleable.CommonTabLayout_indicator_gravity, Gravity.BOTTOM);
 
-        mUnderlineColor = ta.getColor(R.styleable.CommonTabLayout_underline_color, Color.parseColor("#ffffff"));
-        mUnderlineHeight = ta.getDimension(R.styleable.CommonTabLayout_underline_height, dp2px(0));
-        mUnderlineGravity = ta.getInt(R.styleable.CommonTabLayout_underline_gravity, Gravity.BOTTOM);
+            mUnderlineColor = typeArray.getColor(R.styleable.CommonTabLayout_underline_color, Color.parseColor("#ffffff"));
+            mUnderlineHeight = typeArray.getDimension(R.styleable.CommonTabLayout_underline_height, dp2px(0));
+            mUnderlineGravity = typeArray.getInt(R.styleable.CommonTabLayout_underline_gravity, Gravity.BOTTOM);
 
-        mDividerColor = ta.getColor(R.styleable.CommonTabLayout_divider_color, Color.parseColor("#ffffff"));
-        mDividerWidth = ta.getDimension(R.styleable.CommonTabLayout_divider_width, dp2px(0));
-        mDividerPadding = ta.getDimension(R.styleable.CommonTabLayout_divider_padding, dp2px(12));
+            mDividerColor = typeArray.getColor(R.styleable.CommonTabLayout_divider_color, Color.parseColor("#ffffff"));
+            mDividerWidth = typeArray.getDimension(R.styleable.CommonTabLayout_divider_width, dp2px(0));
+            mDividerPadding = typeArray.getDimension(R.styleable.CommonTabLayout_divider_padding, dp2px(12));
 
-        mTextsize = ta.getDimension(R.styleable.CommonTabLayout_textSize, sp2px(13f));
-        mTextSelectColor = ta.getColor(R.styleable.CommonTabLayout_textSelectColor, Color.parseColor("#ffffff"));
-        mTextUnselectColor = ta.getColor(R.styleable.CommonTabLayout_textUnSelectColor, Color.parseColor("#AAffffff"));
-        mTextBold = ta.getInt(R.styleable.CommonTabLayout_textBold, TEXT_BOLD_NONE);
-        mTextAllCaps = ta.getBoolean(R.styleable.CommonTabLayout_textAllCaps, false);
+            mTextSize = typeArray.getDimension(R.styleable.CommonTabLayout_textSize, sp2px(13f));
+            mTextSelectColor = typeArray.getColor(R.styleable.CommonTabLayout_textSelectColor, Color.parseColor("#ffffff"));
+            mTextUnSelectColor = typeArray.getColor(R.styleable.CommonTabLayout_textUnSelectColor, Color.parseColor("#AAffffff"));
+            mTextBold = typeArray.getInt(R.styleable.CommonTabLayout_textBold, TEXT_BOLD_NONE);
+            mTextAllCaps = typeArray.getBoolean(R.styleable.CommonTabLayout_textAllCaps, false);
 
-        mIconVisible = ta.getBoolean(R.styleable.CommonTabLayout_iconVisible, true);
-        mIconGravity = ta.getInt(R.styleable.CommonTabLayout_icon_Gravity, Gravity.TOP);
-        mIconWidth = ta.getDimension(R.styleable.CommonTabLayout_iconWidth, dp2px(0));
-        mIconHeight = ta.getDimension(R.styleable.CommonTabLayout_iconHeight, dp2px(0));
-        mIconMargin = ta.getDimension(R.styleable.CommonTabLayout_iconMargin, dp2px(2.5f));
+            mIconVisible = typeArray.getBoolean(R.styleable.CommonTabLayout_iconVisible, true);
+            mIconGravity = typeArray.getInt(R.styleable.CommonTabLayout_icon_Gravity, Gravity.TOP);
+            mIconWidth = typeArray.getDimension(R.styleable.CommonTabLayout_iconWidth, dp2px(0));
+            mIconHeight = typeArray.getDimension(R.styleable.CommonTabLayout_iconHeight, dp2px(0));
+            mIconMargin = typeArray.getDimension(R.styleable.CommonTabLayout_iconMargin, dp2px(2.5f));
 
-        mTabSpaceEqual = ta.getBoolean(R.styleable.CommonTabLayout_tab_space_equal, true);
-        mTabWidth = ta.getDimension(R.styleable.CommonTabLayout_tab_width, dp2px(-1));
-        mTabPadding = ta.getDimension(R.styleable.CommonTabLayout_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
+            mTabSpaceEqual = typeArray.getBoolean(R.styleable.CommonTabLayout_tab_space_equal, true);
+            mTabWidth = typeArray.getDimension(R.styleable.CommonTabLayout_tab_width, dp2px(-1));
+            mTabPadding = typeArray.getDimension(R.styleable.CommonTabLayout_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
 
-        ta.recycle();
+            typeArray.recycle();
+        }
     }
 
-    public void setTabData(ArrayList<CustomTabEntity> tabEntitys) {
-        if (tabEntitys == null || tabEntitys.size() == 0) {
+    public void setTabData(@NonNull ArrayList<CustomTabEntity> tabEntities) {
+        if (tabEntities == null || tabEntities.size() == 0) {
             throw new IllegalStateException("TabEntitys can not be NULL or EMPTY !");
         }
 
-        this.mTabEntitys.clear();
-        this.mTabEntitys.addAll(tabEntitys);
+        this.mTabEntities.clear();
+        this.mTabEntities.addAll(tabEntities);
 
         notifyDataSetChanged();
     }
 
     /** 关联数据支持同时切换fragments */
-    public void setTabData(ArrayList<CustomTabEntity> tabEntitys, FragmentActivity fa, int containerViewId, ArrayList<Fragment> fragments) {
-        mFragmentChangeManager = new FragmentChangeManager(fa.getSupportFragmentManager(), containerViewId, fragments);
-        setTabData(tabEntitys);
+    public void setTabData(@NonNull ArrayList<CustomTabEntity> tabEntities, @NonNull FragmentManager fm, int containerViewId,@NonNull ArrayList<Fragment> fragments) {
+        mFragmentChangeManager = new FragmentChangeManager(fm, containerViewId, fragments);
+        setTabData(tabEntities);
     }
 
     /** 更新数据 */
     public void notifyDataSetChanged() {
         mTabsContainer.removeAllViews();
-        this.mTabCount = mTabEntitys.size();
+        this.mTabCount = mTabEntities.size();
         View tabView;
         for (int i = 0; i < mTabCount; i++) {
             if (mIconGravity == Gravity.LEFT) {
@@ -235,10 +242,10 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
 
     /** 创建并添加tab */
     private void addTab(final int position, View tabView) {
-        TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
-        tv_tab_title.setText(mTabEntitys.get(position).getTabTitle());
-        ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
-        iv_tab_icon.setImageResource(mTabEntitys.get(position).getTabUnselectedIcon());
+        TextView tv_tab_title =  tabView.findViewById(R.id.tv_tab_title);
+        tv_tab_title.setText(mTabEntities.get(position).getTabTitle());
+        ImageView iv_tab_icon = tabView.findViewById(R.id.iv_tab_icon);
+        iv_tab_icon.setImageResource(mTabEntities.get(position).getTabUnselectedIcon());
 
         tabView.setOnClickListener(new OnClickListener() {
             @Override
@@ -271,9 +278,9 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         for (int i = 0; i < mTabCount; i++) {
             View tabView = mTabsContainer.getChildAt(i);
             tabView.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
-            TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
-            tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);
-            tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);
+            TextView tv_tab_title =  tabView.findViewById(R.id.tv_tab_title);
+            tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnSelectColor);
+            tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
 //            tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
             if (mTextAllCaps) {
                 tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
@@ -285,10 +292,10 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                 tv_tab_title.getPaint().setFakeBoldText(false);
             }
 
-            ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
+            ImageView iv_tab_icon = tabView.findViewById(R.id.iv_tab_icon);
             if (mIconVisible) {
                 iv_tab_icon.setVisibility(View.VISIBLE);
-                CustomTabEntity tabEntity = mTabEntitys.get(i);
+                CustomTabEntity tabEntity = mTabEntities.get(i);
                 iv_tab_icon.setImageResource(i == mCurrentTab ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         mIconWidth <= 0 ? LinearLayout.LayoutParams.WRAP_CONTENT : (int) mIconWidth,
@@ -314,10 +321,10 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         for (int i = 0; i < mTabCount; ++i) {
             View tabView = mTabsContainer.getChildAt(i);
             final boolean isSelect = i == position;
-            TextView tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
-            tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnselectColor);
-            ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
-            CustomTabEntity tabEntity = mTabEntitys.get(i);
+            TextView tab_title =  tabView.findViewById(R.id.tv_tab_title);
+            tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnSelectColor);
+            ImageView iv_tab_icon = tabView.findViewById(R.id.iv_tab_icon);
+            CustomTabEntity tabEntity = mTabEntities.get(i);
             iv_tab_icon.setImageResource(isSelect ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());
             if (mTextBold == TEXT_BOLD_WHEN_SELECT) {
                 tab_title.getPaint().setFakeBoldText(isSelect);
@@ -444,8 +451,6 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         } else if (mIndicatorStyle == STYLE_BLOCK) {
             if (mIndicatorHeight < 0) {
                 mIndicatorHeight = height - mIndicatorMarginTop - mIndicatorMarginBottom;
-            } else {
-
             }
 
             if (mIndicatorHeight > 0) {
@@ -461,11 +466,6 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                 mIndicatorDrawable.draw(canvas);
             }
         } else {
-               /* mRectPaint.setColor(mIndicatorColor);
-                calcIndicatorRect();
-                canvas.drawRect(getPaddingLeft() + mIndicatorRect.left, getHeight() - mIndicatorHeight,
-                        mIndicatorRect.right + getPaddingLeft(), getHeight(), mRectPaint);*/
-
             if (mIndicatorHeight > 0) {
                 mIndicatorDrawable.setColor(mIndicatorColor);
                 if (mIndicatorGravity == Gravity.BOTTOM) {
@@ -597,7 +597,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     }
 
     public void setTextsize(float textsize) {
-        this.mTextsize = sp2px(textsize);
+        this.mTextSize = sp2px(textsize);
         updateTabStyles();
     }
 
@@ -607,7 +607,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     }
 
     public void setTextUnselectColor(int textUnselectColor) {
-        this.mTextUnselectColor = textUnselectColor;
+        this.mTextUnSelectColor = textUnselectColor;
         updateTabStyles();
     }
 
@@ -736,7 +736,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     }
 
     public float getTextsize() {
-        return mTextsize;
+        return mTextSize;
     }
 
     public int getTextSelectColor() {
@@ -744,7 +744,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     }
 
     public int getTextUnselectColor() {
-        return mTextUnselectColor;
+        return mTextUnSelectColor;
     }
 
     public int getTextBold() {
@@ -778,13 +778,13 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
 
     public ImageView getIconView(int tab) {
         View tabView = mTabsContainer.getChildAt(tab);
-        ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
+        ImageView iv_tab_icon = tabView.findViewById(R.id.iv_tab_icon);
         return iv_tab_icon;
     }
 
     public TextView getTitleView(int tab) {
         View tabView = mTabsContainer.getChildAt(tab);
-        TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
+        TextView tv_tab_title =  tabView.findViewById(R.id.tv_tab_title);
         return tv_tab_title;
     }
 
@@ -861,8 +861,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         View tabView = mTabsContainer.getChildAt(position);
         MsgView tipView = (MsgView) tabView.findViewById(R.id.rtv_msg_tip);
         if (tipView != null) {
-            TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
-            mTextPaint.setTextSize(mTextsize);
+            TextView tv_tab_title =  tabView.findViewById(R.id.tv_tab_title);
+            mTextPaint.setTextSize(mTextSize);
             float textWidth = mTextPaint.measureText(tv_tab_title.getText().toString());
             float textHeight = mTextPaint.descent() - mTextPaint.ascent();
             MarginLayoutParams lp = (MarginLayoutParams) tipView.getLayoutParams();
@@ -871,7 +871,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             float margin = 0;
             if (mIconVisible) {
                 if (iconH <= 0) {
-                    iconH = mContext.getResources().getDrawable(mTabEntitys.get(position).getTabSelectedIcon()).getIntrinsicHeight();
+                    iconH = mContext.getResources().getDrawable(mTabEntities.get(position).getTabSelectedIcon()).getIntrinsicHeight();
                 }
                 margin = mIconMargin;
             }
@@ -894,7 +894,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             position = mTabCount - 1;
         }
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = (MsgView) tabView.findViewById(R.id.rtv_msg_tip);
+        MsgView tipView = tabView.findViewById(R.id.rtv_msg_tip);
         return tipView;
     }
 
