@@ -342,7 +342,7 @@ public class ScreenShotListenManager {
 
     public Bitmap createScreenShotBitmap(Context context, String screenFilePath) {
 
-        View rootView = LayoutInflater.from(context).inflate(R.layout.item_share_screenshot, null);
+        View rootView = LayoutInflater.from(context).inflate(R.layout.view_item_share_screenshot, null);
         ImageView iv = rootView.findViewById(R.id.iv);
         Bitmap bitmap = BitmapFactory.decodeFile(screenFilePath);
         iv.setImageBitmap(bitmap);

@@ -90,7 +90,7 @@ public class Choco extends FrameLayout {
 
     private void init(Context context){
         this.context=context;
-        mRootView=View.inflate(context, R.layout.padding_choco,this);
+        mRootView=View.inflate(context, R.layout.view_padding_choco,this);
         mTitleView =mRootView.findViewById(R.id.tv_title);
         mSubText =mRootView.findViewById(R.id.tv_subText);
         mIcon=mRootView.findViewById(R.id.img_icon);
