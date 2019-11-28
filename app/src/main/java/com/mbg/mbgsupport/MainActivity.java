@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
 import com.mbg.mbgsupport.fragment.DragFragment;
@@ -154,6 +155,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SlidingTabFragment.show(context);
+            }
+        });
+        findViewById(R.id.btn_app_bar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppBarLayoutFragment.show(context);
             }
         });
     }

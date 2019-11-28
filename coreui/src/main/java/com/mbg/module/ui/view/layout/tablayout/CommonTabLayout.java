@@ -12,7 +12,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -27,12 +26,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+
 import com.mbg.module.ui.R;
-import com.mbg.module.ui.view.layout.tablayout.model.CustomTabEntity;
 import com.mbg.module.ui.view.layout.tablayout.listener.OnTabSelectListener;
+import com.mbg.module.ui.view.layout.tablayout.model.CustomTabEntity;
 import com.mbg.module.ui.view.layout.tablayout.utils.FragmentChangeManager;
 import com.mbg.module.ui.view.layout.tablayout.utils.UnreadMsgUtils;
 import com.mbg.module.ui.view.layout.tablayout.widget.MsgView;
@@ -51,6 +50,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     /** 用于绘制显示器 */
     private Rect mIndicatorRect = new Rect();
     private GradientDrawable mIndicatorDrawable = new GradientDrawable();
+    private GradientDrawable mBackGroundDrawable = new GradientDrawable();
 
     private Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -64,6 +64,11 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     private float mTabPadding;
     private boolean mTabSpaceEqual;
     private float mTabWidth;
+
+    /** Background */
+    private int mBackGroundColor;
+    private float mBackGroundCornerRadius;
+
 
     /** indicator */
     private int mIndicatorColor;
@@ -130,10 +135,12 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
 
         this.mContext = context;
         mTabsContainer = new LinearLayout(context);
-        addView(mTabsContainer);
 
         obtainAttributes(context, attrs);
-
+        mBackGroundDrawable.setColor(mBackGroundColor);
+        mBackGroundDrawable.setCornerRadius(mBackGroundCornerRadius);
+        setBackground(mBackGroundDrawable);
+        addView(mTabsContainer);
         //get layout_height
         String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
 
@@ -157,6 +164,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.CommonTabLayout);
 
         if (typeArray!=null) {
+            mBackGroundColor= typeArray.getColor(R.styleable.CommonTabLayout_backgroundColor, Color.TRANSPARENT);
+            mBackGroundCornerRadius = typeArray.getDimension(R.styleable.CommonTabLayout_cornerRadius, dp2px(mIndicatorStyle == STYLE_BLOCK ? -1 : 0));
             mIndicatorStyle = typeArray.getInt(R.styleable.CommonTabLayout_indicator_style, 0);
             mIndicatorColor = typeArray.getColor(R.styleable.CommonTabLayout_indicator_color, Color.parseColor(mIndicatorStyle == STYLE_BLOCK ? "#4B6A87" : "#ffffff"));
             mIndicatorHeight = typeArray.getDimension(R.styleable.CommonTabLayout_indicator_height,
@@ -212,7 +221,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     }
 
     /** 关联数据支持同时切换fragments */
-    public void setTabData(@NonNull ArrayList<CustomTabEntity> tabEntities, @NonNull FragmentManager fm, int containerViewId,@NonNull ArrayList<Fragment> fragments) {
+    public void setTabData(@NonNull ArrayList<CustomTabEntity> tabEntities, @NonNull FragmentManager fm, int containerViewId, @NonNull ArrayList<Fragment> fragments) {
         mFragmentChangeManager = new FragmentChangeManager(fm, containerViewId, fragments);
         setTabData(tabEntities);
     }
@@ -806,7 +815,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         }
 
         View tabView = mTabsContainer.getChildAt(position);
-        MsgView tipView = (MsgView) tabView.findViewById(R.id.rtv_msg_tip);
+        MsgView tipView =  tabView.findViewById(R.id.rtv_msg_tip);
         if (tipView != null) {
             UnreadMsgUtils.show(tipView, num);
 

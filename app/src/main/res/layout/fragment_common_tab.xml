@@ -4,7 +4,6 @@
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#eeeeee"
     android:scrollbars="none">
 
     <LinearLayout
@@ -16,7 +15,6 @@
             android:id="@+id/tl_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             tl:indicator_color="#2C97DE"
@@ -34,7 +32,6 @@
             android:id="@+id/tl_2"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:background="#ffffff"
             tl:iconHeight="23dp"
             tl:iconWidth="23dp"
             tl:indicator_color="#2C97DE"
@@ -55,7 +52,6 @@
             android:id="@+id/tl_3"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="#ffffff"
             tl:icon_Gravity="LEFT"
             tl:iconHeight="18dp"
             tl:iconMargin="5dp"
@@ -123,10 +119,13 @@
             android:background="#6D8FB0"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
+            tl:cornerRadius="24dp"
+            tl:backgroundColor="@color/color_6596ff"
             tl:iconVisible="false"
             tl:indicator_margin_left="5dp"
             tl:indicator_margin_right="5dp"
             tl:indicator_style="BLOCK"
+            tl:indicator_color="@color/common_black"
             tl:textSize="14sp"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

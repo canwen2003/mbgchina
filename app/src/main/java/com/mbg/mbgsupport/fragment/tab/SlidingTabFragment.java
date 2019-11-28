@@ -14,6 +14,7 @@ import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
+import com.mbg.module.ui.view.layout.tablayout.PageSlidingTabLayout;
 import com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout;
 import com.mbg.module.ui.view.layout.tablayout.listener.OnTabSelectListener;
 import com.mbg.module.ui.view.layout.tablayout.widget.MsgView;
@@ -23,9 +24,12 @@ import java.util.ArrayList;
 public class SlidingTabFragment extends BaseFragment implements View.OnClickListener, OnTabSelectListener {
     
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private final String[] mTitles = {
+    /*private final String[] mTitles = {
             "热门", "iOS", "Android"
             , "前端", "后端", "设计", "工具资源"
+    };*/
+    private final String[] mTitles = {
+            "热门", "Android","iOS","工具资源"
     };
    
     public static void show(Context context){
@@ -67,7 +71,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         /** indicator圆角色块 */
         SlidingTabLayout tabLayout_9 = findViewById( R.id.tl_9);
         /** indicator圆角色块 */
-        SlidingTabLayout tabLayout_10 = findViewById( R.id.tl_10);
+        PageSlidingTabLayout tabLayout_10 = findViewById( R.id.tl_10);
 
         tabLayout_1.setViewPager(viewPager);
         tabLayout_2.setViewPager(viewPager);
