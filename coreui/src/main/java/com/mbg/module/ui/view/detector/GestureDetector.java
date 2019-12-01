@@ -15,7 +15,7 @@ public class GestureDetector {
     private float mPosY;
     private float mCurPosX;//目前位置
     private float mCurPosY;
-    private GestureType mGestureType= GestureType.UNKNOW;
+    private GestureType mGestureType= GestureType.UNKNOWN;
     private OnScrollListener mOnScrollListener;
     private float mMovingThreshold;//滑动阀值
 
@@ -30,19 +30,15 @@ public class GestureDetector {
 
         switch (action & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_POINTER_DOWN:
-                down(focusX,focusY);
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-                up(focusX,focusY);
-                break;
             case MotionEvent.ACTION_DOWN:
                 down(focusX,focusY);
                 break;
-            case MotionEvent.ACTION_MOVE:
-                move(focusX,focusY);
-                break;
+            case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_UP:
                 up(focusX,focusY);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                move(focusX,focusY);
                 break;
             case MotionEvent.ACTION_CANCEL:
                 break;
@@ -106,7 +102,7 @@ public class GestureDetector {
         START,//第一次MOVE
         MOVING,//滑动中
         STOP,//滑动结束
-        UNKNOW//未知状态
+        UNKNOWN//未知状态
     }
 
     public void setOnScrollListener(OnScrollListener listener){

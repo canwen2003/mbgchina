@@ -19,12 +19,11 @@ import com.mbg.module.ui.R;
 import com.mbg.module.ui.view.layout.tablayout.listener.OnBackgroundListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class PageSlidingTabLayout extends FrameLayout {
     private SlidingTabLayout mSlidingTabLayout;
     private LinearLayout mTabsBgContainer;
-    private LinearLayout mTabsContainer;
-    private OnBackgroundListener mOnBackgroundListener;
 
     private int mTabColor;
     private float mTabCornerRadius;
@@ -44,14 +43,11 @@ public final class PageSlidingTabLayout extends FrameLayout {
 
     private void init(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr){
         mTabsBgContainer = (LinearLayout) View.inflate(context, R.layout.view_layout_tab_bg,null);
-        mTabsContainer=new LinearLayout(context);
-
         mSlidingTabLayout=new SlidingTabLayout(context,attrs,defStyleAttr);
-        mTabsContainer.addView(mSlidingTabLayout);
 
         addView(mTabsBgContainer);
-        addView(mTabsContainer);
-        mOnBackgroundListener =new OnBackgroundListener() {
+        addView(mSlidingTabLayout);
+        OnBackgroundListener onBackgroundListener =new OnBackgroundListener() {
             @Override
             public View getView(int position) {
                 if (mTabsBgContainer == null) {
@@ -119,10 +115,32 @@ public final class PageSlidingTabLayout extends FrameLayout {
             ta.recycle();
         }
 
+        mTabsBgContainer.setId(generateViewId());
+        mSlidingTabLayout.setId(generateViewId());
 
-        mSlidingTabLayout.setTabBackGroundView(mOnBackgroundListener);
+        mSlidingTabLayout.setTabBackGroundView(onBackgroundListener);
 
     }
+
+    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+    /**
+     * Generate a value suitable for use in View.setId(int).
+     * This value will not collide with ID values generated at build time by aapt for R.id.
+     *
+     * @return a generated ID value
+     */
+    public static int generateViewId() {
+        for (;;) {
+            final int result = sNextGeneratedId.get();
+            // aapt-generated IDs have the high byte nonzero; clamp to the range under that.
+            int newValue = result + 1;
+            if (newValue > 0x00FFFFFF) newValue = 1; // Roll over to 1, not 0.
+            if (sNextGeneratedId.compareAndSet(result, newValue)) {
+                return result;
+            }
+        }
+    }
+
 
     /** 关联ViewPager */
     public void setViewPager(@NonNull ViewPager vp) {

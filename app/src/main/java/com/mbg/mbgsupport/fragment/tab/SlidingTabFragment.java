@@ -24,13 +24,13 @@ import java.util.ArrayList;
 public class SlidingTabFragment extends BaseFragment implements View.OnClickListener, OnTabSelectListener {
     
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    /*private final String[] mTitles = {
+    private final String[] mTitles = {
             "热门", "iOS", "Android"
             , "前端", "后端", "设计", "工具资源"
-    };*/
-    private final String[] mTitles = {
-            "热门", "Android","iOS","工具资源"
     };
+   /* private final String[] mTitles = {
+            "热门", "Android","iOS","工具资源"
+    };*/
    
     public static void show(Context context){
         TerminalActivity.show(context, SlidingTabFragment.class,null);
@@ -90,6 +90,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         tabLayout_1.showDot(4);
         tabLayout_3.showDot(4);
         tabLayout_2.showDot(4);
+        tabLayout_10.showDot(2);
 
         tabLayout_2.showMsg(3, 5);
         tabLayout_2.setMsgMargin(3, 0, 10);
