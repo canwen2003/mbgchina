@@ -10,6 +10,7 @@ import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.banner.ITextBannerItemClickListener;
 import com.mbg.module.ui.view.banner.TextBannerView;
+import com.mbg.module.ui.view.showmore.ShowMoreTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class TextBannerFragment extends BaseFragment{
     private TextBannerView textBannerView2;
     private TextBannerView textBannerView3;
     private TextBannerView textBannerView4;
-
+    private ShowMoreTextView showMoreTextView;
     public static void show(Context context){
         TerminalActivity.show(context, TextBannerFragment.class,null);
     }
@@ -35,6 +36,9 @@ public class TextBannerFragment extends BaseFragment{
         textBannerView2=findViewById(R.id.tb_right_left);
         textBannerView3=findViewById(R.id.tb_top_bottom);
         textBannerView4=findViewById(R.id.tb_bottom_top);
+        showMoreTextView=findViewById(R.id.tv_showmore);
+
+        showMoreTextView.setText("7777\n3ddd3333\ndddddddd33333333\nuuu滚滚滚uu\nh多个\n44444");
 
 
         textBannerView1.setItemOnClickListener(new ITextBannerItemClickListener() {

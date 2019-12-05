@@ -507,4 +507,20 @@
         <!-- 圆角矩形宽高相等,取较宽高中大值-->
         <attr name="isWidthHeightEqual" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ShowMoreTextView">
+
+
+        <!-- show more text -->
+        <attr name="show_more_line" format="integer"/>
+        <attr name="show_more_text" format="reference|string"/>
+        <attr name="show_more_text_color" format="reference|color"/>
+        <attr name="show_more_text_dot_enable" format="boolean"/>//是否添加省略号
+
+        <!-- show less text -->
+        <attr name="show_less_text_enable" format="boolean"/>
+        <attr name="show_less_text" format="reference|string"/>
+        <attr name="show_less_text_color" format="reference|color"/>
+
+    </declare-styleable>
 </resources>

@@ -52,4 +52,16 @@
         app:typeface="italic"
         app:textColor="#00FFFF"/>
 
+    <com.mbg.module.ui.view.showmore.ShowMoreTextView
+        android:id="@+id/tv_showmore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:show_more_line="3"
+        app:show_more_text="More"
+        app:show_more_text_color="@color/color_6596ff"
+        app:show_more_text_dot_enable="true"
+        app:show_less_text_enable="false"/>
+
 </LinearLayout>
