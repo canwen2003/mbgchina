@@ -38,13 +38,14 @@ public class TextBannerFragment extends BaseFragment{
         textBannerView4=findViewById(R.id.tb_bottom_top);
         showMoreTextView=findViewById(R.id.tv_showmore);
 
-        showMoreTextView.setText("7777\n3ddd3333\ndddddddd33333333\nuuu滚滚滚uu\nh多个\n44444");
-
-
         textBannerView1.setItemOnClickListener(new ITextBannerItemClickListener() {
             @Override
             public void onItemClick(String data, int position) {
                 LogUtils.v("data="+data+" position="+position);
+
+                showMoreTextView.setOriginText("7777\n3ddd3333\ndddddddd33333333\nuuu滚滚滚uu\nh多个\n44444");
+
+
             }
         });
 

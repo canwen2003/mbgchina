@@ -87,6 +87,18 @@ public class ShowMoreTextView extends AppCompatTextView {
         mAllContent = getText().toString();
     }
 
+    public void setOriginText(CharSequence text){
+        setText(text);
+        mAllContent = getText().toString();
+        addShowMore();
+    }
+
+    public void setOriginText(int resId){
+        setText(resId);
+        mAllContent = getText().toString();
+        addShowMore();
+    }
+
     private void addShowMore() {
         ViewTreeObserver vto = getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

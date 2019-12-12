@@ -58,10 +58,10 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
-        app:show_more_line="3"
+        app:show_more_line="4"
         app:show_more_text="More"
         app:show_more_text_color="@color/color_6596ff"
         app:show_more_text_dot_enable="true"
-        app:show_less_text_enable="false"/>
+        app:show_less_text_enable="true"/>
 
 </LinearLayout>
