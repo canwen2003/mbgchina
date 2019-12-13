@@ -122,9 +122,4 @@ public abstract class BaseFragment extends Fragment {
             activity.doBack(this);
         }
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 }
