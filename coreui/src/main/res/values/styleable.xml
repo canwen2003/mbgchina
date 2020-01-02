@@ -261,9 +261,14 @@
     <!-- 设置显示器颜色 -->
     <attr name="indicator_color" format="color"/>
     <!-- 设置显示器高度 -->
-    <attr name="indicator_height" format="dimension"/>
+    <attr name="indicator_height" format="dimension" >
+        <enum name="wrap_content" value="-1" />
+    </attr>
     <!-- 设置显示器固定宽度 -->
-    <attr name="indicator_width" format="dimension"/>
+
+    <attr name="indicator_width" format="dimension" >
+        <enum name="wrap_content" value="-1" />
+    </attr>
     <!-- 设置显示器margin,当indicator_width大于0,无效 -->
     <attr name="indicator_margin_left" format="dimension"/>
     <attr name="indicator_margin_top" format="dimension"/>
@@ -571,4 +576,139 @@
         <attr name="show_less_text_color" format="reference|color"/>
 
     </declare-styleable>
+
+
+    <declare-styleable name="RangeSeekBar">
+        <!--RangeSeekBar common attrs-->
+
+        <!--The maximum-->
+        <attr name="max" format="float"/>
+
+        <!--The minimum-->
+        <attr name="min" format="float"/>
+
+        <!--RangeSeekBar mode, single is normal seekBar, range is RangeSeekBar-->
+        <attr name="mode" format="enum">
+            <enum name="single" value="1"/>
+            <enum name="range" value="2"/>
+        </attr>
+
+        <!--RangeSeekBar thumbs gravity-->
+        <attr name="thumbs_gravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+            <enum name="center" value="2"/>
+        </attr>
+
+        <!--The min interval of the thumbs -->
+        <attr name="min_interval" format="float"/>
+
+        <!-- 0 for the normal mode, greater than 1 to switch to scale mode-->
+        <attr name="tick_mark_number" format="integer"/>
+
+        <!--Scale mode
+        Number according to the scale of the actual proportion of the distribution of the location (markTextArray must be a number)
+        Other bisects the current layout (markTextArray can be any character)
+        -->
+        <attr name="tick_mark_mode" format="enum">
+            <enum name="number" value="0"/>
+            <enum name="other" value="1"/>
+        </attr>
+
+        <!--The tick mark text gravity -->
+        <attr name="tick_mark_gravity" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+
+        <!--The tick mark text layout gravity -->
+        <attr name="tick_mark_layout_gravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+
+        <!--The tick mark text array -->
+        <attr name="tick_mark_text_array" format="reference"/>
+
+        <!--The tick mark text margin bottom to progress -->
+        <attr name="tick_mark_text_margin" format="dimension" />
+
+        <attr name="tick_mark_text_size" format="dimension" />
+
+        <attr name="tick_mark_text_color" format="color" />
+
+        <!--it just work in range && number mode now-->
+        <attr name="tick_mark_in_range_text_color" format="color" />
+
+        <attr name="progress_height" format="dimension"/>
+
+        <attr name="progress_radius" format="dimension"/>
+
+        <!--the color of progress bar when in progress-->
+        <attr name="progress_color" format="color"/>
+        <!--the default color of the progress bar-->
+        <attr name="progress_default_color" format="color"/>
+
+        <attr name="progress_drawable" format="reference"/>
+
+        <attr name="progress_drawable_default" format="reference"/>
+
+        <!--SeekBar attrs-->
+        <attr name="indicator_show_mode" format="enum">
+            <enum name="showWhenTouch" value="0"/>
+            <enum name="alwaysHide" value="1"/>
+            <enum name="alwaysShowAfterTouch" value="2"/>
+            <enum name="alwaysShow" value="3"/>
+        </attr>
+        <attr name="indicator_height" /> >
+        <attr name="indicator_width" />
+        <!--indicator margin bottom to progress bar-->
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_text_size" format="dimension" />
+        <attr name="indicator_text_color" format="color" />
+        <!--indicator arrow size, it just work when you not use indicator_drawable -->
+        <attr name="indicator_arrow_size" format="dimension" />
+        <!-- must use 9 path ！！！-->
+        <attr name="indicator_drawable" format="reference"/>
+        <attr name="indicator_background_color" format="color" />
+        <attr name="indicator_padding_left" format="dimension" />
+        <attr name="indicator_padding_right" format="dimension" />
+        <attr name="indicator_padding_top" format="dimension" />
+        <attr name="indicator_padding_bottom" format="dimension" />
+        <attr name="indicator_radius" format="dimension" />
+        <attr name="thumb_drawable" format="reference"/>
+        <!--the thumb inactivated is when you don't touch the thumb button-->
+        <attr name="thumb_inactivated_drawable" format="reference"/>
+        <attr name="thumb_width" format="dimension"/>
+        <attr name="thumb_height" format="dimension"/>
+        <attr name="thumb_scale_ratio" format="float"/>
+
+        <!--steps SeekBar-->
+        <attr name="steps" format="integer"/>
+        <attr name="step_color" format="color"/>
+        <attr name="step_width" format="dimension"/>
+        <attr name="step_height" format="dimension"/>
+        <attr name="step_radius" format="dimension"/>
+        <attr name="step_auto_bonding" format="boolean"/>
+        <attr name="step_drawable" format="reference"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="VerticalRangeSeekBar" >
+        <!--the vertical RangeSeekBar draw orientation-->
+        <attr name="orientation" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="tick_mark_orientation" format="enum">
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="2"/>
+        </attr>
+        <attr name="indicator_text_orientation" format="enum">
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="2"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

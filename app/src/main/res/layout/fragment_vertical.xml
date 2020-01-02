@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:mode="single" />
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:thumbs_gravity="bottom"
+            app:indicator_height="25dp"
+            app:indicator_radius="4dp"
+            app:indicator_show_mode="showWhenTouch"
+            app:indicator_text_orientation="horizontal"
+            app:indicator_width="50dp"
+            app:mode="range"
+            app:progress_drawable="@drawable/progress"
+            app:progress_drawable_default="@drawable/progress_default"
+            app:thumb_drawable="@drawable/thumb_gradient" />
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_3"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            app:thumbs_gravity="bottom"
+            app:indicator_height="wrap_content"
+            app:indicator_padding_bottom="5dp"
+            app:indicator_padding_left="10dp"
+            app:indicator_padding_right="10dp"
+            app:indicator_padding_top="5dp"
+            app:indicator_show_mode="alwaysShow"
+            app:indicator_width="wrap_content"
+            app:mode="single"
+            app:orientation="left"
+            app:progress_color="@color/colorAccent"
+            app:progress_default_color="@color/color_f7f7f7"
+            app:thumb_drawable="@drawable/thumb_default"
+            app:tick_mark_mode="number"
+            app:tick_mark_text_array="@array/markArray" />
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_4"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            app:thumbs_gravity="bottom"
+            app:indicator_height="wrap_content"
+            app:indicator_padding_bottom="10dp"
+            app:indicator_padding_left="10dp"
+            app:indicator_padding_right="10dp"
+            app:indicator_padding_top="10dp"
+            app:indicator_show_mode="alwaysShow"
+            app:indicator_width="wrap_content"
+            app:mode="range"
+            app:orientation="right"
+            app:progress_color="@color/colorAccent"
+            app:progress_default_color="@color/color_6596ff"
+            app:thumb_drawable="@drawable/thumb_default"
+            app:tick_mark_mode="number"
+            app:tick_mark_text_array="@array/markArray" />
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:mode="single"
+            app:orientation="right"
+            app:thumb_drawable="@drawable/thumb_activated"
+            app:thumb_inactivated_drawable="@drawable/thumb_inactivated" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:mode="single"
+            app:progress_color="@color/colorAccent"
+            app:step_auto_bonding="true"
+            app:step_color="@color/colorAccent"
+            app:step_height="10dp"
+            app:step_radius="5dp"
+            app:step_width="10dp"
+            app:steps="5"
+            app:thumb_drawable="@color/green_50"
+            app:thumb_height="18dp"
+            app:thumb_scale_ratio="1.25"
+            app:thumb_width="18dp" />
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_7"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            app:gravity="center"
+            app:mode="range"
+            app:progress_color="@color/colorProgress"
+            app:step_auto_bonding="false"
+            app:step_color="@color/colorProgress"
+            app:step_height="10dp"
+            app:step_radius="5dp"
+            app:step_width="10dp"
+            app:steps="5"
+            app:thumb_drawable="@drawable/thumb_yellow_stroke" />
+
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_8"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:thumbs_gravity="bottom"
+            app:indicator_height="40dp"
+            app:indicator_show_mode="alwaysShowAfterTouch"
+            app:indicator_width="40dp"
+            app:mode="range"
+            app:progress_color="@color/colorAccent"
+            app:step_auto_bonding="true"
+            app:step_color="@color/colorAccent"
+            app:step_drawable="@drawable/step_diy"
+            app:step_height="20dp"
+            app:step_width="5dp"
+            app:steps="4"
+            app:thumb_drawable="@drawable/thumb_green_alpha"
+            app:tick_mark_gravity="center"
+            app:tick_mark_layout_gravity="bottom"
+            app:tick_mark_mode="number"
+            app:tick_mark_text_array="@array/markArray4"
+            app:tick_mark_text_margin="20dp" />
+
+        <com.mbg.module.ui.view.seekBar.VerticalRangeSeekBar
+            android:id="@+id/sb_vertical_9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:thumbs_gravity="bottom"
+            app:indicator_height="wrap_content"
+            app:indicator_padding_bottom="10dp"
+            app:indicator_padding_top="10dp"
+            app:indicator_show_mode="showWhenTouch"
+            app:indicator_width="40dp"
+            app:mode="range"
+            app:orientation="right"
+            app:progress_color="@color/color_6596ff"
+            app:step_auto_bonding="true"
+            app:step_height="20dp"
+            app:step_width="20dp"
+            app:steps="3"
+            app:thumb_drawable="@color/yellow_100" />
+    </LinearLayout>
+</LinearLayout>

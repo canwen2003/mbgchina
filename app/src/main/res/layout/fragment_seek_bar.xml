@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <com.mbg.module.ui.view.layout.tablayout.PageSlidingTabLayout
+        android:id="@+id/tab_view"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tl:tab_padding="10dp"
+        tl:tab_color="@color/black"
+        tl:indicator_margin_top="0dp"
+        tl:indicator_margin_bottom="0dp"
+        tl:indicator_margin_left="2dp"
+        tl:indicator_margin_right="2dp"
+        tl:tab_margin_top="0dp"
+        tl:tab_margin_bottom="0dp"
+        tl:tab_margin_left="2dp"
+        tl:tab_margin_right="2dp"
+        tl:textSelectColor="@color/black"
+        tl:textUnSelectColor="@color/white"
+        tl:textSize="14sp"
+        tl:indicator_color="@color/white"
+        tl:indicator_corner_radius="5dp"
+        tl:indicator_style="BLOCK"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

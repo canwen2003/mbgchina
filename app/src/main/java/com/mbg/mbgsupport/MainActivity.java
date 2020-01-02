@@ -20,6 +20,7 @@ import com.mbg.mbgsupport.fragment.TextBannerFragment;
 import com.mbg.mbgsupport.fragment.TimeLineFragment;
 import com.mbg.mbgsupport.fragment.UtilsDemoFragment;
 import com.mbg.mbgsupport.fragment.ViewPager2Fragment;
+import com.mbg.mbgsupport.fragment.seekbar.SeekBarFragment;
 import com.mbg.mbgsupport.fragment.tab.CommonTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
@@ -161,6 +162,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 AppBarLayoutFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_seek_bar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SeekBarFragment.show(context);
             }
         });
     }

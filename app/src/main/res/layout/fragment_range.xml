@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbs_gravity="center"
+        app:mode="range"
+        app:min_interval="1"
+        app:thumb_drawable="@drawable/thumb_gradient"
+        app:progress_drawable_default="@drawable/progress_default"
+        app:progress_drawable="@drawable/progress"
+        />
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbs_gravity="center"
+        app:mode="range"
+        app:min_interval="1"
+        app:thumb_drawable="@drawable/thumb_colorful"
+        app:progress_drawable_default="@drawable/progress_default"
+        app:progress_drawable="@drawable/progress"
+        />
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mode="range"
+        app:tick_mark_layout_gravity="bottom"
+        app:tick_mark_text_margin="15dp"
+        app:progress_color="@color/colorProgress"
+        app:min_interval="1"
+        app:thumb_drawable="@drawable/thumb_yellow_stroke"
+        app:indicator_show_mode="alwaysShow"
+        app:indicator_height="30dp"
+        app:indicator_width="50dp"
+        app:indicator_margin="5dp"
+        app:indicator_background_color="@color/colorProgress"
+        app:tick_mark_mode="number"
+        app:tick_mark_text_array="@array/markArray5"
+        />
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbs_gravity="center"
+        app:mode="range"
+        app:progress_color="@color/colorAccent"
+        app:thumb_inactivated_drawable="@drawable/thumb_inactivated"
+        app:thumb_drawable="@drawable/thumb_activated"
+        />
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_5"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:mode="range"
+        app:thumb_drawable="@drawable/thumb_green_alpha"
+        app:progress_color="@color/colorAccent"
+        app:tick_mark_layout_gravity="top"
+        app:tick_mark_text_array="@array/markArray4"
+        app:tick_mark_gravity="center"
+        app:tick_mark_mode="number"
+        app:tick_mark_text_margin="20dp"
+        />
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbs_gravity="bottom"
+        app:mode="range"
+        app:thumb_drawable="@drawable/thumb_yellow_stroke"
+        app:progress_color="@color/colorProgress"
+        app:tick_mark_layout_gravity="bottom"
+        app:tick_mark_text_array="@array/wordsArray"
+        app:tick_mark_mode="other"
+        app:tick_mark_text_margin="20dp"
+        app:tick_mark_text_color="@color/colorProgress"
+        />
+
+    <com.mbg.module.ui.view.seekBar.RangeSeekBar
+        android:id="@+id/sb_range_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbs_gravity="bottom"
+        app:mode="range"
+        app:thumb_drawable="@drawable/thumb_yellow_stroke"
+        app:progress_color="@color/colorProgress"
+        />
+</LinearLayout>

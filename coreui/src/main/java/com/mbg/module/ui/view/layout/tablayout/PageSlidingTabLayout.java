@@ -224,6 +224,7 @@ import java.util.List;
 
             this.mViewPager.removeOnPageChangeListener(this);
             this.mViewPager.addOnPageChangeListener(this);
+            mTabBGDrawable=null;
             notifyDataSetChanged();
         }
 
@@ -239,6 +240,7 @@ import java.util.List;
 
             this.mViewPager.removeOnPageChangeListener(this);
             this.mViewPager.addOnPageChangeListener(this);
+            mTabBGDrawable=null;
             notifyDataSetChanged();
         }
 

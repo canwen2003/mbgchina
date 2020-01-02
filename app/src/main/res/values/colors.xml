@@ -27,4 +27,9 @@
 
     <color name="color_start">#FFC165DD</color>
     <color name="color_end">#FF5C27F1</color>
+
+    <color name="colorGreen50">#802ED184</color>
+    <color name="colorProgress">#ffffbb33</color>
+    <color name="colorProgressDefault">#FFD7D7D7</color>
+    <color name="colorRed">#F44336</color>
 </resources>
