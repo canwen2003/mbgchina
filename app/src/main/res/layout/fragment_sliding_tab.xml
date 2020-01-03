@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                 tl:underline_gravity="TOP"
                 tl:underline_height="1dp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_2"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -47,7 +47,7 @@
                 tl:underline_color="#1A000000"
                 tl:underline_height="1dp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_3"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -56,7 +56,7 @@
                 tl:textBold="BOTH"
                 tl:textSize="14sp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_4"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -65,14 +65,14 @@
                 tl:tab_width="95dp"
                 tl:textSize="15sp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_5"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="#F6CE59"
                 tl:indicator_width="10dp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_6"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -81,7 +81,7 @@
                 tl:indicator_height="4dp"
                 tl:indicator_width="4dp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_7"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -90,7 +90,7 @@
                 tl:indicator_height="3dp"
                 tl:indicator_width="10dp"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_8"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -98,7 +98,7 @@
                 tl:indicator_color="#eeeeee"
                 tl:indicator_style="TRIANGLE"/>
 
-            <com.mbg.module.ui.view.layout.tablayout.SlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_9"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -111,7 +111,7 @@
 
 
 
-            <com.mbg.module.ui.view.layout.tablayout.PageSlidingTabLayout
+            <com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout
                 android:id="@+id/tl_10"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"

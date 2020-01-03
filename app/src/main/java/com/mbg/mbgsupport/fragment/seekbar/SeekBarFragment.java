@@ -10,7 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.mbg.mbgsupport.R;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
-import com.mbg.module.ui.view.layout.tablayout.PageSlidingTabLayout;
+import com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;

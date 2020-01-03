@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.mbg.module.ui.view.layout.tablayout.PageSlidingTabLayout
+    <com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout
         android:id="@+id/tab_view"
         android:layout_width="wrap_content"
         android:layout_height="26dp"

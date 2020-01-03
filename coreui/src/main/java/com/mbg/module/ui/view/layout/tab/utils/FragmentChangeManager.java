@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.layout.tablayout.utils;
+package com.mbg.module.ui.view.layout.tab.utils;
 
 
 import androidx.fragment.app.Fragment;

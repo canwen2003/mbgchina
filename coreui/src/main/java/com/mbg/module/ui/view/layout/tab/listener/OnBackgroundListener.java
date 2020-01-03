@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.layout.tablayout.listener;
+package com.mbg.module.ui.view.layout.tab.listener;
 
 import android.view.View;
 

@@ -1,6 +1,7 @@
 package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
+import android.view.View;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.ui.activity.TerminalActivity;
@@ -21,7 +22,12 @@ public class SupperButtonFragment extends BaseFragment{
     @Override
     protected void initView() {
 
+        findViewById(R.id.round_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
         initData();
     }
 

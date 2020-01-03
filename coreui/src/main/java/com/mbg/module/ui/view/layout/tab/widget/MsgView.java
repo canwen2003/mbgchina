@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.layout.tablayout.widget;
+package com.mbg.module.ui.view.layout.tab.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

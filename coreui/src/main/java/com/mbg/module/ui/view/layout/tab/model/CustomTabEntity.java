@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.layout.tablayout.model;
+package com.mbg.module.ui.view.layout.tab.model;
 
 
 import androidx.annotation.DrawableRes;

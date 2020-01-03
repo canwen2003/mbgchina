@@ -14,11 +14,11 @@ import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
-import com.mbg.module.ui.view.layout.tablayout.CommonTabLayout;
-import com.mbg.module.ui.view.layout.tablayout.model.CustomTabEntity;
-import com.mbg.module.ui.view.layout.tablayout.listener.OnTabSelectListener;
-import com.mbg.module.ui.view.layout.tablayout.utils.UnreadMsgUtils;
-import com.mbg.module.ui.view.layout.tablayout.widget.MsgView;
+import com.mbg.module.ui.view.layout.tab.CommonTabLayout;
+import com.mbg.module.ui.view.layout.tab.model.CustomTabEntity;
+import com.mbg.module.ui.view.layout.tab.listener.OnTabSelectListener;
+import com.mbg.module.ui.view.layout.tab.utils.UnreadMsgUtils;
+import com.mbg.module.ui.view.layout.tab.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.Random;

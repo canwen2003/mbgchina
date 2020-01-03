@@ -1,11 +1,11 @@
-package com.mbg.module.ui.view.layout.tablayout.utils;
+package com.mbg.module.ui.view.layout.tab.utils;
 
 
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.mbg.module.ui.view.layout.tablayout.widget.MsgView;
+import com.mbg.module.ui.view.layout.tab.widget.MsgView;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.mbg.module.ui.view.layout.tablayout;
+package com.mbg.module.ui.view.layout.tab;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -31,10 +31,10 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import com.mbg.module.ui.R;
-import com.mbg.module.ui.view.layout.tablayout.listener.OnBackgroundListener;
-import com.mbg.module.ui.view.layout.tablayout.listener.OnTabSelectListener;
-import com.mbg.module.ui.view.layout.tablayout.utils.UnreadMsgUtils;
-import com.mbg.module.ui.view.layout.tablayout.widget.MsgView;
+import com.mbg.module.ui.view.layout.tab.listener.OnBackgroundListener;
+import com.mbg.module.ui.view.layout.tab.listener.OnTabSelectListener;
+import com.mbg.module.ui.view.layout.tab.utils.UnreadMsgUtils;
+import com.mbg.module.ui.view.layout.tab.widget.MsgView;
 
 import java.util.ArrayList;
 import java.util.Collections;

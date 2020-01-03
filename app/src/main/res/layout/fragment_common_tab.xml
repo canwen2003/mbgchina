@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="84dp"/>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_2"
             android:layout_width="match_parent"
             android:layout_height="54dp"
@@ -48,7 +48,7 @@
             android:layout_height="84dp">
         </FrameLayout>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_3"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -66,7 +66,7 @@
             tl:underline_gravity="TOP"
             tl:underline_height="1dp"/>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_4"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -76,7 +76,7 @@
             tl:indicator_width="10dp"
             tl:textSize="14sp"/>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             tl:textBold="BOTH"
             android:id="@+id/tl_5"
             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             tl:indicator_width="4dp"
             tl:textSize="14sp"/>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_6"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -99,7 +99,7 @@
             tl:indicator_width="10dp"
             tl:textSize="14sp"/>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_7"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -112,7 +112,7 @@
             tl:indicator_width="10dp"
             tl:textSize="14sp"/>
 
-        <com.mbg.module.ui.view.layout.tablayout.CommonTabLayout
+        <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_8"
             android:layout_width="match_parent"
             android:layout_height="48dp"
