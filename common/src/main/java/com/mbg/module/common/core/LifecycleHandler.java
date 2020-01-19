@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
 
+@SuppressWarnings("unused")
 public final class LifecycleHandler extends Handler implements LifecycleObserver {
     private LifecycleOwner mLifecycleOwner;
 

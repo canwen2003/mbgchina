@@ -292,4 +292,6 @@
     <color name="yellow_a200">#ffff00</color>
     <color name="yellow_a400">#ffea00</color>
     <color name="yellow_a700">#ffd600</color>
+
+    <color name="default_shadow_color">#2a000000</color>
 </resources>

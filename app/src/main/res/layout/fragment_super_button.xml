@@ -10,6 +10,48 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <com.mbg.module.ui.view.layout.round.RoundFrameLayout
+            android:id="@+id/round_layout"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            app:isWidthHeightEqual="true"
+            app:isRadiusHalfHeight="true"
+            app:backgroundColor="@color/color_14c7de"
+            app:backgroundPressColor="@color/colorPrimary"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/common_black"
+            app:strokePressColor="@color/color_6596ff"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_common_loading"/>
+        </com.mbg.module.ui.view.layout.round.RoundFrameLayout>
+
+
+        <com.mbg.module.ui.view.layout.shadow.ShadowFrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cornerRadius="18dp"
+            app:shadowColor="#2aff0000"
+            app:backgroundColor="@color/color_14c7de"
+            app:backgroundPressColor="@color/colorPrimary"
+            app:shadowLimit="5dp"
+            app:selectorMode="pressed"
+            app:isShadowLeftShow="false"
+            app:isShadowTopShow="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_common_loading"/>
+        </com.mbg.module.ui.view.layout.shadow.ShadowFrameLayout>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -349,26 +391,6 @@
             app:textColor="@color/colorAccent"
             app:textSize="22sp" />
 
-        <com.mbg.module.ui.view.layout.round.RoundFrameLayout
-            android:id="@+id/round_layout"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="15dp"
-            app:isWidthHeightEqual="true"
-            app:isRadiusHalfHeight="true"
-            app:backgroundColor="@color/color_14c7de"
-            app:backgroundPressColor="@color/colorPrimary"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/common_black"
-            app:strokePressColor="@color/color_6596ff"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_common_loading"/>
-        </com.mbg.module.ui.view.layout.round.RoundFrameLayout>
 
     </LinearLayout>
 </ScrollView>

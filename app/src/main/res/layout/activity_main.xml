@@ -183,11 +183,11 @@
             android:text="SeekBar"/>
 
         <Button
-            android:id="@+id/btn_test1"
+            android:id="@+id/btn_shape"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Test 1"/>
+            android:text="Shape"/>
 
         <Button
             android:id="@+id/btn_test2"

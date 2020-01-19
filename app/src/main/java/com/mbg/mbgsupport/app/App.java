@@ -9,7 +9,7 @@ import android.os.Handler;
 import androidx.multidex.MultiDex;
 
 import com.mbg.mbgsupport.R;
-import com.mbg.module.common.util.LocaleUtils;
+
 import com.mbg.module.common.util.StorageUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.image.cache.common.HashCodeFileNameGenerator;

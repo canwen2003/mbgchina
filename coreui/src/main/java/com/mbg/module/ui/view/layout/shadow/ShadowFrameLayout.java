@@ -1,0 +1,394 @@
+package com.mbg.module.ui.view.layout.shadow;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.widget.FrameLayout;
+
+import com.mbg.module.common.util.UiUtils;
+import com.mbg.module.ui.R;
+
+
+public class ShadowFrameLayout extends FrameLayout {
+    private int mBackGroundColor;
+    private int mBackPressedGroundColor;
+    private int mShadowColor;
+    private float mShadowLimit;
+    private float mCornerRadius;
+    private float mDx;
+    private float mDy;
+    private boolean leftShow;
+    private boolean rightShow;
+    private boolean topShow;
+    private boolean bottomShow;
+    private Paint shadowPaint;
+    private Paint paint;
+
+    private int leftPadding;
+    private int topPadding;
+    private int rightPadding;
+    private int bottomPadding;
+    //阴影布局子空间区域
+    private RectF rectf = new RectF();
+
+    //ShadowLayout的样式，是只需要pressed还是selected,还是2者都需要，默认支持2者
+    private int selectorType = 3;
+    private boolean isShowShadow = true;
+
+
+    public ShadowFrameLayout(Context context) {
+        this(context, null);
+    }
+
+    public ShadowFrameLayout(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+
+    public ShadowFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView(context, attrs);
+    }
+
+    //增加selector样式
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+
+        if (selectorType == 3 || selectorType == 2) {
+            if (selected) {
+                paint.setColor(mBackPressedGroundColor);
+            } else {
+                paint.setColor(mBackGroundColor);
+            }
+            postInvalidate();
+            invalidate();
+        }
+    }
+
+
+    //动态设置x轴偏移量
+    public void setDx(float dx) {
+        if (Math.abs(mDx) > mShadowLimit) {
+            if (mDx > 0) {
+                this.mDx = mShadowLimit;
+            } else {
+                this.mDx = -mShadowLimit;
+            }
+        } else {
+            this.mDx = dx;
+        }
+        setPadding();
+    }
+
+    //动态设置y轴偏移量
+    public void setDy(float dy) {
+        if (Math.abs(mDy) > mShadowLimit) {
+            if (mDy > 0) {
+                this.mDy = mShadowLimit;
+            } else {
+                this.mDy = -mShadowLimit;
+            }
+        } else {
+            this.mDy = dy;
+        }
+        setPadding();
+    }
+
+
+    public float getCornerRadius() {
+        return mCornerRadius;
+    }
+
+    //动态设置 圆角属性
+    public void setCornerRadius(int mCornerRadius) {
+        this.mCornerRadius = mCornerRadius;
+        if (getWidth() != 0 && getHeight() != 0) {
+            setBackgroundCompat(getWidth(), getHeight());
+        }
+    }
+
+    public float getShadowLimit() {
+        return mShadowLimit;
+    }
+
+    //动态设置阴影扩散区域
+    public void setShadowLimit(int mShadowLimit) {
+        this.mShadowLimit = mShadowLimit;
+        setPadding();
+    }
+
+    //动态设置阴影颜色值
+    public void setShadowColor(int mShadowColor) {
+        this.mShadowColor = mShadowColor;
+        if (getWidth() != 0 && getHeight() != 0) {
+            setBackgroundCompat(getWidth(), getHeight());
+        }
+    }
+
+
+    public void setLeftShow(boolean leftShow) {
+        this.leftShow = leftShow;
+        setPadding();
+    }
+
+    public void setRightShow(boolean rightShow) {
+        this.rightShow = rightShow;
+        setPadding();
+    }
+
+    public void setTopShow(boolean topShow) {
+        this.topShow = topShow;
+        setPadding();
+    }
+
+    public void setBottomShow(boolean bottomShow) {
+        this.bottomShow = bottomShow;
+        setPadding();
+    }
+
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if (w > 0 && h > 0) {
+            setBackgroundCompat(w, h);
+        }
+    }
+
+    private void initView(Context context, AttributeSet attrs) {
+        initAttributes(attrs);
+        shadowPaint = new Paint();
+        shadowPaint.setAntiAlias(true);
+        shadowPaint.setStyle(Paint.Style.FILL);
+
+
+        //矩形画笔
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(mBackGroundColor);
+
+        setPadding();
+    }
+
+
+    public void setPadding() {
+        int xPadding = (int) (mShadowLimit + Math.abs(mDx));
+        int yPadding = (int) (mShadowLimit + Math.abs(mDy));
+
+        if (leftShow) {
+            leftPadding = xPadding;
+        } else {
+            leftPadding = 0;
+        }
+
+        if (topShow) {
+            topPadding = yPadding;
+        } else {
+            topPadding = 0;
+        }
+
+
+        if (rightShow) {
+            rightPadding = xPadding;
+        } else {
+            rightPadding = 0;
+        }
+
+        if (bottomShow) {
+            bottomPadding = yPadding;
+        } else {
+            bottomPadding = 0;
+        }
+
+        setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
+    }
+
+
+    @SuppressWarnings("deprecation")
+    private void setBackgroundCompat(int w, int h) {
+        if (isShowShadow) {
+            //判断传入的颜色值是否有透明度
+            isAddAlpha(mShadowColor);
+            Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowLimit, mDx, mDy, mShadowColor, Color.TRANSPARENT);
+            BitmapDrawable drawable = new BitmapDrawable(bitmap);
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+                setBackgroundDrawable(drawable);
+            } else {
+                setBackground(drawable);
+            }
+        } else {
+            //解决不执行onDraw方法的bug就是给其设置一个透明色
+            this.setBackgroundColor(Color.parseColor("#00000000"));
+        }
+    }
+
+
+    private void initAttributes(AttributeSet attrs) {
+        TypedArray attr = getContext().obtainStyledAttributes(attrs, R.styleable.ShadowFrameLayout);
+        if (attr!=null) {
+            try {
+                //默认是显示
+                isShowShadow = attr.getBoolean(R.styleable.ShadowFrameLayout_isShadowShow, true);
+                leftShow = attr.getBoolean(R.styleable.ShadowFrameLayout_isShadowLeftShow, true);
+                rightShow = attr.getBoolean(R.styleable.ShadowFrameLayout_isShadowRightShow, true);
+                bottomShow = attr.getBoolean(R.styleable.ShadowFrameLayout_isShadowBottomShow, true);
+                topShow = attr.getBoolean(R.styleable.ShadowFrameLayout_isShadowTopShow, true);
+                mCornerRadius = attr.getDimension(R.styleable.ShadowFrameLayout_cornerRadius, 0);
+                //默认扩散区域宽度
+                mShadowLimit = attr.getDimension(R.styleable.ShadowFrameLayout_shadowLimit, UiUtils.dip2px(getContext(), 5));
+
+                //x轴偏移量
+                mDx = attr.getDimension(R.styleable.ShadowFrameLayout_shadow_dx, 0);
+                //y轴偏移量
+                mDy = attr.getDimension(R.styleable.ShadowFrameLayout_shadow_dy, 0);
+                mShadowColor = attr.getColor(R.styleable.ShadowFrameLayout_shadowColor, getResources().getColor(R.color.default_shadow_color));
+                mBackGroundColor = attr.getColor(R.styleable.ShadowFrameLayout_backgroundColor, Color.TRANSPARENT);
+                mBackPressedGroundColor = attr.getColor(R.styleable.ShadowFrameLayout_backgroundPressColor,  Color.TRANSPARENT);
+                if (mBackPressedGroundColor != -1) {
+                    setClickable(true);
+                }
+                selectorType = attr.getInt(R.styleable.ShadowFrameLayout_selectorMode, 3);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            attr.recycle();
+        }
+    }
+
+
+    private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
+                                      float dx, float dy, int shadowColor, int fillColor) {
+        //优化阴影bitmap大小,将尺寸缩小至原来的1/4。
+        dx = dx / 4;
+        dy = dy / 4;
+        shadowWidth = shadowWidth / 4;
+        shadowHeight = shadowHeight / 4;
+        cornerRadius = cornerRadius / 4;
+        shadowRadius = shadowRadius / 4;
+
+        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_4444);
+        Canvas canvas = new Canvas(output);
+
+        RectF shadowRect = new RectF(
+                shadowRadius,
+                shadowRadius,
+                shadowWidth - shadowRadius,
+                shadowHeight - shadowRadius);
+
+        if (dy > 0) {
+            shadowRect.top += dy;
+            shadowRect.bottom -= dy;
+        } else if (dy < 0) {
+            shadowRect.top += Math.abs(dy);
+            shadowRect.bottom -= Math.abs(dy);
+        }
+
+        if (dx > 0) {
+            shadowRect.left += dx;
+            shadowRect.right -= dx;
+        } else if (dx < 0) {
+
+            shadowRect.left += Math.abs(dx);
+            shadowRect.right -= Math.abs(dx);
+        }
+
+
+        shadowPaint.setColor(fillColor);
+        if (!isInEditMode()) {
+            shadowPaint.setShadowLayer(shadowRadius, dx, dy, shadowColor);
+        }
+
+        canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
+        return output;
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        rectf.left = leftPadding;
+        rectf.top = topPadding;
+        rectf.right = getWidth() - rightPadding;
+        rectf.bottom = getHeight() - bottomPadding;
+        int trueHeight = (int) (rectf.bottom - rectf.top);
+
+        if (mCornerRadius > trueHeight / 2) {
+            //画圆角矩形
+            canvas.drawRoundRect(rectf, trueHeight / 2, trueHeight / 2, paint);
+//            canvas.drawRoundRect(rectf, trueHeight / 2, trueHeight / 2, paintStroke);
+        } else {
+            canvas.drawRoundRect(rectf, mCornerRadius, mCornerRadius, paint);
+//            canvas.drawRoundRect(rectf, mCornerRadius, mCornerRadius, paintStroke);
+        }
+    }
+
+
+    public void isAddAlpha(int color) {
+        //获取单签颜色值的透明度，如果没有设置透明度，默认加上#2a
+        if (Color.alpha(color) == 255) {
+            String red = Integer.toHexString(Color.red(color));
+            String green = Integer.toHexString(Color.green(color));
+            String blue = Integer.toHexString(Color.blue(color));
+
+            if (red.length() == 1) {
+                red = "0" + red;
+            }
+
+            if (green.length() == 1) {
+                green = "0" + green;
+            }
+
+            if (blue.length() == 1) {
+                blue = "0" + blue;
+            }
+            String endColor = "#2a" + red + green + blue;
+            mShadowColor = convertToColorInt(endColor);
+        }
+    }
+
+
+    public static int convertToColorInt(String argb)
+            throws IllegalArgumentException {
+
+        if (!argb.startsWith("#")) {
+            argb = "#" + argb;
+        }
+
+        return Color.parseColor(argb);
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (mBackPressedGroundColor != -1) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    if (!ShadowFrameLayout.this.isSelected() && selectorType != 2) {
+                        paint.setColor(mBackPressedGroundColor);
+                        postInvalidate();
+                    }
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    if (!ShadowFrameLayout.this.isSelected() && selectorType != 2) {
+                        paint.setColor(mBackGroundColor);
+                        postInvalidate();
+                    }
+                    break;
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+}

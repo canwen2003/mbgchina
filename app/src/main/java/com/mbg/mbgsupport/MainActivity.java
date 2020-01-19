@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
@@ -169,6 +170,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SeekBarFragment.show(context);
+            }
+        });
+        findViewById(R.id.btn_shape).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShapeFragment.show(context);
             }
         });
     }
