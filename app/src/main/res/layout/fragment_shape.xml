@@ -18,7 +18,7 @@
             android:text="我是文本框BLTextView"
             android:textColor="@color/color_6596ff"
             android:padding="5dp"
-            android:textSize="22dp" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +26,15 @@
             android:layout_marginTop="20dp"
             android:text="按钮阴影"
             android:textColor="@color/color_6596ff"
-            android:textSize="22dp"/>
+            android:textSize="22sp"/>
+
+        <com.mbg.module.ui.view.countDown.CountDownTextView
+            android:id="@+id/count_down_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/color_6596ff"
+            android:textSize="22sp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -7,20 +7,16 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class CountDownTextView extends AppCompatTextView implements View.OnClickListener, LifecycleObserver {
+public class CountDownTextView extends AppCompatTextView implements View.OnClickListener {
     private CountDownTimer mCountDownTimer;
     private OnCountDownStartListener mOnCountDownStartListener;
     private OnCountDownTickListener mOnCountDownTickListener;
@@ -28,13 +24,10 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
     /**
      * 普通文本信息
      */
-    private String mNormalText;
-    private String mCountDownText;
+    private String mNormalText="0";
     private OnClickListener mOnClickListener;
     //倒计时期间是否允许点击
     private boolean mClickable = false;
-    //是否把时间格式化成时分秒
-    private boolean mShowFormatTime = false;
 
     public CountDownTextView(Context context) {
         this(context, null);
@@ -46,43 +39,24 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
 
     public CountDownTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
-    private void init(Context context) {
-        autoBindLifecycle(context);
     }
 
     /**
      * 控件自动绑定生命周期,宿主可以是activity或者fragment
      */
-    private void autoBindLifecycle(Context context) {
-        if (context instanceof AppCompatActivity) {
-            // 宿主是activity
-            AppCompatActivity activity = (AppCompatActivity) context;
-            FragmentManager fm = activity.getSupportFragmentManager();
-            List<Fragment> fragments = fm.getFragments();
-            if (fragments.size() <= 0) {
-                return;
-            }
-            for (Fragment fragment : fragments) {
-                View parent = fragment.getView();
-                if (parent != null) {
-                    View find = parent.findViewById(getId());
-                    if (find == this) {
-                        fragment.getLifecycle().addObserver(this);
-                        return;
-                    }
+    @SuppressWarnings("unused")
+    public void bindLifecycle(LifecycleOwner lifecycleOwner) {
+        if (lifecycleOwner!=null){
+            lifecycleOwner.getLifecycle().addObserver(new LifecycleObserver() {
+                @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+                private void onHostDestroy() {
+                    onDestroy();
                 }
-            }
-        }
-        // 宿主是fragment
-        if (context instanceof LifecycleOwner) {
-            ((LifecycleOwner) context).getLifecycle().addObserver(this);
+            });
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+
     private void onDestroy() {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
@@ -112,32 +86,7 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
             mCountDownTimer.cancel();
             mCountDownTimer = null;
         }
-        mOnCountDownStartListener = null;
-        mOnCountDownTickListener = null;
-        mOnCountDownFinishListener = null;
-        return this;
-    }
 
-    @SuppressWarnings("unused")
-    public void recycler() {
-        if (mCountDownTimer != null) {
-            mCountDownTimer.cancel();
-            mCountDownTimer = null;
-        }
-        mOnCountDownStartListener = null;
-        mOnCountDownTickListener = null;
-        mOnCountDownFinishListener = null;
-    }
-
-    /**
-     * 设置倒计时文本内容
-     *
-     * @param front  倒计时文本前部分
-     * @param latter 倒计时文本后部分
-     */
-    @SuppressWarnings("unused")
-    public CountDownTextView setCountDownText(String front, String latter) {
-        mCountDownText = front + "%1$s" + latter;
         return this;
     }
 
@@ -170,17 +119,6 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
     }
 
     /**
-     * 是否格式化时间
-     *
-     * @param formatTime 是否格式化
-     */
-    @SuppressWarnings("unused")
-    public CountDownTextView setShowFormatTime(boolean formatTime) {
-        mShowFormatTime = formatTime;
-        return this;
-    }
-
-    /**
      * 计时方案
      *
      * @param time        计时时长
@@ -196,28 +134,22 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
         // 转换成毫秒
         final long millisInFuture = timeUnit.toMillis(time) + 500;
         // 时间间隔为1s
-        long interval = TimeUnit.MILLISECONDS.convert(1, timeUnit);
+        long interval = TimeUnit.MILLISECONDS.convert(1, TimeUnit.SECONDS);
         if (mOnCountDownStartListener != null) {
             mOnCountDownStartListener.onStart();
         }
-        if (TextUtils.isEmpty(mCountDownText)) {
-            mCountDownText = getText().toString();
-        }
+
         mCountDownTimer = new CountDownTimer(millisInFuture, interval) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long count = isCountDown ? millisUntilFinished : (millisInFuture - millisUntilFinished);
                 long l = timeUnit.convert(count, TimeUnit.MILLISECONDS);
-                String showTime;
-                if (mShowFormatTime) {
-                    showTime = generateTime(count);
-                } else {
-                    showTime = String.valueOf(l);
-                }
+
                 if (mOnCountDownTickListener != null) {
+                    String showTime = String.valueOf(l);
                     mOnCountDownTickListener.onTick(l, showTime, CountDownTextView.this);
                 } else {
-                    setText(String.format(mCountDownText, showTime));
+                    setText(generateTime(count));
                 }
             }
 
@@ -307,7 +239,7 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
      * 将毫秒转时分秒
      */
 
-    public String generateTime(long time) {
+    private String generateTime(long time) {
         String format;
         long totalSeconds = (time / 1000);
         int seconds = (int) (totalSeconds % 60);
