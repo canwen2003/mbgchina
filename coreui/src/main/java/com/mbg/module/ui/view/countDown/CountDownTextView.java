@@ -45,7 +45,7 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
      * 控件自动绑定生命周期,宿主可以是activity或者fragment
      */
     @SuppressWarnings("unused")
-    public void bindLifecycle(LifecycleOwner lifecycleOwner) {
+    public CountDownTextView bindLifecycle(LifecycleOwner lifecycleOwner) {
         if (lifecycleOwner!=null){
             lifecycleOwner.getLifecycle().addObserver(new LifecycleObserver() {
                 @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -54,6 +54,8 @@ public class CountDownTextView extends AppCompatTextView implements View.OnClick
                 }
             });
         }
+
+        return this;
     }
 
 

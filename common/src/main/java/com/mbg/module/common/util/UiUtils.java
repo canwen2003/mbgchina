@@ -17,6 +17,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class UiUtils {
@@ -301,4 +302,22 @@ public class UiUtils {
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
     }
+
+
+    /***
+     * 通过文件名获取资源id 例子：getResId("icon", R.drawable.class);
+     * @param variableName 资源名称
+     * @param c 资源类名
+     * @return 资源Id
+     */
+    public static int getResId(String variableName, Class<?> c) {
+        try {
+            Field idField = c.getDeclaredField(variableName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 }

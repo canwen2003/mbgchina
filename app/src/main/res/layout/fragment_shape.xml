@@ -36,5 +36,13 @@
             android:textColor="@color/color_6596ff"
             android:textSize="22sp"/>
 
+        <com.mbg.module.ui.view.banner.ConvenientBanner
+            android:id="@+id/convenientBanner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            app:canLoop="true"
+            app:autoTurningTime="3000"/>
+
     </LinearLayout>
 </ScrollView>
