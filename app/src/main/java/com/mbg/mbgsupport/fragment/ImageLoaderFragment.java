@@ -3,8 +3,13 @@ package com.mbg.mbgsupport.fragment;
 import android.content.Context;
 import android.view.View;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.mbg.mbgsupport.R;
+import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.ClickUtils;
+import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
@@ -12,7 +17,6 @@ import com.mbg.module.ui.image.view.RecyclerImageView;
 import com.mbg.module.ui.image.view.RoundedImageView;
 
 public class ImageLoaderFragment extends BaseFragment implements View.OnClickListener{
-
     public static void show(Context context){
         TerminalActivity.show(context, ImageLoaderFragment.class,null);
     }
@@ -57,6 +61,30 @@ public class ImageLoaderFragment extends BaseFragment implements View.OnClickLis
             }
         });
         roundedImageView5.loadImage(uri3);
+
+        ViewModelProviders.of(getActivity()).get("LoadingState", LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
+            @Override
+            public void onChanged(LoadingStateViewModel.LoadingState loadingState) {
+                if (loadingState!=null){
+                    switch (loadingState){
+                        case START:
+                            onDataLoadingStart();
+                            break;
+                        case FINISH:
+                            onDataLoadingFinish();
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    protected void  onDataLoadingStart(){
+        LogUtils.d("LoadingStateViewModel:onDataLoadingStart");
+    }
+
+    protected void  onDataLoadingFinish(){
+        LogUtils.d("LoadingStateViewModel:onDataLoadingFinish");
     }
 
     @Override

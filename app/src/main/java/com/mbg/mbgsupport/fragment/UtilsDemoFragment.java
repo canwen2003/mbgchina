@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.blued.android.module.serviceloader.Router;
 import com.mbg.mbgsupport.MainActivity;
 import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.router.service.IBaseService;
 import com.mbg.mbgsupport.router.service.ServiceKey;
+import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.core.net.manager.HttpManager;
 import com.mbg.module.common.core.net.tool.HttpUtils;
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
@@ -24,6 +28,7 @@ import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.PermissionHelper;
 import com.mbg.module.common.util.PermissionUtils;
 import com.mbg.module.common.util.StringUtils;
+import com.mbg.module.common.util.ThreadUtils;
 import com.mbg.module.common.util.ToastUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.common.util.UriUtils;
@@ -36,6 +41,7 @@ import java.util.Locale;
 
 public class UtilsDemoFragment extends BaseFragment implements View.OnClickListener{
     private ImageView mShowImageView;
+    private LoadingStateViewModel mLoadingStateViewModel;
     public static void show(Context context){
         TerminalActivity.show(context, UtilsDemoFragment.class,null);
     }
@@ -114,6 +120,38 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
                 }
             }
         });
+
+        mLoadingStateViewModel=ViewModelProviders.of(getActivity()).get("LoadingState", LoadingStateViewModel.class);
+        mLoadingStateViewModel.getLoadingState().observe(getActivity(), new Observer<LoadingStateViewModel.LoadingState>() {
+            @Override
+            public void onChanged(LoadingStateViewModel.LoadingState loadingState) {
+                if (loadingState!=null){
+                    switch (loadingState){
+                        case START:
+                            onDataLoadingStart();
+                            break;
+                        case FINISH:
+                            onDataLoadingFinish();
+                            break;
+                    }
+                }
+            }
+        });
+
+        ThreadUtils.postInUIThreadDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mLoadingStateViewModel.setLoadingSate(LoadingStateViewModel.LoadingState.FINISH);
+            }
+        },8000);
+    }
+
+    protected void  onDataLoadingStart(){
+        LogUtils.d("LoadingStateViewModel:onDataLoadingStart");
+    }
+
+    protected void  onDataLoadingFinish(){
+        LogUtils.d("LoadingStateViewModel:onDataLoadingFinish");
     }
 
     @Override
@@ -159,6 +197,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         Uri uri= UriUtils.getUriFromFile(path);
         LogUtils.v(uri.toString());
         mShowImageView.setImageURI(uri);
+         mLoadingStateViewModel.setLoadingSate(LoadingStateViewModel.LoadingState.START);
      }
     private void onTest2(){
         new Thread(new Runnable() {
@@ -168,6 +207,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
                 service.doInBackground();
             }
         }).start();
+        mLoadingStateViewModel.setLoadingSate(LoadingStateViewModel.LoadingState.FINISH);
 
     }
     private void onTest3() {
@@ -236,7 +276,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
        KeyboardUtils.hideSoftInput(getActivity());
     }
     private void onTest9(){
-
+        showContent(ImageLoaderFragment.class);
     }
 
 }

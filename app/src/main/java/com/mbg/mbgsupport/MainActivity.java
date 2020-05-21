@@ -5,6 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
@@ -25,12 +29,13 @@ import com.mbg.mbgsupport.fragment.seekbar.SeekBarFragment;
 import com.mbg.mbgsupport.fragment.tab.CommonTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
+import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
+import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
     private Context context;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,31 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         //setStatusBarColor(getResources().getColor(R.color.design_default_color_primary),0);
         context=this;
+        ;
         initView();
+        ViewModelProviders.of(this).get("LoadingState", LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
+            @Override
+            public void onChanged(LoadingStateViewModel.LoadingState loadingState) {
+                if (loadingState!=null){
+                   switch (loadingState){
+                       case START:
+                           onDataLoadingStart();
+                           break;
+                       case FINISH:
+                           onDataLoadingFinish();
+                           break;
+                   }
+                }
+            }
+        });
+    }
+
+    protected void  onDataLoadingStart(){
+        LogUtils.d("LoadingStateViewModel:onDataLoadingStart");
+    }
+
+    protected void  onDataLoadingFinish(){
+        LogUtils.d("LoadingStateViewModel:onDataLoadingFinish");
     }
 
     private void initView(){
