@@ -1,6 +1,7 @@
 package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.mbg.module.common.util.LocaleUtils;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.PermissionHelper;
 import com.mbg.module.common.util.PermissionUtils;
+import com.mbg.module.common.util.SpannableUtils;
 import com.mbg.module.common.util.StringUtils;
 import com.mbg.module.common.util.ThreadUtils;
 import com.mbg.module.common.util.ToastUtils;
@@ -36,8 +38,14 @@ import com.mbg.module.common.util.consts.PermissionConsts;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeSet;
 
 public class UtilsDemoFragment extends BaseFragment implements View.OnClickListener{
     private ImageView mShowImageView;
@@ -108,6 +116,33 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
         final TextView inputRoot=findViewById(R.id.tv_test_input);
 
+        SpannableUtils.SpannableFilter spannableFilter=new SpannableUtils.SpannableFilter();
+        List<SpannableUtils.SpannableFilter> spannableFilters=new ArrayList<>();
+        spannableFilter.keywords="测试";
+        spannableFilter.keywordsColor= Color.RED;
+        spannableFilter.isUnderLine=false;
+        spannableFilter.onClickListener=new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.debugShow("测试");
+            }
+        };
+        spannableFilters.add(spannableFilter);
+
+        spannableFilter=new SpannableUtils.SpannableFilter();
+        spannableFilter.keywords="键盘";
+        spannableFilter.keywordsColor= Color.GRAY;
+        spannableFilter.isUnderLine=true;
+        spannableFilter.onClickListener=new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.debugShow("键盘");
+            }
+        };
+        spannableFilters.add(spannableFilter);
+
+        SpannableUtils.setViewSpannable(getActivity(),inputRoot,spannableFilters);
+
         mShowImageView=findViewById(R.id.img_show);
 
 
@@ -147,7 +182,55 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     }
 
     protected void  onDataLoadingStart(){
-        LogUtils.d("LoadingStateViewModel:onDataLoadingStart");
+        HashSet hs = new HashSet();
+        long ks = System.currentTimeMillis();
+        for (int i=1;i<99999;i++)
+            hs.add(i);
+        Iterator it = hs.iterator();
+        while (it.hasNext())
+            it.next();
+        boolean add=hs.add(1);
+        hs.remove(5555);
+        hs.clear();
+        long js = System.currentTimeMillis();
+
+
+        //LinkedHashSet效率
+        LinkedHashSet lh = new LinkedHashSet();
+        long ks1 = System.currentTimeMillis();
+        for (int i=1;i<99999;i++)
+            lh.add(i);
+
+
+        Iterator it1 = lh.iterator();
+        while (it1.hasNext())
+            it1.next();
+        add=lh.add(1);
+        lh.remove(5555);
+        lh.clear();
+        long js1 = System.currentTimeMillis();
+
+
+        //TreeSet效率
+        TreeSet ts = new TreeSet();
+        long ks2 = System.currentTimeMillis();
+        for (int i=1;i<99999;i++)
+            ts.add(i);
+
+
+        Iterator it2 = ts.iterator();
+        while (it2.hasNext())
+            it2.next();
+        add=ts.add(1);
+        add=ts.add(0);
+        ts.remove(5555);
+        ts.clear();
+        long js2 = System.currentTimeMillis();
+
+        LogUtils.d("HashSet共花费时间："+(js-ks)+"ms");
+        LogUtils.d("LinkedHashSet共花费时间："+(js1-ks1)+"ms");
+        LogUtils.d("TreeSet共花费时间："+(js2-ks2)+"ms");
+
     }
 
     protected void  onDataLoadingFinish(){
@@ -193,10 +276,10 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
      private void onTest1(){
 
-        String path= Environment.getExternalStorageDirectory().getPath()+"/DCIM/Image/a001.png";
+       /* String path= Environment.getExternalStorageDirectory().getPath()+"/DCIM/Image/a001.png";
         Uri uri= UriUtils.getUriFromFile(path);
         LogUtils.v(uri.toString());
-        mShowImageView.setImageURI(uri);
+        mShowImageView.setImageURI(uri);*/
          mLoadingStateViewModel.setLoadingSate(LoadingStateViewModel.LoadingState.START);
      }
     private void onTest2(){
@@ -276,7 +359,12 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
        KeyboardUtils.hideSoftInput(getActivity());
     }
     private void onTest9(){
-        showContent(ImageLoaderFragment.class);
+        //showContent(ImageLoaderFragment.class);
+      Map<Thread,StackTraceElement[]> map= Thread.getAllStackTraces();
+        for(Map.Entry<Thread,StackTraceElement[]> entry : map.entrySet()){
+            Thread mapKey = entry.getKey();
+            System.out.println("Thread:"+mapKey.getName()+" ,isAlive:"+mapKey.isAlive()+" ,ThreadID:"+mapKey.getId());
+        }
     }
 
 }
