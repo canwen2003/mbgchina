@@ -32,4 +32,5 @@
     <color name="colorProgress">#ffffbb33</color>
     <color name="colorProgressDefault">#FFD7D7D7</color>
     <color name="colorRed">#F44336</color>
+    <color name="shimmer_background_color">#b1b1b1</color>
 </resources>

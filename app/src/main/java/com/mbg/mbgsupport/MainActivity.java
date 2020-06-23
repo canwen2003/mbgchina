@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mbg.mbgsupport.fragment.ShapeFragment;
+import com.mbg.mbgsupport.fragment.ShimmerFragment;
 import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
@@ -32,6 +33,7 @@ import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.activity.BaseActivity;
+import com.mbg.module.ui.view.layout.shimmer.ShimmerLayout;
 
 public class MainActivity extends BaseActivity {
 
@@ -205,6 +207,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 ShapeFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_shimmer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShimmerFragment.show(context);
             }
         });
     }
