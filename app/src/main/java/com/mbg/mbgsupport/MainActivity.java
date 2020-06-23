@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.ShimmerFragment;
+import com.mbg.mbgsupport.fragment.SkeletonFragment;
 import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
@@ -216,5 +217,13 @@ public class MainActivity extends BaseActivity {
                 ShimmerFragment.show(context);
             }
         });
+
+        findViewById(R.id.btn_skeleton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SkeletonFragment.show(context);
+            }
+        });
+
     }
 }
