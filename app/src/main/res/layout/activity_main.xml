@@ -211,11 +211,11 @@
             android:text="Skeleton"/>
 
         <Button
-            android:id="@+id/btn_test0"
+            android:id="@+id/btn_lottie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="text 0"/>
+            android:text="Lottie Anim"/>
 
         <Button
             android:id="@+id/btn_test1"

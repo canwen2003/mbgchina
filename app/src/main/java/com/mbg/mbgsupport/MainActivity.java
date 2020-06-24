@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.ShimmerFragment;
 import com.mbg.mbgsupport.fragment.SkeletonFragment;
@@ -222,6 +223,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 SkeletonFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_lottie).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnimsFragment.show(context);
             }
         });
 
