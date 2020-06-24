@@ -397,7 +397,7 @@ import java.util.List;
                  *  x:表示离起始位置的x水平方向的偏移量
                  *  y:表示离起始位置的y垂直方向的偏移量
                  */
-                scrollTo(newScrollX, 0);
+                smoothScrollTo(newScrollX, 0);
             }
         }
 
@@ -460,9 +460,7 @@ import java.util.List;
             mTabRect.left = (int) left;
             mTabRect.right = (int) right;
 
-            if (mIndicatorWidth < 0) {   //indicatorWidth小于0时,原jpardogo's PagerSlidingTabStrip
-
-            } else {//indicatorWidth大于0时,圆角矩形以及三角形
+            if (mIndicatorWidth >= 0) { //indicatorWidth大于0时,圆角矩形以及三角形
                 float indicatorLeft = currentTabView.getLeft() + (currentTabView.getWidth() - mIndicatorWidth) / 2;
 
                 if (this.mCurrentTab < mTabCount - 1) {
@@ -501,7 +499,9 @@ import java.util.List;
                 return;
             }
 
-            initTabBackGround();
+            if (mTabBGDrawable==null) {
+                initTabBackGround();
+            }
 
             if (mIndicatorHeight > 0) {
                 int paddingLeft = getPaddingLeft();
@@ -569,7 +569,7 @@ import java.util.List;
                     canvas.drawPath(mTrianglePath, mTrianglePaint);
                 }
             } else if (mIndicatorStyle == STYLE_BLOCK) {
-                drawTabBackGround(canvas );
+                drawTabBackGround(canvas);
                 if (mIndicatorHeight < 0) {
                     mIndicatorHeight = height - mIndicatorMarginTop - mIndicatorMarginBottom;
                 }
@@ -585,7 +585,6 @@ import java.util.List;
                             (int) (mIndicatorMarginTop + mIndicatorHeight));
                     mIndicatorDrawable.setCornerRadius(mIndicatorCornerRadius);
                     mIndicatorDrawable.draw(canvas);
-
                 }
             } else {
                 if (mIndicatorHeight > 0) {
