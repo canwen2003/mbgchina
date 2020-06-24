@@ -1,23 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-   <Button
-       android:id="@+id/btn_pop_out"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="Pop Out"/>
+    <Button
+        android:id="@+id/btn_pop_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pop Out" />
 
-   <com.airbnb.lottie.LottieAnimationView
-       android:id="@+id/lt_anim_view"
-       android:layout_width="70dp"
-       android:layout_height="70dp"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lt_anim_view"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_fun1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="圆角矩形" />
+
+        <Button
+            android:id="@+id/btn_fun2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="圆形" />
+
+        <Button
+            android:id="@+id/btn_fun3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="椭圆" />
+
+        <Button
+            android:id="@+id/btn_fun4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扇形" />
+    </LinearLayout>
+
+   <ImageView
+       android:id="@+id/show_result"
+       android:src="@drawable/girl"
        android:layout_marginTop="20dp"
-       app:lottie_loop="false"
-       app:lottie_autoPlay="false"/>
+       android:layout_width="300dp"
+       android:layout_height="300dp"
+       android:scaleType="centerInside"/>
 
 </LinearLayout>
