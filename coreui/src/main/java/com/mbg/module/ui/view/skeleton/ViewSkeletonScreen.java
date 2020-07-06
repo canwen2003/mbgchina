@@ -1,19 +1,20 @@
 package com.mbg.module.ui.view.skeleton;
 
 
+import android.animation.ValueAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.annotation.ColorRes;
+import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.LayoutRes;
-import androidx.core.content.ContextCompat;
 
 import com.mbg.module.ui.R;
-import com.mbg.module.ui.view.layout.shimmer.ShimmerLayout;
+import com.mbg.module.ui.view.shimmer.Shimmer;
+import com.mbg.module.ui.view.shimmer.ShimmerFrameLayout;
 
 
 /**
@@ -25,10 +26,12 @@ public class ViewSkeletonScreen implements SkeletonScreen {
     private final ViewReplacer mViewReplacer;
     private final View mActualView;
     private final int mSkeletonResID;
-    private final int mShimmerColor;
+    private final float mShimmerBaseAlpha;
+    private final float mShimmerHighlightAlpha;
     private final boolean mShimmer;
     private final int mShimmerDuration;
     private final int mShimmerAngle;
+
 
     private ViewSkeletonScreen(Builder builder) {
         mActualView = builder.mView;
@@ -36,15 +39,28 @@ public class ViewSkeletonScreen implements SkeletonScreen {
         mShimmer = builder.mShimmer;
         mShimmerDuration = builder.mShimmerDuration;
         mShimmerAngle = builder.mShimmerAngle;
-        mShimmerColor = builder.mShimmerColor;
+        mShimmerBaseAlpha = builder.mShimmerBaseAlpha;
+        mShimmerHighlightAlpha=builder.mShimmerHighlightAlpha;
         mViewReplacer = new ViewReplacer(builder.mView);
     }
 
-    private ShimmerLayout generateShimmerContainerLayout(ViewGroup parentView) {
-        final ShimmerLayout shimmerLayout = (ShimmerLayout) LayoutInflater.from(mActualView.getContext()).inflate(R.layout.view_layout_shimmer, parentView, false);
-        shimmerLayout.setShimmerColor(mShimmerColor);
-        shimmerLayout.setShimmerAngle(mShimmerAngle);
-        shimmerLayout.setShimmerAnimationDuration(mShimmerDuration);
+    private ShimmerFrameLayout generateShimmerContainerLayout(ViewGroup parentView) {
+        final ShimmerFrameLayout shimmerLayout = (ShimmerFrameLayout) LayoutInflater.from(mActualView.getContext()).inflate(R.layout.view_layout_shimmer, parentView, false);
+
+        Shimmer.AlphaHighlightBuilder alphaHighlightBuilder=new Shimmer.AlphaHighlightBuilder();
+        alphaHighlightBuilder.setAutoStart(false);
+        alphaHighlightBuilder.setDirection(Shimmer.Direction.LEFT_TO_RIGHT);
+        alphaHighlightBuilder.setClipToChildren(true);
+        alphaHighlightBuilder.setRepeatCount(ValueAnimator.INFINITE);
+        alphaHighlightBuilder.setRepeatMode(ValueAnimator.RESTART);
+        alphaHighlightBuilder.setBaseAlpha(mShimmerBaseAlpha);//设置基础View的透明度
+        alphaHighlightBuilder.setHighlightAlpha(mShimmerHighlightAlpha);
+        alphaHighlightBuilder.setDropoff(0.6f);
+        alphaHighlightBuilder.setTilt(mShimmerAngle);
+        alphaHighlightBuilder.setDuration(mShimmerDuration);
+
+        shimmerLayout.setShimmer(alphaHighlightBuilder.build());
+
         View innerView = LayoutInflater.from(mActualView.getContext()).inflate(mSkeletonResID, shimmerLayout, false);
         ViewGroup.LayoutParams lp = innerView.getLayoutParams();
         if (lp != null) {
@@ -54,15 +70,15 @@ public class ViewSkeletonScreen implements SkeletonScreen {
         shimmerLayout.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
-                shimmerLayout.startShimmerAnimation();
+                shimmerLayout.startShimmer();
             }
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                shimmerLayout.stopShimmerAnimation();
+                shimmerLayout.startShimmer();
             }
         });
-        shimmerLayout.startShimmerAnimation();
+        //shimmerLayout.startShimmerAnimation();
         return shimmerLayout;
     }
 
@@ -89,8 +105,8 @@ public class ViewSkeletonScreen implements SkeletonScreen {
 
     @Override
     public void hide() {
-        if (mViewReplacer.getTargetView() instanceof ShimmerLayout) {
-            ((ShimmerLayout) mViewReplacer.getTargetView()).stopShimmerAnimation();
+        if (mViewReplacer.getTargetView() instanceof ShimmerFrameLayout) {
+            ((ShimmerFrameLayout) mViewReplacer.getTargetView()).stopShimmer();
         }
         mViewReplacer.restore();
     }
@@ -99,13 +115,15 @@ public class ViewSkeletonScreen implements SkeletonScreen {
         private final View mView;
         private int mSkeletonLayoutResID;
         private boolean mShimmer = true;
-        private int mShimmerColor;
         private int mShimmerDuration = 1000;
         private int mShimmerAngle = 20;
+        private float mShimmerBaseAlpha;
+        private float mShimmerHighlightAlpha;
 
         public Builder(View view) {
             this.mView = view;
-            this.mShimmerColor = ContextCompat.getColor(mView.getContext(), R.color.shimmer_color);
+            this.mShimmerBaseAlpha=1.0f;
+            this.mShimmerHighlightAlpha=1.0f;
         }
 
         /**
@@ -117,10 +135,19 @@ public class ViewSkeletonScreen implements SkeletonScreen {
         }
 
         /**
-         * @param shimmerColor the shimmer color
+         * @param baseAlpha Sets the base alpha, which is the alpha of the underlying children, amount in the range [0, 1].
+         *
          */
-        public Builder color(@ColorRes int shimmerColor) {
-            this.mShimmerColor = ContextCompat.getColor(mView.getContext(), shimmerColor);
+        public ViewSkeletonScreen.Builder setBaseAlpha(@FloatRange(from = 0, to = 1) float baseAlpha) {
+            this.mShimmerBaseAlpha = baseAlpha;
+            return this;
+        }
+
+        /**
+         * @param highLightAlpha Sets the shimmer alpha amount in the range [0, 1].
+         */
+        public ViewSkeletonScreen.Builder setHighLightAlpha(@FloatRange(from = 0, to = 1) float highLightAlpha) {
+            this.mShimmerHighlightAlpha = highLightAlpha;
             return this;
         }
 

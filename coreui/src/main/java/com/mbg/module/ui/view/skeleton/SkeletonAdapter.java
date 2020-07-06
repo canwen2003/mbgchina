@@ -1,13 +1,16 @@
 package com.mbg.module.ui.view.skeleton;
 
 
+import android.animation.ValueAnimator;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mbg.module.ui.view.layout.shimmer.ShimmerLayout;
+import com.mbg.module.ui.view.shimmer.Shimmer;
+import com.mbg.module.ui.view.shimmer.ShimmerFrameLayout;
 
 
 /**
@@ -23,6 +26,8 @@ public class SkeletonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean mShimmer;
     private int mShimmerDuration;
     private int mShimmerAngle;
+    private  float mShimmerBaseAlpha=1.0f;
+    private  float mShimmerHighlightAlpha=1.0f;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,11 +46,21 @@ public class SkeletonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mShimmer) {
-            ShimmerLayout layout = (ShimmerLayout) holder.itemView;
-            layout.setShimmerAnimationDuration(mShimmerDuration);
-            layout.setShimmerAngle(mShimmerAngle);
-            layout.setShimmerColor(mColor);
-            layout.startShimmerAnimation();
+            ShimmerFrameLayout layout = (ShimmerFrameLayout) holder.itemView;
+
+            Shimmer.AlphaHighlightBuilder alphaHighlightBuilder=new Shimmer.AlphaHighlightBuilder();
+            alphaHighlightBuilder.setAutoStart(false);
+            alphaHighlightBuilder.setDirection(Shimmer.Direction.LEFT_TO_RIGHT);
+            alphaHighlightBuilder.setClipToChildren(true);
+            alphaHighlightBuilder.setRepeatCount(ValueAnimator.INFINITE);
+            alphaHighlightBuilder.setRepeatMode(ValueAnimator.RESTART);
+            alphaHighlightBuilder.setBaseAlpha(mShimmerBaseAlpha);//设置基础View的透明度
+            alphaHighlightBuilder.setHighlightAlpha(mShimmerHighlightAlpha);
+            alphaHighlightBuilder.setDropoff(0.6f);
+            alphaHighlightBuilder.setTilt(mShimmerAngle);
+            alphaHighlightBuilder.setDuration(mShimmerDuration);
+            layout.setShimmer(alphaHighlightBuilder.build());
+            layout.startShimmer();
         }
     }
 
@@ -79,9 +94,22 @@ public class SkeletonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.mItemCount = itemCount;
     }
 
-    public void setShimmerColor(int color) {
-        this.mColor = color;
+
+    /**
+     * @param baseAlpha Sets the base alpha, which is the alpha of the underlying children, amount in the range [0, 1].
+     *
+     */
+    public void setBaseAlpha(@FloatRange(from = 0, to = 1) float baseAlpha) {
+        this.mShimmerBaseAlpha = baseAlpha;
     }
+
+    /**
+     * @param highLightAlpha Sets the shimmer alpha amount in the range [0, 1].
+     */
+    public void setHighLightAlpha(@FloatRange(from = 0, to = 1) float highLightAlpha) {
+        this.mShimmerHighlightAlpha = highLightAlpha;
+    }
+
 
     public void shimmer(boolean shimmer) {
         this.mShimmer = shimmer;

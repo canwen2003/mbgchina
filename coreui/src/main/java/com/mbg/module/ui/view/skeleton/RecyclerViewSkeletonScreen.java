@@ -1,12 +1,10 @@
 package com.mbg.module.ui.view.skeleton;
 
 
-
 import androidx.annotation.ArrayRes;
-import androidx.annotation.ColorRes;
+import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.LayoutRes;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mbg.module.ui.R;
@@ -21,6 +19,8 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
     private final RecyclerView.Adapter mActualAdapter;
     private final SkeletonAdapter mSkeletonAdapter;
     private final boolean mRecyclerViewFrozen;
+    private  float mShimmerBaseAlpha=1.0f;
+    private  float mShimmerHighlightAlpha=1.0f;
 
     private RecyclerViewSkeletonScreen(Builder builder) {
         mRecyclerView = builder.mRecyclerView;
@@ -30,7 +30,8 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
         mSkeletonAdapter.setLayoutReference(builder.mItemResID);
         mSkeletonAdapter.setArrayOfLayoutReferences(builder.mItemsResIDArray);
         mSkeletonAdapter.shimmer(builder.mShimmer);
-        mSkeletonAdapter.setShimmerColor(builder.mShimmerColor);
+        mSkeletonAdapter.setBaseAlpha(builder.mShimmerBaseAlpha);
+        mSkeletonAdapter.setHighLightAlpha(builder.mShimmerHighlightAlpha);
         mSkeletonAdapter.setShimmerAngle(builder.mShimmerAngle);
         mSkeletonAdapter.setShimmerDuration(builder.mShimmerDuration);
         mRecyclerViewFrozen = builder.mFrozen;
@@ -56,14 +57,17 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
         private int mItemCount = 10;
         private int mItemResID = R.layout.view_layout_default_item_skeleton;
         private int[] mItemsResIDArray;
-        private int mShimmerColor;
+
+
         private int mShimmerDuration = 1000;
         private int mShimmerAngle = 20;
         private boolean mFrozen = true;
+        private  float mShimmerBaseAlpha=1.0f;
+        private  float mShimmerHighlightAlpha=1.0f;
 
         public Builder(RecyclerView recyclerView) {
             this.mRecyclerView = recyclerView;
-            this.mShimmerColor = ContextCompat.getColor(recyclerView.getContext(), R.color.shimmer_color);
+
         }
 
         /**
@@ -79,6 +83,23 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
          */
         public Builder count(int itemCount) {
             this.mItemCount = itemCount;
+            return this;
+        }
+
+        /**
+         * @param baseAlpha Sets the base alpha, which is the alpha of the underlying children, amount in the range [0, 1].
+         *
+         */
+        public Builder setBaseAlpha(@FloatRange(from = 0, to = 1) float baseAlpha) {
+            this.mShimmerBaseAlpha = baseAlpha;
+            return this;
+        }
+
+        /**
+         * @param highLightAlpha Sets the shimmer alpha amount in the range [0, 1].
+         */
+        public Builder setHighLightAlpha(@FloatRange(from = 0, to = 1) float highLightAlpha) {
+            this.mShimmerHighlightAlpha = highLightAlpha;
             return this;
         }
 
@@ -101,13 +122,6 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
             return this;
         }
 
-        /**
-         * @param shimmerColor the shimmer color
-         */
-        public Builder color(@ColorRes int shimmerColor) {
-            this.mShimmerColor = ContextCompat.getColor(mRecyclerView.getContext(), shimmerColor);
-            return this;
-        }
 
         /**
          * @param shimmerAngle the angle of the shimmer effect in clockwise direction in degrees.

@@ -57,7 +57,7 @@ public class SkeletonViewFragment extends BaseFragment{
             skeletonScreen = Skeleton.bind(rootview)
                     .load(R.layout.fragment_view_skeleton)
                     .duration(1000)
-                    .color(R.color.shimmer_color_for_image)
+                    .setBaseAlpha(0.8f)
                     .angle(30)
                     .show();
         }
@@ -65,11 +65,11 @@ public class SkeletonViewFragment extends BaseFragment{
             skeletonScreen = Skeleton.bind(rootview)
                     .load(R.layout.layout_img_skeleton)
                     .duration(1000)
-                    .color(R.color.shimmer_color_for_image)
+                    .setBaseAlpha(0.8f)
                     .show();
         }
         MyHandler myHandler = new MyHandler(this);
-        myHandler.sendEmptyMessageDelayed(1, 3000);
+        myHandler.sendEmptyMessageDelayed(1, 6000);
     }
     public static class MyHandler extends android.os.Handler {
         private final WeakReference<SkeletonViewFragment> activityWeakReference;
