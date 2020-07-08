@@ -20,6 +20,7 @@ import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.core.net.manager.HttpManager;
 import com.mbg.module.common.core.net.tool.HttpUtils;
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
+import com.mbg.module.common.core.sharedpreference.FastSharedPreferences;
 import com.mbg.module.common.util.AppUtils;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.FileCacheUtils;
@@ -246,15 +247,21 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         switch (viewId){
             case R.id.btn_test1:
                 onTest1();
+                FastSharedPreferences.get("FSP_DATA_USER").edit().putBoolean("keyBool",true);
+                FastSharedPreferences.get("FSP_DATA_USER").edit().putString("keyString","btn_test1").apply();
                 break;
             case R.id.btn_test2:
+                FastSharedPreferences.get("FSP_DATA_USER").edit().putBoolean("keyBool",false);
+                FastSharedPreferences.get("FSP_DATA_USER").edit().putString("keyString","btn_test2").apply();
                 onTest2();
                 break;
             case R.id.btn_test3:
-                onTest3();
+                ToastUtils.show("keyBool="+ FastSharedPreferences.get("FSP_DATA_USER").getBoolean("keyBool",false));
+               // onTest3();
                 break;
             case R.id.btn_test4:
-                onTest4();
+                ToastUtils.show("keyString="+ FastSharedPreferences.get("FSP_DATA_USER").getString("keyString",""));
+                //onTest4();
                 break;
             case R.id.btn_test5:
                 onTest5();
