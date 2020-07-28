@@ -6,10 +6,117 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+
+    <com.mbg.module.ui.view.layout.swipe.ConfigurableFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.mbg.module.ui.view.imageview.DraggableImageView
+            android:id="@+id/draggable_image_view_1"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/black"
+            app:boundary_bottom="true"
+            app:boundary_left="true"
+            app:boundary_right="true"
+            app:boundary_top="true"
+            app:max_scale="1"
+            app:scale_center="finger_center"
+            app:trigger_distance="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:weightSum="4">
+
+            <com.mbg.module.ui.view.imageview.DraggableImageView
+                android:id="@+id/draggable_image_view_2"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                app:boundary_bottom="true"
+                app:boundary_left="true"
+                app:boundary_right="true"
+                app:boundary_top="true"
+                app:max_scale="1"
+                app:trigger_distance="1dp" />
+
+            <com.mbg.module.ui.view.imageview.DraggableImageView
+                android:id="@+id/draggable_image_view_3"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                app:boundary_bottom="true"
+                app:boundary_left="true"
+                app:boundary_right="true"
+                app:boundary_top="true"
+                app:max_scale="1"
+                app:trigger_distance="1dp" />
+
+            <com.mbg.module.ui.view.imageview.DraggableImageView
+                android:id="@+id/draggable_image_view_4"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                app:boundary_bottom="true"
+                app:boundary_left="true"
+                app:boundary_right="true"
+                app:boundary_top="true"
+                app:max_scale="1"
+                app:trigger_distance="1dp" />
+
+            <com.mbg.module.ui.view.imageview.DraggableImageView
+                android:id="@+id/draggable_image_view_5"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                app:boundary_bottom="true"
+                app:boundary_left="true"
+                app:boundary_right="true"
+                app:boundary_top="true"
+                app:max_scale="1"
+                app:trigger_distance="1dp" />
+
+        </LinearLayout>
+
+    </com.mbg.module.ui.view.layout.swipe.ConfigurableFrameLayout>
+
+
+    <com.mbg.module.ui.view.imageview.TransformativeImageView
+        android:id="@+id/transformative_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/black"
+        app:max_scale="4"
+        app:min_scale="1"
+        app:open_animator="true"
+        app:open_rotate_revert="true"
+        app:open_scale_revert="true"
+        app:open_translate_revert="true"
+        app:revert_duration="300"
+        app:scale_center="finger_center" />
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,28 +192,28 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
-                app:corner="10dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/ic_launcher_foreground"
+                app:corner="10dp" />
 
             <com.mbg.module.ui.image.view.RoundedImageView
                 android:id="@+id/img_test4"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
+                android:src="@drawable/ic_launcher_foreground"
                 app:border_color="@color/colorPrimary"
-                app:border_width="2dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                app:border_width="2dp" />
 
             <com.mbg.module.ui.image.view.RoundedImageView
                 android:id="@+id/img_test5"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
-                app:corner_left_top="20dp"
-                app:corner_right_top="20dp"
+                android:src="@drawable/ic_launcher_foreground"
                 app:corner_left_bottom="20dp"
+                app:corner_left_top="20dp"
                 app:corner_right_bottom="20dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                app:corner_right_top="20dp" />
 
             <com.mbg.module.ui.image.view.RoundedImageView
                 android:id="@+id/img_test6"
@@ -114,7 +221,8 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_launcher_foreground"
-                app:oval="true"/>
+                app:oval="true" />
+
             <com.mbg.module.ui.image.view.RoundedImageView
                 android:id="@+id/img_test7"
                 android:layout_width="200dp"
@@ -123,7 +231,7 @@
                 android:src="@drawable/ic_launcher_foreground"
                 app:border_color="@color/colorAccent"
                 app:border_width="2dp"
-                app:oval="true"/>
+                app:oval="true" />
 
         </LinearLayout>
 

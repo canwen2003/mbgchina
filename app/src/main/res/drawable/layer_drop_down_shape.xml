@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/white"/>
+             <corners android:radius="8dp"/>
+             <stroke android:width="2dp" android:color="@color/color_6596ff"/>
+        </shape>
+    </item>
+    <item>
+        <bitmap android:src="@drawable/brvah_sample_footer_loading_progress" android:gravity="end"/>
+    </item>
+
+
+</layer-list >

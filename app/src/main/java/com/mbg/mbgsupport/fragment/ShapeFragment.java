@@ -3,6 +3,8 @@ package com.mbg.mbgsupport.fragment;
 import android.content.Context;
 import android.view.View;
 
+import androidx.appcompat.widget.AppCompatSpinner;
+
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ToastUtils;
 import com.mbg.module.common.util.UiUtils;
@@ -20,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class ShapeFragment extends BaseFragment{
     private CountDownTextView countDownTextView;
     private ConvenientBanner convenientBanner;
+    private AppCompatSpinner appCompatSpinner;
     private ArrayList<Integer> localImages = new ArrayList<>();
     public static void show(Context context){
         TerminalActivity.show(context, ShapeFragment.class,null);
@@ -88,6 +91,7 @@ public class ShapeFragment extends BaseFragment{
 
 //        convenientBanner.setManualPageable(false);//设置不能手动影响
 
+        appCompatSpinner=findViewById(R.id.selector);
         initData();
     }
 
@@ -111,5 +115,6 @@ public class ShapeFragment extends BaseFragment{
         convenientBanner.stopTurning();
         super.onStop();
     }
+
 
 }
