@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import androidx.annotation.Nullable;
 
 import com.mbg.module.ui.R;
+import com.mbg.module.ui.view.listener.OnImageChangedListener;
 import com.mbg.module.ui.view.listener.OnTriggerDragListener;
 import com.mbg.module.ui.view.listener.TriggerDraggable;
 
@@ -20,6 +21,8 @@ public class DraggableImageView extends TransformativeImageView implements Trigg
     private static final String TAG = DraggableImageView.class.getSimpleName();
     private static final int DEFAULT_TRIGGER_DISTANCE = 100; // 默认触发拖拽的距离为100px
     private OnTriggerDragListener mOnTriggerDragListener; // 拖拽事件监听器
+    private String mImageToken;
+    private OnImageChangedListener mOnImageChangedListener;
 
     /**
      * 可触发拖拽事件的边界,若数组某个index的变量为true，则表示该index对应的边界可以触发拖拽事件；
@@ -165,5 +168,23 @@ public class DraggableImageView extends TransformativeImageView implements Trigg
     @Override
     public void setOnTriggerDragListener(OnTriggerDragListener listener) {
         this.mOnTriggerDragListener = listener;
+    }
+
+    public void setImageToken(String imageToken){
+        this.mImageToken=imageToken;
+    }
+
+    public String getImageToken(){
+        return  mImageToken;
+    }
+
+    public void setOnImageChangedListener(OnImageChangedListener listener){
+        this.mOnImageChangedListener=listener;
+    }
+
+    public void setImageChanged(){
+        if (mOnImageChangedListener!=null){
+            mOnImageChangedListener.onChanged(mImageToken);
+        }
     }
 }

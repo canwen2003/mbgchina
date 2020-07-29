@@ -17,7 +17,6 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.view.imageview.DraggableImageView;
 import com.mbg.module.ui.view.listener.OnTriggerDragListener;
 import com.mbg.module.ui.view.listener.TriggerDraggable;
@@ -244,7 +243,7 @@ public class ConfigurableFrameLayout extends FrameLayout implements OnTriggerDra
             if (v instanceof DraggableImageView) {
                 DraggableImageView toImageView=(DraggableImageView)v;
                 if(toImageView.getCanReplaced()){
-                    exchangeImg(curImgView, (ImageView) v);
+                    exchangeImg(curImgView, (DraggableImageView) v);
                 }
             }
             // 将之前拖拽过程隐藏当前处理事件的子View的图片显示出来
@@ -262,7 +261,7 @@ public class ConfigurableFrameLayout extends FrameLayout implements OnTriggerDra
      * @param fromImgView 源控件
      * @param toImgView 目标控件
      */
-    private void exchangeImg(ImageView fromImgView, ImageView toImgView) {
+    private void exchangeImg(DraggableImageView fromImgView, DraggableImageView toImgView) {
         // 若源控件不包含图片则不交换
         if (toImgView == null || fromImgView == null || fromImgView.getDrawable() == null) {
             return;
@@ -291,6 +290,14 @@ public class ConfigurableFrameLayout extends FrameLayout implements OnTriggerDra
             fromImgView.setImageBitmap(null);
         }
 
+        //交换图片标识
+        String fromToken=fromImgView.getImageToken();
+        fromImgView.setImageToken(toImgView.getImageToken());
+        toImgView.setImageToken(fromToken);
+
+        //发送更新通知
+        fromImgView.setImageChanged();
+        toImgView.setImageChanged();
     }
 
     /**

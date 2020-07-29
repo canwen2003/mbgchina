@@ -13,12 +13,12 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.mbg.module.ui.R;
-
 
 /**
  * 多点触控加Matrix类实现图片的旋转、缩放、平移
@@ -49,6 +49,7 @@ public class TransformativeImageView extends AppCompatImageView {
     private boolean mOpenRotateRevert = false; // 是否开启旋转回弹
     private boolean mOpenTranslateRevert = false; // 是否开启平移回弹
     private boolean mOpenAnimator = false; // 是否开启动画
+    private float mMovingThreshold;//滑动阀值
 
 
     public TransformativeImageView(Context context) {
@@ -62,7 +63,7 @@ public class TransformativeImageView extends AppCompatImageView {
     public TransformativeImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         obtainAttrs(attrs);
-        init();
+        init(context);
 
     }
 
@@ -90,11 +91,13 @@ public class TransformativeImageView extends AppCompatImageView {
         typedArray.recycle();
     }
 
-    private void init() {
+    private void init(Context context) {
         // FIXME 修复图片锯齿,关闭硬件加速ANTI_ALIAS_FLAG才能生效
 //        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         setScaleType(ScaleType.MATRIX);
+        //setScaleType(ScaleType.CENTER_CROP);
         mRevertAnimator.setDuration(mRevertDuration);
+        mMovingThreshold= ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
     @Override
@@ -170,7 +173,10 @@ public class TransformativeImageView extends AppCompatImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        //获取触控的中间位置
         PointF midPoint = getMidPointOfFinger(event);
+
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
@@ -178,30 +184,47 @@ public class TransformativeImageView extends AppCompatImageView {
                 mLastMidPoint.set(midPoint);
                 isTransforming = false;
                 mRevertAnimator.cancel();
+
                 // 新手指落下则需要重新判断是否可以对图片进行变换
-                mCanRotate = false;
-                mCanScale = false;
-                mCanDrag = false;
+                mCanRotate = false;//不能进行旋转
+                mCanScale = false; //放大和缩小
+                mCanDrag = false;//拖动
+
+                // 旋转、平移、缩放分别使用三个判断变量，避免后期某个操作执行条件改变
                 if (event.getPointerCount() == 2) {
-                    // 旋转、平移、缩放分别使用三个判断变量，避免后期某个操作执行条件改变
                     mCanScale = true;
                     mLastPoint1.set(event.getX(0), event.getY(0));
                     mLastPoint2.set(event.getX(1), event.getY(1));
                     mCanRotate = true;
-                    mLastVector.set(event.getX(1) - event.getX(0),
-                            event.getY(1) - event.getY(0));
+                    mLastVector.set(event.getX(1) - event.getX(0), event.getY(1) - event.getY(0));
                 } else if(event.getPointerCount() == 1) {
                     mCanDrag = true;
                 }
-
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mCanDrag&&mDragEnabled) translate(midPoint);
-                if (mCanScale) scale(event);
-                if (mCanRotate) rotate(event);
+                //平移
+                if (mCanDrag&&mDragEnabled){
+                    translate(midPoint);
+                }
+
+                //缩放
+                if (mCanScale){
+                    scale(event);
+                }
+
+                //旋转
+                if (mCanRotate) {
+                    rotate(event);
+                }
+
                 // 判断图片是否发生了变换
-                if (!getImageMatrix().equals(mMatrix)) isTransforming = true;
-                if (mCanDrag || mCanScale || mCanRotate) applyMatrix();
+                if (!getImageMatrix().equals(mMatrix)) {
+                    isTransforming = true;
+                }
+
+                if (mCanDrag || mCanScale || mCanRotate) {
+                    applyMatrix();
+                }
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:

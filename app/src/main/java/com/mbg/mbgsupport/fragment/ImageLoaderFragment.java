@@ -20,6 +20,7 @@ import com.mbg.module.ui.image.view.RecyclerImageView;
 import com.mbg.module.ui.image.view.RoundedImageView;
 import com.mbg.module.ui.view.imageview.DraggableImageView;
 import com.mbg.module.ui.view.imageview.TransformativeImageView;
+import com.mbg.module.ui.view.listener.OnImageChangedListener;
 import com.mbg.module.ui.view.listener.OnTriggerDragListener;
 
 public class ImageLoaderFragment extends BaseFragment implements View.OnClickListener{
@@ -50,17 +51,38 @@ public class ImageLoaderFragment extends BaseFragment implements View.OnClickLis
         imgView2.loadImage(uri,options);
 
         TransformativeImageView transformativeImageView=findViewById(R.id.transformative_image_view);
-        DraggableImageView draggableImageView1=findViewById(R.id.draggable_image_view_1);
+        final DraggableImageView draggableImageView1=findViewById(R.id.draggable_image_view_1);
         draggableImageView1.setDragEnable(false);
         draggableImageView1.setCanReplaced(true);
+        draggableImageView1.setImageToken("1");
+        draggableImageView1.setOnImageChangedListener(new OnImageChangedListener() {
+            @Override
+            public void onChanged(String imageToken) {
+                LogUtils.d("imageToken="+imageToken);
+            }
+        });
+        draggableImageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LogUtils.d("imageToken="+draggableImageView1.getImageToken());
+            }
+        });
 
-        DraggableImageView draggableImageView2=findViewById(R.id.draggable_image_view_2);
+        final DraggableImageView draggableImageView2=findViewById(R.id.draggable_image_view_2);
         draggableImageView2.setCanReplaced(true);
         draggableImageView2.setDragEnable(true);
+        draggableImageView2.setImageToken("2");
+        draggableImageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LogUtils.d("imageToken="+draggableImageView2.getImageToken());
+            }
+        });
 
         DraggableImageView draggableImageView3=findViewById(R.id.draggable_image_view_3);
         draggableImageView3.setDragEnable(true);
         draggableImageView3.setCanReplaced(true);
+        draggableImageView3.setImageToken("3");
 
         DraggableImageView draggableImageView4=findViewById(R.id.draggable_image_view_4);
         draggableImageView4.setDragEnable(true);
@@ -70,17 +92,7 @@ public class ImageLoaderFragment extends BaseFragment implements View.OnClickLis
         draggableImageView5.setDragEnable(true);
         draggableImageView5.setCanReplaced(true);
 
-        draggableImageView3.setOnTriggerDragListener(new OnTriggerDragListener() {
-            @Override
-            public void onDrag(MotionEvent event) {
 
-            }
-
-            @Override
-            public void onDragFinish(MotionEvent event) {
-
-            }
-        });
         ImageLoader imageLoader=ImageLoader.getInstance();
         if (imageLoader!=null) {
             imageLoader.displayImage(uri, transformativeImageView);
