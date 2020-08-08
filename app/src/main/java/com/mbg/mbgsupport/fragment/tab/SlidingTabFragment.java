@@ -69,7 +69,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         /** indicator三角形 */
         SlidingTabLayout tabLayout_8 = findViewById( R.id.tl_8);
         /** indicator圆角色块 */
-        SlidingTabLayout tabLayout_9 = findViewById( R.id.tl_9);
+        PageSlidingTabLayout tabLayout_9 = findViewById( R.id.tl_9);
         /** indicator圆角色块 */
         PageSlidingTabLayout tabLayout_10 = findViewById( R.id.tl_10);
 

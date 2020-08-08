@@ -49,7 +49,7 @@ public class ViewPager2Fragment extends BaseFragment {
         //ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getContext(),list);
         MyFragmentStateAdapter fragmentStateAdapter=new MyFragmentStateAdapter(getChildFragmentManager(),getLifecycle(),list);
         viewPager2.setAdapter(fragmentStateAdapter);
-        viewPager2.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        //viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager2.setCurrentItem(2,false);//true 可以看到滑动效果
         //viewPager2.setOffscreenPageLimit(1);
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -58,7 +58,17 @@ public class ViewPager2Fragment extends BaseFragment {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
         });
+
+        AvatarFrameLayout scrollview=findViewById(R.id.scrollView);
+        scrollview.setmViewPager2(viewPager2);
         initData();
+        TextView textView=findViewById(R.id.tv_showmore);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LogUtils.d("zhaooddodddd");
+            }
+        });
     }
 
 
@@ -74,52 +84,6 @@ public class ViewPager2Fragment extends BaseFragment {
     @Override
     public void onStop() {
         super.onStop();
-    }
-
-
-    private class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
-        private List<String> mData;
-        private LayoutInflater mInflater;
-
-
-        private int[] colorArray = new int[]{android.R.color.holo_blue_bright, android.R.color.holo_blue_dark, android.R.color.holo_green_dark, android.R.color.holo_red_dark};
-
-
-        public ViewPagerAdapter(Context context, List<String> data) {
-            this.mInflater = LayoutInflater.from(context);
-            this.mData = data;
-        }
-
-        @NonNull
-        @Override
-        public ViewPagerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ViewHolder(mInflater.inflate(R.layout.item_viewpager_demo, parent, false));
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewPagerAdapter.ViewHolder holder, int position) {
-            String animal = mData.get(position);
-            holder.myTextView.setText(animal);
-            holder.relativeLayout.setBackgroundResource(colorArray[position]);
-            LogUtils.d("BindData:"+animal);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView myTextView;
-            RelativeLayout relativeLayout;
-
-            ViewHolder(View itemView) {
-                super(itemView);
-                myTextView = itemView.findViewById(R.id.tvTitle);
-                relativeLayout = itemView.findViewById(R.id.container);
-            }
-        }
     }
 
     private class MyFragmentStateAdapter extends FragmentStateAdapter{

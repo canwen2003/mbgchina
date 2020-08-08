@@ -98,7 +98,7 @@
                 tl:indicator_color="#eeeeee"
                 tl:indicator_style="TRIANGLE"/>
 
-            <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
+          <!--  <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_9"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -106,9 +106,32 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 tl:indicator_margin_left="2dp"
-                tl:indicator_margin_right="2dp"
+                tl:indicator_margin_right="2dp"-->
                 tl:indicator_style="BLOCK"/>
 
+
+            <com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout
+                android:id="@+id/tl_9"
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                tl:tab_padding="10dp"
+                tl:tab_color="@color/black"
+                tl:indicator_margin_top="0dp"
+                tl:indicator_margin_bottom="0dp"
+                tl:indicator_margin_left="2dp"
+                tl:indicator_margin_right="2dp"
+                tl:tab_margin_top="0dp"
+                tl:tab_margin_bottom="0dp"
+                tl:tab_margin_left="2dp"
+                tl:tab_margin_right="2dp"
+                tl:textSelectColor="@color/white"
+                tl:textUnSelectColor="@color/black"
+                tl:indicator_color="@color/white"
+                tl:indicator_corner_radius="5dp"
+                tl:indicator_style="BLOCK"/>
 
 
             <com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout
