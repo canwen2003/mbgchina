@@ -48,7 +48,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @Override
-    public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                                    @Nullable Bundle savedInstanceState) {
         mRootView=super.onCreateView(inflater,container,savedInstanceState);
         int id = onRequestLayout();
