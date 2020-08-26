@@ -39,6 +39,10 @@ import com.mbg.module.ui.view.layout.tab.widget.MsgView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_BLOCK;
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_NORMAL;
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_TRIANGLE;
+
 /** 滑动TabLayout,对于ViewPager的依赖性强 */
 public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.OnPageChangeListener {
     private Context mContext;
@@ -59,9 +63,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     private Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mTrianglePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Path mTrianglePath = new Path();
-    private static final int STYLE_NORMAL = 0;
-    private static final int STYLE_TRIANGLE = 1;
-    private static final int STYLE_BLOCK = 2;
+
     private int mIndicatorStyle = STYLE_NORMAL;
     /** tab */
     private float mTabPadding;

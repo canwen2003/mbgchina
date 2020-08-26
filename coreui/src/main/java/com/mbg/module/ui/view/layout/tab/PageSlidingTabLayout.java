@@ -29,6 +29,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mbg.module.ui.R;
+import com.mbg.module.ui.view.layout.tab.constant.TabConsts;
 import com.mbg.module.ui.view.layout.tab.listener.OnTabSelectListener;
 import com.mbg.module.ui.view.layout.tab.utils.UnreadMsgUtils;
 import com.mbg.module.ui.view.layout.tab.widget.MsgView;
@@ -37,7 +38,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-    /** 滑动TabLayout,对于ViewPager的依赖性强 */
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_BLOCK;
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_NORMAL;
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_TEXT;
+import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYLE_TRIANGLE;
+
+/** 滑动TabLayout,对于ViewPager的依赖性强 */
     public class PageSlidingTabLayout extends HorizontalScrollView implements ViewPager.OnPageChangeListener {
         private Context mContext;
         private ViewPager mViewPager;
@@ -58,9 +64,6 @@ import java.util.List;
         private Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         private Paint mTrianglePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         private Path mTrianglePath = new Path();
-        private static final int STYLE_NORMAL = 0;
-        private static final int STYLE_TRIANGLE = 1;
-        private static final int STYLE_BLOCK = 2;
         private int mIndicatorStyle = STYLE_NORMAL;
         /** tab */
         private float mTabPadding;
@@ -101,8 +104,13 @@ import java.util.List;
         private static final int TEXT_BOLD_WHEN_SELECT = 1;
         private static final int TEXT_BOLD_BOTH = 2;
         private float mTextSize;
+        private float mTextSelectSize;
+        private int mTabTextAppearance;
+        private int mTabSelectTextAppearance;
         private int mTextSelectColor;
         private int mTextUnSelectColor;
+        private int mTextGravity=TabConsts.TabTextGravity.CENTER;
+
         private int mTextBold;
         private boolean mTextAllCaps;
 
@@ -178,8 +186,14 @@ import java.util.List;
             mDividerPadding = ta.getDimension(R.styleable.PageSlidingTabLayout_divider_padding, dp2px(12));
 
             mTextSize = ta.getDimension(R.styleable.PageSlidingTabLayout_textSize, sp2px(14));
+            mTextSelectSize = ta.getDimension(R.styleable.PageSlidingTabLayout_textSelectSize, mTextSize);
+            mTabTextAppearance=ta.getResourceId(R.styleable.PageSlidingTabLayout_tabTextAppearance,0);
+            mTabSelectTextAppearance =ta.getResourceId(R.styleable.PageSlidingTabLayout_tabSelectTextAppearance,mTabTextAppearance);
+
+
             mTextSelectColor = ta.getColor(R.styleable.PageSlidingTabLayout_textSelectColor, Color.parseColor("#ffffff"));
             mTextUnSelectColor = ta.getColor(R.styleable.PageSlidingTabLayout_textUnSelectColor, Color.parseColor("#AAffffff"));
+            mTextGravity=ta.getInt(R.styleable.PageSlidingTabLayout_textGravity,TabConsts.TabTextGravity.CENTER);
             mTextBold = ta.getInt(R.styleable.PageSlidingTabLayout_textBold, TEXT_BOLD_NONE);
             mTextAllCaps = ta.getBoolean(R.styleable.PageSlidingTabLayout_textAllCaps, false);
 
@@ -282,6 +296,14 @@ import java.util.List;
                     lp.rightMargin=(int) mTabMarginRight;
                     lp.topMargin=(int) mTabMarginTop;
                     lp.bottomMargin=(int) mTabMarginBottom;
+                    if(mTextGravity==TabConsts.TabTextGravity.TOP){
+                        tv_tab_title.setGravity(Gravity.TOP);
+                    }else if (mTextGravity==TabConsts.TabTextGravity.CENTER){
+                        tv_tab_title.setGravity(Gravity.CENTER);
+                    }else {
+                        tv_tab_title.setGravity(Gravity.BOTTOM);
+                    }
+
                     tv_tab_title.setLayoutParams(lp);
                     tv_tab_title.post(new Runnable() {
                         @Override
@@ -335,9 +357,13 @@ import java.util.List;
                 View v = mTabsContainer.getChildAt(i);
                 TextView tv_tab_title =  v.findViewById(R.id.tv_tab_title);
                 if (tv_tab_title != null) {
-                    tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnSelectColor);
-                    tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+                    boolean select= i == mCurrentTab;
+                    tv_tab_title.setTextColor(select ? mTextSelectColor : mTextUnSelectColor);
+                    tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, select?mTextSelectSize:mTextSize);
                     tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
+                    if (mTabTextAppearance>0&&mTabSelectTextAppearance>0){
+                        tv_tab_title.setTextAppearance(getContext(),select?mTabSelectTextAppearance:mTabTextAppearance);
+                    }
 
                     if (mTextAllCaps) {
                         tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
@@ -409,6 +435,12 @@ import java.util.List;
 
                 if (tab_title != null) {
                     tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnSelectColor);
+                    tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, isSelect?mTextSelectSize:mTextSize);
+                    tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
+                    if (mTabTextAppearance>0&&mTabSelectTextAppearance>0){
+                        tab_title.setTextAppearance(getContext(),isSelect?mTabSelectTextAppearance:mTabTextAppearance);
+                    }
+
                     if (mTextBold == TEXT_BOLD_WHEN_SELECT) {
                         tab_title.getPaint().setFakeBoldText(isSelect);
                     }
@@ -586,6 +618,8 @@ import java.util.List;
                     mIndicatorDrawable.setCornerRadius(mIndicatorCornerRadius);
                     mIndicatorDrawable.draw(canvas);
                 }
+            }else if (mIndicatorStyle == STYLE_TEXT){
+
             } else {
                 if (mIndicatorHeight > 0) {
                     mIndicatorDrawable.setColor(mIndicatorColor);

@@ -26,7 +26,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] mTitles = {
             "热门", "iOS", "Android"
-            , "前端", "后端", "设计", "工具资源"
+           /* , "前端", "后端", "设计", "工具资源"*/
     };
    /* private final String[] mTitles = {
             "热门", "Android","iOS","工具资源"
@@ -65,7 +65,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         /** indicator圆 */
         SlidingTabLayout tabLayout_6 = findViewById( R.id.tl_6);
         /** indicator矩形圆角 */
-        final SlidingTabLayout tabLayout_7 = findViewById( R.id.tl_7);
+        final PageSlidingTabLayout tabLayout_7 = findViewById( R.id.tl_7);
         /** indicator三角形 */
         SlidingTabLayout tabLayout_8 = findViewById( R.id.tl_8);
         /** indicator圆角色块 */

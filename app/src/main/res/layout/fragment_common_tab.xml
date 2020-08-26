@@ -95,9 +95,13 @@
             android:background="#57385C"
             tl:iconVisible="false"
             tl:indicator_corner_radius="1.5dp"
+            tl:indicator_style="TEXT"
             tl:indicator_height="3dp"
             tl:indicator_width="10dp"
-            tl:textSize="14sp"/>
+            tl:textSelectColor="#2C97DE"
+            tl:textUnSelectColor="#66340000"
+            tl:textSize="14sp"
+            tl:textSelectSize="28sp"/>
 
         <com.mbg.module.ui.view.layout.tab.CommonTabLayout
             android:id="@+id/tl_7"

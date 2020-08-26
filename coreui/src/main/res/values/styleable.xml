@@ -11,6 +11,15 @@
     <!--按钮文字大小-->
     <attr name="textSize" format="reference|dimension" />
 
+    <!--被选中按钮文字大小-->
+    <attr name="textSelectSize" format="reference|dimension" />
+
+    <!--文字样式-->
+    <attr name="tabTextAppearance" format="reference" />
+
+    <!--被选中文字样式-->
+    <attr name="tabSelectTextAppearance" format="reference" />
+
     <!--边框宽度-->
     <attr name="border_width" format="dimension" />
 
@@ -306,6 +315,7 @@
         <enum name="NORMAL" value="0"/>
         <enum name="TRIANGLE" value="1"/>
         <enum name="BLOCK" value="2"/>
+        <enum name="TEXT" value="3"/><!--纯文本样式-->
     </attr>
     <!-- 设置显示器长度与title一样长,只有在STYLE_NORMAL并且indicatorWidth小于零有效-->
     <attr name="indicator_width_equal_title" format="boolean"/>
@@ -363,6 +373,14 @@
         <enum name="SELECT" value="1"/>
         <enum name="BOTH" value="2"/>
     </attr>
+
+    <!-- 设置Tab Text gravity-->
+    <attr name="textGravity" format="enum">
+        <enum name="top" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="bottom" value="2"/>
+    </attr>
+
     <!-- 设置字体全大写 -->
     <attr name="textAllCaps" format="boolean"/>
 
@@ -408,8 +426,12 @@
 
         <!-- title -->
         <attr name="textSize"/>
+        <attr name="textSelectSize"/>
+        <attr name="tabTextAppearance"/>
+        <attr name="tabSelectTextAppearance"/>
         <attr name="textSelectColor"/>
         <attr name="textUnSelectColor"/>
+        <attr name="textGravity"/>
         <attr name="textBold"/>
         <attr name="textAllCaps"/>
 
@@ -456,8 +478,12 @@
 
         <!-- title -->
         <attr name="textSize"/>
+        <attr name="textSelectSize"/>
+        <attr name="tabTextAppearance"/>
+        <attr name="tabSelectTextAppearance"/>
         <attr name="textSelectColor"/>
         <attr name="textUnSelectColor"/>
+        <attr name="textGravity"/>
         <attr name="textBold"/>
         <attr name="textAllCaps"/>
 
@@ -501,8 +527,12 @@
 
         <!-- title -->
         <attr name="textSize"/>
+        <attr name="textSelectSize"/>
+        <attr name="tabTextAppearance"/>
+        <attr name="tabSelectTextAppearance"/>
         <attr name="textSelectColor"/>
         <attr name="textUnSelectColor"/>
+        <attr name="textGravity"/>
         <attr name="textBold"/>
         <attr name="textAllCaps"/>
 
@@ -555,9 +585,13 @@
 
         <!-- title -->
         <attr name="textSize"/>
+        <attr name="textSelectSize"/>
+        <attr name="tabTextAppearance"/>
+        <attr name="tabSelectTextAppearance"/>
         <attr name="textSelectColor"/>
         <attr name="textUnSelectColor"/>
         <attr name="textBold"/>
+        <attr name="textGravity"/>
         <attr name="textAllCaps"/>
 
         <attr name="bar_color" format="color"/>
