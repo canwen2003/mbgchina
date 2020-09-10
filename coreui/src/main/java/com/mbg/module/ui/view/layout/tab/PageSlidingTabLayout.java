@@ -107,9 +107,11 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
         private float mTextSelectSize;
         private int mTabTextAppearance;
         private int mTabSelectTextAppearance;
+        private int mTextGravity=TabConsts.TabTextGravity.CENTER;
+
         private int mTextSelectColor;
         private int mTextUnSelectColor;
-        private int mTextGravity=TabConsts.TabTextGravity.CENTER;
+
 
         private int mTextBold;
         private boolean mTextAllCaps;
@@ -189,7 +191,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
             mTextSelectSize = ta.getDimension(R.styleable.PageSlidingTabLayout_textSelectSize, mTextSize);
             mTabTextAppearance=ta.getResourceId(R.styleable.PageSlidingTabLayout_tabTextAppearance,0);
             mTabSelectTextAppearance =ta.getResourceId(R.styleable.PageSlidingTabLayout_tabSelectTextAppearance,mTabTextAppearance);
-
+            mTextGravity=ta.getInt(R.styleable.PageSlidingTabLayout_textGravity,TabConsts.TabTextGravity.CENTER);
 
             mTextSelectColor = ta.getColor(R.styleable.PageSlidingTabLayout_textSelectColor, Color.parseColor("#ffffff"));
             mTextUnSelectColor = ta.getColor(R.styleable.PageSlidingTabLayout_textUnSelectColor, Color.parseColor("#AAffffff"));

@@ -20,6 +20,13 @@
     <!--被选中文字样式-->
     <attr name="tabSelectTextAppearance" format="reference" />
 
+    <!-- 设置Tab Text gravity-->
+    <attr name="textGravity" format="enum">
+        <enum name="top" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="bottom" value="2"/>
+    </attr>
+
     <!--边框宽度-->
     <attr name="border_width" format="dimension" />
 
@@ -374,12 +381,7 @@
         <enum name="BOTH" value="2"/>
     </attr>
 
-    <!-- 设置Tab Text gravity-->
-    <attr name="textGravity" format="enum">
-        <enum name="top" value="0"/>
-        <enum name="center" value="1"/>
-        <enum name="bottom" value="2"/>
-    </attr>
+
 
     <!-- 设置字体全大写 -->
     <attr name="textAllCaps" format="boolean"/>
@@ -588,10 +590,10 @@
         <attr name="textSelectSize"/>
         <attr name="tabTextAppearance"/>
         <attr name="tabSelectTextAppearance"/>
+        <attr name="textGravity"/>
         <attr name="textSelectColor"/>
         <attr name="textUnSelectColor"/>
         <attr name="textBold"/>
-        <attr name="textGravity"/>
         <attr name="textAllCaps"/>
 
         <attr name="bar_color" format="color"/>
