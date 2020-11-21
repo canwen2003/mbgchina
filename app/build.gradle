@@ -27,6 +27,11 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
+    compileOptions {
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -45,6 +50,9 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.4.0'
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
     implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation project(path:':common')
     implementation project(path:':coreui')
