@@ -2,11 +2,11 @@ package com.mbg.mbgsupport;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mbg.mbgsupport.fragment.AnimsFragment;
@@ -230,6 +230,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 AnimsFragment.show(context);
+            }
+        });
+
+        findViewById(R.id.btn_kotlin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context,KotlinMain.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
 
