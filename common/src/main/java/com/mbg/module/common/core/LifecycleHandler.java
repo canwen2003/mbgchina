@@ -48,6 +48,7 @@ public final class LifecycleHandler extends Handler implements LifecycleObserver
         removeCallbacksAndMessages(null);
         if (mLifecycleOwner!=null) {
             mLifecycleOwner.getLifecycle().removeObserver(this);
+            mLifecycleOwner=null;
         }
     }
 

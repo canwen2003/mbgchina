@@ -8,6 +8,11 @@ import android.os.Message;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
+
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.locks.Lock;
@@ -29,13 +34,29 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by Dmytro Voronkevych on 17/06/2014.
  */
 @SuppressWarnings("unused")
-public class WeakHandler {
+public class WeakHandler implements LifecycleObserver {
     private final Handler.Callback mCallback; // hard reference to Callback. We need to keep callback in memory
     private final ExecHandler mExec;
     private Lock mLock = new ReentrantLock();
     @SuppressWarnings("ConstantConditions")
     @VisibleForTesting
     private final ChainedRef mRunnables = new ChainedRef(mLock, null);
+    private LifecycleOwner mLifecycleOwner;
+
+    private void addObserver() {
+        if (mLifecycleOwner!=null) {
+            mLifecycleOwner.getLifecycle().addObserver(this);
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    private void onDestroy() {
+        removeCallbacksAndMessages(null);
+        if (mLifecycleOwner!=null) {
+            mLifecycleOwner.getLifecycle().removeObserver(this);
+            mLifecycleOwner=null;
+        }
+    }
 
     /**
      * Default constructor associates this handler with the {@link Looper} for the
@@ -47,6 +68,20 @@ public class WeakHandler {
     public WeakHandler() {
         mCallback = null;
         mExec = new ExecHandler();
+    }
+
+    /**
+     * Default constructor associates this handler with the {@link Looper} for the
+     * current thread.
+     *
+     * If this thread does not have a looper, this handler won't be able to receive messages
+     * so an exception is thrown.
+     */
+    public WeakHandler(final LifecycleOwner lifecycleOwner) {
+        mCallback = null;
+        mExec = new ExecHandler();
+        this.mLifecycleOwner=lifecycleOwner;
+        addObserver();
     }
 
     /**

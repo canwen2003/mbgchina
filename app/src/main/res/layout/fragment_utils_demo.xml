@@ -54,13 +54,34 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change to Chinese"/>
+            android:text="更改为 Chinese"/>
         <Button
             android:id="@+id/btn_test6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change to English"/>
+            android:text="更改为 English"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_weak_handle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="防止内存泄漏的Handle "/>
+        <Button
+            android:id="@+id/btn_life_handle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="防止带生命周期的Handle "/>
     </LinearLayout>
 
     <LinearLayout

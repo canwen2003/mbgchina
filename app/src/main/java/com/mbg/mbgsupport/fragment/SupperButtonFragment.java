@@ -12,7 +12,7 @@ import com.mbg.module.ui.fragment.BaseFragment;
 
 public class SupperButtonFragment extends BaseFragment{
 
-    private WeakHandler weakHandler=new WeakHandler();
+    private WeakHandler weakHandler=new WeakHandler(this);
     private LifecycleHandler lifecycleHandler=new LifecycleHandler(this);
 
     public static void show(Context context){

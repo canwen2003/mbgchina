@@ -17,6 +17,8 @@ import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.router.service.IBaseService;
 import com.mbg.mbgsupport.router.service.ServiceKey;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
+import com.mbg.module.common.core.LifecycleHandler;
+import com.mbg.module.common.core.WeakHandler;
 import com.mbg.module.common.core.net.manager.HttpManager;
 import com.mbg.module.common.core.net.tool.HttpUtils;
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
@@ -51,6 +53,11 @@ import java.util.TreeSet;
 public class UtilsDemoFragment extends BaseFragment implements View.OnClickListener{
     private ImageView mShowImageView;
     private LoadingStateViewModel mLoadingStateViewModel;
+    private WeakHandler weakHandler=new WeakHandler(this);
+    private LifecycleHandler lifecycleHandler=new LifecycleHandler(this);
+    private TextView weakTextView;
+    private TextView lifeTextView;
+
     public static void show(Context context){
         TerminalActivity.show(context, UtilsDemoFragment.class,null);
     }
@@ -114,6 +121,11 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         findViewById(R.id.btn_test7).setOnClickListener(this);
         findViewById(R.id.btn_test8).setOnClickListener(this);
         findViewById(R.id.btn_test9).setOnClickListener(this);
+
+        weakTextView=findViewById(R.id.btn_weak_handle);
+        weakTextView.setOnClickListener(this);
+        lifeTextView=findViewById(R.id.btn_life_handle);
+        lifeTextView.setOnClickListener(this);
 
         final TextView inputRoot=findViewById(R.id.tv_test_input);
 
@@ -277,6 +289,26 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
             case R.id.btn_test9:
                 onTest9();
                 break;
+            case R.id.btn_weak_handle:
+                for (int i=0;i<1000;i++) {
+                    weakHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            weakTextView.setText("我3秒前被点击了");
+                            weakTextView.setTextColor(Color.GREEN);
+                        }
+                    }, 10000);
+                }
+                break;
+            case R.id.btn_life_handle:
+                lifecycleHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lifeTextView.setText("我3秒前被点击了");
+                        lifeTextView.setTextColor(Color.RED);
+                    }
+                },3000);
+                break;
         }
 
     }
@@ -374,4 +406,10 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        weakTextView=null;
+        lifeTextView=null;
+    }
 }
