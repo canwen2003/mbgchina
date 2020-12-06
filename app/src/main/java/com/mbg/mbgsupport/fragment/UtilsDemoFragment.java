@@ -2,8 +2,6 @@ package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,6 +47,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.concurrent.CountDownLatch;
 
 public class UtilsDemoFragment extends BaseFragment implements View.OnClickListener{
     private ImageView mShowImageView;
@@ -57,6 +56,8 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     private LifecycleHandler lifecycleHandler=new LifecycleHandler(this);
     private TextView weakTextView;
     private TextView lifeTextView;
+    private CountDownLatch countDownLatch;
+
 
     public static void show(Context context){
         TerminalActivity.show(context, UtilsDemoFragment.class,null);
@@ -68,6 +69,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     protected void initView() {
+        countDownLatch=new CountDownLatch(2);
         PermissionUtils.checkStoragePermissson(getActivity(), new PermissionUtils.PermissionCallbacks() {
             @Override
             public void onPermissionsGranted(int requestCodes, List<String> perms) {
@@ -192,6 +194,38 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
                 mLoadingStateViewModel.setLoadingSate(LoadingStateViewModel.LoadingState.FINISH);
             }
         },8000);
+
+        ThreadUtils.postInThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(800);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                countDownLatch.countDown();
+            }
+        });
+
+        ThreadUtils.postInThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(800);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        ToastUtils.show("countDownLatch.wait() 在主线程返回");
+
     }
 
     protected void  onDataLoadingStart(){
