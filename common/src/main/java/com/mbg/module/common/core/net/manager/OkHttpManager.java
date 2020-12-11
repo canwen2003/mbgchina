@@ -14,7 +14,7 @@ import okhttp3.Request;
  */
 public class OkHttpManager {
     private static volatile OkHttpManager instance;
-    private OkHttpClient mOkHttpClient;
+    private final OkHttpClient mOkHttpClient;
 
     private OkHttpManager(){
         mOkHttpClient = new OkHttpClient.Builder()
