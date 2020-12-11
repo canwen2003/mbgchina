@@ -289,7 +289,7 @@
 
 
     <!-- 圆角矩形背景色 -->
-    <attr name="backgroundColor"/>
+    <!--<attr name="backgroundColor"/>-->
     <!-- 圆角弧度,单位dp-->
     <attr name="cornerRadius" format="dimension"/>
 
