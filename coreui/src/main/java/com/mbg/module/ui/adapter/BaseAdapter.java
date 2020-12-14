@@ -12,10 +12,10 @@ import com.mbg.module.common.core.listener.OnItemClickListener;
 
 import java.util.List;
 
-
+@SuppressWarnings("unused")
 public class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> implements View.OnClickListener, View.OnLongClickListener {
-    private int mLayoutId;
-    private List<T> mList;
+    private final int mLayoutId;
+    private final List<T> mList;
     protected int mSelectIndex = -1;//用来标识选择的item
     protected int mDownloadIndex = -1;//用来标记选择需要下载的item
     protected OnItemClickListener mOnItemClickListener; //每个Item的点击事件

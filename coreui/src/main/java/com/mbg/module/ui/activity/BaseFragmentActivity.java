@@ -16,7 +16,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
 
     protected static final String ARG_FRAGMENT_CLASS_NAME="arg_fragment_class_name";
     protected static final String ARG_FRAGMENT_ARGS="arg_fragment_args";
-    private ArrayDeque<BaseFragment> mFragments = new ArrayDeque<>();
+    private final ArrayDeque<BaseFragment> mFragments = new ArrayDeque<>();
 
 
     @Override

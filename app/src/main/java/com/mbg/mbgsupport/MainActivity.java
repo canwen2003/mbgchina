@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.mbg.mbgsupport.databinding.ActivityMainBinding;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.ShimmerFragment;
@@ -40,16 +42,17 @@ import com.mbg.module.ui.view.layout.shimmer.ShimmerLayout;
 public class MainActivity extends BaseActivity {
 
     private Context context;
-
+    private ActivityMainBinding mViewBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mViewBinding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mViewBinding.getRoot());
         //setStatusBarColor(getResources().getColor(R.color.design_default_color_primary),0);
         context=this;
-        ;
+
         initView();
-        ViewModelProviders.of(this).get("LoadingState", LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
+        new ViewModelProvider(this).get(LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
             @Override
             public void onChanged(LoadingStateViewModel.LoadingState loadingState) {
                 if (loadingState!=null){
@@ -75,97 +78,98 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initView(){
-        findViewById(R.id.btn_drag_view).setOnClickListener(new View.OnClickListener() {
+
+        mViewBinding.btnDragView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DragFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_imageloader).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnImageloader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageLoaderFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_snapshot).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSnapshot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SnapShotFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_text_banner).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnTextBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TextBannerFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_utils).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnUtils.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UtilsDemoFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_supper).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSupper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SupperButtonFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_bubble).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnBubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BubbleViewFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_pudding).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnPudding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PuddingFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_big_image).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnBigImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BigImageLoaderFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_slid).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSlid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SlidingFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_viewpager).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnViewpager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ViewPager2Fragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_timeline).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnTimeline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimeLineFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_flowlayout).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnFlowlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FlowLayoutFragment.show(context);
             }
         });
-        findViewById(R.id.btn_system_flowlayout).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSystemFlowlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SystemFlowLayoutFragment.show(context);
@@ -179,61 +183,61 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        findViewById(R.id.btn_segment).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSegment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SegmentTabFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_sliding).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSliding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SlidingTabFragment.show(context);
             }
         });
-        findViewById(R.id.btn_app_bar).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnAppBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppBarLayoutFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_seek_bar).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSeekBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SeekBarFragment.show(context);
             }
         });
-        findViewById(R.id.btn_shape).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnShape.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShapeFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_shimmer).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnShimmer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShimmerFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_skeleton).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnSkeleton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SkeletonFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_lottie).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnLottie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AnimsFragment.show(context);
             }
         });
 
-        findViewById(R.id.btn_kotlin).setOnClickListener(new View.OnClickListener() {
+        mViewBinding.btnKotlin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context,KotlinMain.class);

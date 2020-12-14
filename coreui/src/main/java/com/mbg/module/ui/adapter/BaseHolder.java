@@ -18,8 +18,8 @@ import com.mbg.module.ui.image.cache.engine.imageloader.ImageLoader;
  * 创建RecyclerView.ViewHolder基础 holder类，用来进行数据缓存和控件操作
  */
 public class BaseHolder extends RecyclerView.ViewHolder{
-    private SparseArray<View> mViews=new SparseArray<>(24);
-    private LoadOptions mLoadOptions;
+    private final SparseArray<View> mViews=new SparseArray<>(24);
+    private final LoadOptions mLoadOptions;
 
     public BaseHolder(View itemView) {
         super(itemView);
@@ -29,6 +29,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
 
 
     //根据控件ID获取控件对象
+    @SuppressWarnings("unchecked")
     public <T> T getView(Integer viewId){
         View view=mViews.get(viewId);
         if (view==null){
@@ -52,6 +53,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
     }
 
     //根据TextView的ID设置文本文字颜色
+    @SuppressWarnings("unused")
     public BaseHolder setTextColor(Integer viewId, int color){
         TextView view=getView(viewId);
 
@@ -85,6 +87,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
     }
 
     //根据控件ID设置图形控件透明度
+    @SuppressWarnings("unused")
     public BaseHolder setImageAlpha(Integer viewId, int alpha){
         ImageView view=getView(viewId);
 
@@ -95,6 +98,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
     }
 
     //设置ImageView的图像
+    @SuppressWarnings("unused")
     public BaseHolder setImageResource(Integer viewId, Integer resId){
         ImageView view=getView(viewId);
 
@@ -106,6 +110,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
     }
 
     //通过异步方式设置ImageView的图像
+    @SuppressWarnings("unused")
     public BaseHolder setImageResource(Integer viewId, String imageUrl, Integer defaultResId){
         final ImageView view=getView(viewId);
         ImageLoader imageLoader=ImageLoader.getInstance();
@@ -120,6 +125,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
 
 
    //设置RecyclerView的Item的点击和长按事件
+   @SuppressWarnings("unused")
     public BaseHolder setItemOnClickListener(Integer viewId, final OnItemClickListener listener){
         View view=getView(viewId);
 
@@ -148,6 +154,7 @@ public class BaseHolder extends RecyclerView.ViewHolder{
     }
 
     //设置RecyclerView的Itemd的子控件的点击事件
+    @SuppressWarnings("unused")
     public BaseHolder setSubItemOnClickListener(Integer viewId, View.OnClickListener listener){
         View view=getView(viewId);
 

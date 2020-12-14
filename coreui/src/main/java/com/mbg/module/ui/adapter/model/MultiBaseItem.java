@@ -28,10 +28,12 @@ public class MultiBaseItem implements MultiItemEntity {
         return itemType;
     }
 
+    @SuppressWarnings("unused")
     public int getSpanSize() {
         return spanSize;
     }
 
+    @SuppressWarnings("unused")
     public void setTypeSpanSize(int itemType,int spanSize){
         this.itemType=itemType;
         this.spanSize=spanSize;
