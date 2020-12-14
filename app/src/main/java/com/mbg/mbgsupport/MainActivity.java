@@ -8,7 +8,6 @@ import android.view.View;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
@@ -36,38 +35,11 @@ import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.LogUtils;
-import com.mbg.module.ui.activity.BaseActivity;
-import com.mbg.module.ui.view.layout.shimmer.ShimmerLayout;
+import com.mbg.module.ui.activity.BaseViewBindingActivity;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
 
     private Context context;
-    private ActivityMainBinding mViewBinding;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mViewBinding=ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(mViewBinding.getRoot());
-        //setStatusBarColor(getResources().getColor(R.color.design_default_color_primary),0);
-        context=this;
-
-        initView();
-        new ViewModelProvider(this).get(LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
-            @Override
-            public void onChanged(LoadingStateViewModel.LoadingState loadingState) {
-                if (loadingState!=null){
-                   switch (loadingState){
-                       case START:
-                           onDataLoadingStart();
-                           break;
-                       case FINISH:
-                           onDataLoadingFinish();
-                           break;
-                   }
-                }
-            }
-        });
-    }
 
     protected void  onDataLoadingStart(){
         LogUtils.d("LoadingStateViewModel:onDataLoadingStart");
@@ -77,7 +49,24 @@ public class MainActivity extends BaseActivity {
         LogUtils.d("LoadingStateViewModel:onDataLoadingFinish");
     }
 
-    private void initView(){
+    @Override
+    public void initView(){
+        context=this;
+        new ViewModelProvider(this).get(LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
+            @Override
+            public void onChanged(LoadingStateViewModel.LoadingState loadingState) {
+                if (loadingState!=null){
+                    switch (loadingState){
+                        case START:
+                            onDataLoadingStart();
+                            break;
+                        case FINISH:
+                            onDataLoadingFinish();
+                            break;
+                    }
+                }
+            }
+        });
 
         mViewBinding.btnDragView.setOnClickListener(new View.OnClickListener() {
             @Override
