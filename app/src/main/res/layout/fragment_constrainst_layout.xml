@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_6596ff">
+
+    <!--链式排列开始-->
+    <TextView
+        android:id="@+id/tv_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第一个：链式"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:background="@color/amber_100"
+        app:layout_constraintRight_toLeftOf="@id/tv_second"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/amber_100"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="第二个：链式"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_first"
+        app:layout_constraintRight_toLeftOf="@id/tv_third"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第三个：链式"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:background="@color/amber_100"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_second"
+        app:layout_constraintRight_toRightOf="parent" />
+    <!--链式排列结束-->
+
+    <!--链式排列开始-->
+    <TextView
+        android:id="@+id/tv_0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="水平权重链"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:background="@color/color_f7f7f7"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toLeftOf="@id/tv_1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintTop_toBottomOf="@id/tv_first"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_f7f7f7"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="水平权重链"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_0"
+        app:layout_constraintRight_toLeftOf="@id/tv_2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintTop_toBottomOf="@id/tv_second"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="水平权重链"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:background="@color/color_f7f7f7"
+        app:layout_constraintLeft_toRightOf="@id/tv_1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintTop_toBottomOf="@id/tv_third"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+    <!--链式排列结束-->
+
+
+
+    <!--水平居中开始-->
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="水平居中加偏移1/3"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:background="@color/color_default_shadow"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_0"
+        app:layout_constraintHorizontal_bias="0.3"/>
+    <!--水平居中结束-->
+
+    <!--宽高比实现正方形开始-->
+    <TextView
+        android:id="@+id/tv_fourth"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_3"
+        android:background="@color/color_14c7de"
+        android:text="第四个:宽高比实现正方形"/>
+    <!--宽高比实现正方形结束-->
+
+    <!--窗口居中开始-->
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="窗口居中"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:background="@color/color_default_shadow"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <!--窗口居中结束-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
