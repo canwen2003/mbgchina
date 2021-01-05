@@ -60,14 +60,13 @@ public class Choco extends FrameLayout {
     private ViewGroup mRootBody;
 
 
-    private ObjectAnimator animEnter;
-    private TimeInterpolator animEnterInterceptor = new OvershootInterpolator();
+    private final TimeInterpolator animEnterInterceptor = new OvershootInterpolator();
     private boolean enableIconPulse = true;
 
     public boolean enableInfiniteDuration = false;
     private boolean enableProgress = false;
     private boolean enabledVibration = false;
-    private List<Button> buttons = new ArrayList<>();
+    private final List<Button> buttons = new ArrayList<>();
 
     private boolean onlyOnce = true;
     public OnShow onShow;
@@ -149,7 +148,7 @@ public class Choco extends FrameLayout {
 
         if (onlyOnce) {
             onlyOnce = false;
-            animEnter = ObjectAnimator.ofFloat(this, "translationY", -this.getMeasuredHeight(), -80F);
+            ObjectAnimator animEnter = ObjectAnimator.ofFloat(this, "translationY", -this.getMeasuredHeight(), -80F);
             animEnter.setInterpolator(animEnterInterceptor);
             animEnter.setDuration(ANIMATION_DURATION);
             animEnter.start();

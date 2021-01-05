@@ -36,7 +36,7 @@ public class Pudding implements LifecycleObserver {
 
 
     // each Activity hold itself pudding list
-    private static ConcurrentHashMap<String, Pudding> puddingMapX= new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Pudding> puddingMapX= new ConcurrentHashMap<>();
 
 
     // after create

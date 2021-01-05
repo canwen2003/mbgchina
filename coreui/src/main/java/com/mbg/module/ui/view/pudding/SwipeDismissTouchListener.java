@@ -16,8 +16,8 @@ import com.mbg.module.common.util.TypeUtils;
 import com.mbg.module.ui.view.listener.OnAnimatorListener;
 
 public class SwipeDismissTouchListener implements View.OnTouchListener {
-        private View mView;
-        private DismissCallbacks mCallbacks;
+        private final View mView;
+        private final DismissCallbacks mCallbacks;
 
         // Cached ViewConfiguration and system-wide constant values
         private int mSlop;
