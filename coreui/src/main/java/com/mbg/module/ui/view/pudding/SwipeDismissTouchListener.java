@@ -143,7 +143,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 
                         // Cancel listview's touch
                         MotionEvent cancelEvent = MotionEvent.obtain(motionEvent);
-                        cancelEvent.setAction(MotionEvent.ACTION_CANCEL|(motionEvent.getAction() << MotionEvent.ACTION_POINTER_INDEX_SHIFT));
+                        cancelEvent.setAction(MotionEvent.ACTION_CANCEL|(motionEvent.getActionIndex() << MotionEvent.ACTION_POINTER_INDEX_SHIFT));
                         mView.onTouchEvent(cancelEvent);
                         cancelEvent.recycle();
                     }

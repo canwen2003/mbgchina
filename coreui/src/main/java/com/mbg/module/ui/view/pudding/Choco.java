@@ -155,6 +155,11 @@ public class Choco extends FrameLayout {
         }
     }
 
+    @Override
+    public void setOnClickListener(OnClickListener onClickListener){
+        mRootBody.setOnClickListener(onClickListener);
+    }
+
     public void onShow( OnShow onShow) {
         this.onShow = onShow;
     }
@@ -452,7 +457,7 @@ public class Choco extends FrameLayout {
      * Set whether to enable swipe to dismiss or not
      */
     public void enableSwipeToDismiss() {
-        setOnTouchListener(new SwipeDismissTouchListener(this, new SwipeDismissTouchListener.DismissCallbacks() {
+        mRootBody.setOnTouchListener(new SwipeDismissTouchListener(mRootBody, new SwipeDismissTouchListener.DismissCallbacks() {
             @Override
             public boolean canDismiss() {
                 return true;
