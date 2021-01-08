@@ -72,7 +72,6 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
             case MotionEvent.ACTION_UP:
                 deltaX = motionEvent.getRawX() - mDownX;
                 mVelocityTracker.addMovement(motionEvent);
-                mVelocityTracker.addMovement(motionEvent);
                 mVelocityTracker.computeCurrentVelocity(1000);
                 float velocityX = mVelocityTracker.getXVelocity();
                 float absVelocityX = Math.abs(velocityX);
