@@ -3,6 +3,8 @@ package com.mbg.mbgsupport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 
@@ -37,6 +39,9 @@ import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
 
@@ -242,5 +247,35 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 ConstraintLayoutFragment.show(context);
             }
         });
+
+       LogUtils.d("位置："+getAddress(39.898566,116.464244));
+
+    }
+
+    public String getAddress(double latitude, double longitude) {
+        String cityName = "";
+        List<Address> addList = null;
+        List<Address> addressList = null;
+        Geocoder ge = new Geocoder(context);
+        try {
+            addList = ge.getFromLocation(latitude, longitude, 40);//可用
+            addressList=ge.getFromLocationName("天安门",40);//基本查询不到，不好用
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addList != null && addList.size() > 0) {
+            for (int i = 0; i < addList.size(); i++) {
+                Address ad = addList.get(i);
+                cityName += ad.getCountryName() + "," + ad.getLocality()+","+ad.getFeatureName();
+            }
+        }
+
+        if (addressList != null && addressList.size() > 0) {
+            for (int i = 0; i < addressList.size(); i++) {
+                Address ad = addressList.get(i);
+                cityName += ad.getCountryName() + "," + ad.getLocality()+","+ad.getFeatureName();
+            }
+        }
+        return cityName;
     }
 }
