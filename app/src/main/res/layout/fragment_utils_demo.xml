@@ -85,6 +85,27 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_show_global"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Show Global "/>
+        <Button
+            android:id="@+id/btn_hide_global"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hide Global"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/ll_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

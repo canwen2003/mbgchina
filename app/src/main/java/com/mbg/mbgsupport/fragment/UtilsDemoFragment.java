@@ -57,6 +57,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     private TextView weakTextView;
     private TextView lifeTextView;
     private CountDownLatch countDownLatch;
+    private View mGlobalView;
 
 
     public static void show(Context context){
@@ -123,6 +124,9 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         findViewById(R.id.btn_test7).setOnClickListener(this);
         findViewById(R.id.btn_test8).setOnClickListener(this);
         findViewById(R.id.btn_test9).setOnClickListener(this);
+        findViewById(R.id.btn_show_global).setOnClickListener(this);
+        findViewById(R.id.btn_hide_global).setOnClickListener(this);
+        mGlobalView=View.inflate(getActivity(),R.layout.view_global_demo,null);
 
         weakTextView=findViewById(R.id.btn_weak_handle);
         weakTextView.setOnClickListener(this);
@@ -342,6 +346,17 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
                         lifeTextView.setTextColor(Color.RED);
                     }
                 },3000);
+                break;
+            case R.id.btn_show_global:
+                UiUtils.showGlobal(getActivity(), mGlobalView, R.id.view_global, 500, new UiUtils.ViewCallback() {
+                    @Override
+                    public boolean onView(View view) {
+                        return true;//返回true,表示不重新加入
+                    }
+                });
+                break;
+            case R.id.btn_hide_global:
+                UiUtils.hideGlobal(getActivity(),R.id.view_global,500);
                 break;
         }
 
