@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Bundle;
+import android.os.Looper;
+import android.util.Printer;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
@@ -38,13 +39,13 @@ import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.LogUtils;
+import com.mbg.module.common.util.ThreadUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
-
     private Context context;
 
     protected void  onDataLoadingStart(){
@@ -250,7 +251,50 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
 
        LogUtils.d("位置："+getAddress(39.898566,116.464244));
 
+
+        Looper.getMainLooper().setMessageLogging(new Printer() {
+            private static final String START = ">>>>> Dispatching";
+            private static final String END = "<<<<< Finished";
+
+            @Override
+            public void println(String x) {
+                if (x==null) {
+                    return;
+                }
+
+                if (x.startsWith(START)){
+                    mStartOfMsg=System.currentTimeMillis();
+                }
+
+                if (x.startsWith(END)){
+                    long subTime=System.currentTimeMillis()-mStartOfMsg;
+                    if (subTime>=160) {
+                        LogUtils.d("smooth = " + (System.currentTimeMillis() - mStartOfMsg));
+                        LogUtils.d("smooth = " + x);
+                    }
+                }
+            }
+        });
+
+        ThreadUtils.postInUIThreadDelayed(new Runnable() {
+            int Loop=1000;
+            @Override
+            public void run() {
+                while (Loop>0){
+                    try {
+                        Thread.sleep(10);
+                        Loop--;
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        },2000);
+
     }
+    private long mStartOfMsg=0;
+
 
     public String getAddress(double latitude, double longitude) {
         String cityName = "";
