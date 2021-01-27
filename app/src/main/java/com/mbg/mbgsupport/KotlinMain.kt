@@ -1,7 +1,7 @@
 package com.mbg.mbgsupport
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.mbg.module.common.util.LogUtils
 import com.mbg.module.common.util.ToastUtils
 import kotlinx.android.synthetic.main.activity_kotlin_main.*

@@ -276,21 +276,6 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
             }
         });
 
-        ThreadUtils.postInUIThreadDelayed(new Runnable() {
-            int Loop=1000;
-            @Override
-            public void run() {
-                while (Loop>0){
-                    try {
-                        Thread.sleep(10);
-                        Loop--;
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        },2000);
 
     }
     private long mStartOfMsg=0;

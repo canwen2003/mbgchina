@@ -3,9 +3,12 @@ package com.mbg.mbgsupport.fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -38,6 +41,8 @@ import com.mbg.module.common.util.UriUtils;
 import com.mbg.module.common.util.consts.PermissionConsts;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
+import com.mbg.module.ui.view.inflate.AsyncLayoutInflatePlus;
+import com.mbg.module.ui.view.inflate.OnInflateFinishedListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -56,8 +61,8 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     private LifecycleHandler lifecycleHandler=new LifecycleHandler(this);
     private TextView weakTextView;
     private TextView lifeTextView;
-    private CountDownLatch countDownLatch;
     private View mGlobalView;
+    private ViewGroup mRootView;
 
 
     public static void show(Context context){
@@ -70,7 +75,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     protected void initView() {
-        countDownLatch=new CountDownLatch(2);
+        mRootView=findViewById(R.id.root_view);
         PermissionUtils.checkStoragePermissson(getActivity(), new PermissionUtils.PermissionCallbacks() {
             @Override
             public void onPermissionsGranted(int requestCodes, List<String> perms) {
@@ -182,7 +187,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
                 if (loadingState!=null){
                     switch (loadingState){
                         case START:
-                            onDataLoadingStart();
+                            //onDataLoadingStart();
                             break;
                         case FINISH:
                             onDataLoadingFinish();
@@ -199,40 +204,18 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
             }
         },8000);
 
-        ThreadUtils.postInThread(new Runnable() {
+
+        new AsyncLayoutInflatePlus(getActivity()).inflate(R.layout.view_async_load, null, new OnInflateFinishedListener() {
             @Override
-            public void run() {
-                try {
-                    Thread.sleep(800);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                countDownLatch.countDown();
+            public void onInflateFinished(@NonNull View view, int resId, @Nullable ViewGroup parent) {
+                mRootView.addView(view);
             }
         });
-
-        ThreadUtils.postInThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(800);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                countDownLatch.countDown();
-            }
-        });
-
-        try {
-            countDownLatch.await();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        ToastUtils.show("countDownLatch.wait() 在主线程返回");
 
     }
 
     protected void  onDataLoadingStart(){
+
         HashSet hs = new HashSet();
         long ks = System.currentTimeMillis();
         for (int i=1;i<99999;i++)

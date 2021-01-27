@@ -109,6 +109,16 @@ public class ThreadPoolManager {
     }
 
     /**
+     * 在多线程池中执行
+     * @param runnable 执行的Runnable对象
+     */
+    public void start(Runnable runnable){
+        if (runnable!=null && mExecutorService != null){
+            mExecutorService.execute(runnable);
+        }
+    }
+
+    /**
      *
      * 埋点信息线程池，用于埋点信息上传
      * @param runnable 执行的Runnable对象
