@@ -1,6 +1,14 @@
 package com.mbg.module.common.util;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -286,6 +294,38 @@ public class ResourceUtils {
     public static List<String> readRaw2List(@RawRes final int resId,
                                             final String charsetName) {
         return is2List(AppUtils.getResources().openRawResource(resId), charsetName);
+    }
+
+    @Nullable
+    public static Drawable getDrawable(Context context, String resName) {
+        Resources resources = context.getResources();
+        if(resName.startsWith("#")){
+            return new ColorDrawable(Color.parseColor(resName));
+        }
+        int id = resources.getIdentifier(resName, "drawable", context.getPackageName());
+        if(id == 0){
+            id = resources.getIdentifier(resName, "mipmap", context.getPackageName());
+        }
+        if(id == 0){
+            id = resources.getIdentifier(resName, "color", context.getPackageName());
+        }
+        if(id == 0){
+            return null;
+        }
+        return ContextCompat.getDrawable(context, id);
+    }
+
+
+    public static int getColor(Context context, String resName) {
+        Resources resources = context.getResources();
+        if(resName.startsWith("#")){
+            return Color.parseColor(resName);
+        }
+        int id = resources.getIdentifier(resName, "color", context.getPackageName());
+        if(id == 0){
+            return -1;
+        }
+        return ContextCompat.getColor(context, id);
     }
 
     ///////////////////////////////////////////////////////////////////////////
