@@ -9,25 +9,39 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:weightSum="3">
-        <Button
+        <TextView
             android:id="@+id/btn_drag_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="DragView"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_imageloader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginLeft="15dp"
             android:text="ImageLoader"/>
-        <Button
+
+        <TextView
             android:id="@+id/btn_snapshot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
             android:text="SnapShot"/>
     </LinearLayout>
 

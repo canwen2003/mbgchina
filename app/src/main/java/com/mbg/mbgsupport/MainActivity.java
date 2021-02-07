@@ -3,6 +3,8 @@ package com.mbg.mbgsupport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Looper;
@@ -40,7 +42,9 @@ import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.ThreadUtils;
+import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
+import com.mbg.module.ui.view.drawable.DrawableCreator;
 
 import java.io.IOException;
 import java.util.List;
@@ -74,6 +78,23 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 }
             }
         });
+
+        DrawableCreator.Builder drawableBuilder = new DrawableCreator.Builder()
+                .setCornersRadius(UiUtils.dip2px(30))
+                .setSolidColor(getResources().getColor(R.color.amber_a100))
+                .setStrokeColor(getResources().getColor(R.color.amber_100))
+                .setStrokeWidth(UiUtils.dip2px(2));
+
+        mViewBinding.btnDragView.setBackground(drawableBuilder.build());
+        drawableBuilder
+                .setSolidColor(getResources().getColor(R.color.black))
+                .setStrokeColor(getResources().getColor(R.color.red_50));
+        mViewBinding.btnImageloader.setBackground(drawableBuilder.build());
+
+        drawableBuilder
+                .setSolidColor(getResources().getColor(R.color.green_50))
+                .setStrokeColor(getResources().getColor(R.color.black));
+        mViewBinding.btnSnapshot.setBackground(drawableBuilder.build());
 
         mViewBinding.btnDragView.setOnClickListener(new View.OnClickListener() {
             @Override
