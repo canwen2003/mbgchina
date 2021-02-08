@@ -32,6 +32,8 @@ class KotlinMain : AppCompatActivity() {
             LogUtils.d("test3 clicked")
             ToastUtils.show("test3 clicked")
         }
+
+        showInfo.text=""+intent.getStringExtra("dowork")
     }
 
 }

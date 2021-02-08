@@ -13,6 +13,11 @@ import android.view.View;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
@@ -40,6 +45,7 @@ import com.mbg.mbgsupport.fragment.tab.CommonTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
+import com.mbg.mbgsupport.work.DemoWorker;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.ThreadUtils;
 import com.mbg.module.common.util.UiUtils;
@@ -48,6 +54,7 @@ import com.mbg.module.ui.view.drawable.DrawableCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
     private Context context;
@@ -62,6 +69,7 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
 
     @Override
     public void initView(){
+
         context=this;
         new ViewModelProvider(this).get(LoadingStateViewModel.class).getLoadingState().observe(this, new Observer<LoadingStateViewModel.LoadingState>() {
             @Override
@@ -297,6 +305,21 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
             }
         });
 
+        Constraints constraints=new Constraints.Builder()
+                //.setRequiresCharging(true)//在充电状态
+                .setRequiredNetworkType(NetworkType.CONNECTED)//网络连接时
+                .setRequiresBatteryNotLow(true)//电池电量不能为低
+                .build();
+        Data data=new Data.Builder()
+                .putString("doWork",""+System.currentTimeMillis())
+                .build();
+
+        OneTimeWorkRequest oneTimeWorkRequest=new OneTimeWorkRequest.Builder(DemoWorker.class)
+                .setConstraints(constraints)
+                .setInitialDelay(10, TimeUnit.SECONDS)
+                .setInputData(data)
+                .build();
+        WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
 
     }
     private long mStartOfMsg=0;

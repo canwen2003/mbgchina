@@ -49,4 +49,11 @@
             android:text="Test1"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/showInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/color_6596ff"/>
+
 </LinearLayout>
