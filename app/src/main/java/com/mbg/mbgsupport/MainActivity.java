@@ -22,6 +22,7 @@ import androidx.work.WorkManager;
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ConstraintLayoutFragment;
+import com.mbg.mbgsupport.fragment.FlexboxLayoutFragment;
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.ShimmerFragment;
 import com.mbg.mbgsupport.fragment.SkeletonFragment;
@@ -275,6 +276,13 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
             @Override
             public void onClick(View v) {
                 ConstraintLayoutFragment.show(context);
+            }
+        });
+
+        mViewBinding.btnFlexbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FlexboxLayoutFragment.show(context);
             }
         });
 
