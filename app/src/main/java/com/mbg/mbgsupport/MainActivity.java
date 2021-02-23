@@ -23,6 +23,7 @@ import com.mbg.mbgsupport.databinding.ActivityMainBinding;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ConstraintLayoutFragment;
 import com.mbg.mbgsupport.fragment.FlexboxLayoutFragment;
+import com.mbg.mbgsupport.fragment.MotionLayoutFragment;
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.ShimmerFragment;
 import com.mbg.mbgsupport.fragment.SkeletonFragment;
@@ -286,6 +287,12 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
             }
         });
 
+        mViewBinding.btnMotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MotionLayoutFragment.show(context);
+            }
+        });
        LogUtils.d("位置："+getAddress(39.898566,116.464244));
 
 

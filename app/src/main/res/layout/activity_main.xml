@@ -260,11 +260,11 @@
             android:text="FlexboxLayout"/>
 
         <Button
-            android:id="@+id/btn_test2t"
+            android:id="@+id/btn_motion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Test2"/>
+            android:text="MotionLayout"/>
     </LinearLayout>
 
 </LinearLayout>
