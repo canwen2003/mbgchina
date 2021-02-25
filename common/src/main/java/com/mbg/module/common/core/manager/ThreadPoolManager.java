@@ -6,6 +6,7 @@ import android.os.Build;
 import com.mbg.module.common.util.LogUtils;
 
 import java.util.Comparator;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -20,8 +21,8 @@ public class ThreadPoolManager {
     private static ThreadPoolManager mInstance;
     private static final Long KEEP_ALIVE_TIME=10L;//线程最大闲置销毁时间 10s
     private ThreadPoolExecutor mExecutorService;//高优先级和普通优先级线程池
-    private ExecutorService mSingleExecutorService;//单线程池
-    private ExecutorService mLogExecutorService;//埋点信息上传
+    private final ExecutorService mSingleExecutorService;//单线程池
+    private final ExecutorService mLogExecutorService;//埋点信息上传
 
     private ThreadPoolManager(){
         int corePoolSize=2;
@@ -86,7 +87,7 @@ public class ThreadPoolManager {
                 new LinkedBlockingQueue<Runnable>(),new DefaultThreadFactory("log"));
     }
 
-    public static ThreadPoolManager getInstance(){
+    public static ThreadPoolManager get(){
         if (mInstance==null){
             synchronized (ThreadPoolManager.class){
                 if (mInstance==null) {
@@ -140,6 +141,13 @@ public class ThreadPoolManager {
         }
     }
 
+    public Executor getMainExecutor(){
+        return mExecutorService;
+    }
+
+    public Executor getSingleExecutor(){
+        return mSingleExecutorService;
+    }
 
     private static class DefaultThreadFactory implements ThreadFactory {
         private static final AtomicInteger poolNumber = new AtomicInteger(1);

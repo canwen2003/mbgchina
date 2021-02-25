@@ -43,7 +43,7 @@ public final class AsyncLayoutInflatePlus {
         request.resId = resId;
         request.parent = parent;
         request.callback = callback;
-        ThreadPoolManager.getInstance().start(new InflateRunnable(request));
+        ThreadPoolManager.get().start(new InflateRunnable(request));
     }
 
     private Handler.Callback mHandlerCallback = new Handler.Callback() {

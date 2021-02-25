@@ -78,7 +78,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        ThreadPoolManager.getInstance().start(() -> {
+                        ThreadPoolManager.get().start(() -> {
                             // Add a delay to simulate a long-running operation
                             addDelay();
                             // Generate the data for pre-population

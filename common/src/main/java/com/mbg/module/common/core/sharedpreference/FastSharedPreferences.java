@@ -256,7 +256,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
             if (syncing.get()) {
                 return;
             }
-            ThreadPoolManager.getInstance().start(new SyncTask());
+            ThreadPoolManager.get().start(new SyncTask());
         }
 
         private class SyncTask extends ThreadPoolRunnable {
@@ -332,7 +332,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
                 //如果正在同步，则取消reload
                 return;
             }
-            ThreadPoolManager.getInstance().start(new ReloadTask());
+            ThreadPoolManager.get().start(new ReloadTask());
         }
 
         private void onDelete() {
