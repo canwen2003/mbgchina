@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 
 import com.mbg.mbgsupport.R;
+import com.mbg.module.common.core.manager.ThreadPoolManager;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.StorageUtils;
 import com.mbg.module.common.util.UiUtils;
@@ -76,10 +77,8 @@ public class ImageLoaderFirstStartup extends AndroidStartup<String> {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .memoryCacheExtraOptions(UiUtils.getScreenWidth(context), UiUtils.getScreenHeight(context)) // 即保存的每个缓存文件的最大长宽
                 .diskCacheExtraOptions(UiUtils.getScreenWidth(context), UiUtils.getScreenHeight(context), null)//
-                //.taskExecutor(...)
-                //.taskExecutorForCachedImages(...)
-                .threadPoolSize(4) // /线程池内加载的数量
-                .threadPriority(Thread.NORM_PRIORITY - 2) // /当同一个Uri获取不同大小的图片，缓存到内存时，只缓存一个。默认会缓存多个不同的大小的相同图片
+                .taskExecutor(ThreadPoolManager.get().getMainExecutor())
+                .taskExecutorForCachedImages(ThreadPoolManager.get().getMainExecutor())
                 .tasksProcessingOrder(QueueProcessingType.FIFO) // default
                 .denyCacheImageMultipleSizesInMemory()////拒绝缓存多个图片。
                 .memoryCache(new LruMemoryCache(2 * 1024 * 1024))////缓存策略你可以通过自己的内存缓存实现 ，这里用弱引用，缺点是太容易被回收了，不是很好！

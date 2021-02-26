@@ -10,18 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.core.content.ContextCompat;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okio.BufferedSink;
+import okio.Okio;
 
 public class ResourceUtils {
     private static final int BUFFER_SIZE = 8192;
@@ -186,7 +186,7 @@ public class ResourceUtils {
         }
         byte[] bytes = is2Bytes(is);
         if (bytes == null) return null;
-        if (isSpace(charsetName)) {
+        if (StringUtils.isEmpty(charsetName)) {
             return new String(bytes);
         } else {
             try {
@@ -262,7 +262,7 @@ public class ResourceUtils {
         InputStream is = AppUtils.getResources().openRawResource(resId);
         byte[] bytes = is2Bytes(is);
         if (bytes == null) return null;
-        if (isSpace(charsetName)) {
+        if (StringUtils.isEmpty(charsetName)) {
             return new String(bytes);
         } else {
             try {
@@ -342,36 +342,27 @@ public class ResourceUtils {
                                            final InputStream is,
                                            final boolean append) {
         if (!createOrExistsFile(file) || is == null) return false;
-        OutputStream os = null;
+        BufferedSink bufferedSink=null;
         try {
-            os = new BufferedOutputStream(new FileOutputStream(file, append));
-            byte data[] = new byte[BUFFER_SIZE];
+            bufferedSink= Okio.buffer(Okio.sink(file,append));
+            byte[] data = new byte[BUFFER_SIZE];
             int len;
             while ((len = is.read(data, 0, BUFFER_SIZE)) != -1) {
-                os.write(data, 0, len);
+                bufferedSink.write(data, 0, len);
             }
+            bufferedSink.flush();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                if (os != null) {
-                    os.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(bufferedSink);
         }
     }
 
     private static File getFileByPath(final String filePath) {
-        return isSpace(filePath) ? null : new File(filePath);
+        return StringUtils.isEmpty(filePath) ? null : new File(filePath);
     }
 
     private static boolean createOrExistsFile(final File file) {
@@ -390,16 +381,6 @@ public class ResourceUtils {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
-    private static boolean isSpace(final String s) {
-        if (s == null) return true;
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private static byte[] is2Bytes(final InputStream is) {
         if (is == null) return null;
         ByteArrayOutputStream os = null;
@@ -415,18 +396,8 @@ public class ResourceUtils {
             e.printStackTrace();
             return null;
         } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                if (os != null) {
-                    os.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(os);
         }
     }
 
@@ -435,7 +406,7 @@ public class ResourceUtils {
         BufferedReader reader = null;
         try {
             List<String> list = new ArrayList<>();
-            if (isSpace(charsetName)) {
+            if (StringUtils.isEmpty(charsetName)) {
                 reader = new BufferedReader(new InputStreamReader(is));
             } else {
                 reader = new BufferedReader(new InputStreamReader(is, charsetName));

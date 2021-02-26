@@ -14,7 +14,7 @@ import java.util.Locale;
 public class LocaleUtils {
     private static final String TAG = "LocaleUtils";
     private static final String SHARED_KEY_LOCALE = "_shared_key_locale_";
-    private static Locale defaultLocale = new Locale(Language.EN.getCode(),CountryArea.America.getCode());
+    private static final Locale defaultLocale = new Locale(Language.EN.getCode(),CountryArea.America.getCode());
 
 
     /**
@@ -88,7 +88,7 @@ public class LocaleUtils {
     /**
      * sp存储本地语言类型
      *
-     * @param locale
+     * @param locale 存储的locale
      */
     private static void putLocale(Locale locale) {
         if (locale==null){
@@ -155,7 +155,7 @@ public class LocaleUtils {
         Language(String code){
             this.code=code;
         }
-        private String code;
+        private final String code;
         public String getCode(){
             return code;
         }
@@ -179,7 +179,7 @@ public class LocaleUtils {
         CountryArea(String code){
             this.code=code;
         }
-        private String code;
+        private final String code;
 
         public String getCode() {
             return code;

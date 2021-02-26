@@ -22,10 +22,10 @@ import com.mbg.module.common.tool.Encryption;
 
 public abstract class BasicCacheStore implements CacheStore<CacheEntity> {
 
-    private Context mContext;
+    private final Context mContext;
 
     public BasicCacheStore(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     protected String uniqueKey(String key) {

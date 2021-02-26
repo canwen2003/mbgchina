@@ -3,33 +3,35 @@ package com.mbg.module.common.core.cache;
 import android.content.Context;
 import android.text.TextUtils;
 
-
 import com.mbg.module.common.tool.Encryption;
 import com.mbg.module.common.util.IOUtils;
 import com.mbg.module.common.util.LogUtils;
+import com.mbg.module.common.util.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import okio.BufferedSink;
+import okio.BufferedSource;
+import okio.Okio;
+import okio.Sink;
+import okio.Source;
 
 
 public class DiskCacheStore extends BasicCacheStore {
     /**
      * Database sync lock.
      */
-    private Lock mLock;
+    private final Lock mLock;
     /**
      *
      */
-    private Encryption mEncryption;
+    private final Encryption mEncryption;
     /**
      * Folder.
      */
-    private String mCacheDirectory;
+    private final String mCacheDirectory;
 
     /**
      * You must remember to check the runtime permissions.
@@ -48,8 +50,9 @@ public class DiskCacheStore extends BasicCacheStore {
     public DiskCacheStore(Context context, String cacheDirectory) {
         super(context);
 
-        if (TextUtils.isEmpty(cacheDirectory))
+        if (TextUtils.isEmpty(cacheDirectory)) {
             throw new IllegalArgumentException("The cacheDirectory can't be null.");
+        }
         mLock = new ReentrantLock();
         mEncryption = new Encryption(DiskCacheStore.class.getSimpleName());
         mCacheDirectory = cacheDirectory;
@@ -60,7 +63,7 @@ public class DiskCacheStore extends BasicCacheStore {
         mLock.lock();
         key = uniqueKey(key);
 
-        BufferedReader bufferedReader = null;
+        BufferedSource bufferedSource = null;
         try {
             if (TextUtils.isEmpty(key))
                 return null;
@@ -68,17 +71,19 @@ public class DiskCacheStore extends BasicCacheStore {
             if (!file.exists() || file.isDirectory())
                 return null;
             CacheEntity cacheEntity = new CacheEntity();
+            Source fileSource= Okio.source(file);
+            bufferedSource=Okio.buffer(fileSource);
 
-            bufferedReader = new BufferedReader(new FileReader(file));
-            cacheEntity.setResponseHeadersJson(decrypt(bufferedReader.readLine()));
-            cacheEntity.setDataBase64(decrypt(bufferedReader.readLine()));
-            cacheEntity.setLocalExpireString(decrypt(bufferedReader.readLine()));
+            cacheEntity.setResponseHeadersJson(decrypt(bufferedSource.readUtf8Line()));
+            cacheEntity.setDataBase64(decrypt(bufferedSource.readUtf8Line()));
+            cacheEntity.setLocalExpireString(decrypt(bufferedSource.readUtf8Line()));
             return cacheEntity;
         } catch (Exception e) {
             IOUtils.delFileOrFolder(new File(mCacheDirectory, key));
             LogUtils.e(e.toString());
         } finally {
-            IOUtils.closeQuietly(bufferedReader);
+
+            IOUtils.closeQuietly(bufferedSource);
             mLock.unlock();
         }
         return null;
@@ -89,30 +94,31 @@ public class DiskCacheStore extends BasicCacheStore {
         mLock.lock();
         key = uniqueKey(key);
 
-        BufferedWriter bufferedWriter = null;
+        BufferedSink bufferedSink = null;
         try {
-            if (TextUtils.isEmpty(key) || cacheEntity == null)
+            if (StringUtils.isEmpty(key) || cacheEntity == null) {
                 return cacheEntity;
-            initialize();
+            }
+            IOUtils.createFolder(mCacheDirectory);
             File file = new File(mCacheDirectory, key);
 
             IOUtils.createNewFile(file);
+            Sink fileSink = Okio.sink(file);
+            bufferedSink=Okio.buffer(fileSink);
 
-            bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(encrypt(cacheEntity.getResponseHeadersJson()));
-            bufferedWriter.newLine();
-            bufferedWriter.write(encrypt(cacheEntity.getDataBase64()));
-            bufferedWriter.newLine();
-            bufferedWriter.write(encrypt(cacheEntity.getLocalExpireString()));
-            bufferedWriter.flush();
-            bufferedWriter.close();
+            bufferedSink.writeUtf8(encrypt(cacheEntity.getResponseHeadersJson()));
+            bufferedSink.writeUtf8("\n");
+            bufferedSink.writeUtf8(encrypt(cacheEntity.getDataBase64()));
+            bufferedSink.writeUtf8("\n");
+            bufferedSink.writeUtf8(encrypt(cacheEntity.getLocalExpireString()));
+            bufferedSink.flush();
             return cacheEntity;
         } catch (Exception e) {
             IOUtils.delFileOrFolder(new File(mCacheDirectory, key));
             LogUtils.e(e.toString());
             return null;
         } finally {
-            IOUtils.closeQuietly(bufferedWriter);
+            IOUtils.closeQuietly(bufferedSink);
             mLock.unlock();
         }
     }
@@ -139,9 +145,6 @@ public class DiskCacheStore extends BasicCacheStore {
         }
     }
 
-    private boolean initialize() {
-        return IOUtils.createFolder(mCacheDirectory);
-    }
 
     private String encrypt(String encryptionText) throws Exception {
         return mEncryption.encrypt(encryptionText);

@@ -20,9 +20,9 @@ public class ViewAnimUtil {
      * 从底下弹出
      *
      * @param view      the view
-     * @param duraction 动画持续时间
+     * @param duration 动画持续时间
      */
-    public static void showFromBottom(View view, int duraction) {
+    public static void showFromBottom(View view, int duration) {
         if (view != null) {
             view.setEnabled(true);
             TranslateAnimation showAnim = new TranslateAnimation(
@@ -30,7 +30,7 @@ public class ViewAnimUtil {
                     Animation.RELATIVE_TO_SELF, 0.0f,
                     Animation.RELATIVE_TO_SELF, 1.0f,
                     Animation.RELATIVE_TO_SELF, 0.0f);
-            showAnim.setDuration(duraction);
+            showAnim.setDuration(duration);
             view.startAnimation(showAnim);
             view.setVisibility(View.VISIBLE);
         }
@@ -40,9 +40,9 @@ public class ViewAnimUtil {
      * 到底下消失
      *
      * @param view      the view
-     * @param duraction 动画持续时间
+     * @param duration 动画持续时间
      */
-    public static void hideToBottom(View view, int duraction) {
+    public static void hideToBottom(View view, int duration) {
         if (view != null) {
             view.setEnabled(false);
             TranslateAnimation hideAnim = new TranslateAnimation(
@@ -50,7 +50,7 @@ public class ViewAnimUtil {
                     Animation.RELATIVE_TO_SELF, 0.0f,
                     Animation.RELATIVE_TO_SELF, 0.0f,
                     Animation.RELATIVE_TO_SELF, 1.0f);
-            hideAnim.setDuration(duraction);
+            hideAnim.setDuration(duration);
             view.startAnimation(hideAnim);
             view.setVisibility(View.GONE);
         }
@@ -80,13 +80,13 @@ public class ViewAnimUtil {
      * @param view       the view
      * @param startAlpha 开始的渐变
      * @param endAlpha   结束的渐变
-     * @param duraction  动画持续时间
+     * @param duration  动画持续时间
      */
-    public static void hideFade(View view, float startAlpha, float endAlpha, int duraction) {
+    public static void hideFade(View view, float startAlpha, float endAlpha, int duration) {
         if (view != null) {
             view.setEnabled(false);
             Animation animation = new AlphaAnimation(startAlpha, endAlpha);
-            animation.setDuration(duraction);
+            animation.setDuration(duration);
             view.startAnimation(animation);
             view.setVisibility(View.GONE);
         }

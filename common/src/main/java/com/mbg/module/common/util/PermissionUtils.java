@@ -385,8 +385,7 @@ public class PermissionUtils {
             boolean hasPerm = (ContextCompat.checkSelfPermission(AppUtils.getApplication(), perm) == PackageManager.PERMISSION_GRANTED);
 
             if (hasPerm && isXiaomiPhone()) {//小米手机特别处理，二逼的小米
-                hasPerm = PermissionChecker.checkPermission(AppUtils.getApplication(), perm, android.os.Process.myPid(), android.os.Process.myUid(), AppUtils.getPackageName())
-                        == PackageManager.PERMISSION_GRANTED;
+                hasPerm = PermissionChecker.checkPermission(AppUtils.getApplication(), perm, android.os.Process.myPid(), android.os.Process.myUid(), AppUtils.getPackageName()) == PermissionChecker.PERMISSION_GRANTED;
             }
             Log.i(TAG, perm + ": " + hasPerm);
             if (!hasPerm) {

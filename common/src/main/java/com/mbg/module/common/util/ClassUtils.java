@@ -12,11 +12,11 @@ public class ClassUtils {
     // type不能直接实例化对象，通过type获取class的类型，然后实例化对象
     public static Class<?> getRawType(Type type) {
         if (type instanceof Class) {
-            return (Class) type;
+            return (Class<?>) type;
         } else if (type instanceof ParameterizedType) {
             ParameterizedType parameterizedType = (ParameterizedType) type;
             Type rawType = parameterizedType.getRawType();
-            return (Class) rawType;
+            return (Class<?>) rawType;
         } else if (type instanceof GenericArrayType) {
             Type componentType = ((GenericArrayType) type).getGenericComponentType();
             return Array.newInstance(getRawType(componentType), 0).getClass();

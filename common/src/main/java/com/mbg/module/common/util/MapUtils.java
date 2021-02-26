@@ -157,7 +157,9 @@ public class MapUtils {
 
 
     public static String toString(Map map) {
-        if (map == null) return "null";
+        if (map == null) {
+            return "null";
+        }
         return map.toString();
     }
 

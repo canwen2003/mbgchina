@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public class JsonUtils {
-   private static Gson mExecuter=new Gson();
+   private static final Gson mExecutor =new Gson();
    private JsonUtils(){}
 
 
@@ -21,7 +21,7 @@ public class JsonUtils {
          return null;
       }
 
-      return mExecuter.toJson(params);
+      return mExecutor.toJson(params);
    }
 
    /***
@@ -35,7 +35,7 @@ public class JsonUtils {
          return null;
       }
 
-      return mExecuter.toJson(params);
+      return mExecutor.toJson(params);
    }
 
    /***
@@ -50,7 +50,7 @@ public class JsonUtils {
          return null;
       }
 
-      return mExecuter.fromJson(json,type);
+      return mExecutor.fromJson(json,type);
    }
 
 
@@ -66,7 +66,7 @@ public class JsonUtils {
          return null;
       }
 
-      return mExecuter.fromJson(json,tClass);
+      return mExecutor.fromJson(json,tClass);
    }
 
 

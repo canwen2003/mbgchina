@@ -38,7 +38,7 @@ public class PermissionHelper {
     private SimpleCallback      mSimpleCallback;
     private FullCallback        mFullCallback;
     private ThemeCallback       mThemeCallback;
-    private Set<String> mPermissions;
+    private final Set<String> mPermissions;
     private List<String>        mPermissionsRequest;
     private List<String>        mPermissionsGranted;
     private List<String>        mPermissionsDenied;
@@ -317,6 +317,7 @@ public class PermissionHelper {
         return isRationale;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void getPermissionsStatus(final Activity activity) {
         for (String permission : mPermissionsRequest) {
             if (isGranted(permission)) {
@@ -357,6 +358,7 @@ public class PermissionHelper {
         mThemeCallback = null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void onRequestPermissionsResult(final Activity activity) {
         getPermissionsStatus(activity);
         requestCallback();

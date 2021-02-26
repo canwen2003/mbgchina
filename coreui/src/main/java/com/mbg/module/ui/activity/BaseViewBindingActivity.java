@@ -27,7 +27,7 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends App
     protected T mViewBinding;
     protected static final String ARG_FRAGMENT_CLASS_NAME="arg_fragment_class_name";
     protected static final String ARG_FRAGMENT_ARGS="arg_fragment_args";
-    private final ArrayDeque<BaseViewBindingFragment> mFragments = new ArrayDeque<>();
+    private final ArrayDeque<BaseViewBindingFragment<T>> mFragments = new ArrayDeque<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,14 +37,14 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends App
         setContentView(mViewBinding.getRoot());
 
         Intent intent=getIntent();
-        Class<? extends BaseViewBindingFragment> fragmentClass=null;
+        Class<? extends BaseViewBindingFragment<T>> fragmentClass=null;
         Bundle bundle=null;
         if (intent!=null){
 
             String fragmentName=intent.getStringExtra(ARG_FRAGMENT_CLASS_NAME);
             if (fragmentName!=null){
                 try {
-                    fragmentClass=(Class<? extends BaseViewBindingFragment>)getClassLoader().loadClass(fragmentName);
+                    fragmentClass=(Class<? extends BaseViewBindingFragment<T>>)getClassLoader().loadClass(fragmentName);
                 }catch (Exception e){
                     e.printStackTrace();
                     finish();
@@ -67,13 +67,13 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends App
         StatusBarUtil.setColor(this,color,statusBarAlpha);
     }
 
-    public void showContent(Class<? extends BaseViewBindingFragment> target) {
+    public void showContent(Class<? extends BaseViewBindingFragment<T>> target) {
         showContent(target, null);
     }
 
-    public void showContent(Class<? extends BaseViewBindingFragment> target, Bundle bundle) {
+    public void showContent(Class<? extends BaseViewBindingFragment<T>> target, Bundle bundle) {
         try {
-            BaseViewBindingFragment fragment = target.newInstance();
+            BaseViewBindingFragment<T> fragment = target.newInstance();
             if (bundle != null) {
                 fragment.setArguments(bundle);
             }
@@ -93,7 +93,7 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends App
     @Override
     public void onBackPressed() {
         if (!mFragments.isEmpty()) {
-            BaseViewBindingFragment fragment = mFragments.getFirst();
+            BaseViewBindingFragment<T> fragment = mFragments.getFirst();
             if (!fragment.onBackPressed()) {
                 mFragments.removeFirst();
                 super.onBackPressed();
@@ -106,7 +106,7 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends App
         }
     }
 
-    public void doBack(BaseViewBindingFragment fragment) {
+    public void doBack(BaseViewBindingFragment<T> fragment) {
         if (mFragments.contains(fragment)) {
             mFragments.remove(fragment);
             FragmentManager fm = getSupportFragmentManager();
