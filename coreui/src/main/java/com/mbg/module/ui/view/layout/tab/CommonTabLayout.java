@@ -246,8 +246,10 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                 tabView = View.inflate(mContext, R.layout.view_layout_tab_right, null);
             } else if (mIconGravity == Gravity.BOTTOM) {
                 tabView = View.inflate(mContext, R.layout.view_layout_tab_bottom, null);
-            } else {
+            } else if (mIconGravity == Gravity.TOP) {
                 tabView = View.inflate(mContext, R.layout.view_layout_tab_top, null);
+            } else{
+                tabView = View.inflate(mContext, R.layout.view_layout_tab_center, null);
             }
 
             tabView.setTag(i);
@@ -326,7 +328,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                     lp.leftMargin = (int) mIconMargin;
                 } else if (mIconGravity == Gravity.BOTTOM) {
                     lp.topMargin = (int) mIconMargin;
-                } else {
+                } else if (mIconGravity == Gravity.TOP){
                     lp.bottomMargin = (int) mIconMargin;
                 }
 

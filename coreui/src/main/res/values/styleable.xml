@@ -551,6 +551,7 @@
             <enum name="TOP" value="48"/>
             <enum name="RIGHT" value="5"/>
             <enum name="BOTTOM" value="80"/>
+            <enum name="CENTER" value="17"/>
         </attr>
 
         <!-- 设置icon与文字间距 -->
