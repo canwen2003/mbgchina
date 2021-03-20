@@ -50,8 +50,7 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mRootView = super.onCreateView(inflater, container, savedInstanceState)
         val id = onRequestLayout()
         if (id > 0 && mRootView == null) {
@@ -75,13 +74,11 @@ abstract class BaseFragment : Fragment() {
     private fun tryGetContainerId() {
         if (mRootView != null) {
             val parent = mRootView!!.parent as View
-            if (parent != null) {
-                mContainer = parent.id
-            }
+            mContainer = parent.id
         }
     }
 
-    protected fun interceptTouchEvents(): Boolean {
+    fun interceptTouchEvents(): Boolean {
         return false
     }
 
