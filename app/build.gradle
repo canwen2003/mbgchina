@@ -41,8 +41,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -77,8 +77,6 @@ dependencies {
     //android-startup提供一种在应用启动时能够更加简单、高效的方式来初始化组件。开发人员可以使用android-startup来简化启动序列，并显式地设置初始化顺序与组件之间的依赖关系。 与此同时android-startup支持同步与异步等待，并通过有向无环图拓扑排序的方式来保证内部依赖组件的初始化顺序。
     implementation 'com.rousetime.android:android-startup:1.0.6'
 
-    //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation project(path: ':common')
     implementation project(path: ':coreui')

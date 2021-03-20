@@ -3,8 +3,6 @@ package com.mbg.mbgsupport;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Looper;
@@ -46,10 +44,10 @@ import com.mbg.mbgsupport.fragment.seekbar.SeekBarFragment;
 import com.mbg.mbgsupport.fragment.tab.CommonTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment;
 import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
+import com.mbg.mbgsupport.kotlin.KotlinMain;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.mbgsupport.work.DemoWorker;
 import com.mbg.module.common.util.LogUtils;
-import com.mbg.module.common.util.ThreadUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
 import com.mbg.module.ui.view.drawable.DrawableCreator;
@@ -267,7 +265,7 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
         mViewBinding.btnKotlin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context,KotlinMain.class);
+                Intent intent=new Intent(context, KotlinMain.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }

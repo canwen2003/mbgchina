@@ -8,7 +8,7 @@ import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.mbg.mbgsupport.KotlinMain;
+import com.mbg.mbgsupport.kotlin.KotlinMain;
 import com.mbg.module.common.util.LogUtils;
 
 public class DemoWorker extends Worker {
