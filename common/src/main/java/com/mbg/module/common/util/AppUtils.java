@@ -22,7 +22,8 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
-import com.jeremyliao.liveeventbus.LiveEventBus;
+
+import com.mbg.module.common.liveeventbus.LiveEventBus;
 import com.mbg.module.common.util.consts.UtilsConsts;
 
 import java.io.BufferedReader;
