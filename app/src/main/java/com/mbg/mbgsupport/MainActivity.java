@@ -3,6 +3,7 @@ package com.mbg.mbgsupport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Looper;
@@ -52,6 +53,7 @@ import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
 import com.mbg.module.ui.view.drawable.DrawableCreator;
+import com.mbg.module.ui.view.drawable.LayerBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -93,17 +95,33 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 .setSolidColor(getResources().getColor(R.color.amber_a100))
                 .setStrokeColor(getResources().getColor(R.color.amber_100))
                 .setStrokeWidth(UiUtils.dip2px(2));
-
         mViewBinding.btnDragView.setBackground(drawableBuilder.build());
+                drawableBuilder.setSolidColor(getResources().getColor(R.color.trans))
+                .setStrokeColor(getResources().getColor(R.color.red_50));
+        Drawable drawable1=drawableBuilder.build();
+
+
         drawableBuilder
                 .setSolidColor(getResources().getColor(R.color.black))
                 .setStrokeColor(getResources().getColor(R.color.red_50));
+
         mViewBinding.btnImageloader.setBackground(drawableBuilder.build());
+
+        drawableBuilder
+                .setSolidColor(getResources().getColor(R.color.black))
+                .setStrokeWidth(0);
+        Drawable drawable2=drawableBuilder.build();
 
         drawableBuilder
                 .setSolidColor(getResources().getColor(R.color.green_50))
                 .setStrokeColor(getResources().getColor(R.color.black));
+
+        Drawable drawable3=drawableBuilder.build();
         mViewBinding.btnSnapshot.setBackground(drawableBuilder.build());
+
+        LayerBuilder layerBuilder=LayerBuilder.create(drawable1,drawable2,drawable3)
+                .setMargin(1,UiUtils.dip2px(2),UiUtils.dip2px(2),UiUtils.dip2px(40),UiUtils.dip2px(2))
+                .setMargin(2,UiUtils.dip2px(40),UiUtils.dip2px(2),UiUtils.dip2px(2),UiUtils.dip2px(2));
 
         mViewBinding.btnDragView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,6 +296,8 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 ConstraintFragment.show(context);
             }
         });
+
+        mViewBinding.btnConstraint.setBackground(layerBuilder.build());
 
         mViewBinding.btnFlexbox.setOnClickListener(new View.OnClickListener() {
             @Override
