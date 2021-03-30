@@ -112,16 +112,17 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 .setStrokeWidth(0);
         Drawable drawable2=drawableBuilder.build();
 
-        drawableBuilder
-                .setSolidColor(getResources().getColor(R.color.green_50))
-                .setStrokeColor(getResources().getColor(R.color.black));
+        drawableBuilder =new DrawableCreator.Builder()
+                .setGradientColor(getResources().getColor(R.color.green_50),getResources().getColor(R.color.green_700))
+                .setGradientAngle(0)
+                .setCornersRadius(0,UiUtils.dip2px(30),0,UiUtils.dip2px(30));
 
         Drawable drawable3=drawableBuilder.build();
         mViewBinding.btnSnapshot.setBackground(drawableBuilder.build());
 
         LayerBuilder layerBuilder=LayerBuilder.create(drawable1,drawable2,drawable3)
                 .setMargin(1,UiUtils.dip2px(2),UiUtils.dip2px(2),UiUtils.dip2px(40),UiUtils.dip2px(2))
-                .setMargin(2,UiUtils.dip2px(40),UiUtils.dip2px(2),UiUtils.dip2px(2),UiUtils.dip2px(2));
+                .setMargin(2,UiUtils.dip2px(60),UiUtils.dip2px(2),UiUtils.dip2px(2),UiUtils.dip2px(2));
 
         mViewBinding.btnDragView.setOnClickListener(new View.OnClickListener() {
             @Override
