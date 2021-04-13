@@ -24,7 +24,9 @@ public class DemoWorker extends Worker {
         Intent intent=new Intent(getApplicationContext(), KotlinMain.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("dowork","Come from WorkManager ->doWork");
+        LogUtils.d("zzy:Start");
         getApplicationContext().startActivity(intent);
+        LogUtils.d("zzy:finish");
         return Result.success();
     }
 }
