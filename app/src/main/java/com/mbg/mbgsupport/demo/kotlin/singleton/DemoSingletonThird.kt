@@ -20,6 +20,7 @@ class DemoSingletonThird private constructor(){
                 return field;
             }
 
+        @JvmStatic
         @Synchronized
         fun get():DemoSingletonThird{
             return instance!!;

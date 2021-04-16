@@ -18,11 +18,11 @@ public class TestMain{
          DemoSingletonFourth.getInstance().logInfo("java demo 4");
          DemoSingletonFourth.getInstance().logInfo("java demo 5");
 
-         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonFirst.INSTANCE.logInfo("Kotlin demo 1");
-         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonSecond.Companion.get().logInfo("Kotlin Demo 2");
-         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonThird.Companion.get().logInfo("Kotlin Demo 3");
-         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonFourth.Companion.get().logInfo("Kotlin Demo 4");
-         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingleton5.Companion.get().logInfo("Kotlin Demo 5");
+         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonFirst.logInfo("Kotlin demo 1");
+         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonSecond.get().logInfo("Kotlin Demo 2");
+         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonThird.get().logInfo("Kotlin Demo 3");
+         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonFourth.get().logInfo("Kotlin Demo 4");
+         com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingleton5.get().logInfo("Kotlin Demo 5");
 
      }
 }

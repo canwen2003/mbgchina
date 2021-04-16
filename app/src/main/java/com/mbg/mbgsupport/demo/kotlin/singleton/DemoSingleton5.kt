@@ -7,6 +7,8 @@ class DemoSingleton5 private constructor(){
 
     companion object {
         private const val TAG="DemoSingletonThird"
+
+        @JvmStatic
         fun get():DemoSingleton5{
             return SingletonHolder.holder;
         }

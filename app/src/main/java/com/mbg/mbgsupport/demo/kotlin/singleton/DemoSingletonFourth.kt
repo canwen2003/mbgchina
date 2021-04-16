@@ -15,6 +15,7 @@ class DemoSingletonFourth private constructor(){
             DemoSingletonFourth()
         }
 
+        @JvmStatic
         fun get():DemoSingletonFourth{
             return instance;
         }

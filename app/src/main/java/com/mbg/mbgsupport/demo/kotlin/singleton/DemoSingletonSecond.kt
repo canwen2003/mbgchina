@@ -21,6 +21,7 @@ class DemoSingletonSecond private constructor(){
             return field;
         }
 
+        @JvmStatic
         fun get():DemoSingletonSecond{
             return instance!!;
         }

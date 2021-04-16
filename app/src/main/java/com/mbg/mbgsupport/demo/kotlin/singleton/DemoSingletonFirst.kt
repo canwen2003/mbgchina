@@ -5,9 +5,11 @@ package com.mbg.mbgsupport.demo.kotlin.singleton
  * created by canwen2003
  */
 
+
 object DemoSingletonFirst {
     private const val TAG="DemoSingletonFirst"
 
+    @JvmStatic
     fun logInfo(str: String){
         println("$TAG:$str")
 
