@@ -4,6 +4,7 @@ import com.mbg.mbgsupport.demo.java.singleton.DemoSingletonFirst;
 import com.mbg.mbgsupport.demo.java.singleton.DemoSingletonFourth;
 import com.mbg.mbgsupport.demo.java.singleton.DemoSingletonSecond;
 import com.mbg.mbgsupport.demo.java.singleton.DemoSingletonThird;
+import com.mbg.mbgsupport.demo.thisLabel.ThisDemo;
 
 /**
  * java 测试类
@@ -24,5 +25,7 @@ public class TestMain{
          com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingletonFourth.get().logInfo("Kotlin Demo 4");
          com.mbg.mbgsupport.demo.kotlin.singleton.DemoSingleton5.get().logInfo("Kotlin Demo 5");
 
+        ThisDemo demo=new ThisDemo();
+        demo.new InnerClass().test();
      }
 }
