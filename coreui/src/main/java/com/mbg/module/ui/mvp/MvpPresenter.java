@@ -24,10 +24,10 @@ import java.util.Set;
  * 定义基础具有缓存功能的Presenter
  * created by Gap
  */
-public abstract class MvpPresenter<T extends IView> implements IPresenter {
+public abstract class MvpPresenter<T extends IView> implements IPresenter<T> {
     protected Context mContext;
     private String presenterId;
-    private Set<T> mViewPool= Collections.synchronizedSet(new HashSet<T>());
+    private final Set<T> mViewPool= Collections.synchronizedSet(new HashSet<T>());
 
     /**
      * 初始化Presenter

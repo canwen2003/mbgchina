@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".demo.kotlin.inlinefun.KotlinDemoActivity"></activity>
+        <activity android:name=".demo.kotlin.viewbinding.DemoViewBindingActivity"></activity>
+        <activity android:name=".demo.kotlin.inlinefun.KotlinDemoActivity" />
         <activity android:name=".kotlin.KotlinMain" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -19,6 +19,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
+import com.mbg.mbgsupport.demo.kotlin.viewbinding.DemoViewBindingActivity;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ConstraintFragment;
 import com.mbg.mbgsupport.fragment.constraint.ConstraintLayoutFragment;
@@ -313,6 +314,16 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 MotionLayoutFragment.show(context);
             }
         });
+
+        mViewBinding.btnKotlinBinding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, DemoViewBindingActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
        LogUtils.d("位置："+getAddress(39.898566,116.464244));
 
 

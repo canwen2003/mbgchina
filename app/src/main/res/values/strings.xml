@@ -5,4 +5,6 @@
     <string name="poetry_3">Raising my head, I look at the bright moon</string>
     <string name="poetry_4">Bending my head, I think of home</string>
     <string name="utils">Utils</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

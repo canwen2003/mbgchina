@@ -12,26 +12,23 @@ import androidx.viewbinding.ViewBinding
 
 
 
-private class DialogFragmentViewBindingProperty<in F : DialogFragment, out T : ViewBinding>(
-        viewBinder: (F) -> T
-) : LifecycleViewBindingProperty<F, T>(viewBinder) {
+private class DialogFragmentViewBindingProperty<in F : DialogFragment, out T : ViewBinding>(viewBinder: (F) -> T) : LifecycleViewBindingProperty<F, T>(viewBinder) {
 
     override fun getLifecycleOwner(thisRef: F): LifecycleOwner {
-        if (thisRef.showsDialog) {
-            return thisRef
+       return if (thisRef.showsDialog) {
+             thisRef
         } else {
             try {
-                return thisRef.viewLifecycleOwner
+                 thisRef.viewLifecycleOwner
             } catch (ignored: IllegalStateException) {
                 error("Fragment doesn't have view associated with it or the view has been destroyed")
             }
         }
+
     }
 }
 
-private class FragmentViewBindingProperty<in F : Fragment, out T : ViewBinding>(
-        viewBinder: (F) -> T
-) : LifecycleViewBindingProperty<F, T>(viewBinder) {
+private class FragmentViewBindingProperty<in F : Fragment, out T : ViewBinding>(viewBinder: (F) -> T) : LifecycleViewBindingProperty<F, T>(viewBinder) {
 
     override fun getLifecycleOwner(thisRef: F): LifecycleOwner {
         try {
@@ -47,9 +44,7 @@ private class FragmentViewBindingProperty<in F : Fragment, out T : ViewBinding>(
  */
 @Suppress("UNCHECKED_CAST")
 @JvmName("viewBindingFragment")
-public fun <F : Fragment, T : ViewBinding> Fragment.viewBinding(
-        viewBinder: (F) -> T
-): ViewBindingProperty<F, T> {
+public fun <F : Fragment, T : ViewBinding> Fragment.viewBinding(viewBinder: (F) -> T): ViewBindingProperty<F, T> {
     return when (this) {
         is DialogFragment -> DialogFragmentViewBindingProperty(viewBinder) as ViewBindingProperty<F, T>
         else -> FragmentViewBindingProperty(viewBinder)

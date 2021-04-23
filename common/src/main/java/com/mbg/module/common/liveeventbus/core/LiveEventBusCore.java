@@ -20,9 +20,9 @@ import androidx.lifecycle.Observer;
 import com.mbg.module.common.liveeventbus.ipc.consts.IpcConst;
 import com.mbg.module.common.liveeventbus.ipc.core.ProcessorManager;
 import com.mbg.module.common.liveeventbus.ipc.receiver.LebIpcReceiver;
-import com.mbg.module.common.liveeventbus.utils.AppUtils;
-import com.mbg.module.common.liveeventbus.utils.ThreadUtils;
+import com.mbg.module.common.util.AppUtils;
 import com.mbg.module.common.util.LogUtils;
+import com.mbg.module.common.util.ThreadUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -108,7 +108,7 @@ public final class LiveEventBusCore {
         if (isRegisterReceiver) {
             return;
         }
-        Application application = AppUtils.getApp();
+        Application application = AppUtils.getApplication();
         if (application != null) {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(IpcConst.ACTION);
@@ -145,7 +145,7 @@ public final class LiveEventBusCore {
          */
         @Override
         public void post(T value) {
-            if (ThreadUtils.isMainThread()) {
+            if (ThreadUtils.isOnMainThread()) {
                 postInternal(value);
             } else {
                 mainHandler.post(new PostValueTask(value));
@@ -228,8 +228,8 @@ public final class LiveEventBusCore {
          */
         @Override
         public void broadcast(final T value, final boolean foreground, final boolean onlyInApp) {
-            if (AppUtils.getApp() != null) {
-                if (ThreadUtils.isMainThread()) {
+            if (AppUtils.getApplication() != null) {
+                if (ThreadUtils.isOnMainThread()) {
                     broadcastInternal(value, foreground, onlyInApp);
                 } else {
                     mainHandler.post(new Runnable() {
@@ -252,7 +252,7 @@ public final class LiveEventBusCore {
          */
         @Override
         public void observe(@NonNull final LifecycleOwner owner, @NonNull final Observer<T> observer) {
-            if (ThreadUtils.isMainThread()) {
+            if (ThreadUtils.isOnMainThread()) {
                 observeInternal(owner, observer);
             } else {
                 mainHandler.post(new Runnable() {
@@ -273,7 +273,7 @@ public final class LiveEventBusCore {
          */
         @Override
         public void observeSticky(@NonNull final LifecycleOwner owner, @NonNull final Observer<T> observer) {
-            if (ThreadUtils.isMainThread()) {
+            if (ThreadUtils.isOnMainThread()) {
                 observeStickyInternal(owner, observer);
             } else {
                 mainHandler.post(new Runnable() {
@@ -292,7 +292,7 @@ public final class LiveEventBusCore {
          */
         @Override
         public void observeForever(@NonNull final Observer<T> observer) {
-            if (ThreadUtils.isMainThread()) {
+            if (ThreadUtils.isOnMainThread()) {
                 observeForeverInternal(observer);
             } else {
                 mainHandler.post(new Runnable() {
@@ -312,7 +312,7 @@ public final class LiveEventBusCore {
          */
         @Override
         public void observeStickyForever(@NonNull final Observer<T> observer) {
-            if (ThreadUtils.isMainThread()) {
+            if (ThreadUtils.isOnMainThread()) {
                 observeStickyForeverInternal(observer);
             } else {
                 mainHandler.post(new Runnable() {
@@ -331,7 +331,7 @@ public final class LiveEventBusCore {
          */
         @Override
         public void removeObserver(@NonNull final Observer<T> observer) {
-            if (ThreadUtils.isMainThread()) {
+            if (ThreadUtils.isOnMainThread()) {
                 removeObserverInternal(observer);
             } else {
                 mainHandler.post(new Runnable() {
@@ -353,7 +353,7 @@ public final class LiveEventBusCore {
         private void broadcastInternal(T value, boolean foreground, boolean onlyInApp) {
             LogUtils.d( "broadcast: " + value + " foreground: " + foreground +
                     " with key: " + key);
-            Application application = AppUtils.getApp();
+            Application application = AppUtils.getApplication();
             if (application == null) {
                  LogUtils.d(  "application is null, you can try setContext() when config");
                 return;
@@ -542,7 +542,7 @@ public final class LiveEventBusCore {
             sb.append("lifecycleObserverAlwaysActive: ").append(lifecycleObserverAlwaysActive).append("\n")
                     .append("autoClear: ").append(autoClear).append("\n")
                     .append("Receiver register: ").append(isRegisterReceiver).append("\n")
-                    .append("Application: ").append(AppUtils.getApp()).append("\n");
+                    .append("Application: ").append(AppUtils.getApplication()).append("\n");
             return sb.toString();
         }
 

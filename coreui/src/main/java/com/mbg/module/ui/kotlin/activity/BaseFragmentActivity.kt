@@ -9,7 +9,6 @@ abstract class BaseFragmentActivity : BaseActivity() {
     private val mFragments = ArrayDeque<BaseFragment>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = intent
         var fragmentClass: Class<out BaseFragment>? = null
         var bundle: Bundle? = null
         if (intent != null) {
@@ -35,11 +34,12 @@ abstract class BaseFragmentActivity : BaseActivity() {
     fun showContent(target: Class<out BaseFragment>, bundle: Bundle? = null) {
         try {
             val fragment = target.newInstance()
+
             if (bundle != null) {
                 fragment.arguments = bundle
             }
-            val fm = supportFragmentManager
-            val fragmentTransaction = fm.beginTransaction()
+
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.add(android.R.id.content, fragment)
             mFragments.push(fragment)
             fragmentTransaction.addToBackStack("")
@@ -78,7 +78,7 @@ abstract class BaseFragmentActivity : BaseActivity() {
     }
 
     companion object {
-         const val ARG_FRAGMENT_CLASS_NAME = "arg_fragment_class_name"
-         const val ARG_FRAGMENT_ARGS = "arg_fragment_args"
+        const val ARG_FRAGMENT_CLASS_NAME = "arg_fragment_class_name"
+        const val ARG_FRAGMENT_ARGS = "arg_fragment_args"
     }
 }

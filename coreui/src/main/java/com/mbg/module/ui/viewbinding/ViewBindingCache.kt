@@ -48,14 +48,14 @@ internal abstract class InflateViewBinding<out VB : ViewBinding>(private val inf
 @RestrictTo(LIBRARY)
 @Suppress("FunctionName")
 internal fun <VB : ViewBinding> InflateViewBinding(viewBindingClass: Class<VB>): InflateViewBinding<VB> {
-    try {
+    return try {
         val method = viewBindingClass.getMethod(
             "inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java
         )
-        return FullInflateViewBinding(method)
+       FullInflateViewBinding(method)
     } catch (e: NoSuchMethodException) {
         val method = viewBindingClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java)
-        return MergeInflateViewBinding(method)
+         MergeInflateViewBinding(method)
     }
 }
 

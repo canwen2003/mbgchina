@@ -7,11 +7,14 @@ import com.mbg.module.ui.kotlin.fragment.BaseFragment
 
 
 class PhoneActivity : BaseFragmentActivity() {
+
     companion object{
-        fun show(context: Context, baseFragment: Class<out BaseFragment?>, bundle: Bundle?) {
+        @JvmStatic
+        @JvmOverloads
+        fun show(context: Context, fragment: Class<out BaseFragment>, bundle: Bundle?=null) {
             val intent = Intent(context, PhoneActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.putExtra(ARG_FRAGMENT_CLASS_NAME, baseFragment.name)
+            intent.putExtra(ARG_FRAGMENT_CLASS_NAME, fragment.name)
             intent.putExtra(ARG_FRAGMENT_ARGS, bundle)
             context.startActivity(intent)
         }

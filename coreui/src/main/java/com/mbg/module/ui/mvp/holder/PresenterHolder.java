@@ -6,6 +6,8 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 
 import com.mbg.module.ui.mvp.MvpPresenter;
+import com.mbg.module.ui.mvp.base.IView;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,19 +15,19 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Presenter管理类，用来保存presenter
  */
-public  final class PresenterHolder {
+public final class PresenterHolder {
     private static volatile PresenterHolder holder;
-    private Map<String, MvpPresenter> pool;//存储Presenter
+    private final Map<String, MvpPresenter<? extends IView>> pool;//存储Presenter
 
-    private PresenterHolder(){
+    private PresenterHolder() {
         pool = new ConcurrentHashMap<>();
     }
 
     public static PresenterHolder get() {
-        if (holder==null){
-            synchronized (PresenterHolder.class){
-                if (holder==null){
-                    holder=new PresenterHolder();
+        if (holder == null) {
+            synchronized (PresenterHolder.class) {
+                if (holder == null) {
+                    holder = new PresenterHolder();
                 }
             }
         }
@@ -34,15 +36,15 @@ public  final class PresenterHolder {
     }
 
 
-
     /**
      * 保存presenter
-     * @param presenter
-     * @param lifecycle
+     *
+     * @param presenter p
+     * @param lifecycle l
      */
-    public void addPresenter(final MvpPresenter presenter, final Lifecycle lifecycle) {
+    public void addPresenter(final MvpPresenter<? extends IView> presenter, final Lifecycle lifecycle) {
 
-        if (pool.containsKey(presenter.getPresenterId())){
+        if (pool.containsKey(presenter.getPresenterId())) {
             pool.remove(presenter.getPresenterId());
         }
         pool.put(presenter.getPresenterId(), presenter);
@@ -58,9 +60,10 @@ public  final class PresenterHolder {
 
     /**
      * 获取presenter
-     * @param presenterId
+     *
+     * @param presenterId id
      */
-    public MvpPresenter getPresenter(final String presenterId) {
+    public MvpPresenter<? extends IView> getPresenter(final String presenterId) {
         return pool.get(presenterId);
     }
 }

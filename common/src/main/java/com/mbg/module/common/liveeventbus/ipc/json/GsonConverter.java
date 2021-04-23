@@ -9,7 +9,7 @@ import com.google.gson.JsonSyntaxException;
  */
 public class GsonConverter implements JsonConverter {
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public String toJson(Object value) {

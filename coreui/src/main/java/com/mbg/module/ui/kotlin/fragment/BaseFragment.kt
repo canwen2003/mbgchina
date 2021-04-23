@@ -14,6 +14,7 @@ import com.mbg.module.ui.kotlin.activity.BaseFragmentActivity
 abstract class BaseFragment : Fragment() {
     var mRootView: View? = null
     private var mContainer = 0
+
     @JvmOverloads
     fun showContent(fragmentClass: Class<out BaseFragment?>?, bundle: Bundle? = null) {
         val activity = activity as BaseFragmentActivity?
@@ -24,12 +25,13 @@ abstract class BaseFragment : Fragment() {
         StatusBarUtil.setColor(activity, color, statusBarAlpha)
     }
 
+
     //返回Layout Id
     @LayoutRes
     abstract fun onRequestLayout(): Int
 
     //返回View
-    fun onCreateView(savedInstanceState: Bundle?): View? {
+    open fun onCreateView(savedInstanceState: Bundle?): View? {
         return mRootView
     }
 
@@ -64,8 +66,7 @@ abstract class BaseFragment : Fragment() {
             (mRootView!!.parent as ViewGroup).removeView(mRootView)
         }
         if (interceptTouchEvents()) {
-            if (mRootView != null) {
-                mRootView!!.setOnTouchListener { view, motionEvent -> true }
+            mRootView?.setOnTouchListener{ view, motionEvent -> true
             }
         }
         return mRootView
@@ -78,7 +79,7 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    fun interceptTouchEvents(): Boolean {
+    open fun interceptTouchEvents(): Boolean {
         return false
     }
 

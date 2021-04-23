@@ -2,8 +2,7 @@ package com.mbg.module.common.liveeventbus.core;
 
 import android.content.Context;
 
-
-import com.mbg.module.common.liveeventbus.utils.AppUtils;
+import com.mbg.module.common.util.AppUtils;
 
 
 /**
