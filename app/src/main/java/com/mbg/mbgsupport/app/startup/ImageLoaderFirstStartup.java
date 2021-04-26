@@ -6,6 +6,8 @@ import android.os.Handler;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.core.manager.ThreadPoolManager;
+import com.mbg.module.common.liveeventbus.LiveEventBus;
+import com.mbg.module.common.liveeventbus.core.LiveEventBusCore;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.StorageUtils;
 import com.mbg.module.common.util.UiUtils;
@@ -33,6 +35,7 @@ public class ImageLoaderFirstStartup extends AndroidStartup<String> {
     @Override
     public String create(@NotNull Context context) {
         LogUtils.d("create:"+getClass().getSimpleName());
+        LiveEventBus.config().setContext(context);
         initImageLoader(context);
         return ImageLoaderFirstStartup.class.getSimpleName();
     }

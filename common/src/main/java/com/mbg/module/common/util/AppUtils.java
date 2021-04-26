@@ -49,6 +49,7 @@ public class AppUtils {
             "com.blankj.utilcode.util.PermissionUtils$PermissionActivity";
 
     private static final ActivityLifecycleImpl ACTIVITY_LIFECYCLE = new ActivityLifecycleImpl();
+    private static boolean mActivityLifeCycleInit=false;
 
 
     private static Application sApplication;
@@ -59,12 +60,6 @@ public class AppUtils {
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new AppLifecycleObserver());
     }
 
-    /**
-     * 设置全局 Application
-     */
-    public static void setApplication(@NonNull Application application) {
-        sApplication = application;
-    }
 
     /**
      * 获取全局 Application
@@ -113,12 +108,17 @@ public class AppUtils {
                 sApplication = app;
             }
             sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
+            mActivityLifeCycleInit=true;
         } else {
             if (app != null && app.getClass() != sApplication.getClass()) {
                 sApplication.unregisterActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
                 ACTIVITY_LIFECYCLE.mActivityList.clear();
                 sApplication = app;
                 sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
+                mActivityLifeCycleInit=true;
+            }else if (!mActivityLifeCycleInit){
+                sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
+                mActivityLifeCycleInit=true;
             }
         }
     }

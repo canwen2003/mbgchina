@@ -1,5 +1,7 @@
 package com.mbg.mbgsupport.demo
 
+import com.mbg.mbgsupport.demo.kotlin.proxy.BaseImpl
+import com.mbg.mbgsupport.demo.kotlin.proxy.Derived
 import com.mbg.mbgsupport.demo.thisLabel.ThisDemo
 
 /**
@@ -22,6 +24,9 @@ class TestKotlinMain {
         com.mbg.mbgsupport.demo.java.singleton.DemoSingleton5.getInstance().logInfo("Java demo 5")*/
 
         ThisDemo().InnerClass().test();
+
+        //调用代理类
+        Derived(BaseImpl(5)).print()
 
     }
 }
