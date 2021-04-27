@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public abstract class MvpFragment<T extends MvpPresenter<? extends IView>> extends BaseFragment implements IView {
+public abstract class MvpFragment<T extends MvpPresenter<? extends IView>> extends BaseFragment implements IView{
     private final String TAG = "_MVP_" + MvpFragment.this.getClass().getSimpleName();
     private boolean mIsVisibleToUser = false;
     private boolean mViewInitialized = false;

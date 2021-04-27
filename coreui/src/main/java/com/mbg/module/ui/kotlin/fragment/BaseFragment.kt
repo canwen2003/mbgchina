@@ -95,7 +95,7 @@ abstract class BaseFragment : Fragment() {
         return false
     }
 
-    fun finish() {
+    open fun finish() {
         val activity = activity as BaseFragmentActivity?
         activity?.doBack(this)
     }

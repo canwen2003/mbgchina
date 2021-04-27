@@ -19,6 +19,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
+import com.mbg.mbgsupport.demo.kotlin.mvp.DemoFragment;
 import com.mbg.mbgsupport.demo.kotlin.viewbinding.DemoViewBindingActivity;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ConstraintFragment;
@@ -53,6 +54,8 @@ import com.mbg.mbgsupport.work.DemoWorker;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
+import com.mbg.module.ui.activity.TerminalActivity;
+import com.mbg.module.ui.kotlin.activity.PhoneActivity;
 import com.mbg.module.ui.view.drawable.DrawableCreator;
 import com.mbg.module.ui.view.drawable.LayerBuilder;
 
@@ -326,6 +329,12 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
 
        LogUtils.d("位置："+getAddress(39.898566,116.464244));
 
+        mViewBinding.btnMvpTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PhoneActivity.show(context, DemoFragment.class, null);
+            }
+        });
 
         Looper.getMainLooper().setMessageLogging(new Printer() {
             private static final String START = ">>>>> Dispatching";
