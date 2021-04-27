@@ -57,4 +57,7 @@
        android:layout_height="300dp"
        android:scaleType="centerInside"/>
 
+<include layout="@layout/view_merge_demo"/>
+
+
 </LinearLayout>
