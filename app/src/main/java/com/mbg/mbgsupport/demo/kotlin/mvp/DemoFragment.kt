@@ -20,9 +20,9 @@ class DemoFragment:MvpFragment<DemoPresenter,FragmentAnimBinding>() {
 
     }
 
-    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentAnimBinding {
+    /*override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentAnimBinding {
         return FragmentAnimBinding.inflate(inflater,container,false)
-    }
+    }*/
 
     override fun onInitView(savedInstanceState: Bundle?) {
         super.onInitView(savedInstanceState)

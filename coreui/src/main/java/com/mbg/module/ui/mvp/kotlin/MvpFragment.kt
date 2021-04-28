@@ -34,6 +34,9 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : Ba
 
     }
 
+    /***
+     * 注意：如果layout中存在merge标签并且设置了id反射就会失败
+     */
     protected open fun getBinding(): VB? {
         try {
             val superClass = javaClass.genericSuperclass
@@ -116,12 +119,13 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : Ba
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        mViewBinding=getViewBinding(inflater,container)
+        mViewBinding=getViewBinding(inflater,container)?:getBinding()
+
 
         return mViewBinding?.root
     }
 
-    abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+    open fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB?=null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
