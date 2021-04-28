@@ -1,15 +1,16 @@
 package com.mbg.mbgsupport.demo.kotlin.mvp
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.mbg.mbgsupport.R
-import com.mbg.mbgsupport.databinding.FragmentDemoViewBindingBinding
+import com.mbg.mbgsupport.databinding.FragmentAnimBinding
+
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
-import kotlinx.android.synthetic.main.fragment_anim.*
-import kotlinx.android.synthetic.main.fragment_textbanner.*
-import kotlinx.android.synthetic.main.view_merge_demo.*
 
 
-class DemoFragment:MvpFragment<DemoPresenter,FragmentDemoViewBindingBinding>() {
+
+class DemoFragment:MvpFragment<DemoPresenter,FragmentAnimBinding>() {
 
     override fun onRequestLayout(): Int {
         return R.layout.fragment_anim
@@ -19,11 +20,14 @@ class DemoFragment:MvpFragment<DemoPresenter,FragmentDemoViewBindingBinding>() {
 
     }
 
+    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentAnimBinding {
+        return FragmentAnimBinding.inflate(inflater,container,false)
+    }
+
     override fun onInitView(savedInstanceState: Bundle?) {
         super.onInitView(savedInstanceState)
         mViewBinding?.apply {
-            btn_pop_out.text="onInitView"
-            tv_mr_view1.text="Merge child";
+            btnPopOut.text="onInitView"
         }
     }
 

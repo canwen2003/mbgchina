@@ -73,10 +73,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     private fun tryGetContainerId() {
-        if (mRootView != null) {
-            val parent = mRootView!!.parent as View
-            mContainer = parent.id
-        }
+        mContainer=mRootView?.parent?.let {
+            (it as View).id
+        }?:0
     }
 
     open fun interceptTouchEvents(): Boolean {

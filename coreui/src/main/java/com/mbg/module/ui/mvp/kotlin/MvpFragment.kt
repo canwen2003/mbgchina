@@ -17,13 +17,13 @@ import com.mbg.module.ui.mvp.kotlin.holder.PresenterHolder
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-abstract class MvpFragment<T : MvpPresenter<out IntView>, B : ViewBinding> : BaseFragment(), IntView {
+abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : BaseFragment(), IntView {
     private val logTag = "_MVP_" + this@MvpFragment.javaClass.simpleName
     var mIsVisibleToUser = false
     var mViewInitialized = false
     var mMvpRegistered = false
     var mPresenter: T? = null
-    var mViewBinding:B?=null
+    var mViewBinding:VB?=null
 
 
     open fun onCreateConfigured() {}
@@ -31,10 +31,10 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, B : ViewBinding> : Bas
 
     @CallSuper
     open fun onInitView(savedInstanceState: Bundle?) {
-        mViewBinding=getBinding()
+
     }
 
-    protected open fun getBinding(): B? {
+    protected open fun getBinding(): VB? {
         try {
             val superClass = javaClass.genericSuperclass
             val type = (superClass as ParameterizedType?)!!.actualTypeArguments[1]
@@ -115,23 +115,13 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, B : ViewBinding> : Bas
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mRootView = super.onCreateView(inflater, container, savedInstanceState)
-        val id: Int = onRequestLayout()
-        if (id > 0 && mRootView == null) {
-            mRootView = inflater.inflate(id, container, false)
-            initView()
-        }
-        if (mRootView == null) {
-            mRootView = onCreateView(savedInstanceState)
-            initView()
-        } else if (mRootView?.parent != null) {
-            (mRootView?.parent as ViewGroup).removeView(mRootView)
-        }
-        if (interceptTouchEvents()) {
-            mRootView?.setOnTouchListener{ view, motionEvent -> true }
-        }
-        return mRootView
+        super.onCreateView(inflater, container, savedInstanceState)
+        mViewBinding=getViewBinding(inflater,container)
+
+        return mViewBinding?.root
     }
+
+    abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -217,7 +207,7 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, B : ViewBinding> : Bas
     // 判断父fragment是否可见
     open fun isParentVisible(): Boolean {
         val fragment = parentFragment
-        return fragment !is MvpFragment<*,*> || (fragment as MvpFragment<T,B>).mIsVisibleToUser
+        return fragment !is MvpFragment<*,*> || (fragment as MvpFragment<T,VB>).mIsVisibleToUser
     }
 
 }
