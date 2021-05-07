@@ -1,5 +1,6 @@
 package com.mbg.mbgsupport.fragment;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,17 +55,44 @@ public class AnimsFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         int viewId=view.getId();
         if (viewId==R.id.lt_anim_view){
-            mLottieAnimationView.setAnimation("LottieJson/flash_chat_friend_applying.json");
+            mLottieAnimationView.setAnimation("LottieJson/anim_buy_progress.json");
             mLottieAnimationView.setImageAssetsFolder("LottieImg");
+            mLottieAnimationView.setRepeatMode(LottieDrawable.RESTART);
+            mLottieAnimationView.setRepeatCount(LottieDrawable.INFINITE);
             mLottieAnimationView.playAnimation();
             progress=0.01f;
         }else if (viewId==R.id.btn_pop_out){
 
-            if (progress==0.01f) {
-                mLottieAnimationView.setAnimation("LottieJson/flash_chat_friend_receive.json");
+          /*  if (progress==0.01f) {
+                mLottieAnimationView.setAnimation("LottieJson/anim_buy_success.json");
                 mLottieAnimationView.setImageAssetsFolder("LottieImg");
-            }
-            mLottieAnimationView.setProgress(progress);
+            }*/
+            mLottieAnimationView.setAnimation("LottieJson/anim_buy_success.json");
+            mLottieAnimationView.setImageAssetsFolder("LottieImg");
+            mLottieAnimationView.setRepeatCount(0);
+            mLottieAnimationView.playAnimation();
+            mLottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            //mLottieAnimationView.setProgress(progress);
             progress+=0.01f;
            // mLottieAnimationView.playAnimation();
         }else if (viewId==R.id.btn_fun1){
