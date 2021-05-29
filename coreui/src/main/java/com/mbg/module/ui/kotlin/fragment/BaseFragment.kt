@@ -66,7 +66,7 @@ abstract class BaseFragment : Fragment() {
             (mRootView!!.parent as ViewGroup).removeView(mRootView)
         }
         if (interceptTouchEvents()) {
-            mRootView?.setOnTouchListener{ view, motionEvent -> true
+            mRootView?.setOnTouchListener{ _, _ -> true
             }
         }
         return mRootView

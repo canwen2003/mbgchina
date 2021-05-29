@@ -17,14 +17,7 @@ class DemoViewBindingFragment : Fragment(R.layout.fragment_demo_view_binding) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBindingRef){
-            tvTest1.text="初始化 Test1 控件"
-            tvTest1.setOnClickListener {
-                ToastUtils.debugShow("别点击我");
-            }
-            tvTest2.text="初始化 Text2 控件"
-            tvTest2.setOnClickListener {
-                ToastUtils.debugShow("来点击我");
-            }
+
         }
     }
 }

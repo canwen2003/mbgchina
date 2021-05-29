@@ -2,26 +2,223 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
+    android:paddingTop="80dp"
     android:orientation="vertical">
 
-
     <TextView
-        android:id="@+id/tv_test1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textColor="@color/color_6596ff"
-        android:text="Test1" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="颜色百分比透明度转换器"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textColor="@color/red_100" />
 
-    <TextView
-        android:id="@+id/tv_test2"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        android:textColor="@color/color_6596ff"
-        android:text="Test2" />
+        android:gravity="center_vertical"
+        android:layout_marginTop="40dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_orig"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/common_label_selected_bg"
+            android:text="0"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="23sp"
+            android:gravity="center"
+            android:textColor="@color/red_100" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="%==>"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/red_100" />
+
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/common_label_selected_bg"
+            android:text="00"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="23sp"
+            android:gravity="center"
+            android:textColor="@color/red_100" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:stretchColumns="*">
+
+        <TableRow>
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_0"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="0"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_Clear"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="复位"
+                app:textColor="@color/color_14c7de"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_Change"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="转换"
+                app:textColor="@color/color_end"
+                app:textSize="22sp"/>
+        </TableRow>
+
+        <TableRow android:layout_marginTop="20dp">
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="1"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="2"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_3"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="3"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+        </TableRow>
+
+        <TableRow android:layout_marginTop="20dp">
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_4"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="4"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_5"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="5"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_6"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="6"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+        </TableRow>
+
+        <TableRow android:layout_marginTop="20dp">
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_7"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="7"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_8"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="8"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+
+            <com.mbg.module.ui.view.button.SuperButton
+                android:id="@+id/btn_9"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:color_normal="@color/common_title_bar_bg"
+                app:corner="20dp"
+                app:text="9"
+                app:textColor="@color/colorAccent"
+                app:textSize="22sp"/>
+        </TableRow>
+    </TableLayout>
+
 
 </LinearLayout>

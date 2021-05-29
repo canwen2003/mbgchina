@@ -25,14 +25,15 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : Ba
     var mPresenter: T? = null
     var mViewBinding:VB?=null
 
-
-    open fun onCreateConfigured() {}
-
+    override fun onRequestLayout(): Int {
+        return 0
+    }
 
     @CallSuper
     open fun onInitView(savedInstanceState: Bundle?) {
 
     }
+
 
     /***
      * 注意：如果layout中存在merge标签并且设置了id反射就会失败
@@ -111,7 +112,6 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : Ba
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.v(logTag, " onCreate()")
-        onCreateConfigured()
         mPresenter = onCreatePresenter()
         mPresenter?.init(requireActivity())
     }
