@@ -132,6 +132,8 @@ public class AnimsFragment extends BaseFragment implements View.OnClickListener{
 
         Bitmap result = getResultBitmap(mSourceBitmap.getWidth(),mSourceBitmap.getHeight(),b);
         mImageView.setImageBitmap(result);
+
+        getActivity().onBackPressed();
     }
 
     //圆形
