@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 import com.mbg.module.ui.view.listener.OnScrollListener;
+import com.mbg.module.ui.view.listener.OnSuperListener;
 
 /**
  * Created by Gap
@@ -17,13 +18,14 @@ public class GestureDetector {
     private float mCurPosY;
     private GestureType mGestureType= GestureType.UNKNOWN;
     private OnScrollListener mOnScrollListener;
-    private float mMovingThreshold;//滑动阀值
+    private OnSuperListener mOnSuperListener;
+    private final float mMovingThreshold;//滑动阀值
 
     public GestureDetector(Context context){
         mMovingThreshold= ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
-    public boolean onTouchEvent(MotionEvent ev) {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         final int action = ev.getAction();
         float focusX=ev.getX();
         float focusY=ev.getY();
@@ -31,32 +33,42 @@ public class GestureDetector {
         switch (action & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_POINTER_DOWN:
             case MotionEvent.ACTION_DOWN:
-                down(focusX,focusY);
-                break;
+                return down(ev,focusX,focusY);
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_UP:
-                up(focusX,focusY);
-                break;
+               return up(ev,focusX,focusY);
             case MotionEvent.ACTION_MOVE:
-                move(focusX,focusY);
-                break;
+                return move(ev,focusX,focusY);
             case MotionEvent.ACTION_CANCEL:
                 break;
         }
 
-        return true;
+        if (mOnSuperListener!=null){
+            return mOnSuperListener.dispatchTouchEvent(ev);
+        }else {
+            return false;
+        }
     }
-    private void down(float x,float y){
+    private boolean down(MotionEvent ev,float x,float y){
         mPosX=x;
         mPosY=y;
         mGestureType= GestureType.DOWN;
+        if (mOnSuperListener!=null){
+            return mOnSuperListener.dispatchTouchEvent(ev);
+        }else {
+            return false;
+        }
     }
 
-    private void move(float x,float y){
+    private boolean move(MotionEvent ev,float x,float y){
         mCurPosX=x;
         mCurPosY=y;
         if (Math.abs(mCurPosX-mPosX)<mMovingThreshold&&Math.abs(mCurPosY-mPosY)<mMovingThreshold){
-            return;
+            if (mOnSuperListener!=null){
+                return mOnSuperListener.dispatchTouchEvent(ev);
+            }else {
+                return false;
+            }
         }
 
         if (mGestureType== GestureType.DOWN){
@@ -80,9 +92,10 @@ public class GestureDetector {
         mPosX=mCurPosX;
         mPosY=mCurPosY;
 
+        return true;
     }
 
-    private void up(float x,float y){
+    private boolean up(MotionEvent ev,float x,float y){
         mCurPosX=x;
         mCurPosY=y;
         if (mGestureType== GestureType.MOVING){
@@ -92,6 +105,13 @@ public class GestureDetector {
                 mOnScrollListener.onScrollStop();
                 mPosX=mCurPosX;
                 mPosY=mCurPosY;
+            }
+            return true;
+        }else {
+            if (mOnSuperListener!=null){
+                return mOnSuperListener.dispatchTouchEvent(ev);
+            }else {
+                return false;
             }
         }
     }
@@ -107,6 +127,10 @@ public class GestureDetector {
 
     public void setOnScrollListener(OnScrollListener listener){
         mOnScrollListener=listener;
+    }
+
+    public void setOnSuperListener(OnSuperListener listener){
+        mOnSuperListener=listener;
     }
 
 }

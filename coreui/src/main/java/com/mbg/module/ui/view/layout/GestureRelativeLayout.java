@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import com.mbg.module.ui.view.detector.GestureDetector;
 import com.mbg.module.ui.view.listener.OnScrollListener;
+import com.mbg.module.ui.view.listener.OnSuperListener;
 
 /**
  * created by Gap
@@ -32,17 +33,26 @@ public class GestureRelativeLayout extends RelativeLayout {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         if (mGestureEnable) {
-            return mGestureDetector.onTouchEvent(event);
+            return mGestureDetector.dispatchTouchEvent(ev);
         }else {
-            return super.onTouchEvent(event);
+            return super.dispatchTouchEvent(ev);
         }
     }
 
+    private boolean dispatchTouchEventEx(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
 
     private void init(Context context){
         mGestureDetector=new GestureDetector(context);
+        mGestureDetector.setOnSuperListener(new OnSuperListener() {
+            @Override
+            public boolean dispatchTouchEvent(MotionEvent ev) {
+                return GestureRelativeLayout.this.dispatchTouchEventEx(ev);
+            }
+        });
         mGestureEnable=true;
     }
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_bg_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/red_100"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="底层View"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+
+    <com.mbg.module.ui.view.layout.GestureRelativeLayout
+        android:id="@+id/gesture_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_moved_view"
+            android:layout_width="match_parent"
+            android:layout_height="900dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-600dp"
+            android:background="@color/red_100"
+            android:text="*******HHHHHHHHHHHHHHHHHHHHHHHHHHLLLLLLLLLLLLLLLL"
+            android:textColor="@color/black"
+            android:textSize="90sp"/>
+
+    </com.mbg.module.ui.view.layout.GestureRelativeLayout>
+
+</FrameLayout>
