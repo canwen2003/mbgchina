@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
+import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout;
@@ -62,6 +63,10 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         SlidingTabLayout tabLayout_4 = findViewById( R.id.tl_4);
         /** indicator固定宽度 */
         SlidingTabLayout tabLayout_5 = findViewById( R.id.tl_5);
+        tabLayout_5.setIndicatorColor(getResources().getColor(R.color.blue_500),getResources().getColor(R.color.blue_200));
+        tabLayout_5.setIndicatorCornerRadius(2.0f);
+        tabLayout_5.setIndicatorHeight(4.0f);
+        tabLayout_5.setIndicatorWidth(32.0f);
         /** indicator圆 */
         SlidingTabLayout tabLayout_6 = findViewById( R.id.tl_6);
         /** indicator矩形圆角 */

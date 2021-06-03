@@ -185,6 +185,10 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         mTabPadding = ta.getDimension(R.styleable.SlidingTabLayout_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(20));
 
         ta.recycle();
+
+        if (mIndicatorHeight>0){
+            mIndicatorDrawable.setColor(mIndicatorColor);
+        }
     }
 
     public void setTabBackGroundView(OnBackgroundListener onBackGroundListener){
@@ -537,7 +541,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
                     mIndicatorCornerRadius = mIndicatorHeight / 2;
                 }
 
-                mIndicatorDrawable.setColor(mIndicatorColor);
+
                 mIndicatorDrawable.setBounds(paddingLeft + (int) mIndicatorMarginLeft + mIndicatorRect.left,
                         (int) mIndicatorMarginTop, (int) (paddingLeft + mIndicatorRect.right - mIndicatorMarginRight),
                         (int) (mIndicatorMarginTop + mIndicatorHeight));
@@ -547,8 +551,6 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             }
         } else {
             if (mIndicatorHeight > 0) {
-                mIndicatorDrawable.setColor(mIndicatorColor);
-
                 if (mIndicatorGravity == Gravity.BOTTOM) {
                     mIndicatorDrawable.setBounds(paddingLeft + (int) mIndicatorMarginLeft + mIndicatorRect.left,
                             height - (int) mIndicatorHeight - (int) mIndicatorMarginBottom,
@@ -957,5 +959,34 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     protected int sp2px(float sp) {
         final float scale = this.mContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (sp * scale + 0.5f);
+    }
+
+    public void  setIndicatorColor(int startColor,int centerColor,int endColor,GradientDrawable.Orientation orientation){
+        int[] colors = new int[3];
+            colors[0] = startColor;
+            colors[1] = centerColor;
+            colors[2] = endColor;
+            if (mIndicatorDrawable!=null) {
+                mIndicatorDrawable.setOrientation(orientation);
+                mIndicatorDrawable.setColors(colors);
+            }
+    }
+
+    public void  setIndicatorColor(int startColor,int endColor,GradientDrawable.Orientation orientation){
+        int[] colors = new int[2];
+        colors[0] = startColor;
+        colors[1] = endColor;
+        if (mIndicatorDrawable!=null) {
+            mIndicatorDrawable.setOrientation(orientation);
+            mIndicatorDrawable.setColors(colors);
+        }
+    }
+
+    public void  setIndicatorColor(int startColor,int endColor){
+        setIndicatorColor(startColor,endColor, GradientDrawable.Orientation.LEFT_RIGHT);
+    }
+
+    public void  setIndicatorColor(int startColor,int centerColor,int endColor){
+        setIndicatorColor(startColor,endColor,centerColor,GradientDrawable.Orientation.LEFT_RIGHT);
     }
 }
