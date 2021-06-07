@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="15dp"
+    android:paddingStart="15dp"
     android:paddingTop="20dp"
-    android:paddingRight="15dp"
+    android:paddingEnd="15dp"
     android:paddingBottom="20dp">
 
     <LinearLayout
@@ -18,8 +18,8 @@
             android:id="@+id/flow2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_marginTop="32dp"
             app:flexWrap="nowrap"
             app:flexDirection="column"
@@ -41,8 +41,8 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="mon"
                 android:textColor="@color/color_6596ff"
                 app:layout_flexBasisPercent="70%"/>
@@ -51,8 +51,8 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/common_label_selected_bg"
                 android:gravity="center"
                 android:padding="4dp"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:paddingTop="10dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:background="@drawable/common_box_bg"
             app:flexWrap="wrap"
             app:flexDirection="row"
@@ -81,7 +81,7 @@
                 android:padding="4dp"
                 android:text="sun"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/color_6596ff" />
 
             <TextView
@@ -91,7 +91,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="mon"
                 android:textColor="@color/color_6596ff" />
 
@@ -102,7 +102,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="tue"
                 android:textColor="@color/color_6596ff" />
 
@@ -113,7 +113,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="wed"
                 android:textColor="@color/color_6596ff" />
 
@@ -124,7 +124,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="thu"
                 android:textColor="@color/color_6596ff" />
 
@@ -135,7 +135,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="fri"
                 android:textColor="@color/color_6596ff" />
 
@@ -146,7 +146,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -157,7 +157,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -168,7 +168,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
         </com.google.android.flexbox.FlexboxLayout>
@@ -186,7 +186,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:background="@drawable/common_box_bg"
             app:flexWrap="wrap"
             app:flexDirection="row"
@@ -200,7 +200,7 @@
                 android:padding="4dp"
                 android:text="sun"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/color_6596ff" />
 
             <TextView
@@ -210,7 +210,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="mon"
                 android:textColor="@color/color_6596ff" />
 
@@ -221,7 +221,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="tue"
                 android:textColor="@color/color_6596ff" />
 
@@ -232,7 +232,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="wed"
                 android:textColor="@color/color_6596ff" />
 
@@ -244,7 +244,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="thu"
                 app:layout_wrapBefore="true"
                 android:textColor="@color/color_6596ff" />
@@ -256,7 +256,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="fri"
                 android:textColor="@color/color_6596ff" />
 
@@ -267,7 +267,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -278,7 +278,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -289,7 +289,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
         </com.google.android.flexbox.FlexboxLayout>
@@ -299,7 +299,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:paddingTop="10dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:background="@drawable/common_box_bg"
             app:flexWrap="wrap"
             app:flexDirection="row"
@@ -313,7 +313,7 @@
                 android:padding="4dp"
                 android:text="sun"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/color_6596ff" />
 
             <TextView
@@ -323,7 +323,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="mon"
                 android:textColor="@color/color_6596ff" />
 
@@ -334,7 +334,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="tue"
                 android:textColor="@color/color_6596ff" />
 
@@ -345,7 +345,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="wed"
                 android:textColor="@color/color_6596ff" />
 
@@ -356,7 +356,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="thu"
                 android:textColor="@color/color_6596ff" />
 
@@ -367,7 +367,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="fri"
                 android:textColor="@color/color_6596ff" />
 
@@ -378,7 +378,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -389,7 +389,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -400,7 +400,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
         </com.google.android.flexbox.FlexboxLayout>
@@ -410,7 +410,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:paddingTop="10dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:background="@drawable/common_box_bg"
             app:flexWrap="wrap"
             app:flexDirection="row"
@@ -424,7 +424,7 @@
                 android:padding="4dp"
                 android:text="sun"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/color_6596ff" />
 
             <TextView
@@ -434,7 +434,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="mon"
                 android:textColor="@color/color_6596ff" />
 
@@ -445,7 +445,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="tue"
                 android:textColor="@color/color_6596ff" />
 
@@ -456,7 +456,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="wed"
                 android:textColor="@color/color_6596ff" />
 
@@ -467,7 +467,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="thu"
                 android:textColor="@color/color_6596ff" />
 
@@ -478,7 +478,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="fri"
                 android:textColor="@color/color_6596ff" />
 
@@ -489,7 +489,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -500,7 +500,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
 
@@ -511,7 +511,7 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="sat"
                 android:textColor="@color/color_6596ff" />
         </com.google.android.flexbox.FlexboxLayout>

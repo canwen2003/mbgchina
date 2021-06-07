@@ -5,9 +5,9 @@
     android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/pudding_padding_default"
+    android:paddingStart="@dimen/pudding_padding_default"
     android:paddingTop="@dimen/pudding_text_padding_top"
-    android:paddingRight="@dimen/pudding_padding_default"
+    android:paddingEnd="@dimen/pudding_padding_default"
     android:paddingBottom="@dimen/pudding_padding_default">
 
     <RelativeLayout
@@ -37,9 +37,9 @@
             android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/big_margin"
-            android:layout_toRightOf="@+id/root_icon"
-            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_toEndOf="@+id/root_icon"
+            android:paddingStart="@dimen/small_margin"
             android:layout_centerVertical="true"
             android:orientation="vertical">
 

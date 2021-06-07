@@ -38,7 +38,7 @@
             android:id="@+id/tv_showmore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
+            android:layout_gravity="end|bottom"
             android:textSize="36sp"
             android:text="4777777"/>
     </com.mbg.mbgsupport.fragment.AvatarFrameLayout>

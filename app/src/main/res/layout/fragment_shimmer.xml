@@ -10,8 +10,8 @@
         android:id="@+id/shimmer_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:paddingTop="30dp">
 
         <RelativeLayout
@@ -22,14 +22,14 @@
                 android:id="@+id/shimmer_avatar_1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginRight="11dp"
+                android:layout_marginEnd="11dp"
                 android:background="@drawable/avatar_background"/>
 
             <View
                 android:layout_width="130dp"
                 android:layout_height="19dp"
                 android:layout_alignTop="@+id/shimmer_avatar_1"
-                android:layout_toRightOf="@+id/shimmer_avatar_1"
+                android:layout_toEndOf="@+id/shimmer_avatar_1"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -37,14 +37,14 @@
                 android:layout_width="39dp"
                 android:layout_height="13dp"
                 android:layout_alignBottom="@+id/shimmer_avatar_1"
-                android:layout_toRightOf="@+id/shimmer_avatar_1"
+                android:layout_toEndOf="@+id/shimmer_avatar_1"
                 android:background="@color/shimmer_background_color"/>
 
             <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_alignBottom="@+id/shimmer_description_1"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -61,14 +61,14 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/shimmer_divider_1"
-                android:layout_marginRight="11dp"
+                android:layout_marginEnd="11dp"
                 android:background="@drawable/avatar_background"/>
 
             <View
                 android:layout_width="130dp"
                 android:layout_height="19dp"
                 android:layout_alignTop="@+id/shimmer_avatar_2"
-                android:layout_toRightOf="@+id/shimmer_avatar_2"
+                android:layout_toEndOf="@+id/shimmer_avatar_2"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -76,14 +76,14 @@
                 android:layout_width="39dp"
                 android:layout_height="13dp"
                 android:layout_alignBottom="@+id/shimmer_avatar_2"
-                android:layout_toRightOf="@+id/shimmer_avatar_2"
+                android:layout_toEndOf="@+id/shimmer_avatar_2"
                 android:background="@color/shimmer_background_color"/>
 
             <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_alignBottom="@+id/shimmer_description_2"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -100,14 +100,14 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/shimmer_divider_2"
-                android:layout_marginRight="11dp"
+                android:layout_marginEnd="11dp"
                 android:background="@drawable/avatar_background"/>
 
             <View
                 android:layout_width="130dp"
                 android:layout_height="19dp"
                 android:layout_alignTop="@+id/shimmer_avatar_3"
-                android:layout_toRightOf="@+id/shimmer_avatar_3"
+                android:layout_toEndOf="@+id/shimmer_avatar_3"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -115,14 +115,14 @@
                 android:layout_width="39dp"
                 android:layout_height="13dp"
                 android:layout_alignBottom="@+id/shimmer_avatar_3"
-                android:layout_toRightOf="@+id/shimmer_avatar_3"
+                android:layout_toEndOf="@+id/shimmer_avatar_3"
                 android:background="@color/shimmer_background_color"/>
 
             <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_alignBottom="@+id/shimmer_description_3"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -139,14 +139,14 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/shimmer_divider_3"
-                android:layout_marginRight="11dp"
+                android:layout_marginEnd="11dp"
                 android:background="@drawable/avatar_background"/>
 
             <View
                 android:layout_width="130dp"
                 android:layout_height="19dp"
                 android:layout_alignTop="@+id/shimmer_avatar_4"
-                android:layout_toRightOf="@+id/shimmer_avatar_4"
+                android:layout_toEndOf="@+id/shimmer_avatar_4"
                 android:background="@color/shimmer_background_color"/>
 
             <View
@@ -154,14 +154,14 @@
                 android:layout_width="39dp"
                 android:layout_height="13dp"
                 android:layout_alignBottom="@+id/shimmer_avatar_4"
-                android:layout_toRightOf="@+id/shimmer_avatar_4"
+                android:layout_toEndOf="@+id/shimmer_avatar_4"
                 android:background="@color/shimmer_background_color"/>
 
             <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_alignBottom="@+id/shimmer_description_4"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:background="@color/shimmer_background_color"/>
 
         </RelativeLayout>
@@ -174,8 +174,8 @@
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
         app:shimmer_animation_duration="1200"
         app:shimmer_reverse_animation="true"
         app:shimmer_auto_start="true">

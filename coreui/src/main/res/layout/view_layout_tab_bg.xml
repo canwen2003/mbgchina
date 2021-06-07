@@ -9,8 +9,8 @@
         android:id="@+id/view_item_1"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
 
@@ -18,24 +18,24 @@
         android:id="@+id/view_item_2"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
     <View
         android:id="@+id/view_item_3"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
     <View
         android:id="@+id/view_item_4"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
 
@@ -43,8 +43,8 @@
         android:id="@+id/view_item_5"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
 
@@ -52,16 +52,16 @@
         android:id="@+id/view_item_6"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
     <View
         android:id="@+id/view_item_7"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
 
@@ -69,8 +69,8 @@
         android:id="@+id/view_item_8"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/teal_100"
         android:visibility="gone"/>
 
