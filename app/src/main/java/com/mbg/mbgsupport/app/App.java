@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.didichuxing.doraemonkit.DoKit;
 import com.mbg.mbgsupport.app.startup.ImageLoaderFirstStartup;
 import com.mbg.mbgsupport.app.startup.SampleFourthStartup;
 import com.mbg.mbgsupport.app.startup.PreferencesSecondStartup;
@@ -32,6 +33,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+       new  DoKit.Builder(this).build();
 
         StartupConfig startupConfig = new StartupConfig.Builder()
                 .setAwaitTimeout(12000)

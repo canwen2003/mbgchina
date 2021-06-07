@@ -18,8 +18,11 @@ import android.widget.ImageView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
 import com.mbg.mbgsupport.R;
+import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
+import com.mbg.module.ui.view.layout.DoubleClickedRelativeLayout;
+import com.mbg.module.ui.view.listener.OnMultiClickedListener;
 
 public class AnimsFragment extends BaseFragment implements View.OnClickListener{
 
@@ -41,7 +44,55 @@ public class AnimsFragment extends BaseFragment implements View.OnClickListener{
         mLottieAnimationView.setImageResource(R.drawable.girl);
         mLottieAnimationView.setOnClickListener(this);
         mLottieAnimationView.setRepeatMode(LottieDrawable.RESTART);
-        findViewById(R.id.btn_pop_out).setOnClickListener(this);
+        DoubleClickedRelativeLayout clickedRelativeLayout=findViewById(R.id.root_top_view);
+        clickedRelativeLayout.setMultiClickedListener(new OnMultiClickedListener() {
+            @Override
+            public void onClicked(View view) {
+                mLottieAnimationView.setAnimation("LottieJson/anim_buy_success.json");
+                mLottieAnimationView.setImageAssetsFolder("LottieImg");
+                LogUtils.d("zzy: onClicked");
+            }
+
+            @Override
+            public void onLongClicked(View view) {
+                mLottieAnimationView.setAnimation("LottieJson/anim_buy_success.json");
+                mLottieAnimationView.setImageAssetsFolder("LottieImg");
+                mLottieAnimationView.setRepeatCount(0);
+                mLottieAnimationView.playAnimation();
+                mLottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                LogUtils.d("zzy: onLongClicked");
+            }
+
+            @Override
+            public void onDoubleClicked(View view) {
+                mLottieAnimationView.setAnimation("LottieJson/anim_buy_progress.json");
+                mLottieAnimationView.setImageAssetsFolder("LottieImg");
+                mLottieAnimationView.setRepeatMode(LottieDrawable.RESTART);
+                mLottieAnimationView.setRepeatCount(LottieDrawable.INFINITE);
+                mLottieAnimationView.playAnimation();
+                LogUtils.d("zzy: onDoubleClicked");
+            }
+        });
         findViewById(R.id.btn_fun1).setOnClickListener(this);
         findViewById(R.id.btn_fun2).setOnClickListener(this);
         findViewById(R.id.btn_fun3).setOnClickListener(this);
@@ -61,40 +112,6 @@ public class AnimsFragment extends BaseFragment implements View.OnClickListener{
             mLottieAnimationView.setRepeatCount(LottieDrawable.INFINITE);
             mLottieAnimationView.playAnimation();
             progress=0.01f;
-        }else if (viewId==R.id.btn_pop_out){
-
-          /*  if (progress==0.01f) {
-                mLottieAnimationView.setAnimation("LottieJson/anim_buy_success.json");
-                mLottieAnimationView.setImageAssetsFolder("LottieImg");
-            }*/
-            mLottieAnimationView.setAnimation("LottieJson/anim_buy_success.json");
-            mLottieAnimationView.setImageAssetsFolder("LottieImg");
-            mLottieAnimationView.setRepeatCount(0);
-            mLottieAnimationView.playAnimation();
-            mLottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-            //mLottieAnimationView.setProgress(progress);
-            progress+=0.01f;
-           // mLottieAnimationView.playAnimation();
         }else if (viewId==R.id.btn_fun1){
             usingRoundRect();
         }

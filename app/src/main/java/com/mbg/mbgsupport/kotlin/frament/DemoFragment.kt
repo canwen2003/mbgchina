@@ -1,12 +1,13 @@
 package com.mbg.mbgsupport.kotlin.frament
 
 import android.widget.Button
+import android.widget.TextView
 import com.mbg.mbgsupport.R
 import com.mbg.module.ui.fragment.BaseFragment
 
 
 class DemoFragment : BaseFragment(){
-    private var tvS: Button?=null
+    private var tvS: TextView?=null
 
     override fun onRequestLayout(): Int {
        return R.layout.fragment_anim

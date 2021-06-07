@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'ServiceLoader'
 apply plugin: 'kotlin-android'
 
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -83,6 +82,9 @@ dependencies {
 
     //android-startup提供一种在应用启动时能够更加简单、高效的方式来初始化组件。开发人员可以使用android-startup来简化启动序列，并显式地设置初始化顺序与组件之间的依赖关系。 与此同时android-startup支持同步与异步等待，并通过有向无环图拓扑排序的方式来保证内部依赖组件的初始化顺序。
     implementation 'com.rousetime.android:android-startup:1.0.6'
+
+
+    debugImplementation "io.github.didi.dokit:dokitx:3.4.0-alpha03"
 
 
     implementation project(path: ':common')

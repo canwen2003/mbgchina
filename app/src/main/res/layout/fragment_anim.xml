@@ -6,11 +6,19 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_pop_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pop Out" />
+    <com.mbg.module.ui.view.layout.DoubleClickedRelativeLayout
+        android:id="@+id/root_top_view"
+        android:layout_width="100dp"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/btn_pop_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pop Out" />
+    </com.mbg.module.ui.view.layout.DoubleClickedRelativeLayout>
+
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lt_anim_view"
