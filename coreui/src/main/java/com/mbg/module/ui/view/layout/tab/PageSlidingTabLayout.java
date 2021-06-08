@@ -137,6 +137,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
 
             this.mContext = context;
             mTabsContainer = new LinearLayout(context);
+            mTabsContainer.setLayoutDirection(LAYOUT_DIRECTION_LTR);
             addView(mTabsContainer);
 
             obtainAttributes(context, attrs);

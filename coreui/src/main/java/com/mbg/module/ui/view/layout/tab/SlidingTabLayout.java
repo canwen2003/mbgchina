@@ -127,7 +127,11 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
         this.mContext = context;
         mTabsContainer = new LinearLayout(context);
+        mTabsContainer.setLayoutDirection(LAYOUT_DIRECTION_LTR);
+        mTabsContainer.setOrientation(LinearLayout.HORIZONTAL);
         addView(mTabsContainer);
+        mTabsContainer.getLayoutParams().height=ViewGroup.LayoutParams.MATCH_PARENT;
+        mTabsContainer.getLayoutParams().width=ViewGroup.LayoutParams.WRAP_CONTENT;
 
         obtainAttributes(context, attrs);
 
