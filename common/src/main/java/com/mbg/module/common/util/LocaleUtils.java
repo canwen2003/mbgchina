@@ -150,6 +150,7 @@ public class LocaleUtils {
         PT("pt"),//葡萄牙文
         IN("in"),//印度尼西亚文
         VI("vi"),//越南文
+        AR("ar"),//阿拉伯
         RU("ru");//俄罗斯文
 
         Language(String code){
@@ -175,6 +176,7 @@ public class LocaleUtils {
         Indonesia("ID"),//印尼
         Vietnam("VN"),//越南
         Russia("RU"),//俄罗斯
+        Arab("AE"),//阿拉伯
         India("IN");//印度
         CountryArea(String code){
             this.code=code;

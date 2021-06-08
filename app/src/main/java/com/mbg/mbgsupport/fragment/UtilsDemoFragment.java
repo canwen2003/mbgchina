@@ -131,6 +131,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         findViewById(R.id.btn_test9).setOnClickListener(this);
         findViewById(R.id.btn_show_global).setOnClickListener(this);
         findViewById(R.id.btn_hide_global).setOnClickListener(this);
+        findViewById(R.id.btn_ar).setOnClickListener(this);
         mGlobalView=View.inflate(getActivity(),R.layout.view_global_demo,null);
 
         weakTextView=findViewById(R.id.btn_weak_handle);
@@ -214,59 +215,6 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
 
     }
 
-    protected void  onDataLoadingStart(){
-
-        HashSet hs = new HashSet();
-        long ks = System.currentTimeMillis();
-        for (int i=1;i<99999;i++)
-            hs.add(i);
-        Iterator it = hs.iterator();
-        while (it.hasNext())
-            it.next();
-        boolean add=hs.add(1);
-        hs.remove(5555);
-        hs.clear();
-        long js = System.currentTimeMillis();
-
-
-        //LinkedHashSet效率
-        LinkedHashSet lh = new LinkedHashSet();
-        long ks1 = System.currentTimeMillis();
-        for (int i=1;i<99999;i++)
-            lh.add(i);
-
-
-        Iterator it1 = lh.iterator();
-        while (it1.hasNext())
-            it1.next();
-        add=lh.add(1);
-        lh.remove(5555);
-        lh.clear();
-        long js1 = System.currentTimeMillis();
-
-
-        //TreeSet效率
-        TreeSet ts = new TreeSet();
-        long ks2 = System.currentTimeMillis();
-        for (int i=1;i<99999;i++)
-            ts.add(i);
-
-
-        Iterator it2 = ts.iterator();
-        while (it2.hasNext())
-            it2.next();
-        add=ts.add(1);
-        add=ts.add(0);
-        ts.remove(5555);
-        ts.clear();
-        long js2 = System.currentTimeMillis();
-
-        LogUtils.d("HashSet共花费时间："+(js-ks)+"ms");
-        LogUtils.d("LinkedHashSet共花费时间："+(js1-ks1)+"ms");
-        LogUtils.d("TreeSet共花费时间："+(js2-ks2)+"ms");
-
-    }
-
     protected void  onDataLoadingFinish(){
         LogUtils.d("LoadingStateViewModel:onDataLoadingFinish");
     }
@@ -295,6 +243,9 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
             case R.id.btn_test4:
                 ToastUtils.show("keyString="+ FastSharedPreferences.get("FSP_DATA_USER").getString("keyString",""));
                 //onTest4();
+                break;
+            case R.id.btn_ar:
+                onAR();
                 break;
             case R.id.btn_test5:
                 onTest5();
@@ -420,6 +371,11 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
     }
     private void onTest6(){
         LocaleUtils.setLocale(getActivity(),new Locale(LocaleUtils.Language.EN.getCode(),LocaleUtils.CountryArea.America.getCode()));
+        AppUtils.rebootApplication(MainActivity.class);
+    }
+
+    private void onAR(){
+        LocaleUtils.setLocale(getActivity(),new Locale(LocaleUtils.Language.AR.getCode(),LocaleUtils.CountryArea.Arab.getCode()));
         AppUtils.rebootApplication(MainActivity.class);
     }
 

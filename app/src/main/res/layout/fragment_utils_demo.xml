@@ -46,11 +46,11 @@
         android:layout_marginTop="10dp"
         android:weightSum="3">
         <Button
-            android:id="@+id/btn_test4"
+            android:id="@+id/btn_ar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Http test"/>
+            android:text="更改为 阿拉伯"/>
 
         <Button
             android:id="@+id/btn_test5"
@@ -71,7 +71,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:weightSum="2">
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/btn_test4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Http test"/>
 
         <Button
             android:id="@+id/btn_weak_handle"
