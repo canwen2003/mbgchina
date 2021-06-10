@@ -20,6 +20,7 @@ import com.mbg.mbgsupport.router.service.ServiceKey;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.core.LifecycleHandler;
 import com.mbg.module.common.core.WeakHandler;
+import com.mbg.module.common.core.manager.CoroutineManager;
 import com.mbg.module.common.core.net.manager.HttpManager;
 import com.mbg.module.common.core.net.tool.HttpUtils;
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse;
@@ -132,6 +133,7 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         findViewById(R.id.btn_show_global).setOnClickListener(this);
         findViewById(R.id.btn_hide_global).setOnClickListener(this);
         findViewById(R.id.btn_ar).setOnClickListener(this);
+        findViewById(R.id.btn_coroutine).setOnClickListener(this);
         mGlobalView=View.inflate(getActivity(),R.layout.view_global_demo,null);
 
         weakTextView=findViewById(R.id.btn_weak_handle);
@@ -292,6 +294,21 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
             case R.id.btn_hide_global:
                 UiUtils.hideGlobal(getActivity(),R.id.view_global,500);
                 break;
+            case R.id.btn_coroutine://协程测试
+                for (int i=0;i<1000;i++){
+                    CoroutineManager.get().start(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(400);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                }
+                break;
         }
 
     }
@@ -399,5 +416,6 @@ public class UtilsDemoFragment extends BaseFragment implements View.OnClickListe
         super.onDestroyView();
         weakTextView=null;
         lifeTextView=null;
+        CoroutineManager.get().clear();
     }
 }
