@@ -61,6 +61,14 @@ class CoroutineManager {
         mJobPool.clear()
     }
 
+    fun clear(jobKey: String){
+        mJobPool[jobKey]?.apply {
+            if (isActive){
+                cancel()
+            }
+        }
+    }
+
     companion object {
         private val coroutineManager: CoroutineManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             CoroutineManager()
