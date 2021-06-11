@@ -4,9 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.mbg.mbgsupport.R
+import com.mbg.module.common.core.manager.CoroutineManager
 import com.mbg.module.common.util.LogUtils
+import kotlinx.coroutines.delay
 
 class KotlinMain : AppCompatActivity() {
 
@@ -18,7 +21,17 @@ class KotlinMain : AppCompatActivity() {
     }
 
     fun initView(){
+        findViewById<TextView>(R.id.tv_test1).setOnClickListener {
+            CoroutineManager.get().start {
+                CoroutineManager.get().start {
+                    LogUtils.d("zzy=In")
+                }
 
+                delay(200)
+                LogUtils.d("zzy=out")
+
+            }
+        }
     }
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
