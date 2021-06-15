@@ -6,6 +6,7 @@ import com.mbg.mbgsupport.databinding.FragmentDemoViewBindingBinding
 import com.mbg.module.common.util.LogUtils
 import com.mbg.module.common.util.ToastUtils
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,7 @@ class AlphaTranFragment:MvpFragment<DemoPresenter, FragmentDemoViewBindingBindin
             ToastUtils.show("LifecyleScope is whenResumed")
         }
 
-        launch {
+        launch(Dispatchers.IO) {
             LogUtils.d("zzy launch started")
             delay(20000)
             LogUtils.d("zzy launch finished")
@@ -69,8 +70,8 @@ class AlphaTranFragment:MvpFragment<DemoPresenter, FragmentDemoViewBindingBindin
                 tvOrig.text=mOrig.toString()
             }
             btnChange.setOnClickListener{
-                if (!mOrig.isEmpty()) {
-                    val origin = mOrig.toString().toInt();
+                if (mOrig.isNotEmpty()) {
+                    val origin = mOrig.toString().toInt()
                     val base = origin * 255 / 100
                     tvValue.text = base.toString(16)
                 }
