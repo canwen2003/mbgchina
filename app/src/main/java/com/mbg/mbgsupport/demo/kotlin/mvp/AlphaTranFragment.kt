@@ -1,29 +1,29 @@
 package com.mbg.mbgsupport.demo.kotlin.mvp
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.mbg.mbgsupport.R
-import com.mbg.mbgsupport.databinding.FragmentAnimBinding
+import androidx.lifecycle.lifecycleScope
 import com.mbg.mbgsupport.databinding.FragmentDemoViewBindingBinding
-import com.mbg.module.ui.dialog.screenshot.ScreenShotDialog
-
+import com.mbg.module.common.util.LogUtils
+import com.mbg.module.common.util.ToastUtils
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
-
-class DemoFragment:MvpFragment<DemoPresenter, FragmentDemoViewBindingBinding>() {
+class AlphaTranFragment:MvpFragment<DemoPresenter, FragmentDemoViewBindingBinding>() {
 
     private var mOrig = StringBuilder()
-    private var mResult = StringBuffer()
     override fun initView() {
+        lifecycleScope.launchWhenResumed {
+            ToastUtils.show("LifecyleScope is whenResumed")
+        }
 
+        launch {
+            LogUtils.d("zzy launch started")
+            delay(20000)
+            LogUtils.d("zzy launch finished")
+        }
     }
-
-    /*override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentAnimBinding {
-        return FragmentAnimBinding.inflate(inflater,container,false)
-    }*/
 
     override fun onInitView(savedInstanceState: Bundle?) {
         super.onInitView(savedInstanceState)

@@ -19,7 +19,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
-import com.mbg.mbgsupport.demo.kotlin.mvp.DemoFragment;
+import com.mbg.mbgsupport.demo.kotlin.mvp.AlphaTranFragment;
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoGestureFragment;
 import com.mbg.mbgsupport.demo.kotlin.viewbinding.DemoViewBindingActivity;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
@@ -331,7 +331,7 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
         mViewBinding.btnMvpTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoneActivity.show(context, DemoFragment.class, null);
+                PhoneActivity.show(context, AlphaTranFragment.class, null);
             }
         });
 
