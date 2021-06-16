@@ -41,7 +41,7 @@ public class TextBannerView extends RelativeLayout {
     private boolean isSingleLine = false;/**文字是否为单行,默认false*/
     private int mTextColor = 0xff000000;/**设置文字颜色,默认黑色*/
     private int mTextSize = 16; /**设置文字尺寸,默认16px*/
-    private int mGravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;/**文字显示位置,默认左边居中*/
+    private int mGravity = Gravity.START | Gravity.CENTER_VERTICAL;/**文字显示位置,默认左边居中*/
     private static final int GRAVITY_LEFT = 0;
     private static final int GRAVITY_CENTER = 1;
     private static final int GRAVITY_RIGHT = 2;
@@ -95,13 +95,13 @@ public class TextBannerView extends RelativeLayout {
         int gravityType = typedArray.getInt(R.styleable.TextBannerViewStyle_gravity, GRAVITY_LEFT);//显示位置
         switch (gravityType) {
             case GRAVITY_LEFT:
-                mGravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+                mGravity = Gravity.START | Gravity.CENTER_VERTICAL;
                 break;
             case GRAVITY_CENTER:
                 mGravity = Gravity.CENTER;
                 break;
             case GRAVITY_RIGHT:
-                mGravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+                mGravity = Gravity.END | Gravity.CENTER_VERTICAL;
                 break;
         }
         hasSetAnimDuration = typedArray.hasValue(R.styleable.TextBannerViewStyle_animDuration);
@@ -197,7 +197,7 @@ public class TextBannerView extends RelativeLayout {
     /**
      * 设置延时间隔
      */
-    private AnimRunnable mRunnable = new AnimRunnable();
+    private final AnimRunnable mRunnable = new AnimRunnable();
     private class AnimRunnable implements Runnable {
 
         @Override
@@ -241,7 +241,7 @@ public class TextBannerView extends RelativeLayout {
                 TextView textView = new TextView(getContext());
                 setTextView(textView,i);
 
-                mViewFlipper.addView(textView,i);//添加子view,并标识子view位置
+                mViewFlipper.addView(textView,i,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));//添加子view,并标识子view位置
             }
         }
 
@@ -268,11 +268,11 @@ public class TextBannerView extends RelativeLayout {
             float scale = getResources().getDisplayMetrics().density;// 屏幕密度 ;
             int muchDp = (int) (size * scale + 0.5f);
             drawable.setBounds(0, 0, muchDp, muchDp);
-            if (direction== Gravity.LEFT){
+            if (direction== Gravity.START){
                 textView.setCompoundDrawables(drawable,null,null , null);//左边
             }else if (direction== Gravity.TOP){
                 textView.setCompoundDrawables(null,drawable,null , null);//顶部
-            }else if (direction== Gravity.RIGHT){
+            }else if (direction== Gravity.END){
                 textView.setCompoundDrawables(null,null, drawable, null);//右边
             }else if (direction== Gravity.BOTTOM){
                 textView.setCompoundDrawables(null,null, null, drawable);//底部

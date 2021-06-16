@@ -48,7 +48,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         app:direction="bottom_to_top"
-        app:gravity="center"
+        app:gravity="left"
         app:typeface="italic"
         app:textColor="#00FFFF"/>
 
