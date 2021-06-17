@@ -12,7 +12,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mbg.mbgsupport.R;
 import com.mbg.module.common.util.ClickUtils;
-import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.layout.tab.PageSlidingTabLayout;

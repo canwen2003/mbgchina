@@ -48,22 +48,22 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
         private Context mContext;
         private ViewPager mViewPager;
         private ArrayList<String> mTitles;
-        private LinearLayout mTabsContainer;
+        private final LinearLayout mTabsContainer;
         private int mCurrentTab;
         private float mCurrentPositionOffset;
         private int mTabCount;
         /** 用于绘制显示器 */
-        private Rect mIndicatorRect = new Rect();
+        private final Rect mIndicatorRect = new Rect();
         private List<Rect> mTabBgRect;
         /** 用于实现滚动居中 */
-        private Rect mTabRect = new Rect();
-        private GradientDrawable mIndicatorDrawable = new GradientDrawable();
+        private final Rect mTabRect = new Rect();
+        private final GradientDrawable mIndicatorDrawable = new GradientDrawable();
         private List<GradientDrawable> mTabBGDrawable;
 
-        private Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private Paint mTrianglePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private Path mTrianglePath = new Path();
+        private final Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint mTrianglePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Path mTrianglePath = new Path();
         private int mIndicatorStyle = STYLE_NORMAL;
         /** tab */
         private float mTabPadding;
@@ -137,8 +137,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
 
             this.mContext = context;
             mTabsContainer = new LinearLayout(context);
-            mTabsContainer.setLayoutDirection(LAYOUT_DIRECTION_LTR);
-            addView(mTabsContainer);
+            addView(mTabsContainer,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 
             obtainAttributes(context, attrs);
 
@@ -344,9 +343,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
             });
 
             /** 每一个Tab的布局参数 */
-            LinearLayout.LayoutParams lp_tab = mTabSpaceEqual ?
-                    new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f) :
-                    new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+            LinearLayout.LayoutParams lp_tab = mTabSpaceEqual ? new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f) : new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
             if (mTabWidth > 0) {
                 lp_tab = new LinearLayout.LayoutParams((int) mTabWidth, LayoutParams.MATCH_PARENT);
             }
