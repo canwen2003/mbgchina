@@ -5,6 +5,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.mbg.module.ui.view.layout.tab.widget.MsgView;
 
 
@@ -19,7 +21,7 @@ public class UnreadMsgUtils {
         if (msgView == null) {
             return;
         }
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) msgView.getLayoutParams();
+        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) msgView.getLayoutParams();
         DisplayMetrics dm = msgView.getResources().getDisplayMetrics();
         msgView.setVisibility(View.VISIBLE);
         if (num <= 0) {//圆点,设置默认宽高

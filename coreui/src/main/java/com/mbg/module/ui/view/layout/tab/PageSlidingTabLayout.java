@@ -22,12 +22,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.R;
 import com.mbg.module.ui.view.layout.tab.constant.TabConsts;
 import com.mbg.module.ui.view.layout.tab.listener.OnTabSelectListener;
@@ -293,7 +295,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
             if (tv_tab_title != null) {
                 if (title != null) {
                     tv_tab_title.setText(title);
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv_tab_title.getLayoutParams();
+                    ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) tv_tab_title.getLayoutParams();
                     lp.leftMargin = (int) mTabMarginLeft;
                     lp.rightMargin=(int) mTabMarginRight;
                     lp.topMargin=(int) mTabMarginTop;
@@ -387,6 +389,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
              */
             this.mCurrentTab = position;
             this.mCurrentPositionOffset = positionOffset;
+            LogUtils.d("zzy:mCurrentPositionOffset="+mCurrentPositionOffset);
             scrollToCurrentTab();
             invalidate();
         }

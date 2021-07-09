@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -45,24 +46,24 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
 
 /** 滑动TabLayout,对于ViewPager的依赖性强 */
 public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.OnPageChangeListener {
-    private Context mContext;
+    private final Context mContext;
     private ViewPager mViewPager;
     private ArrayList<String> mTitles;
-    private LinearLayout mTabsContainer;
+    private final LinearLayout mTabsContainer;
     private OnBackgroundListener mTabsBGContainer;
     private int mCurrentTab;
     private float mCurrentPositionOffset;
     private int mTabCount;
     /** 用于绘制显示器 */
-    private Rect mIndicatorRect = new Rect();
+    private final Rect mIndicatorRect = new Rect();
     /** 用于实现滚动居中 */
-    private Rect mTabRect = new Rect();
-    private GradientDrawable mIndicatorDrawable = new GradientDrawable();
+    private final Rect mTabRect = new Rect();
+    private final GradientDrawable mIndicatorDrawable = new GradientDrawable();
 
-    private Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Paint mTrianglePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Path mTrianglePath = new Path();
+    private final Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mTrianglePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Path mTrianglePath = new Path();
 
     private int mIndicatorStyle = STYLE_NORMAL;
     /** tab */
@@ -127,7 +128,6 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
         this.mContext = context;
         mTabsContainer = new LinearLayout(context);
-        mTabsContainer.setLayoutDirection(LAYOUT_DIRECTION_LTR);
         mTabsContainer.setOrientation(LinearLayout.HORIZONTAL);
         addView(mTabsContainer);
         mTabsContainer.getLayoutParams().height=ViewGroup.LayoutParams.MATCH_PARENT;
@@ -283,7 +283,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         if (tv_tab_title != null) {
             if (title != null) {
                 tv_tab_title.setText(title);
-                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv_tab_title.getLayoutParams();
+                ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) tv_tab_title.getLayoutParams();
                 lp.leftMargin = (int) mTabMarginLeft;
                 lp.rightMargin=(int) mTabMarginRight;
                 lp.topMargin=(int) mTabMarginTop;
@@ -377,7 +377,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
          * mCurrentPositionOffset:当前View的偏移量比例.[0,1)
          */
         this.mCurrentTab = position;
-        this.mCurrentPositionOffset = positionOffset;
+        this.mCurrentPositionOffset =positionOffset;
         scrollToCurrentTab();
         invalidate();
     }
@@ -480,15 +480,24 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         if (mIndicatorWidth < 0) {   //indicatorWidth小于0时,原jpardogo's PagerSlidingTabStrip
 
         } else {//indicatorWidth大于0时,圆角矩形以及三角形
-            float indicatorLeft = currentTabView.getLeft() + (currentTabView.getWidth() - mIndicatorWidth) / 2;
+            if (true){
+                mIndicatorRect.left = (int) (left + margin - 1);
+                mIndicatorRect.right = (int) (right - margin - 1);
+                int sub=(int)(mIndicatorRect.right-mIndicatorRect.left-mIndicatorWidth)/2;
+                mIndicatorRect.left= mIndicatorRect.left+sub;
+                mIndicatorRect.right =mIndicatorRect.right-sub;
 
-            if (this.mCurrentTab < mTabCount - 1) {
-                View nextTab = mTabsContainer.getChildAt(this.mCurrentTab + 1);
-                indicatorLeft = indicatorLeft + mCurrentPositionOffset * (currentTabView.getWidth() / 2 + nextTab.getWidth() / 2);
+            }else {
+                float indicatorLeft = currentTabView.getRight() + (currentTabView.getWidth() - mIndicatorWidth) / 2;
+
+                if (this.mCurrentTab < mTabCount - 1) {
+                    View nextTab = mTabsContainer.getChildAt(this.mCurrentTab + 1);
+                    indicatorLeft = indicatorLeft + mCurrentPositionOffset * (currentTabView.getWidth() / 2 + nextTab.getWidth() / 2);
+                }
+
+                mIndicatorRect.left = (int) indicatorLeft;
+                mIndicatorRect.right = (int) (mIndicatorRect.left + mIndicatorWidth);
             }
-
-            mIndicatorRect.left = (int) indicatorLeft;
-            mIndicatorRect.right = (int) (mIndicatorRect.left + mIndicatorWidth);
         }
     }
 

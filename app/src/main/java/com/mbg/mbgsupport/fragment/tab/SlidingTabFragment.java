@@ -65,7 +65,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
         tabLayout_5.setIndicatorColor(getResources().getColor(R.color.blue_500),getResources().getColor(R.color.blue_200));
         tabLayout_5.setIndicatorCornerRadius(2.0f);
         tabLayout_5.setIndicatorHeight(4.0f);
-        tabLayout_5.setIndicatorWidth(32.0f);
+        //tabLayout_5.setIndicatorWidth(32.0f);
         /** indicator圆 */
         SlidingTabLayout tabLayout_6 = findViewById( R.id.tl_6);
         /** indicator矩形圆角 */
