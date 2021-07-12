@@ -31,7 +31,8 @@
             android:background="@color/red_100"
             android:text="*******HHHHHHHHHHHHHHHHHHHHHHHHHHLLLLLLLLLLLLLLLL"
             android:textColor="@color/black"
-            android:textSize="90sp"/>
+            android:textSize="90sp"
+            android:translationY="0dp"/>
 
     </com.mbg.module.ui.view.layout.GestureRelativeLayout>
 

@@ -12,8 +12,8 @@ import com.mbg.module.ui.view.listener.OnSuperListener;
  * 手势识别器
  */
 public class GestureDetector {
-    private float mPosX;//开始位置
-    private float mPosY;
+    private float mStartPosX;//开始位置
+    private float mStartPosY;
     private float mCurPosX;//目前位置
     private float mCurPosY;
     private GestureType mGestureType= GestureType.UNKNOWN;
@@ -50,8 +50,8 @@ public class GestureDetector {
         }
     }
     private boolean down(MotionEvent ev,float x,float y){
-        mPosX=x;
-        mPosY=y;
+        mStartPosX =x;
+        mStartPosY =y;
         mGestureType= GestureType.DOWN;
         if (mOnSuperListener!=null){
             return mOnSuperListener.dispatchTouchEvent(ev);
@@ -63,8 +63,8 @@ public class GestureDetector {
     private boolean move(MotionEvent ev,float x,float y){
         mCurPosX=x;
         mCurPosY=y;
-        float absDeltaX=Math.abs(mCurPosX-mPosX);
-        float absDeltaY=Math.abs(mCurPosY-mPosY);
+        float absDeltaX=Math.abs(mCurPosX- mStartPosX);
+        float absDeltaY=Math.abs(mCurPosY- mStartPosY);
 
         if (absDeltaX<mMovingThreshold&&absDeltaY<mMovingThreshold){
             if (mOnSuperListener!=null){
@@ -85,15 +85,15 @@ public class GestureDetector {
 
         if (absDeltaX>absDeltaY){
             if (mOnScrollListener!=null){
-                mOnScrollListener.onHorizontalScroll(mPosX-mCurPosX);
+                mOnScrollListener.onHorizontalScroll(mStartPosX -mCurPosX);
             }
         }else {
             if (mOnScrollListener!=null){
-                mOnScrollListener.onVerticalScroll(mPosY-mCurPosY);
+                mOnScrollListener.onVerticalScroll(mStartPosY -mCurPosY);
             }
         }
-        mPosX=mCurPosX;
-        mPosY=mCurPosY;
+        //mStartPosX =mCurPosX;
+        //mStartPosY =mCurPosY;
 
         return true;
     }
@@ -106,8 +106,8 @@ public class GestureDetector {
 
             if (mOnScrollListener!=null){
                 mOnScrollListener.onScrollStop();
-                mPosX=mCurPosX;
-                mPosY=mCurPosY;
+                mStartPosX =mCurPosX;
+                mStartPosY =mCurPosY;
             }
             return true;
         }else {
