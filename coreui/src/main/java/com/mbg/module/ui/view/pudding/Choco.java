@@ -1,6 +1,5 @@
 package com.mbg.module.ui.view.pudding;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.content.Context;
@@ -186,21 +185,18 @@ public class Choco extends FrameLayout {
             return;
         }
         mRootView.setClickable(false);
-        Animator anim = ObjectAnimator.ofFloat(this, "translationY", -80F, -this.getMeasuredHeight());
+        ObjectAnimator anim = ObjectAnimator.ofFloat(this, "translationY", -80F, -this.getMeasuredHeight());
         anim.setInterpolator(new AnticipateOvershootInterpolator());
         anim.setDuration(ANIMATION_DURATION);
         anim.start();
-        ThreadUtils.postInUIThreadDelayed(new Runnable() {
-            @Override
-            public void run() {
+        ThreadUtils.postInUIThreadDelayed(()-> {
                 if (isAttachedToWindow) {
                     if (onDismiss!=null){
                         onDismiss.invoke();
                     }
                     windowManager.removeViewImmediate(Choco.this);
                 }
-            }
-        },ANIMATION_DURATION);
+            },ANIMATION_DURATION);
     }
 
 
@@ -223,11 +219,7 @@ public class Choco extends FrameLayout {
      * @param drawable The qualified drawable
      */
     public void setChocoBackgroundDrawable(Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            mRootBody.setBackground(drawable);
-        } else {
-            mRootBody.setBackgroundDrawable(drawable);
-        }
+        mRootBody.setBackground(drawable);
     }
 
     /**
@@ -457,7 +449,7 @@ public class Choco extends FrameLayout {
      * Set whether to enable swipe to dismiss or not
      */
     public void enableSwipeToDismiss() {
-        mRootBody.setOnTouchListener(new SwipeDismissTouchListener(mRootBody, new SwipeDismissTouchListener.DismissCallbacks() {
+        mRootBody.setOnTouchListener(new SwipeDismissTouchListener(mRootBody, new SwipeDismissTouchListener.OnDismissListener() {
             @Override
             public boolean canDismiss() {
                 return true;

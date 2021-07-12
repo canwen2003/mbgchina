@@ -35,7 +35,7 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
                 }
 
                 override fun onVerticalScroll(distance: Float) {
-                    tvMovedView.translationY = tvMovedView.translationY - distance * 0.5f
+                    tvMovedView.translationY = tvMovedView.translationY - distance
                 }
 
                 override fun onScrollStop() {

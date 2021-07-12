@@ -69,16 +69,16 @@ dependencies {
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
     implementation 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
 
-    implementation "androidx.datastore:datastore:1.0.0-alpha08"
+    implementation "androidx.datastore:datastore:1.0.0-rc01"
 
     def versions = "2.5.0"
     implementation "androidx.work:work-runtime:$versions"
 
     //Room数据库
-    implementation "androidx.room:room-runtime:2.2.6"
-    annotationProcessor "androidx.room:room-compiler:2.2.6"
+    implementation "androidx.room:room-runtime:2.3.0"
+    annotationProcessor "androidx.room:room-compiler:2.3.0"
 
-    implementation 'com.google.android:flexbox:1.1.0'
+    implementation 'com.google.android:flexbox:1.1.1'
 
     //android-startup提供一种在应用启动时能够更加简单、高效的方式来初始化组件。开发人员可以使用android-startup来简化启动序列，并显式地设置初始化顺序与组件之间的依赖关系。 与此同时android-startup支持同步与异步等待，并通过有向无环图拓扑排序的方式来保证内部依赖组件的初始化顺序。
     implementation 'com.rousetime.android:android-startup:1.0.6'

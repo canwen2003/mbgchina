@@ -1,6 +1,5 @@
 package com.mbg.mbgsupport.kotlin.frament
 
-import android.widget.Button
 import android.widget.TextView
 import com.mbg.mbgsupport.R
 import com.mbg.module.ui.kotlin.fragment.BaseFragment

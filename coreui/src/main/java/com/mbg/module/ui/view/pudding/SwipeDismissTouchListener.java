@@ -17,7 +17,7 @@ import com.mbg.module.ui.view.listener.OnAnimatorListener;
 
 public class SwipeDismissTouchListener implements View.OnTouchListener {
         private final View mView;
-        private final DismissCallbacks mCallbacks;
+        private final OnDismissListener mCallbacks;
 
         // Cached ViewConfiguration and system-wide constant values
         private int mSlop;
@@ -30,12 +30,12 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
         private float mDownY = 0f;
         private boolean mSwiping = false;
         private int mSwipingSlop = 0;
-        private VelocityTracker mVelocityTracker = null;
+        private VelocityTracker mVelocityTracker = null;//通过VelocityTracker可以获得Touch事件的速度
         private float mTranslationX=0f;
 
-    public SwipeDismissTouchListener(View view,DismissCallbacks dismissCallbacks) {
+    public SwipeDismissTouchListener(View view, OnDismissListener onDismissListener) {
         mView=view;
-        mCallbacks=dismissCallbacks;
+        mCallbacks= onDismissListener;
         init();
     }
 
@@ -64,6 +64,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                 mDownY = motionEvent.getRawY();
                 if (mCallbacks.canDismiss()) {
                     mVelocityTracker = VelocityTracker.obtain();
+                    //在Touch的down和move事件中把Touch加入到VelocityTracker对象中
                     mVelocityTracker.addMovement(motionEvent);
                 }
                 mCallbacks.onTouch(view, true);
@@ -71,8 +72,11 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 
             case MotionEvent.ACTION_UP:
                 deltaX = motionEvent.getRawX() - mDownX;
+                //计算当前速度, 其中units是单位表示， 1代表px/毫秒, 1000代表px/秒
+                //maxVelocity此次计算速度你想要的最大值
                 mVelocityTracker.addMovement(motionEvent);
                 mVelocityTracker.computeCurrentVelocity(1000);
+
                 float velocityX = mVelocityTracker.getXVelocity();
                 float absVelocityX = Math.abs(velocityX);
                 float absVelocityY = Math.abs(mVelocityTracker.getYVelocity());
@@ -201,7 +205,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
      * The callback interface used by [SwipeDismissTouchListener] to inform its client
      * about a successful dismissal of the view for which it was created.
      */
-     interface DismissCallbacks {
+     interface OnDismissListener {
         /**
          * Called to determine whether the view can be dismissed.
          *

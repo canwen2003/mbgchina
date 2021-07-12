@@ -63,7 +63,10 @@ public class GestureDetector {
     private boolean move(MotionEvent ev,float x,float y){
         mCurPosX=x;
         mCurPosY=y;
-        if (Math.abs(mCurPosX-mPosX)<mMovingThreshold&&Math.abs(mCurPosY-mPosY)<mMovingThreshold){
+        float absDeltaX=Math.abs(mCurPosX-mPosX);
+        float absDeltaY=Math.abs(mCurPosY-mPosY);
+
+        if (absDeltaX<mMovingThreshold&&absDeltaY<mMovingThreshold){
             if (mOnSuperListener!=null){
                 return mOnSuperListener.dispatchTouchEvent(ev);
             }else {
@@ -74,13 +77,13 @@ public class GestureDetector {
         if (mGestureType== GestureType.DOWN){
             mGestureType= GestureType.START;
             if (mOnScrollListener!=null){
-                mOnScrollListener.onScrollStart(Math.abs(mCurPosX-mPosX)<= Math.abs(mCurPosY-mPosY));
+                mOnScrollListener.onScrollStart(absDeltaX<= absDeltaY);
             }
         }else {
             mGestureType= GestureType.MOVING;
         }
 
-        if (Math.abs(mCurPosX-mPosX)> Math.abs(mCurPosY-mPosY)){
+        if (absDeltaX>absDeltaY){
             if (mOnScrollListener!=null){
                 mOnScrollListener.onHorizontalScroll(mPosX-mCurPosX);
             }
