@@ -28,6 +28,8 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
             }
             gestureView.setOnScrollListener(object : OnScrollListener {
                 var mIsUp:Boolean=false
+                var mTranslationY:Float=0f
+
                 override fun onHorizontalScroll(distance: Float) {
 
                 }
@@ -37,7 +39,7 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
                 }
 
                 override fun onVerticalScroll(distance: Float) {
-                    tvMovedView.translationY = -distance*0.8f
+                    tvMovedView.translationY = mTranslationY-distance*0.8f
                     LogUtils.d("zzy:$distance")
                     mIsUp=distance>0
                 }
@@ -52,6 +54,7 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
                         )
                         animator.duration = 360
                         animator.start()
+                        mTranslationY=-260f
                     }else{
                         val animator: ObjectAnimator = ObjectAnimator.ofFloat(
                             tvMovedView,
@@ -61,6 +64,7 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
                         )
                         animator.duration = 360
                         animator.start()
+                        mTranslationY=0f
                     }
                 }
             })
