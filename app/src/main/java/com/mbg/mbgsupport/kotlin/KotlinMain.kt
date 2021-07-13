@@ -18,6 +18,8 @@ class KotlinMain : AppCompatActivity() {
         LogUtils.d("zzy:onCreate")
         setContentView(R.layout.activity_kotlin_main)
         initView()
+
+
     }
 
     fun initView(){

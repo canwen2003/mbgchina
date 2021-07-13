@@ -70,6 +70,7 @@ dependencies {
     implementation 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
 
     implementation "androidx.datastore:datastore:1.0.0-rc01"
+    implementation "androidx.datastore:datastore-preferences:1.0.0-rc01"
 
     def versions = "2.5.0"
     implementation "androidx.work:work-runtime:$versions"

@@ -2,11 +2,17 @@ package com.mbg.mbgsupport.demo.kotlin.mvp
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import com.mbg.mbgsupport.databinding.FragmentDemoGestureBinding
+import com.mbg.module.common.core.manager.CoroutineManager
+import com.mbg.module.common.datastore.AppDataStore
 import com.mbg.module.common.util.LogUtils
 import com.mbg.module.common.util.ToastUtils
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
 import com.mbg.module.ui.view.listener.OnScrollListener
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 
 
 class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>() {
@@ -35,6 +41,15 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
                 }
 
                 override fun onScrollStart(isVerticalScroll: Boolean) {
+                    val EXAMPLE_COUNTER = intPreferencesKey("example_counter")
+
+                    CoroutineManager.get().start {
+                        AppDataStore.get().getMain().edit {
+                                settings->
+                            val currentCounterValue = settings[EXAMPLE_COUNTER] ?: 0
+                            settings[EXAMPLE_COUNTER] = currentCounterValue + 1
+                        }
+                    }
 
                 }
 
@@ -65,6 +80,18 @@ class DemoGestureFragment:MvpFragment<DemoPresenter, FragmentDemoGestureBinding>
                         animator.duration = 360
                         animator.start()
                         mTranslationY=0f
+                    }
+
+                    val EXAMPLE_COUNTER = intPreferencesKey("example_counter")
+
+                    CoroutineManager.get().start {
+
+                        AppDataStore.get().getMain().data.map {
+                            it[EXAMPLE_COUNTER]?:0
+                        }.collect {
+                            LogUtils.d("zzy=$it");
+                        }
+
                     }
                 }
             })

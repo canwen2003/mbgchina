@@ -51,6 +51,7 @@ import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment;
 import com.mbg.mbgsupport.kotlin.KotlinMain;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.mbgsupport.work.DemoWorker;
+import com.mbg.module.common.datastore.AppDataStore;
 import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.activity.BaseViewBindingActivity;
