@@ -5,4 +5,15 @@
     <string name="poetry_3">Raising my head, I look at the bright moon</string>
     <string name="poetry_4">Bending my head, I think of home</string>
     <string name="utils">Utils</string>
+    <string name="user_name_placeholder" translatable="false">Please text your username</string>
+    <string name="password_placeholder" translatable="false">Please test your password</string>
+    <string name="forget_password" translatable="false">Forget Password?</string>
+    <string name="auto_login" translatable="false">Auto Login</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="register" translatable="false">Register</string>
+    <string name="send" translatable="false">Send</string>
+    <string name="back" translatable="false">Back</string>
+    <string name="retrieve_password" translatable="false">Retrieve Password</string>
+    <string name="email_placeholder" translatable="false">Please text your email</string>
+    <string name="tip_forget_password" translatable="false">Please text your Email,we will send a link to your mail box.</string>
 </resources>

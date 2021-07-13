@@ -13,4 +13,27 @@
 
     <style name="PuddingButton" parent="@style/Widget.AppCompat.Button.Colored" />
 
+    <style name="Theme.ActivityDialogStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/trans</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+    </style>
+
+    <style name="loginEditStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:background">@drawable/bg_button_register</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
 </resources>

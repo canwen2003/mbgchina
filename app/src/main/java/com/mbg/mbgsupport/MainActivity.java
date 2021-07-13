@@ -22,6 +22,7 @@ import com.mbg.mbgsupport.databinding.ActivityMainBinding;
 import com.mbg.mbgsupport.demo.kotlin.mvp.AlphaTranFragment;
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoGestureFragment;
 import com.mbg.mbgsupport.demo.kotlin.viewbinding.DemoViewBindingActivity;
+import com.mbg.mbgsupport.dialogfliptest.FlipMainActivity;
 import com.mbg.mbgsupport.fragment.AnimsFragment;
 import com.mbg.mbgsupport.fragment.ConstraintFragment;
 import com.mbg.mbgsupport.fragment.FlexboxLayoutFragment;
@@ -340,6 +341,15 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
             @Override
             public void onClick(View v) {
                 PhoneActivity.show(context, DemoGestureFragment.class, null);
+            }
+        });
+
+        mViewBinding.btnFlip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, FlipMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

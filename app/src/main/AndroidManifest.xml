@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".demo.kotlin.viewbinding.DemoViewBindingActivity"></activity>
+        <activity android:name=".demo.kotlin.viewbinding.DemoViewBindingActivity"/>
         <activity android:name=".demo.kotlin.inlinefun.KotlinDemoActivity" />
         <activity android:name=".kotlin.KotlinMain" />
         <activity android:name=".MainActivity">
@@ -30,6 +30,10 @@
         <activity
             android:name="com.mbg.module.ui.kotlin.activity.PhoneActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".dialogfliptest.FlipMainActivity"/>
+        <activity android:name=".dialogfliptest.LoginActivity"/>
+        <activity android:name=".dialogfliptest.DActivity"/>
     </application>
 
 </manifest>
