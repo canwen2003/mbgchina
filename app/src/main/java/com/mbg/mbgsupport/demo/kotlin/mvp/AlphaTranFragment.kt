@@ -72,7 +72,7 @@ class AlphaTranFragment:MvpFragment<DemoPresenter, FragmentDemoViewBindingBindin
             btnChange.setOnClickListener{
                 if (mOrig.isNotEmpty()) {
                     val origin = mOrig.toString().toInt()
-                    val base = origin * 255 / 100
+                    val base = origin * 256 / 100
                     tvValue.text = base.toString(16)
                 }
             }
