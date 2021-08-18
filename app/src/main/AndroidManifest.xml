@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".demo.kotlin.viewbinding.DemoViewBindingActivity"/>
-        <activity android:name=".demo.kotlin.inlinefun.KotlinDemoActivity" />
+        <activity android:name=".demo.kotlin.inlinefun.SnackbarDemoActivity" />
         <activity android:name=".kotlin.KotlinMain" />
         <activity android:name=".MainActivity">
             <intent-filter>

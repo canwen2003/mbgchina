@@ -19,6 +19,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 
+import com.mbg.module.common.util.UiUtils;
 import com.mbg.module.ui.R;
 
 import java.lang.annotation.Retention;

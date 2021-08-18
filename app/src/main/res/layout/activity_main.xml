@@ -312,11 +312,11 @@
             android:text="Flip Demo"/>
 
         <Button
-            android:id="@+id/btn_test1"
+            android:id="@+id/btn_snackbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="test 1"/>
+            android:text="SnackBar"/>
 
         <Button
             android:id="@+id/btn_test2"
