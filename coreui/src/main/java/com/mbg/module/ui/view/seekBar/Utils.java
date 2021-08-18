@@ -15,6 +15,7 @@ import android.util.Log;
 
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 
 public class Utils {
@@ -35,11 +36,9 @@ public class Utils {
 
     public static Bitmap drawableToBitmap(Context context, int width, int height, int drawableId) {
         if (context == null || width <= 0 || height <= 0 || drawableId == 0) return null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return Utils.drawableToBitmap(width, height, context.getResources().getDrawable(drawableId, null));
-        } else {
-            return Utils.drawableToBitmap(width, height, context.getResources().getDrawable(drawableId));
-        }
+
+        return Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(context.getResources(),drawableId, null));
+
     }
 
     /**
@@ -163,10 +162,7 @@ public class Utils {
     }
 
     public static boolean verifyBitmap(Bitmap bitmap) {
-        if (bitmap == null || bitmap.isRecycled() || bitmap.getWidth() <= 0 || bitmap.getHeight() <= 0) {
-            return false;
-        }
-        return true;
+        return  !(bitmap == null || bitmap.isRecycled() || bitmap.getWidth() <= 0 || bitmap.getHeight() <= 0);
     }
 
     public static int getColor(Context context, @ColorRes int colorId) {

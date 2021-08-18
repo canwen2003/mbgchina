@@ -15,7 +15,6 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -574,11 +573,7 @@ public class SeekBar {
     public void setThumbInactivatedDrawableId(@DrawableRes int thumbInactivatedDrawableId, int width, int height) {
         if (thumbInactivatedDrawableId != 0 && getResources() != null) {
             this.thumbInactivatedDrawableId = thumbInactivatedDrawableId;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                thumbInactivatedBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbInactivatedDrawableId, null));
-            } else {
-                thumbInactivatedBitmap = Utils.drawableToBitmap(width, height,ResourcesCompat.getDrawable(getResources(),thumbInactivatedDrawableId,null));
-            }
+            thumbInactivatedBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbInactivatedDrawableId, null));
         }
     }
 
@@ -589,11 +584,7 @@ public class SeekBar {
     public void setThumbDrawableId(@DrawableRes int thumbDrawableId, int width, int height) {
         if (thumbDrawableId != 0 && getResources() != null && width > 0 && height > 0) {
             this.thumbDrawableId = thumbDrawableId;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                thumbBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbDrawableId, null));
-            } else {
-                thumbBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbDrawableId,null));
-            }
+            thumbBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbDrawableId, null));
         }
     }
 
@@ -603,11 +594,7 @@ public class SeekBar {
         }
         if (thumbDrawableId != 0 && getResources() != null) {
             this.thumbDrawableId = thumbDrawableId;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, ResourcesCompat.getDrawable(getResources(),thumbDrawableId, null));
-            } else {
-                thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, ResourcesCompat.getDrawable(getResources(),thumbDrawableId,null));
-            }
+            thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, ResourcesCompat.getDrawable(getResources(),thumbDrawableId, null));
         }
     }
 
