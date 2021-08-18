@@ -16,7 +16,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Build;
-
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -24,12 +23,11 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.mbg.module.ui.R;
 
 import java.text.DecimalFormat;
-
-
 
 
 public class SeekBar {
@@ -577,9 +575,9 @@ public class SeekBar {
         if (thumbInactivatedDrawableId != 0 && getResources() != null) {
             this.thumbInactivatedDrawableId = thumbInactivatedDrawableId;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                thumbInactivatedBitmap = Utils.drawableToBitmap(width, height, getResources().getDrawable(thumbInactivatedDrawableId, null));
+                thumbInactivatedBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbInactivatedDrawableId, null));
             } else {
-                thumbInactivatedBitmap = Utils.drawableToBitmap(width, height, getResources().getDrawable(thumbInactivatedDrawableId));
+                thumbInactivatedBitmap = Utils.drawableToBitmap(width, height,ResourcesCompat.getDrawable(getResources(),thumbInactivatedDrawableId,null));
             }
         }
     }
@@ -592,9 +590,9 @@ public class SeekBar {
         if (thumbDrawableId != 0 && getResources() != null && width > 0 && height > 0) {
             this.thumbDrawableId = thumbDrawableId;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                thumbBitmap = Utils.drawableToBitmap(width, height, getResources().getDrawable(thumbDrawableId, null));
+                thumbBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbDrawableId, null));
             } else {
-                thumbBitmap = Utils.drawableToBitmap(width, height, getResources().getDrawable(thumbDrawableId));
+                thumbBitmap = Utils.drawableToBitmap(width, height, ResourcesCompat.getDrawable(getResources(),thumbDrawableId,null));
             }
         }
     }
@@ -606,9 +604,9 @@ public class SeekBar {
         if (thumbDrawableId != 0 && getResources() != null) {
             this.thumbDrawableId = thumbDrawableId;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, getResources().getDrawable(thumbDrawableId, null));
+                thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, ResourcesCompat.getDrawable(getResources(),thumbDrawableId, null));
             } else {
-                thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, getResources().getDrawable(thumbDrawableId));
+                thumbBitmap = Utils.drawableToBitmap(thumbWidth, thumbHeight, ResourcesCompat.getDrawable(getResources(),thumbDrawableId,null));
             }
         }
     }
@@ -674,7 +672,7 @@ public class SeekBar {
     /**
      * if visble is false, will clear the Canvas
      *
-     * @param visible
+     * @param visible 是否显示
      */
     public void setVisible(boolean visible) {
         isVisible = visible;
@@ -682,6 +680,6 @@ public class SeekBar {
 
     public float getProgress() {
         float range = rangeSeekBar.getMaxProgress() - rangeSeekBar.getMinProgress();
-        return rangeSeekBar.getMinProgress() + range * currPercent;
+        return Math.round(rangeSeekBar.getMinProgress() + range * currPercent);
     }
 }

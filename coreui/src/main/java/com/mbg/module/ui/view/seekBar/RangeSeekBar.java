@@ -9,7 +9,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Parcelable;
-
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -34,8 +33,6 @@ import static com.mbg.module.ui.view.seekBar.SeekBar.INDICATOR_ALWAYS_SHOW;
 
 
 public class RangeSeekBar extends View {
-
-    private final static int MIN_INTERCEPT_DISTANCE = 100;
 
     //normal seekBar mode
     public final static int SEEKBAR_MODE_SINGLE = 1;
@@ -200,8 +197,7 @@ public class RangeSeekBar extends View {
     }
 
     private boolean verifyStepsMode() {
-        if (steps < 1 || stepsHeight <= 0 || stepsWidth <= 0) return false;
-        return true;
+        return !(steps < 1 || stepsHeight <= 0 || stepsWidth <= 0);
     }
 
     private void initStepsBitmap() {
