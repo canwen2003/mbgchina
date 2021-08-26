@@ -97,7 +97,7 @@
         app:tick_mark_mode="other"
         app:tick_mark_text_margin="20dp"
         app:tick_mark_text_color="@color/colorProgress"
-        />
+        android:visibility="gone" />
 
     <com.mbg.module.ui.view.seekBar.RangeSeekBar
         android:id="@+id/sb_range_8"
@@ -107,5 +107,18 @@
         app:mode="range"
         app:thumb_drawable="@drawable/thumb_yellow_stroke"
         app:progress_color="@color/colorProgress"
+        app:thumb_scale_ratio="1.2"
+        app:progress_height="4dp"
+        android:visibility="gone"
         />
+
+    <com.mbg.module.ui.view.FilterScopeItemView
+        android:id="@+id/filter_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_min="18"
+        app:item_max="20"
+        app:item_title_text="年龄"
+        app:item_scopeUnit_text="岁"
+        app:item_vip_limit="true"/>
 </LinearLayout>

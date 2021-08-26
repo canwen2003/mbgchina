@@ -17,6 +17,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -40,8 +41,7 @@ public class SeekBar {
     public @interface IndicatorModeDef {
     }
 
-    public static final int WRAP_CONTENT = -1;
-    public static final int MATCH_PARENT = -2;
+    public static final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
 
     private int indicatorShowMode;
 
@@ -83,6 +83,7 @@ public class SeekBar {
     boolean isVisible = true;
     RangeSeekBar rangeSeekBar;
     String indicatorTextStringFormat;
+    OnIndicatorShowListener mIndicatorShowListener;
     Path indicatorArrowPath = new Path();
     Rect indicatorTextRect = new Rect();
     Rect indicatorRect = new Rect();
@@ -102,6 +103,7 @@ public class SeekBar {
     private void initAttrs(AttributeSet attrs) {
         TypedArray t = getContext().obtainStyledAttributes(attrs, R.styleable.RangeSeekBar);
         if (t == null) return;
+        //指示器相关属性参数
         indicatorMargin = (int) t.getDimension(R.styleable.RangeSeekBar_indicator_margin, 0);
         indicatorDrawableId = t.getResourceId(R.styleable.RangeSeekBar_indicator_drawable, 0);
         indicatorShowMode = t.getInt(R.styleable.RangeSeekBar_indicator_show_mode, INDICATOR_ALWAYS_HIDE);
@@ -115,12 +117,14 @@ public class SeekBar {
         indicatorPaddingTop = (int) t.getDimension(R.styleable.RangeSeekBar_indicator_padding_top, 0);
         indicatorPaddingBottom = (int) t.getDimension(R.styleable.RangeSeekBar_indicator_padding_bottom, 0);
         indicatorArrowSize = (int) t.getDimension(R.styleable.RangeSeekBar_indicator_arrow_size, 0);
+        indicatorRadius = t.getDimension(R.styleable.RangeSeekBar_indicator_radius, 0f);
+
+        //thumb 相关支持参数
         thumbDrawableId = t.getResourceId(R.styleable.RangeSeekBar_thumb_drawable, R.drawable.default_seekbar_thumb);
         thumbInactivatedDrawableId = t.getResourceId(R.styleable.RangeSeekBar_thumb_inactivated_drawable, 0);
         thumbWidth = (int) t.getDimension(R.styleable.RangeSeekBar_thumb_width, Utils.dp2px(getContext(), 26));
         thumbHeight = (int) t.getDimension(R.styleable.RangeSeekBar_thumb_height, Utils.dp2px(getContext(), 26));
         thumbScaleRatio = t.getFloat(R.styleable.RangeSeekBar_thumb_scale_ratio, 1f);
-        indicatorRadius = t.getDimension(R.styleable.RangeSeekBar_indicator_radius, 0f);
         t.recycle();
     }
 
@@ -131,7 +135,7 @@ public class SeekBar {
             indicatorHeight = Utils.measureText("8", indicatorTextSize).height() + indicatorPaddingTop + indicatorPaddingBottom;
         }
         if (indicatorArrowSize <= 0) {
-            indicatorArrowSize = (int) (thumbWidth / 4);
+            indicatorArrowSize =thumbWidth / 4;
         }
     }
 
@@ -236,11 +240,12 @@ public class SeekBar {
      * 格式化提示文字
      * format the indicator text
      *
-     * @param text2Draw
+     * @param text2Draw 文字
      * @return
      */
     protected String formatCurrentIndicatorText(String text2Draw) {
         SeekBarState[] states = rangeSeekBar.getRangeSeekBarState();
+        float indicatorValue=-1.0f;
         if (TextUtils.isEmpty(text2Draw)) {
             if (isLeft) {
                 if (indicatorTextDecimalFormat != null) {
@@ -248,16 +253,30 @@ public class SeekBar {
                 } else {
                     text2Draw = states[0].indicatorText;
                 }
+                indicatorValue=states[0].value;
             } else {
                 if (indicatorTextDecimalFormat != null) {
                     text2Draw = indicatorTextDecimalFormat.format(states[1].value);
                 } else {
                     text2Draw = states[1].indicatorText;
                 }
+                indicatorValue=states[1].value;
             }
         }
+
         if (indicatorTextStringFormat != null) {
             text2Draw = String.format(indicatorTextStringFormat, text2Draw);
+        }
+
+        if (mIndicatorShowListener!=null){
+            if (indicatorValue<0.0f) {
+                if (isLeft) {
+                    indicatorValue = states[0].value;
+                } else {
+                    indicatorValue = states[1].value;
+                }
+            }
+            text2Draw = mIndicatorShowListener.getFormatText(indicatorValue);
         }
         return text2Draw;
     }
@@ -419,6 +438,14 @@ public class SeekBar {
 
     public void setIndicatorTextStringFormat(String formatPattern) {
         indicatorTextStringFormat = formatPattern;
+    }
+
+    public void setIndicatorShowListener(OnIndicatorShowListener listener){
+        this.mIndicatorShowListener=listener;
+    }
+
+    public interface OnIndicatorShowListener{
+        String getFormatText(float value);
     }
 
     public int getIndicatorDrawableId() {

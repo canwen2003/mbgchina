@@ -19,6 +19,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 
+import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.R;
 
 import java.lang.annotation.Retention;
@@ -587,9 +588,15 @@ public class RangeSeekBar extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                //获取点击时的坐标点
                 touchDownX = getEventX(event);
                 touchDownY = getEventY(event);
+
+                //如果是范围选择模式
                 if (seekBarMode == SEEKBAR_MODE_RANGE) {
+                    LogUtils.d("leftSB:currPercent="+leftSB.currPercent);
+                    LogUtils.d("rightSB:currPercent="+rightSB.currPercent);
+
                     if (rightSB.currPercent >= 1 && leftSB.collide(getEventX(event), getEventY(event))) {
                         currTouchSB = leftSB;
                         scaleCurrentSeekBarThumb();
@@ -891,6 +898,13 @@ public class RangeSeekBar extends View {
         leftSB.setIndicatorTextStringFormat(formatPattern);
         if (seekBarMode == SEEKBAR_MODE_RANGE) {
             rightSB.setIndicatorTextStringFormat(formatPattern);
+        }
+    }
+
+    public void setIndicatorTextStringFormat(SeekBar.OnIndicatorShowListener listener) {
+        leftSB.setIndicatorShowListener(listener);
+        if (seekBarMode == SEEKBAR_MODE_RANGE) {
+            rightSB.setIndicatorShowListener(listener);
         }
     }
 

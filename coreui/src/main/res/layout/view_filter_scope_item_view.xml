@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:viewBindingIgnore="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1F2a00">
+
+    <!-- 筛选的信息 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/filter_title_style"
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="11dp"
+            tools:text="身高" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_scope_content"
+                style="@style/filter_scope_tv_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                tools:text="170-175 cm" />
+
+            <ImageView
+                android:id="@+id/iv_show_scope"
+                android:layout_marginStart="9dp"
+                style="@style/filter_icon_right_arrow_bg_white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_scope_body"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:orientation="horizontal"
+        android:layoutDirection="ltr"
+        android:gravity="center_vertical">
+
+        <com.mbg.module.ui.view.NavBarBackgroundView
+            android:id="@+id/vip_limit_view"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="18dp"/>
+
+        <com.mbg.module.ui.view.seekBar.RangeSeekBar
+            android:id="@+id/seek_bar_view"
+            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            app:mode="range"
+            app:tick_mark_layout_gravity="bottom"
+            app:tick_mark_text_margin="15dp"
+            app:progress_color="#4969FF"
+            app:progress_default_color="@color/black"
+            app:min="150"
+            app:max="220"
+            app:min_interval="1"
+            app:thumb_drawable="@drawable/default_seekbar_thumb"
+            app:thumb_height="28dp"
+            app:thumb_width="28dp"
+            app:thumb_scale_ratio="1.22"
+            app:indicator_show_mode="showWhenTouch"
+            app:indicator_margin="2dp"
+            app:indicator_background_color="@color/trans"
+            app:indicator_padding_top="9dp"
+            app:indicator_padding_bottom="9dp"
+            app:indicator_text_color="#809BFF"
+            app:indicator_text_size="20sp"/>
+    </LinearLayout>
+</LinearLayout>
