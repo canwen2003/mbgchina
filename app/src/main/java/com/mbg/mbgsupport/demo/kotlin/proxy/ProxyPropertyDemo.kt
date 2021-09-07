@@ -20,7 +20,7 @@ class Delegate{
     }
 }
 
-fun main(args:Array<String>){
+fun main(){
     val demo:ProxyPropertyDemo= ProxyPropertyDemo();
     println(demo.member)
     demo.member="新的值";

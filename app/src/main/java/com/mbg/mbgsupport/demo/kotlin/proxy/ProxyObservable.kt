@@ -17,7 +17,7 @@ class ProxyObservable {
 
 
 
-fun main(args:Array<String>){
+fun main(){
     val demo= ProxyObservable();
     demo.set("First")
     demo.set("second")

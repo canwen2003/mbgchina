@@ -16,7 +16,7 @@ class BaseImpl(val x:Int):IBase{
 //过关键字 by 建立委托类
 class Derived(base:IBase):IBase by base
 
-fun main(args:Array<String>){
+fun main(){
 
     //调用代理类
     Derived(BaseImpl(5)).print()

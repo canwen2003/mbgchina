@@ -10,7 +10,7 @@ import com.mbg.mbgsupport.demo.thisLabel.ThisDemo
  */
 class TestKotlinMain {
 
-    fun main(args:Array<String>){
+    fun main(){
        /* DemoSingletonFirst.logInfo("Kotlin demo 1")
         DemoSingletonSecond.get().logInfo("Kotlin demo 2")
         DemoSingletonThird.get().logInfo("Kotlin demo 3")

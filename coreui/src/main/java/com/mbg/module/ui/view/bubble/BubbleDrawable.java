@@ -18,19 +18,19 @@ import android.graphics.drawable.Drawable;
  * Created by lgp on 2015/3/24.
  */
 public class BubbleDrawable extends Drawable {
-    private RectF mRect;
-    private Path mPath = new Path();
+    private final RectF mRect;
+    private final Path mPath = new Path();
     private BitmapShader mBitmapShader;
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private float mArrowWidth;
-    private float mAngle;
-    private float mArrowHeight;
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final float mArrowWidth;
+    private final float mAngle;
+    private final float mArrowHeight;
     private float mArrowPosition;
-    private int bubbleColor;
-    private Bitmap bubbleBitmap;
-    private ArrowLocation mArrowLocation;
-    private BubbleType bubbleType;
-    private boolean mArrowCenter;
+    private final int bubbleColor;
+    private final Bitmap bubbleBitmap;
+    private final ArrowLocation mArrowLocation;
+    private final BubbleType bubbleType;
+    private final boolean mArrowCenter;
 
     private BubbleDrawable(Builder builder) {
         this.mRect = builder.mRect;

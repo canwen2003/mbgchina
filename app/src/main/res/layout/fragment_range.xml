@@ -77,12 +77,11 @@
         app:mode="range"
         app:thumb_drawable="@drawable/thumb_green_alpha"
         app:progress_color="@color/colorAccent"
-        app:tick_mark_layout_gravity="top"
+        app:tick_mark_layout_gravity="bottom"
         app:tick_mark_text_array="@array/markArray4"
         app:tick_mark_gravity="center"
         app:tick_mark_mode="number"
-        app:tick_mark_text_margin="20dp"
-        />
+        app:tick_mark_text_margin="20dp"/>
 
     <com.mbg.module.ui.view.seekBar.RangeSeekBar
         android:id="@+id/sb_range_6"

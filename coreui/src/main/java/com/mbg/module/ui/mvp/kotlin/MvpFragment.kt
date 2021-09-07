@@ -7,23 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.mbg.module.common.util.ClassUtils
 import com.mbg.module.common.util.TypeUtils
-
 import com.mbg.module.ui.kotlin.fragment.BaseFragment
 import com.mbg.module.ui.mvp.kotlin.base.IntView
 import com.mbg.module.ui.mvp.kotlin.holder.PresenterHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : BaseFragment(), IntView,CoroutineScope by MainScope() {
+abstract class MvpFragment< T : MvpPresenter<out IntView>, VB : ViewBinding> : BaseFragment(), IntView,CoroutineScope by MainScope() {
     private val logTag = "_MVP_" + this@MvpFragment.javaClass.simpleName
     var mIsVisibleToUser = false
     var mViewInitialized = false
@@ -75,7 +71,7 @@ abstract class MvpFragment<T : MvpPresenter<out IntView>, VB : ViewBinding> : Ba
     }
 
 
-    private fun onCreatePresenter(): T? {
+    private fun onCreatePresenter(): T {
         val presenterId = getPresenterId()
         var mvpPresenter = PresenterHolder.get().getPresenter(presenterId)
         if (mvpPresenter == null) {
