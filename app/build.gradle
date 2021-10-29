@@ -61,6 +61,8 @@ dependencies {
     implementation 'com.github.canwen2003:module_interfaces:v1.0.0.0'
     implementation 'com.github.canwen2003:module_serviceloader:v1.0.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     annotationProcessor 'com.github.canwen2003:module_compiler:v1.0.0.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -87,6 +89,16 @@ dependencies {
 
     debugImplementation "io.github.didi.dokit:dokitx:3.4.0-alpha03"
 
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation ("com.android.support.test.espresso:espresso-contrib:3.0.2"){
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
 
     implementation project(path: ':common')
     implementation project(path: ':coreui')

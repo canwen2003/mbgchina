@@ -34,7 +34,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-       new  DoKit.Builder(this).build();
+       //new  DoKit.Builder(this).build();
 
         StartupConfig startupConfig = new StartupConfig.Builder()
                 .setAwaitTimeout(12000)

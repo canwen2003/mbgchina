@@ -9,6 +9,7 @@ import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.view.banner.ITextBannerItemClickListener;
+import com.mbg.module.ui.view.banner.ScrollTextView;
 import com.mbg.module.ui.view.banner.TextBannerView;
 import com.mbg.module.ui.view.showmore.ShowMoreTextView;
 
@@ -70,13 +71,16 @@ public class TextBannerFragment extends BaseFragment{
             }
         });
 
+        ScrollTextView scrollTextView=findViewById(R.id.tv_scroll_text);
+        scrollTextView.setScrollText("第一个Banner显示");
+
         initData();
     }
 
 
     private void initData() {
         List<String> mList = new ArrayList<>();
-        mList.add("第一个Banner显示");
+        mList.add("第一个Banner显示走遍天下都不怕第一个Banner显第一个Banner显");
         mList.add("走遍天下都不怕！！！！！");
         mList.add("不是我吹，就怕你做不到，哈哈");
         mList.add("第4个Banner显示");
