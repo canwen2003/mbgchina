@@ -319,11 +319,11 @@
             android:text="SnackBar"/>
 
         <Button
-            android:id="@+id/btn_test2"
+            android:id="@+id/btn_transformer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Test 2"/>
+            android:text="Transformers"/>
     </LinearLayout>
 
 </LinearLayout>

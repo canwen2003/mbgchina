@@ -121,7 +121,7 @@ public class YView extends View {
         super.onDraw(canvas);
         //canvas.drawColor(Color.GRAY);
         mPaint.setColor(Color.RED);
-        canvas.drawText(mText, getWidth() / 2 - mBound.width() / 2, getHeight() / 2 + mBound.height() / 2, mPaint);
+        canvas.drawText(mText, getWidth() / 2.0f - mBound.width() / 2f, getHeight() / 2f + mBound.height() / 2f, mPaint);
 
     }
 }

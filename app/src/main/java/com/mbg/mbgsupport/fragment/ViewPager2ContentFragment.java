@@ -1,7 +1,9 @@
 package com.mbg.mbgsupport.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.mbg.mbgsupport.R;
@@ -22,11 +24,16 @@ public class ViewPager2ContentFragment extends BaseFragment {
     @Override
     protected void initView() {
         textView=findViewById(R.id.tv_title);
+        int color= Color.RED;
         Bundle bundle=getArguments();
         if (bundle!=null){
             mTitle=bundle.getString("titile","");
+            color=bundle.getInt("color",Color.GRAY);
         }
         textView.setText(mTitle);
+
+        View rootView=findViewById(R.id.root_view);
+        rootView.setBackgroundColor(color);
     }
 
     @Override

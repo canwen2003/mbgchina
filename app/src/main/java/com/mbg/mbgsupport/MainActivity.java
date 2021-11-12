@@ -31,6 +31,7 @@ import com.mbg.mbgsupport.fragment.MotionLayoutFragment;
 import com.mbg.mbgsupport.fragment.ShapeFragment;
 import com.mbg.mbgsupport.fragment.ShimmerFragment;
 import com.mbg.mbgsupport.fragment.SkeletonFragment;
+import com.mbg.mbgsupport.fragment.ViewPagerTransformerFragment;
 import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment;
 import com.mbg.mbgsupport.fragment.BigImageLoaderFragment;
 import com.mbg.mbgsupport.fragment.BubbleViewFragment;
@@ -359,6 +360,13 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
                 Intent intent=new Intent(context, SnackbarDemoActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+        });
+
+        mViewBinding.btnTransformer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPagerTransformerFragment.show(context);
             }
         });
 

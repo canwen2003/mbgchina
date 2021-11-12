@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.mbg.module.ui.view.layout.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="20dp"
+        android:orientation="horizontal"
+        app:flChildSpacing="auto"
+        app:flRowSpacing="8dp"
+        app:flFlow="true">
+
+        <TextView
+            android:id="@+id/tv_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_300"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:textSize="12sp"
+            android:background="@color/color_14c7de"
+            android:text="Default"/>
+        
+        <TextView
+            android:id="@+id/tv_h3d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_300"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:textSize="12sp"
+            android:background="@color/color_14c7de"
+            android:text="H3D"/>
+
+        <TextView
+            android:id="@+id/tv_h3dinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_300"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:textSize="12sp"
+            android:background="@color/color_14c7de"
+            android:text="H3DINFO"/>
+
+        <TextView
+            android:id="@+id/tv_fadein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_300"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:textSize="12sp"
+            android:background="@color/color_14c7de"
+            android:text="FADEIN"/>
+
+        <TextView
+            android:id="@+id/tv_tandem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_300"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:textSize="12sp"
+            android:background="@color/color_14c7de"
+            android:text="TANDEM"/>
+        <TextView
+            android:id="@+id/tv_overlap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_300"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            
+            android:textSize="12sp"
+            android:background="@color/color_14c7de"
+            android:text="OVERLAP"/>
+
+
+    </com.mbg.module.ui.view.layout.FlowLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
