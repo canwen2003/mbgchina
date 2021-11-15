@@ -68,4 +68,5 @@
     <dimen name="len_96">96dp</dimen>
 
 
+    <item name="item_id" type="id" />
 </resources>

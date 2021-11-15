@@ -19,6 +19,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.mbg.mbgsupport.databinding.ActivityMainBinding;
+import com.mbg.mbgsupport.demo.UPVDemoActivity;
 import com.mbg.mbgsupport.demo.kotlin.inlinefun.SnackbarDemoActivity;
 import com.mbg.mbgsupport.demo.kotlin.mvp.AlphaTranFragment;
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoGestureFragment;
@@ -357,7 +358,11 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
         mViewBinding.btnSnackbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, SnackbarDemoActivity.class);
+               /* Intent intent=new Intent(context, SnackbarDemoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);*/
+
+                Intent intent=new Intent(context, UPVDemoActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -367,6 +372,7 @@ public class MainActivity extends BaseViewBindingActivity<ActivityMainBinding> {
             @Override
             public void onClick(View view) {
                 ViewPagerTransformerFragment.show(context);
+
             }
         });
 

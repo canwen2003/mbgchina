@@ -36,4 +36,20 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
     </style>
+
+    <string-array name="indicator_style">
+        <item>None</item>
+        <item>Circle</item>
+        <item>Icon</item>
+    </string-array>
+    <string-array name="indicator_gravity_hor">
+        <item>Left</item>
+        <item>Right</item>
+        <item>Center</item>
+    </string-array>
+    <string-array name="indicator_gravity_ver">
+        <item>Top</item>
+        <item>Bottom</item>
+        <item>Center</item>
+    </string-array>
 </resources>

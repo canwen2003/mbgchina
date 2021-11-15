@@ -50,6 +50,22 @@ public class ViewPagerTransformerFragment extends BaseFragment {
         mViewPager.setAdapter(fragmentStateAdapter);
         mViewPager.setPageTransformer(false, MyTransformer.getMyTransformer(TransType.DEFAULT));
         mViewPager.setCurrentItem(2,false);//true 可以看到滑动效果
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         findViewById(R.id.tv_default).setOnClickListener(new View.OnClickListener() {
             @Override

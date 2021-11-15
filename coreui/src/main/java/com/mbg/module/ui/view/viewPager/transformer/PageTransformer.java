@@ -24,6 +24,7 @@ public class PageTransformer extends BasePageTransformer {
 
     @Override
     public void other(View view, float position) {
+        LogUtils.d("hash="+view.hashCode());
         LogUtils.d("other="+position);
     }
 
