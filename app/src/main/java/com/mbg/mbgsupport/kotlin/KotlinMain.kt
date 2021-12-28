@@ -19,7 +19,6 @@ class KotlinMain : AppCompatActivity() {
         setContentView(R.layout.activity_kotlin_main)
         initView()
 
-
     }
 
     fun initView(){
