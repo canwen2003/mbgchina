@@ -1,6 +1,5 @@
 package com.mbg.module.common.core.sharedpreference;
 
-import android.content.Context;
 import android.os.FileObserver;
 
 import android.util.Log;
@@ -12,6 +11,7 @@ import androidx.collection.LruCache;
 import com.mbg.module.common.core.manager.ThreadPoolManager;
 import com.mbg.module.common.core.manager.ThreadPoolRunnable;
 import com.mbg.module.common.core.sharedpreference.io.ReadWriteManager;
+import com.mbg.module.common.util.AppUtils;
 
 import java.io.File;
 import java.io.Serializable;
@@ -30,9 +30,8 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
 
     private static final String TAG = "FastSharedPreferences";
     private static final FspCache FSP_CACHE = new FspCache();
-    private static Context sContext = null;
     private final String name;
-    private final Map<String, Object> keyValueMap;
+    private final Map<String, Object> keyValueMap=new ConcurrentHashMap<>();
     private final FspEditor editor = new FspEditor();
     private final AtomicBoolean needSync = new AtomicBoolean(false);
     private final AtomicBoolean syncing = new AtomicBoolean(false);
@@ -42,18 +41,10 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
 
     private FastSharedPreferences(String name) {
         this.name = name;
-        this.keyValueMap = new ConcurrentHashMap<>();
+
         reload();
-        observer = new DataChangeObserver(ReadWriteManager.getFilePath(sContext, name));
+        observer = new DataChangeObserver(ReadWriteManager.getFilePath(AppUtils.getApplication(), name));
         observer.startWatching();
-    }
-
-
-    public static void init(Context context) {
-        if (context == null) {
-            return;
-        }
-        sContext = context.getApplicationContext();
     }
 
     public static void setMaxSize(int maxSize) {
@@ -156,7 +147,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
 
     private void reload() {
         Log.d(TAG, "reload data");
-        Object loadedData = new ReadWriteManager(sContext, name).read();
+        Object loadedData = new ReadWriteManager(AppUtils.getApplication(), name).read();
         this.keyValueMap.clear();
         if (loadedData != null) {
             this.keyValueMap.putAll((Map<? extends String, ?>) loadedData);
@@ -164,7 +155,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     }
 
     private int sizeOf() {
-        File file = new File(ReadWriteManager.getFilePath(sContext, name));
+        File file = new File(ReadWriteManager.getFilePath(AppUtils.getApplication(), name));
         if (!file.exists()) {
             return 0;
         }
@@ -281,7 +272,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
                 //把needSync置为false，如果在此之后有数据写入，则需要重新同步
                 needSync.compareAndSet(true, false);
                 observer.stopWatching();
-                ReadWriteManager manager = new ReadWriteManager(sContext, name);
+                ReadWriteManager manager = new ReadWriteManager(AppUtils.getApplication(), name);
                 manager.write(storeMap);
                 //解除同步过程
                 syncing.compareAndSet(true, false);
@@ -354,8 +345,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
 
         @Override
         protected int sizeOf(@NonNull String key, @NonNull FastSharedPreferences value) {
-            int size = 0;
-            size = value.sizeOf();
+            int size = value.sizeOf();
             Log.d(TAG, "FspCache sizeOf " + key + " is: " + size);
             return size;
         }

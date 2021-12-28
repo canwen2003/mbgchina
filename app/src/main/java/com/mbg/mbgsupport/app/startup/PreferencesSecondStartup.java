@@ -19,7 +19,7 @@ public class PreferencesSecondStartup extends AndroidStartup<Boolean> {
     @Nullable
     @Override
     public Boolean create(@NotNull Context context) {
-        FastSharedPreferences.init(context);
+        //FastSharedPreferences.init(context);
         LogUtils.d("create:"+getClass().getSimpleName());
         return true;
     }
