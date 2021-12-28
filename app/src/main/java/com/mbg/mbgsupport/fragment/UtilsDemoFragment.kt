@@ -86,7 +86,6 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
         }
         mViewBinding?.run {
 
-            val inputRoot = tvTestInput
             var spannableFilter = SpannableFilter()
             val spannableFilters: MutableList<SpannableFilter> = ArrayList()
             spannableFilter.keywords = "测试"
@@ -100,12 +99,12 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             spannableFilter.isUnderLine = true
             spannableFilter.onClickListener = View.OnClickListener { ToastUtils.debugShow("键盘") }
             spannableFilters.add(spannableFilter)
-            SpannableUtils.setViewSpannable(activity, inputRoot, spannableFilters)
+            SpannableUtils.setViewSpannable(activity, tvTestInput, spannableFilters)
 
             KeyboardUtils.registerSoftInputChangedListener(requireActivity()) { height ->
                 ToastUtils.debugShow("onSoftInputChanged:height=$height")
                 if (height > 0) {
-                    inputRoot.translationY = -height.toFloat()
+                    tvTestInput.translationY = -height.toFloat()
                 }
             }
 
@@ -123,23 +122,21 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             AsyncLayoutInflatePlus(requireActivity()).inflate(R.layout.view_async_load, null) { view, resId, parent -> root.addView(view) }
 
             val mGlobalView = View.inflate(activity, R.layout.view_global_demo, null)
-
             btnTest1.setOnClickListener {
                 onTest1()
                 FastSharedPreferences.get("FSP_DATA_USER").edit().putBoolean("keyBool", true)
-                FastSharedPreferences.get("FSP_DATA_USER").edit()
-                    .putString("keyString", "btn_test1").apply()
+                FastSharedPreferences.get("FSP_DATA_USER").edit().putString("keyString", "btn_test1").apply()
             }
             btnTest2.setOnClickListener {
                 FastSharedPreferences.get("FSP_DATA_USER").edit().putBoolean("keyBool", false)
-                FastSharedPreferences.get("FSP_DATA_USER").edit()
-                    .putString("keyString", "btn_test2").apply()
+                FastSharedPreferences.get("FSP_DATA_USER").edit().putString("keyString", "btn_test2").apply()
                 onTest2()
             }
 
             btnTest3.setOnClickListener {
                 ToastUtils.show("keyBool=" + FastSharedPreferences.get("FSP_DATA_USER")
                     .getBoolean("keyBool", false))
+                onTest3()
             }
 
             btnTest4.setOnClickListener {
@@ -153,7 +150,7 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             }
 
             btnTest6.setOnClickListener {
-
+                onTest6()
             }
 
             btnTest7.setOnClickListener {
@@ -210,18 +207,16 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             }
 
             btnWeakHandle.setOnClickListener {
-                var i = 0
-                while (i < 1000) {
-                    weakHandler.postDelayed({
-                        btnWeakHandle.text = "我3秒前被点击了"
-                        btnWeakHandle.setTextColor(Color.GREEN)
-                    }, 10000)
-                    i++
-                }
+                weakHandler.postDelayed({
+                    btnWeakHandle.text = "我3秒前被点击了"
+                    btnWeakHandle.setTextColor(Color.GREEN)
+                    LogUtils.d("weakHandler 我3秒前被点击了")
+                }, 10000)
             }
 
             btnLifeHandle.setOnClickListener {
                 lifecycleHandler.postDelayed({
+                    LogUtils.d("btnLifeHandle 我3秒前被点击了")
                     btnLifeHandle.text = "我3秒前被点击了"
                     btnLifeHandle.setTextColor(Color.RED)
                 }, 3000)
@@ -231,6 +226,19 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
 
             }
 
+            btnTest.setOnClickListener {
+                val list= listOf(1,2,3,4,5)
+                val  result1=list.reduce { acc, i ->
+                    LogUtils.d("acc=$acc i=$i")
+                    acc+i }
+                LogUtils.d("result1=$result1")
+
+                val  result2=list.fold(2) { acc, i ->
+                    LogUtils.d("acc=$acc i=$i")
+                    acc+i }
+
+                LogUtils.d("result2=$result2")
+            }
 
         }
 
@@ -276,7 +284,7 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
 
     private fun onTest1() {
 
-        mLoadingStateViewModel!!.setLoadingSate(LoadingState.START)
+        mLoadingStateViewModel?.setLoadingSate(LoadingState.START)
     }
 
     private fun onTest2() {
@@ -284,14 +292,14 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             val service = Router.getService(IBaseService::class.java, ServiceKey.KEY_SERVICE)
             service.doInBackground()
         }.start()
-        mLoadingStateViewModel!!.setLoadingSate(LoadingState.FINISH)
+        mLoadingStateViewModel?.setLoadingSate(LoadingState.FINISH)
     }
 
     private fun onTest3() {
         val key = "Test"
         val str = FileCacheUtils.getContent(key)
         if (StringUtils.isEmpty(str)) {
-            FileCacheUtils.saveContent(key, "Fisrt save,大中国。。")
+            FileCacheUtils.saveContent(key, "First save,大中国。。")
             ToastUtils.show("Cache is empty!")
         } else {
             ToastUtils.show("Cache:$str")
