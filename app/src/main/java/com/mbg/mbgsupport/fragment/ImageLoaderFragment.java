@@ -1,7 +1,6 @@
 package com.mbg.mbgsupport.fragment;
 
 import android.content.Context;
-import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
@@ -11,7 +10,6 @@ import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.LogUtils;
-import com.mbg.module.common.util.UriUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
@@ -21,7 +19,6 @@ import com.mbg.module.ui.image.view.RoundedImageView;
 import com.mbg.module.ui.view.imageview.DraggableImageView;
 import com.mbg.module.ui.view.imageview.TransformativeImageView;
 import com.mbg.module.ui.view.listener.OnImageChangedListener;
-import com.mbg.module.ui.view.listener.OnTriggerDragListener;
 
 public class ImageLoaderFragment extends BaseFragment implements View.OnClickListener{
     public static void show(Context context){

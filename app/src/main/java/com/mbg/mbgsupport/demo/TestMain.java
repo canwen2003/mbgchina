@@ -27,5 +27,8 @@ public class TestMain{
 
         ThisDemo demo=new ThisDemo();
         demo.new InnerClass().test();
+
+        new FilledRectangle().draw();
+        
      }
 }
