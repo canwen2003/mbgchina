@@ -10,6 +10,7 @@ import com.mbg.mbgsupport.R;
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel;
 import com.mbg.module.common.util.ClickUtils;
 import com.mbg.module.common.util.LogUtils;
+import com.mbg.module.common.util.ToastUtils;
 import com.mbg.module.ui.activity.TerminalActivity;
 import com.mbg.module.ui.fragment.BaseFragment;
 import com.mbg.module.ui.image.cache.engine.LoadOptions;
@@ -17,6 +18,7 @@ import com.mbg.module.ui.image.cache.engine.imageloader.ImageLoader;
 import com.mbg.module.ui.image.view.RecyclerImageView;
 import com.mbg.module.ui.image.view.RoundedImageView;
 import com.mbg.module.ui.view.imageview.DraggableImageView;
+import com.mbg.module.ui.view.imageview.PartClickImageView;
 import com.mbg.module.ui.view.imageview.TransformativeImageView;
 import com.mbg.module.ui.view.listener.OnImageChangedListener;
 
@@ -97,6 +99,22 @@ public class ImageLoaderFragment extends BaseFragment implements View.OnClickLis
             imageLoader.displayImage(uri1,draggableImageView2);
             imageLoader.displayImage(uri2,draggableImageView3);
         }
+
+        PartClickImageView imageView=findViewById(R.id.img_part);
+        imageView.setLeftOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show("Left Clicked");
+            }
+        });
+
+
+        imageView.setRightOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show("right Clicked");
+            }
+        });
 
 
         RoundedImageView roundedImageView1=findViewById(R.id.img_test3);
