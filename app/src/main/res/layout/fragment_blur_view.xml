@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <com.mbg.mbgsupport.demo.BlurMaskFilterView
+        android:layout_marginTop="20dp"
+        android:layout_width="240dp"
+        android:layout_height="160dp"/>
+
+</LinearLayout>
