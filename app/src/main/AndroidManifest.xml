@@ -37,6 +37,12 @@
         <activity android:name=".dialogfliptest.FlipMainActivity"/>
         <activity android:name=".dialogfliptest.LoginActivity"/>
         <activity android:name=".dialogfliptest.DActivity"/>
+        <activity android:name=".viewdraghelper.LessonOneActivity"/>
+        <activity android:name=".viewdraghelper.LessonTwoActivity"/>
+        <activity android:name=".viewdraghelper.LessonThreeActivity"/>
+        <activity android:name=".viewdraghelper.LessonFourActivity"/>
+        <activity android:name=".viewdraghelper.LessonFiveActivity"/>
+
     </application>
 
 </manifest>

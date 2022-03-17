@@ -2,6 +2,7 @@ package com.mbg.mbgsupport.fragment
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import com.mbg.mbgsupport.databinding.FragmentUtilsDemoBinding
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoPresenter
 import com.mbg.mbgsupport.router.service.IBaseService
 import com.mbg.mbgsupport.router.service.ServiceKey
+import com.mbg.mbgsupport.viewdraghelper.*
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel.LoadingState
 import com.mbg.module.common.core.LifecycleHandler
@@ -164,6 +166,23 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             btnTest9.setOnClickListener {
                 onTest9()
             }
+
+            btnDrag0.setOnClickListener {
+                startActivity(Intent(activity,LessonOneActivity::class.java))
+            }
+            btnDrag1.setOnClickListener {
+                startActivity(Intent(activity,LessonTwoActivity::class.java))
+            }
+            btnDrag2.setOnClickListener {
+                startActivity(Intent(activity,LessonThreeActivity::class.java))
+            }
+            btnDrag3.setOnClickListener {
+                startActivity(Intent(activity,LessonFourActivity::class.java))
+            }
+            btnDrag4.setOnClickListener {
+                startActivity(Intent(activity,LessonFiveActivity::class.java))
+            }
+
 
             btnShowGlobal.setOnClickListener {
                 UiUtils.showGlobal(requireActivity(), mGlobalView, R.id.view_global, 500) {

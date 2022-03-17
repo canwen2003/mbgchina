@@ -193,6 +193,50 @@
             android:text="通用测试"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="5">
+
+        <Button
+            android:id="@+id/btn_drag_0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Drag 0"/>
+
+        <Button
+            android:id="@+id/btn_drag_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Drag 1"/>
+
+
+        <Button
+            android:id="@+id/btn_drag_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Drag 0"/>
+        <Button
+            android:id="@+id/btn_drag_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Drag 3"/>
+
+        <Button
+            android:id="@+id/btn_drag_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Drag 4"/>
+
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
