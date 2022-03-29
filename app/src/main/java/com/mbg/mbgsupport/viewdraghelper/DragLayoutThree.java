@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewCompat;
 import androidx.customview.widget.ViewDragHelper;
@@ -70,8 +71,7 @@ public class DragLayoutThree extends ViewGroup{
         final int topBound = getPaddingTop();
         int y = (int) (topBound + slideOffset * mDragRange);
 
-        if(mDragHelper.smoothSlideViewTo(mHeaderView, mHeaderView.getLeft(), y))
-        {
+        if(mDragHelper.smoothSlideViewTo(mHeaderView, mHeaderView.getLeft(), y)) {
             ViewCompat.postInvalidateOnAnimation(this);
             return true;
         }
@@ -80,14 +80,14 @@ public class DragLayoutThree extends ViewGroup{
 
     @Override
     protected void onFinishInflate() {
-        Log.d(TAG, "onFInishInflate");
+        Log.d(TAG, "onFinishInflate");
+        super.onFinishInflate();
         mHeaderView = findViewById(R.id.header_view);
         mDescView   = findViewById(R.id.desc_view);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        Log.d(TAG, "onMeasure");
         measureChildren(widthMeasureSpec, heightMeasureSpec);
 
         int maxWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -103,7 +103,6 @@ public class DragLayoutThree extends ViewGroup{
         int parentViewHeight = getHeight();
         int dragViewHeight = mHeaderView.getMeasuredHeight();
         mDragRange = parentViewHeight - dragViewHeight;
-//        Log.d(TAG, "onLayout:" + "changed:" + changed + ",l:" + l + ",t:" + t + ",r:" + r + ",b:" + b + ",mDragRange" + mDragRange);
 
         mHeaderView.layout(
                 0,
@@ -121,17 +120,15 @@ public class DragLayoutThree extends ViewGroup{
     private class DragHelperCallback extends ViewDragHelper.Callback
     {
         @Override
-        public boolean tryCaptureView(View child, int pointerId) {
+        public boolean tryCaptureView(@NonNull View child, int pointerId) {
             return child == mHeaderView;
         }
 
         @Override
-        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-//            Log.i(TAG, "onViewPositionChanged:" + "left:" + left + ",top:" + top + ",dx:" + dx + ",dy:" + dy);
+        public void onViewPositionChanged(@NonNull View changedView, int left, int top, int dx, int dy) {
+
             mTop = top;
             mDragOffset = (float) top / mDragRange;
-
-//            Log.i(TAG, "onViewPositionChanged:" + "mDragOffset:" + mDragOffset);
 
             mHeaderView.setPivotX(mHeaderView.getWidth());
             mHeaderView.setPivotY(mHeaderView.getHeight());
@@ -144,18 +141,15 @@ public class DragLayoutThree extends ViewGroup{
         }
 
         @Override
-        public int clampViewPositionVertical(View child, int top, int dy) {
+        public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
             final int topBound = getPaddingTop();
             final int bottomBound = getHeight() - mHeaderView.getHeight() - mHeaderView.getPaddingBottom();
 
-            final int newTop = Math.min(Math.max(top, topBound), bottomBound);
-            return newTop;
+            return Math.min(Math.max(top, topBound), bottomBound);
         }
 
         @Override
-        public void onViewReleased(View releasedChild, float xvel, float yvel) {
-//            Log.i(TAG, "onViewReleased:" + "xvel:" + xvel + ",yvel:" + yvel);
-            //yvel Fling产生的值，yvel > 0 则是快速往下Fling || yvel < 0 则是快速往上Fling
+        public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
 
             int top = getPaddingTop();
             if (yvel > 0 || (yvel == 0 && mDragOffset > 0.4f)/* 后面这个小括号里判断处理拖动之后停下来但是未松手的情况 */) {
@@ -166,7 +160,7 @@ public class DragLayoutThree extends ViewGroup{
         }
 
         @Override
-        public int getViewVerticalDragRange(View child) {
+        public int getViewVerticalDragRange(@NonNull View child) {
             return mDragRange;
         }
 

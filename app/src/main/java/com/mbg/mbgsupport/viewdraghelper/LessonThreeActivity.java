@@ -21,16 +21,15 @@ import com.mbg.mbgsupport.R;
  */
 public class LessonThreeActivity extends FragmentActivity {
 
-    private ListView mListView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_three);
         setupListView();
     }
+
     private void setupListView() {
-        mListView = (ListView) findViewById(R.id.listView);
+        ListView mListView = findViewById(R.id.listView);
         SampleAdapter adapter = new SampleAdapter(this);
         for (int i = 0; i < 20; i++) {
             adapter.add(new SampleItem("Love Android", android.R.drawable.star_on));
@@ -39,7 +38,7 @@ public class LessonThreeActivity extends FragmentActivity {
     }
 
 
-    private class SampleItem {
+    private static class SampleItem {
         public String tag;
         public int iconRes;
         public SampleItem(String tag, int iconRes) {
@@ -48,7 +47,7 @@ public class LessonThreeActivity extends FragmentActivity {
         }
     }
 
-    public class SampleAdapter extends ArrayAdapter<SampleItem> {
+    public static class SampleAdapter extends ArrayAdapter<SampleItem> {
 
         public SampleAdapter(Context context) {
             super(context, 0);

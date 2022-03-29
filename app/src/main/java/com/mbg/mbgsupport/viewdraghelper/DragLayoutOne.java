@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.customview.widget.ViewDragHelper;
 
 import com.mbg.mbgsupport.R;
@@ -52,7 +53,7 @@ public class DragLayoutOne extends LinearLayout {
          * @param dx  建议的移动的x距离
          */
         @Override
-        public int clampViewPositionHorizontal(View child, int left, int dx) {
+        public int clampViewPositionHorizontal(@NonNull View child, int left, int dx) {
             Log.e(TAG,"left:"+left+"++++dx:"+dx);
             //两个if主要是让view在ViewGroup中
             if (left<getPaddingLeft()){

@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 public class ShapeFragment extends BaseFragment{
     private CountDownTextView countDownTextView;
     private ConvenientBanner convenientBanner;
-    private AppCompatSpinner appCompatSpinner;
     private ArrayList<Integer> localImages = new ArrayList<>();
     public static void show(Context context){
         TerminalActivity.show(context, ShapeFragment.class,null);
@@ -91,7 +90,6 @@ public class ShapeFragment extends BaseFragment{
 
 //        convenientBanner.setManualPageable(false);//设置不能手动影响
 
-        appCompatSpinner=findViewById(R.id.selector);
         initData();
     }
 

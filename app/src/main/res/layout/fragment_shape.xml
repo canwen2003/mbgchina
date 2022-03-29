@@ -44,11 +44,5 @@
             app:canLoop="true"
             app:autoTurningTime="3000"/>
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/selector"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/layer_drop_down_shape"/>
-
     </LinearLayout>
 </ScrollView>
