@@ -363,18 +363,47 @@
                     android:text="Blur" />
 
                 <Button
+                    android:id="@+id/btn_svga"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="svga" />
+
+                <Button
+                    android:id="@+id/btn_range"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="RangeBar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Button
                     android:id="@+id/btn_test1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="test1" />
+                    android:text="Test" />
 
                 <Button
                     android:id="@+id/btn_test2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="test2" />
+                    android:text="Test" />
+
+                <Button
+                    android:id="@+id/btn_test3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Test" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
