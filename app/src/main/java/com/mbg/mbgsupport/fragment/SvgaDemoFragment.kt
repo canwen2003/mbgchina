@@ -38,7 +38,7 @@ class SvgaDemoFragment : MvpFragment<DemoPresenter,FragmentSvgaDemoBinding>() {
         //asset jojo_audio.svga  cannot callback
         val name = "svga/rose.svga"
         Log.d("SVGA", "## name $name")
-        svgaParser.setFrameSize(100, 100)
+        svgaParser.setFrameSize(50, 50)
         svgaParser.decodeFromAssets(name, object : SVGAParser.ParseCompletion{
             override fun onComplete(videoItem: SVGAVideoEntity) {
                 Log.e("zzzz", "onComplete: ")

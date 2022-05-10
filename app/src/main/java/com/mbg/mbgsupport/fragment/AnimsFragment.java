@@ -11,7 +11,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Xfermode;
-import android.graphics.drawable.VectorDrawable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -106,7 +105,7 @@ public class AnimsFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         int viewId=view.getId();
         if (viewId==R.id.lt_anim_view){
-            mLottieAnimationView.setAnimation("LottieJson/anim_buy_progress.json");
+            mLottieAnimationView.setAnimation("LottieJson/icon_water_ripple.json");
             mLottieAnimationView.setImageAssetsFolder("LottieImg");
             mLottieAnimationView.setRepeatMode(LottieDrawable.RESTART);
             mLottieAnimationView.setRepeatCount(LottieDrawable.INFINITE);
