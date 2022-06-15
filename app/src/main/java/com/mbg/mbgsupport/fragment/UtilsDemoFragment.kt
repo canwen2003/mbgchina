@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import com.blued.android.module.serviceloader.Router
 import com.mbg.mbgsupport.MainActivity
 import com.mbg.mbgsupport.R
@@ -26,6 +27,7 @@ import com.mbg.module.common.core.net.manager.HttpManager
 import com.mbg.module.common.core.net.tool.HttpUtils
 import com.mbg.module.common.core.net.wrapper.response.DefaultHttpResponse
 import com.mbg.module.common.core.sharedpreference.FastSharedPreferences
+import com.mbg.module.common.liveeventbus.LiveEventBus
 import com.mbg.module.common.util.*
 import com.mbg.module.common.util.SpannableUtils.SpannableFilter
 import com.mbg.module.common.util.consts.PermissionConsts
@@ -111,16 +113,22 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
             }
 
             mLoadingStateViewModel = ViewModelProviders.of(requireActivity()).get("LoadingState", LoadingStateViewModel::class.java)
-            mLoadingStateViewModel?.loadingState?.observe(requireActivity(), { loadingState ->
+            mLoadingStateViewModel?.loadingState?.observe(requireActivity()) { loadingState ->
                 if (loadingState != null) {
                     when (loadingState) {
-                        LoadingState.START -> {
-                        }
+                        LoadingState.START -> onDataLoadingStart()
                         LoadingState.FINISH -> onDataLoadingFinish()
                     }
                 }
-            })
-            ThreadUtils.postInUIThreadDelayed({ mLoadingStateViewModel!!.setLoadingSate(LoadingState.FINISH) }, 8000)
+            }
+
+            LiveEventBus.get(MainActivity.EventBusKey).observe(this@UtilsDemoFragment){
+                if (it==true){
+                    onDataLoadingStart()
+                }else{
+                    onDataLoadingFinish()
+                }
+            }
             AsyncLayoutInflatePlus(requireActivity()).inflate(R.layout.view_async_load, null) { view, resId, parent -> root.addView(view) }
 
             val mGlobalView = View.inflate(activity, R.layout.view_global_demo, null)
@@ -268,6 +276,10 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
 
     }
 
+    private fun onDataLoadingStart() {
+        LogUtils.d("LoadingStateViewModel:onDataLoadingStart")
+    }
+
     private fun onDataLoadingFinish() {
         LogUtils.d("LoadingStateViewModel:onDataLoadingFinish")
     }
@@ -302,16 +314,18 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
     }
 
     private fun onTest1() {
-
-        mLoadingStateViewModel?.setLoadingSate(LoadingState.START)
+       // mLoadingStateViewModel?.setLoadingSate(LoadingState.START)
+        LiveEventBus.get(MainActivity.EventBusKey).post(true)
     }
 
     private fun onTest2() {
-        Thread {
+        /*Thread {
             val service = Router.getService(IBaseService::class.java, ServiceKey.KEY_SERVICE)
             service.doInBackground()
-        }.start()
-        mLoadingStateViewModel?.setLoadingSate(LoadingState.FINISH)
+        }.start()*/
+
+        //mLoadingStateViewModel?.setLoadingSate(LoadingState.FINISH)
+        LiveEventBus.get(MainActivity.EventBusKey).post(false)
     }
 
     private fun onTest3() {

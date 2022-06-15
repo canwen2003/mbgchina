@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10410334346504559" />
         <entry key="app/src/main/res/layout/fragment_anim.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_blur_view.xml" value="0.13728470111448834" />
+        <entry key="app/src/main/res/layout/fragment_spannable_demo.xml" value="0.10182370820668693" />
         <entry key="app/src/main/res/layout/fragment_svga_demo.xml" value="0.2427536231884058" />
       </map>
     </option>

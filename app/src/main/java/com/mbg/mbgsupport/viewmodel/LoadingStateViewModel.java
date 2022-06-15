@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
  * 数据加载状态的ViewModel
  */
 public class LoadingStateViewModel extends ViewModel {
-    private final MutableLiveData<LoadingState> mLoadingState=new MutableLiveData<>();
+    private static final MutableLiveData<LoadingState> mLoadingState=new MutableLiveData<>();
 
     public MutableLiveData<LoadingState> getLoadingState(){
         return mLoadingState;

@@ -1,44 +1,43 @@
 package com.mbg.mbgsupport
 
 import android.content.Context
-import com.mbg.mbgsupport.fragment.UtilsDemoFragment.Companion.show
-import com.mbg.module.ui.kotlin.activity.PhoneActivity.Companion.show
-import com.mbg.module.ui.activity.BaseViewBindingActivity
-import androidx.lifecycle.ViewModelProvider
-import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel
-import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel.LoadingState
-import com.mbg.module.ui.view.drawable.DrawableCreator
-import com.mbg.module.common.util.UiUtils
-import com.mbg.module.ui.view.drawable.LayerBuilder
-import com.mbg.mbgsupport.fragment.tab.CommonTabFragment
-import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment
-import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment
-import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment
-import com.mbg.mbgsupport.fragment.seekbar.SeekBarFragment
 import android.content.Intent
 import android.location.Address
-import com.mbg.mbgsupport.kotlin.KotlinMain
-import com.mbg.mbgsupport.demo.kotlin.viewbinding.DemoViewBindingActivity
-import com.mbg.mbgsupport.demo.kotlin.mvp.AlphaTranFragment
-import com.mbg.mbgsupport.demo.kotlin.mvp.DemoGestureFragment
-import com.mbg.mbgsupport.dialogfliptest.FlipMainActivity
-import com.mbg.mbgsupport.demo.UPVDemoActivity
-import android.os.Looper
-import com.mbg.mbgsupport.work.DemoWorker
 import android.location.Geocoder
+import android.os.Looper
 import android.util.Printer
 import androidx.core.content.ContextCompat
 import androidx.work.*
 import com.mbg.mbgsupport.databinding.ActivityMainBinding
+import com.mbg.mbgsupport.demo.UPVDemoActivity
 import com.mbg.mbgsupport.demo.kotlin.inlinefun.SnackbarDemoActivity
+import com.mbg.mbgsupport.demo.kotlin.mvp.AlphaTranFragment
+import com.mbg.mbgsupport.demo.kotlin.mvp.DemoGestureFragment
+import com.mbg.mbgsupport.demo.kotlin.viewbinding.DemoViewBindingActivity
+import com.mbg.mbgsupport.dialogfliptest.FlipMainActivity
 import com.mbg.mbgsupport.fragment.*
+import com.mbg.mbgsupport.fragment.UtilsDemoFragment.Companion.show
+import com.mbg.mbgsupport.fragment.appbar.AppBarLayoutFragment
+import com.mbg.mbgsupport.fragment.seekbar.SeekBarFragment
+import com.mbg.mbgsupport.fragment.tab.CommonTabFragment
+import com.mbg.mbgsupport.fragment.tab.SegmentTabFragment
+import com.mbg.mbgsupport.fragment.tab.SlidingTabFragment
+import com.mbg.mbgsupport.kotlin.KotlinMain
+import com.mbg.mbgsupport.work.DemoWorker
+import com.mbg.module.common.liveeventbus.LiveEventBus
 import com.mbg.module.common.util.LogUtils
+import com.mbg.module.common.util.ThreadUtils
+import com.mbg.module.common.util.UiUtils
+import com.mbg.module.ui.activity.BaseViewBindingActivity
+import com.mbg.module.ui.kotlin.activity.PhoneActivity.Companion.show
+import com.mbg.module.ui.view.drawable.DrawableCreator
+import com.mbg.module.ui.view.drawable.LayerBuilder
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
+
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
     private lateinit var context: Context
-
     private fun onDataLoadingStart() {
         LogUtils.d("LoadingStateViewModel:onDataLoadingStart")
     }
@@ -49,14 +48,36 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
 
     override fun initView() {
         context = this
-        ViewModelProvider(this).get(LoadingStateViewModel::class.java).loadingState.observe(this) { loadingState ->
+
+        //获取广告的adid
+        ThreadUtils.postInThread {
+            try {
+                val adid = AdvertisingIdClient.getGoogleAdId(applicationContext)
+                LogUtils.e("adid:$adid")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        /*ViewModelProvider(this).get(LoadingStateViewModel::class.java).loadingState.observe(this) { loadingState ->
             if (loadingState != null) {
                 when (loadingState) {
                     LoadingState.START -> onDataLoadingStart()
                     LoadingState.FINISH -> onDataLoadingFinish()
                 }
             }
+        }*/
+
+        LiveEventBus.config(EventBusKey).lifecycleObserverAlwaysActive(true)
+        LiveEventBus.config().lifecycleObserverAlwaysActive(false)
+        LiveEventBus.get(EventBusKey).observe(this){
+            if (it==true){
+                onDataLoadingStart()
+            }else{
+                onDataLoadingFinish()
+            }
         }
+
         var builder =
             DrawableCreator.Builder().setCornersRadius(UiUtils.dip2px(30f).toFloat())
                 .setSolidColor(ContextCompat.getColor(context, R.color.amber_a100))
@@ -165,6 +186,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
                 startActivity(intent)
             }
 
+            btnSpan.setOnClickListener {
+                SpannableStringFragment.show(context)
+            }
 
             Looper.getMainLooper().setMessageLogging(object : Printer {
                 private val START = ">>>>> Dispatching"
@@ -226,5 +250,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
             }
         }
         return cityName
+    }
+
+    companion object{
+        const val EventBusKey="event_bus_key"
     }
 }
