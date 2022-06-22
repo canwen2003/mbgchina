@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.mbg.mbgsupport.R
 import com.mbg.mbgsupport.databinding.FragmentSpannableDemoBinding
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoPresenter
+import com.mbg.module.common.util.LogUtils
 import com.mbg.module.common.util.ToastUtils
 import com.mbg.module.common.util.UiUtils
 import com.mbg.module.ui.kotlin.activity.PhoneActivity
@@ -86,6 +87,13 @@ class SpannableStringFragment : MvpFragment<DemoPresenter,FragmentSpannableDemoB
             builder1.setSpan(textAppearanceSpan,"设置部分文字颜色:".length,"设置部分文字颜色:设置我吧".length,Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
             tvSpanView7.text=builder1
 
+
+            chronometer.base=0
+            chronometer.format="MM:SS"
+            chronometer.setOnChronometerTickListener {
+                LogUtils.d("zzy: ${it.drawingTime}")
+            }
+            chronometer.start()
         }
 
     }

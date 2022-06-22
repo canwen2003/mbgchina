@@ -79,21 +79,13 @@
         android:gravity="center"
         android:textSize="13sp"
         android:textColor="@color/white"/>
-    <TextView
-        android:id="@+id/tv_span_view_9"
+
+    <Chronometer
+        android:id="@+id/chronometer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:gravity="center"
-        android:textSize="13sp"
-        android:textColor="@color/white"/>
-    <TextView
-        android:id="@+id/tv_span_view_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:textSize="13sp"
-        android:textColor="@color/white"/>
+        android:textSize="12sp"
+        android:textColor="@color/light_blue_a400"/>
 
 </LinearLayout>
