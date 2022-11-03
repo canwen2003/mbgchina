@@ -189,6 +189,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
             btnSpan.setOnClickListener {
                 SpannableStringFragment.show(context)
             }
+            btnProgress.setOnClickListener {
+                ProgressBarFragment.show(context)
+            }
 
             Looper.getMainLooper().setMessageLogging(object : Printer {
                 private val START = ">>>>> Dispatching"

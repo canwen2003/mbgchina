@@ -5,18 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
-import com.blued.android.module.serviceloader.Router
 import com.mbg.mbgsupport.MainActivity
 import com.mbg.mbgsupport.R
 import com.mbg.mbgsupport.databinding.FragmentUtilsDemoBinding
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoPresenter
-import com.mbg.mbgsupport.router.service.IBaseService
-import com.mbg.mbgsupport.router.service.ServiceKey
 import com.mbg.mbgsupport.viewdraghelper.*
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel
 import com.mbg.mbgsupport.viewmodel.LoadingStateViewModel.LoadingState
@@ -34,7 +31,9 @@ import com.mbg.module.common.util.consts.PermissionConsts
 import com.mbg.module.ui.kotlin.activity.PhoneActivity
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
 import com.mbg.module.ui.view.inflate.AsyncLayoutInflatePlus
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() {
     private val weakHandler = WeakHandler(this)
@@ -56,6 +55,14 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
     override fun onInitView(savedInstanceState: Bundle?) {
         super.onInitView(savedInstanceState)
         initView()
+
+        val bizDate: Long=1658456771*1000L // 传进来的long类型时间
+
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+
+        val bizDateStr: String = sdf.format(Date(bizDate))
+        LogUtils.d(bizDateStr)
     }
 
     override fun initView() {
@@ -90,6 +97,7 @@ class UtilsDemoFragment : MvpFragment<DemoPresenter,FragmentUtilsDemoBinding>() 
         }
         mViewBinding?.run {
 
+            tvScrollText.movementMethod = ScrollingMovementMethod()
             var spannableFilter = SpannableFilter()
             val spannableFilters: MutableList<SpannableFilter> = ArrayList()
             spannableFilter.keywords = "测试"

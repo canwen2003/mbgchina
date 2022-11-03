@@ -299,4 +299,8 @@
     <color name="shimmer_hightlight_color">#ffffff</color>
     <color name="light_transparent">#16000000</color>
     <color name="dark_transparent">#24000000</color>
+
+    <color name="color_1A1A1B">#1A1A1B</color>
+    <color name="color_FA404A">#FA404A</color>
+
 </resources>

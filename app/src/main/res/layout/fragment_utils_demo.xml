@@ -237,6 +237,14 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_scroll_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:maxLines="4"
+        android:scrollbars="vertical"
+        android:text="可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件可以上下滑动的控件"/>
 
     <View
         android:layout_width="match_parent"

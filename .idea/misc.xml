@@ -3,15 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_btn_device_id.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bg_button_login.xml" value="0.1015" />
+        <entry key="app/src/main/res/layout/activity_auto_load.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_banner.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10410334346504559" />
+        <entry key="app/src/main/res/layout/activity_native.xml" value="0.8870967741935484" />
         <entry key="app/src/main/res/layout/fragment_anim.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_blur_view.xml" value="0.13728470111448834" />
+        <entry key="app/src/main/res/layout/fragment_common_tab.xml" value="0.10410334346504559" />
+        <entry key="app/src/main/res/layout/fragment_progress_demo.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_single.xml" value="0.1331521739130435" />
         <entry key="app/src/main/res/layout/fragment_spannable_demo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_svga_demo.xml" value="0.2427536231884058" />
+        <entry key="app/src/main/res/layout/fragment_utils_demo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/view_live_progress.xml" value="0.13728470111448834" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
