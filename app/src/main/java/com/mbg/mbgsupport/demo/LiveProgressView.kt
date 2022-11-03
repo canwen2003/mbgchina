@@ -47,6 +47,7 @@ class LiveProgressView : FrameLayout{
                     0f,
                     UiUtils.dip2px(context, 9f).toFloat())
              layerBuilder = LayerBuilder.create(builder1.build(), builder2.build())
+            setProgress(0,0)
         }
     }
 
