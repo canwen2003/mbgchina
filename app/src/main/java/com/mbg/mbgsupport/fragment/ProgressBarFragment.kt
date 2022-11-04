@@ -20,7 +20,7 @@ class ProgressBarFragment : MvpFragment<DemoPresenter,FragmentProgressDemoBindin
         mViewBinding?.run {
             liveProgressView.initView(this@ProgressBarFragment)
 
-            liveProgressView.setProgress(34,900)
+            liveProgressView.setProgress(5,15)
         }
 
     }

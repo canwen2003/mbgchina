@@ -51,17 +51,24 @@ class LiveProgressView : FrameLayout{
         }
     }
 
-    fun setProgress(left:Int=0,right:Int=0){
+    @JvmOverloads
+    fun setProgress(left:Int=0,right:Int=0,marginDp:Float=0f){
         mViewBinding?.run {
             tvStartView.text=left.toString()
             tvEndView.text=right.toString()
+            val paddingText=UiUtils.dip2px(context,marginDp)
+
+            tvStartView.setPadding(0,0,paddingText,0)
+            tvEndView.setPadding(paddingText,0,0,0)
+
+
             tvStartView.post {
                 tvEndView.post {
-                    val totalLength=tvEndView.left-tvStartView.right
+                    val totalLength=tvEndView.left-tvStartView.right-imgMarkView.width
                     val margin=if (left+right==0) totalLength/2 else left*totalLength/(left+right)
 
                     val layoutParams=imgMarkView.layoutParams as ConstraintLayout.LayoutParams
-                    layoutParams.marginStart=margin-imgMarkView.width/2
+                    layoutParams.marginStart=margin
                     imgMarkView.layoutParams=layoutParams
 
                     imgMarkView.post {
