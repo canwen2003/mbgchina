@@ -42,4 +42,6 @@
     <color name="colorFontRed">#F96650</color>
 
     <color name="shimmer_color_for_image">#55efefef</color>
+    <color name="color_FF3AFA">#FF3AFA</color>
+    <color name="color_1CCEFF">#1CCEFF</color>
 </resources>

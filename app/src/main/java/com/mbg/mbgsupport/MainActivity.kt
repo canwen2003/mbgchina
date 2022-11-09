@@ -193,6 +193,10 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
                 ProgressBarFragment.show(context)
             }
 
+            btnShapeImg.setOnClickListener {
+                ShapeableImageViewFragment.show(context)
+            }
+
             Looper.getMainLooper().setMessageLogging(object : Printer {
                 private val START = ">>>>> Dispatching"
 

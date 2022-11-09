@@ -36,18 +36,18 @@ class LiveProgressView : FrameLayout{
         mViewBinding?.run {
 
             val builder1: DrawableCreator.Builder = DrawableCreator.Builder()
-            builder1.setSolidColor(ContextCompat.getColor(context, R.color.yellow_800))
-                .setCornersRadius(UiUtils.dip2px(context, 10f).toFloat())
+            builder1.setSolidColor(ContextCompat.getColor(context, R.color.color_FF3AFA))
+                .setCornersRadius(UiUtils.dip2px(context, 4f).toFloat())
 
             val builder2: DrawableCreator.Builder = DrawableCreator.Builder()
             builder2.setGradientAngle(180)
-                .setSolidColor(ContextCompat.getColor(context, R.color.color_FA404A))
+                .setSolidColor(ContextCompat.getColor(context, R.color.color_1CCEFF))
                 .setCornersRadius(0f,
-                    UiUtils.dip2px(context, 9f).toFloat(),
+                    UiUtils.dip2px(context, 4f).toFloat(),
                     0f,
-                    UiUtils.dip2px(context, 9f).toFloat())
-             layerBuilder = LayerBuilder.create(builder1.build(), builder2.build())
-            setProgress(0,0)
+                    UiUtils.dip2px(context, 4f).toFloat())
+            layerBuilder = LayerBuilder.create(builder1.build(), builder2.build())
+            setProgress(0, 0)
         }
     }
 

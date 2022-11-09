@@ -5,6 +5,9 @@
       <map>
         <entry key="app/src/main/res/drawable/bg_btn_device_id.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_button_login.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/shape_circle_bg_gray.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/shape_round.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/shape_rounded_rectangle_bg_gray_12dp.xml" value="0.1015" />
         <entry key="app/src/main/res/layout/activity_auto_load.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_banner.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10410334346504559" />
@@ -13,6 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_blur_view.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/fragment_common_tab.xml" value="0.10410334346504559" />
         <entry key="app/src/main/res/layout/fragment_progress_demo.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_shapeimageview_demo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_single.xml" value="0.1331521739130435" />
         <entry key="app/src/main/res/layout/fragment_spannable_demo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_svga_demo.xml" value="0.2427536231884058" />

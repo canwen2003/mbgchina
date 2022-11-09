@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/progress_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="16dp"
     android:clipChildren="false">
 
     <ImageView
         android:id="@+id/img_start_view"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_tool_dinner"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:src="@drawable/icon_live_top_bar_beans"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,11 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:text="0"
         android:paddingRight="5dp"
         android:layout_marginStart="6dp"
-        android:background="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@id/img_start_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -33,14 +32,12 @@
 
     <ImageView
         android:id="@+id/img_mark_view"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/ic_tool_extra_meal"
+        android:layout_width="21dp"
+        android:layout_height="33dp"
+        android:src="@drawable/icon_live_top_bar_vs"
         app:layout_constraintStart_toEndOf="@id/tv_start_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-
 
 
     <TextView
@@ -48,8 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:background="@color/colorPrimary"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:text="0"
         android:layout_marginEnd="6dp"
         android:paddingLeft="5dp"
@@ -59,9 +55,9 @@
 
     <ImageView
         android:id="@+id/img_end_view"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_tool_dinner"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:src="@drawable/icon_live_top_bar_beans"
         android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

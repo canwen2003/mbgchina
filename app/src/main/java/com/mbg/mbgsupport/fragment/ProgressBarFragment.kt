@@ -2,6 +2,7 @@ package com.mbg.mbgsupport.fragment
 
 import android.content.Context
 import android.os.Bundle
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.mbg.mbgsupport.databinding.FragmentProgressDemoBinding
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoPresenter
 import com.mbg.module.ui.kotlin.activity.PhoneActivity
@@ -22,6 +23,7 @@ class ProgressBarFragment : MvpFragment<DemoPresenter,FragmentProgressDemoBindin
 
             liveProgressView.setProgress(5,15)
         }
+
 
     }
 
