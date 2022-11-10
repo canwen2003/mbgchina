@@ -9,8 +9,10 @@ import com.google.android.material.shape.*
 import com.mbg.mbgsupport.R
 import com.mbg.mbgsupport.databinding.FragmentShapeimageviewDemoBinding
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoPresenter
+import com.mbg.module.common.util.UiUtils
 import com.mbg.module.ui.kotlin.activity.PhoneActivity
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
+import com.mbg.module.ui.view.drawable.DrawableCreator
 import com.opensource.svgaplayer.utils.log.SVGALogger.setLogEnabled
 
 class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimageviewDemoBinding>() {
@@ -23,6 +25,7 @@ class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimagev
 
     override fun initView() {
         mViewBinding?.run {
+
             val shapeAppearanceModel2 = ShapeAppearanceModel.builder().apply {
                 setAllCorners(RoundedCornerTreatment())
                 setAllCornerSizes(30f)
@@ -87,6 +90,9 @@ class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimagev
                 strokeWidth = 2f
                 strokeColor = ContextCompat.getColorStateList(requireContext(), R.color.red_200)
             }
+
+
+
         }
     }
 

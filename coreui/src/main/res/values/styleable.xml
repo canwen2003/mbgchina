@@ -1014,4 +1014,17 @@
         <attr name="upv_automeasure" format="boolean" />
         <attr name="upv_itemratio" format="float" />
     </declare-styleable>
+
+    <!--圆角控件属性-->
+    <declare-styleable name="ShapeImageView">
+
+        <attr name="sv_stroke_start_color" format="color" />
+        <attr name="sv_stroke_middle_color" format="color" />
+        <attr name="sv_stroke_end_color" format="color" />
+        <attr name="sv_stroke_width" format="dimension" />
+        <attr name="sv_stroke_angle" format="integer"/>
+        <attr name="sv_stroke_corner_radius" format="dimension"/>
+
+    </declare-styleable>
+
 </resources>

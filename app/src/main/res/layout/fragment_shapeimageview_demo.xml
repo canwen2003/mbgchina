@@ -34,13 +34,17 @@
                 android:src="@drawable/icon_girl"
                 app:shapeAppearance="@style/RoundedStyle" />
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <com.mbg.module.ui.view.imageview.ShapeImageView
+                android:id="@+id/img_test"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_marginStart="20dp"
-                android:scaleType="fitXY"
                 android:src="@drawable/icon_girl"
-                app:shapeAppearance="@style/CircleStyle" />
+                app:sv_stroke_corner_radius="80dp"
+                app:sv_stroke_width="2dp"
+                app:sv_stroke_start_color="@color/amber_100"
+                app:sv_stroke_middle_color="@color/red_300"
+                app:sv_stroke_end_color="@color/blue_300"/>
         </LinearLayout>
 
         <LinearLayout
