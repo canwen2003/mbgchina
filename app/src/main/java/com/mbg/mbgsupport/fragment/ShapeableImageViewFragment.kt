@@ -9,23 +9,47 @@ import com.google.android.material.shape.*
 import com.mbg.mbgsupport.R
 import com.mbg.mbgsupport.databinding.FragmentShapeimageviewDemoBinding
 import com.mbg.mbgsupport.demo.kotlin.mvp.DemoPresenter
-import com.mbg.module.common.util.UiUtils
+import com.mbg.module.common.util.LogUtils
 import com.mbg.module.ui.kotlin.activity.PhoneActivity
 import com.mbg.module.ui.mvp.kotlin.MvpFragment
-import com.mbg.module.ui.view.drawable.DrawableCreator
 import com.opensource.svgaplayer.utils.log.SVGALogger.setLogEnabled
 
 class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimageviewDemoBinding>() {
 
+    private var mTestStr:String?=null
+
     override fun onInitView(savedInstanceState: Bundle?) {
         super.onInitView(savedInstanceState)
         setLogEnabled(true)
-        initView()
     }
 
     override fun initView() {
-        mViewBinding?.run {
+        mTestStr?.run {
+            LogUtils.d("mTestStr:run")
+        }?:kotlin.run {
+            LogUtils.d("mTestStr:run else")
+        }
 
+        mTestStr?.let {
+            LogUtils.d("mTestStr:let")
+        }?:kotlin.run {
+            LogUtils.d("mTestStr:let else")
+        }
+
+        mTestStr?.apply {
+            LogUtils.d("mTestStr:apply")
+        }?:kotlin.run {
+            LogUtils.d("mTestStr:apply else")
+        }
+
+        mTestStr?.also {
+            LogUtils.d("mTestStr:also")
+        }?:kotlin.run {
+            LogUtils.d("mTestStr:also else")
+        }
+
+
+        mViewBinding?.run {
             val shapeAppearanceModel2 = ShapeAppearanceModel.builder().apply {
                 setAllCorners(RoundedCornerTreatment())
                 setAllCornerSizes(30f)
@@ -74,9 +98,9 @@ class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimagev
         mViewBinding?.run {
 
             val shapeAppearanceModel = ShapeAppearanceModel.builder().apply {
-                setAllCorners(CutCornerTreatment())
+                setAllCorners(RoundedCornerTreatment())
                 setAllCornerSizes(20f)
-                setTopEdge(OffsetEdgeTreatment(TriangleEdgeTreatment(20f, false),100f))
+                setBottomEdge(OffsetEdgeTreatment(TriangleEdgeTreatment(20f, false),0f))
             }.build()
 
             (tvTest3.parent as ViewGroup).clipChildren=false
@@ -91,6 +115,12 @@ class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimagev
                 strokeColor = ContextCompat.getColorStateList(requireContext(), R.color.red_200)
             }
 
+
+
+            tvTest3.background=MaterialShapeDrawable(shapeAppearanceModel).apply {
+                setTint(ContextCompat.getColor(requireContext(),R.color.colorGreen50))
+                        paintStyle = Paint.Style.FILL
+            }
 
 
         }

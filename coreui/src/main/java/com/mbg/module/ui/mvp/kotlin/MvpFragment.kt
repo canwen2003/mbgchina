@@ -31,6 +31,7 @@ abstract class MvpFragment< T : MvpPresenter<out IntView>, VB : ViewBinding> : B
         return 0
     }
 
+
     @CallSuper
     open fun onInitView(savedInstanceState: Bundle?) {
 
@@ -145,9 +146,8 @@ abstract class MvpFragment< T : MvpPresenter<out IntView>, VB : ViewBinding> : B
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
         mViewBinding=getViewBinding(inflater,container)?:getBinding()
-
+        super.onCreateView(inflater, container, savedInstanceState)
 
         return mViewBinding?.root
     }

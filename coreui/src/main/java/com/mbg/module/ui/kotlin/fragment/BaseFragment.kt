@@ -36,6 +36,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     abstract fun initView()
+
     fun <T : View?> findViewById(@IdRes id: Int): T {
         return mRootView!!.findViewById(id)
     }
