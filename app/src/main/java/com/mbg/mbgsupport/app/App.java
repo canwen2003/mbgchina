@@ -35,14 +35,14 @@ public class App extends Application {
         super.onCreate();
 
        //new  DoKit.Builder(this).build();
-
+        long currentTime=System.currentTimeMillis();
         StartupConfig startupConfig = new StartupConfig.Builder()
                 .setAwaitTimeout(12000)
                 .setLoggerLevel(LoggerLevel.DEBUG)
                 .setListener(new StartupListener() {
             @Override
             public void onCompleted(long totalMainThreadCostTime, @NotNull List<CostTimesModel> list) {
-                LogUtils.d("totalMainThreadCostTime:"+totalMainThreadCostTime);
+                LogUtils.d("totalMainThreadCostTime:"+totalMainThreadCostTime/1000);
                 for (CostTimesModel costTimesModel :list) {
                     LogUtils.d("getName=" + costTimesModel.getName());
                     LogUtils.d("getCallOnMainThread=" + costTimesModel.getCallOnMainThread());
@@ -62,6 +62,8 @@ public class App extends Application {
                 .build(this)
                 .start()
                 .await();
+
+        LogUtils.d("LAST:"+ (System.currentTimeMillis()-currentTime));
     }
 
 }

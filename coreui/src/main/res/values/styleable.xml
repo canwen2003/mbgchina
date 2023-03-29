@@ -1027,4 +1027,46 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="BubbleTextView">
+        <!--原件-->
+        <attr name="cornerRadius"/>
+
+        <!--箭头的高度-->
+        <attr name="bt_arrowSize" format="dimension" />
+
+        <!--箭头的距离起始位置的距离-->
+        <attr name="bt_position" format="dimension" />
+
+        <!--背景色-->
+        <attr name="bt_Color" format="color" />
+
+
+        <!--箭头方向-->
+        <attr name="Location" format="enum">
+            <enum name="left" value="0x00" />
+            <enum name="right" value="0x01" />
+            <enum name="top" value="0x02" />
+            <enum name="bottom" value="0x03" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ShapeBlurView">
+        <attr name="blur_radius" format="dimension" />
+        <attr name="blur_down_sample" format="float" />
+        <attr name="blur_overlay_color" format="color" />
+        <attr name="blur_corner_radius" format="dimension" />
+        <attr name="blur_corner_radius_top_left" format="dimension" />
+        <attr name="blur_corner_radius_top_right" format="dimension" />
+        <attr name="blur_corner_radius_bottom_left" format="dimension" />
+        <attr name="blur_corner_radius_bottom_right" format="dimension" />
+        <attr name="blur_border_width" format="dimension" />
+        <attr name="blur_border_color" format="color" />
+        <attr name="blur_mode">
+            <enum name="rectangle" value="0" />
+            <enum name="circle" value="1" />
+            <enum name="oval" value="2" />
+        </attr>
+    </declare-styleable>
+
 </resources>

@@ -104,6 +104,7 @@ dependencies {
         exclude module: 'recyclerview-v7'
     }
 
+    
     implementation project(path: ':common')
     implementation project(path: ':coreui')
 }

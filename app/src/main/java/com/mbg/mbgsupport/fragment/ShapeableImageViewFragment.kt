@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.google.android.material.shape.*
 import com.mbg.mbgsupport.R
@@ -16,7 +17,7 @@ import com.opensource.svgaplayer.utils.log.SVGALogger.setLogEnabled
 
 class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimageviewDemoBinding>() {
 
-    private var mTestStr:String?=null
+    private var mTestStr:String?="ddd"
 
     override fun onInitView(savedInstanceState: Bundle?) {
         super.onInitView(savedInstanceState)
@@ -50,6 +51,30 @@ class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimagev
 
 
         mViewBinding?.run {
+            viewFlipper.addView(getImageView(R.drawable.girl,"girl"),ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT))
+            viewFlipper.addView(getImageView(R.drawable.social_1,"social_1"),ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT))
+            viewFlipper.addView(getImageView(R.drawable.social_2,"social_2"),ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT))
+            viewFlipper.addView(getImageView(R.drawable.social_3,"social_3"),ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT))
+            viewFlipper.addView(getImageView(R.drawable.social_4,"social_4"),ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT))
+            viewFlipper.addView(getImageView(R.drawable.social_5,"social_5"),ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT))
+/*
+            viewFlipper.inAnimation.setAnimationListener(object : Animation.AnimationListener{
+                override fun onAnimationStart(p0: Animation?) {
+                }
+
+                override fun onAnimationEnd(p0: Animation?) {
+
+                }
+
+                override fun onAnimationRepeat(p0: Animation?) {
+                }
+            })*/
+
+            viewFlipper.setOnClickListener {
+                LogUtils.d("tag:${viewFlipper.currentView.tag}")
+            }
+            viewFlipper.startFlipping()
+            viewFlipper.currentView
             val shapeAppearanceModel2 = ShapeAppearanceModel.builder().apply {
                 setAllCorners(RoundedCornerTreatment())
                 setAllCornerSizes(30f)
@@ -92,6 +117,13 @@ class ShapeableImageViewFragment : MvpFragment<DemoPresenter,FragmentShapeimagev
         }
 
 
+    }
+
+    private fun getImageView(resId:Int,tag:String):ImageView{
+        val imageView=ImageView(context)
+        imageView.tag=tag
+        imageView.setImageResource(resId)
+        return imageView
     }
 
     private fun shapeView(){

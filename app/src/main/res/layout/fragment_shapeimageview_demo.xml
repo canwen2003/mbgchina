@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_alpha_16"
-    android:clipChildren="false"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -19,6 +18,23 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:paddingBottom="20dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipChildren="true">
+
+
+         <ViewFlipper
+            android:id="@+id/view_flipper"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:flipInterval="2000"
+            android:clipChildren="true"
+            android:inAnimation="@anim/anim_right_in"
+            android:outAnimation="@anim/anim_left_out"
+            android:scrollbarFadeDuration="200"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -196,6 +196,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding?>() {
             btnShapeImg.setOnClickListener {
                 ShapeableImageViewFragment.show(context)
             }
+            btnBlurView.setOnClickListener {
+                BlurViewDemoFragment.show(context)
+            }
 
             Looper.getMainLooper().setMessageLogging(object : Printer {
                 private val START = ">>>>> Dispatching"

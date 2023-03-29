@@ -4,24 +4,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clipChildren="false">
 
-    <com.mbg.module.ui.view.bubble.BubbleTextView
-        android:id="@+id/textView"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello BubbleTextVew"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="20dp"
-        app:bubbleColor="#7EC0EE"
-        app:arrowLocation="right"
-        app:arrowWidth="8dp"
-        app:corner="8dp"
-        app:arrowHeight="10dp"
-        app:arrowPosition="14dp"
-        />
+        android:clipChildren="false">
+
+        <com.mbg.module.ui.view.bubble.BubbleTextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello BubbleTextVew"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"
+            app:bt_Color="#7EC0EE"
+            app:bt_arrowSize="12dp"
+            app:cornerRadius="8dp"
+            app:bt_position="10dp"
+            />
+    </FrameLayout>
+
 
     <com.mbg.module.ui.view.bubble.BubbleImageView
         android:id="@+id/bubble_image"

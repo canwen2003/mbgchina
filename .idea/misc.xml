@@ -14,6 +14,8 @@
         <entry key="app/src/main/res/layout/activity_native.xml" value="0.8870967741935484" />
         <entry key="app/src/main/res/layout/fragment_anim.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_blur_view.xml" value="0.13728470111448834" />
+        <entry key="app/src/main/res/layout/fragment_blur_view_demo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_bubble_view.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_common_tab.xml" value="0.10410334346504559" />
         <entry key="app/src/main/res/layout/fragment_constrainst_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_constraint_demo.xml" value="0.1" />

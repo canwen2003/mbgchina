@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.RectF;
-
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -15,7 +14,7 @@ import com.mbg.module.ui.R;
 /**
  * Created by lgp on 2015/3/24.
  */
-public class BubbleTextView extends AppCompatTextView {
+public class BubbleTextViewOr extends AppCompatTextView {
     private BubbleDrawable bubbleDrawable;
     private float mArrowWidth;
     private float mAngle;
@@ -25,17 +24,17 @@ public class BubbleTextView extends AppCompatTextView {
     private BubbleDrawable.ArrowLocation mArrowLocation;
     private boolean mArrowCenter;
 
-    public BubbleTextView(Context context) {
+    public BubbleTextViewOr(Context context) {
         super(context);
         initView(null);
     }
 
-    public BubbleTextView(Context context, AttributeSet attrs) {
+    public BubbleTextViewOr(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(attrs);
     }
 
-    public BubbleTextView(Context context, AttributeSet attrs, int defStyle) {
+    public BubbleTextViewOr(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initView(attrs);
     }
