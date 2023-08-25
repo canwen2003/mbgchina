@@ -1,5 +1,7 @@
 package com.mbg.module.ui.view.layout.tab;
 
+import android.animation.ArgbEvaluator;
+import android.animation.FloatEvaluator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -121,6 +123,9 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
         private int mLastScrollX;
         private int mHeight;
         private boolean mSnapOnTabClick;
+         private final ArgbEvaluator mEvaluator = new ArgbEvaluator();
+        private final FloatEvaluator mEvaluatorSize = new FloatEvaluator();
+        private float mTextSizeScaleDiff=0.0f;
 
         public PageSlidingTabLayout(Context context) {
             this(context, null, 0);
@@ -139,7 +144,7 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
 
             this.mContext = context;
             mTabsContainer = new LinearLayout(context);
-            addView(mTabsContainer,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+            addView(mTabsContainer);
 
             obtainAttributes(context, attrs);
 
@@ -204,6 +209,12 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
             mTabSpaceEqual = ta.getBoolean(R.styleable.PageSlidingTabLayout_tab_space_equal, false);
             mTabWidth = ta.getDimension(R.styleable.PageSlidingTabLayout_tab_width, dp2px(-1));
             mTabPadding = ta.getDimension(R.styleable.PageSlidingTabLayout_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(20));
+
+            if (mTextSelectSize == mTextSize) {
+                mTextSizeScaleDiff = 0.0f;
+            }else {
+                mTextSizeScaleDiff = Math.abs(mTextSelectSize-mTextSize)/(3f*Math.max(mTextSize,mTextSelectSize));
+            }
 
             ta.recycle();
         }
@@ -392,6 +403,13 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
             LogUtils.d("zzy:mCurrentPositionOffset="+mCurrentPositionOffset);
             scrollToCurrentTab();
             invalidate();
+
+            if (mIndicatorStyle==TabConsts.TabStyle.STYLE_TEXT) {
+                animalTabs(position, positionOffset, false);
+                if (positionOffset < 1 && position < getTabCount() - 1) {
+                    animalTabs(position + 1, positionOffset, true);
+                }
+            }
         }
 
         @Override
@@ -401,7 +419,60 @@ import static com.mbg.module.ui.view.layout.tab.constant.TabConsts.TabStyle.STYL
 
         @Override
         public void onPageScrollStateChanged(int state) {
+            if (state == ViewPager.SCROLL_STATE_IDLE&&mIndicatorStyle== TabConsts.TabStyle.STYLE_TEXT) {
+                for (int i = 0; i < getTabCount(); i++) {
+                    View tabView =  mTabsContainer.getChildAt(i);
+                    TextView tabTitle =  tabView.findViewById(R.id.tv_tab_title);
+                    if (tabTitle!=null){
+                        if (i!=mCurrentTab){
+                            tabTitle.setScaleX(1);
+                            tabTitle.setScaleY(1);
+                            tabTitle.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
+                        }else {
+                            int  padding=(int) (mTabPadding*(1+mTextSizeScaleDiff));
+                            tabTitle.setPadding(padding, 0, padding, 0);
+                        }
+                    }
+                }
+            }
         }
+    private void animalTabs(int position, float positionOffset,boolean isBigger){
+        if (mTabCount <= 0) {
+            return;
+        }
+        View tabView =  mTabsContainer.getChildAt(position);
+        if (tabView==null){
+            return;
+        }
+
+        TextView tabTitle =  tabView.findViewById(R.id.tv_tab_title);
+        float baseScale;
+        int color;
+
+
+        if (isBigger){
+            baseScale=1+mTextSizeScaleDiff*positionOffset;
+
+            //textSize=mEvaluatorSize.evaluate(positionOffset,mTextSize,mTextSelectSize);
+            color=(int)mEvaluator.evaluate(positionOffset,mTextUnSelectColor,mTextSelectColor);
+        }else {
+            baseScale=1f+mTextSizeScaleDiff-mTextSizeScaleDiff*positionOffset;
+            //textSize=mEvaluatorSize.evaluate(positionOffset,mTextSelectSize,mTextSize);
+            color=(int)mEvaluator.evaluate(positionOffset,mTextSelectColor,mTextUnSelectColor);
+        }
+
+        if (tabTitle!=null) {
+            tabTitle.setTextColor(color);
+            //tabTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+            tabTitle.setScaleX(baseScale);
+            tabTitle.setScaleY(baseScale);
+            int  padding=(int) (mTabPadding*baseScale);
+            tabTitle.post(()->{
+                    tabTitle.setPadding(padding, 0, padding, 0);
+            });
+
+        }
+    }
 
         /** HorizontalScrollView滚到当前tab,并且居中显示 */
         private void scrollToCurrentTab() {

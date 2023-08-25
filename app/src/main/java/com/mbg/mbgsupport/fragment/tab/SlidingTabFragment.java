@@ -25,7 +25,7 @@ public class SlidingTabFragment extends BaseFragment implements View.OnClickList
     
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] mTitles = {
-            "热门", "iOS", "Android"
+            "热门", "iOS", "AndroidIOS"
             , "前端"/*, "后端", "设计", "工具资源"*/
     };
    /* private final String[] mTitles = {

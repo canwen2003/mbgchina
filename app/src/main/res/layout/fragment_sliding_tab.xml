@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="start">
 
             <com.mbg.module.ui.view.layout.tab.SlidingTabLayout
                 android:id="@+id/tl_1"
@@ -28,6 +28,8 @@
                 android:paddingTop="15dp"
                 tl:indicator_gravity="BOTTOM"
                 tl:textBold="SELECT"
+                tl:textSelectSize="24sp"
+                tl:textSize="16sp"
                 tl:underline_color="#1A000000"
                 tl:underline_gravity="TOP"
                 tl:underline_height="1dp"/>
@@ -175,9 +177,10 @@
                 tl:textSelectColor="@color/black"
                 tl:textUnSelectColor="@color/white"
                 tl:textSize="14sp"
+                tl:textSelectSize="24sp"
                 tl:indicator_color="@color/white"
                 tl:indicator_corner_radius="5dp"
-                tl:indicator_style="BLOCK"/>
+                tl:indicator_style="TEXT"/>
 
         </LinearLayout>
 

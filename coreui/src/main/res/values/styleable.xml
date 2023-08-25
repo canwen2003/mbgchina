@@ -648,6 +648,7 @@
         <attr name="mode" format="enum">
             <enum name="single" value="1"/>
             <enum name="range" value="2"/>
+            <enum name="step" value="3"/>
         </attr>
 
         <!--RangeSeekBar thumbs gravity-->
@@ -743,12 +744,16 @@
 
         <!--steps SeekBar-->
         <attr name="steps" format="integer"/>
+        <attr name="steps_progress" format="integer"/>
         <attr name="step_color" format="color"/>
         <attr name="step_width" format="dimension"/>
         <attr name="step_height" format="dimension"/>
+        <attr name="step_progress_width" format="dimension"/>
+        <attr name="step_progress_height" format="dimension"/>
         <attr name="step_radius" format="dimension"/>
         <attr name="step_auto_bonding" format="boolean"/>
         <attr name="step_drawable" format="reference"/>
+        <attr name="step_progress_drawable" format="reference"/>
 
     </declare-styleable>
 

@@ -40,10 +40,12 @@ public class RangeSeekBar extends View {
     //RangeSeekBar
     public final static int SEEKBAR_MODE_RANGE = 2;
 
+    public final static int SEEKBAR_MODE_STEP = 3;
+
     /**
      * @hide
      */
-    @IntDef({SEEKBAR_MODE_SINGLE, SEEKBAR_MODE_RANGE})
+    @IntDef({SEEKBAR_MODE_SINGLE, SEEKBAR_MODE_RANGE,SEEKBAR_MODE_STEP})
     @Retention(RetentionPolicy.SOURCE)
     public @interface SeekBarModeDef {
     }
@@ -146,12 +148,20 @@ public class RangeSeekBar extends View {
     //the height of each step
     private float stepsHeight;
     //the radius of step divs
+
+    private float stepsProgressWidth;
+    //the height of each step
+    private float stepsProgressHeight;
+    //the radius of step divs
     private float stepsRadius;
     //steps is 0 will disable StepSeekBar
     private int steps;
+    private int stepsProgress;
     //the thumb will automatic bonding close to its value
     private boolean stepsAutoBonding;
     private int stepsDrawableId;
+
+    private int stepsProgressDrawableId;
     //True values set by the user
     private float minProgress, maxProgress;
     //****************** the above is attr value  ******************//
@@ -173,6 +183,8 @@ public class RangeSeekBar extends View {
     Bitmap progressBitmap;
     Bitmap progressDefaultBitmap;
     List<Bitmap> stepsBitmaps = new ArrayList<>();
+    List<Bitmap> stepsProgressBitmaps = new ArrayList<>();
+
     private int progressPaddingRight;
     private OnRangeChangedListener callback;
 
@@ -209,6 +221,13 @@ public class RangeSeekBar extends View {
                 stepsBitmaps.add(bitmap);
             }
         }
+
+        if (stepsProgressBitmaps.isEmpty()){
+            Bitmap bitmap = Utils.drawableToBitmap(getContext(), (int) stepsProgressWidth, (int) stepsProgressHeight, stepsProgressDrawableId);
+            for (int i = 0; i <= stepsProgress; i++) {
+                stepsProgressBitmaps.add(bitmap);
+            }
+        }
     }
 
     private void initSeekBar(AttributeSet attrs) {
@@ -241,11 +260,17 @@ public class RangeSeekBar extends View {
             tickMarkTextColor = t.getColor(R.styleable.RangeSeekBar_tick_mark_text_color, progressDefaultColor);
             tickMarkInRangeTextColor = t.getColor(R.styleable.RangeSeekBar_tick_mark_text_color, progressColor);
             steps = t.getInt(R.styleable.RangeSeekBar_steps, 0);
+            stepsProgress = t.getInt(R.styleable.RangeSeekBar_steps_progress, 1);
             stepsColor = t.getColor(R.styleable.RangeSeekBar_step_color, 0xFF9d9d9d);
             stepsRadius = t.getDimension(R.styleable.RangeSeekBar_step_radius, 0);
             stepsWidth = t.getDimension(R.styleable.RangeSeekBar_step_width, 0);
             stepsHeight = t.getDimension(R.styleable.RangeSeekBar_step_height, 0);
+
+            stepsProgressWidth= t.getDimension(R.styleable.RangeSeekBar_step_progress_width, stepsWidth);
+            stepsProgressHeight= t.getDimension(R.styleable.RangeSeekBar_step_progress_width, stepsHeight);
+
             stepsDrawableId = t.getResourceId(R.styleable.RangeSeekBar_step_drawable, 0);
+            stepsProgressDrawableId = t.getResourceId(R.styleable.RangeSeekBar_step_progress_drawable, 0);
             stepsAutoBonding = t.getBoolean(R.styleable.RangeSeekBar_step_auto_bonding, true);
             t.recycle();
         } catch (Exception e) {
@@ -387,7 +412,11 @@ public class RangeSeekBar extends View {
         onDrawTickMark(canvas, paint);
         onDrawProgressBar(canvas, paint);
         onDrawSteps(canvas, paint);
-        onDrawSeekBar(canvas);
+        if (seekBarMode==SEEKBAR_MODE_STEP){
+            onDrawPressSteps(canvas, paint);
+        }else {
+            onDrawSeekBar(canvas);
+        }
     }
 
     //绘制刻度，并且根据当前位置是否在刻度范围内设置不同的颜色显示
@@ -450,7 +479,12 @@ public class RangeSeekBar extends View {
             progressDstRect.left = leftSB.left + leftSB.getThumbScaleWidth() / 2f + progressWidth * leftSB.currPercent;
             progressDstRect.right = rightSB.left + rightSB.getThumbScaleWidth() / 2f + progressWidth * rightSB.currPercent;
             progressDstRect.bottom = getProgressBottom();
-        } else {
+        }else if(seekBarMode==SEEKBAR_MODE_SINGLE){
+            progressDstRect.top = getProgressTop();
+            progressDstRect.left = leftSB.left + leftSB.getThumbScaleWidth() / 2f;
+            progressDstRect.right = leftSB.left + leftSB.getThumbScaleWidth() / 2f + progressWidth * leftSB.currPercent;
+            progressDstRect.bottom = getProgressBottom();
+        }else {
             progressDstRect.top = getProgressTop();
             progressDstRect.left = leftSB.left + leftSB.getThumbScaleWidth() / 2f;
             progressDstRect.right = leftSB.left + leftSB.getThumbScaleWidth() / 2f + progressWidth * leftSB.currPercent;
@@ -464,6 +498,9 @@ public class RangeSeekBar extends View {
             if (seekBarMode == SEEKBAR_MODE_RANGE) {
                 progressSrcRect.left = (int) (bitmapWidth * leftSB.currPercent);
                 progressSrcRect.right = (int) (bitmapWidth * rightSB.currPercent);
+            }else if(seekBarMode==SEEKBAR_MODE_SINGLE){
+                progressSrcRect.left = 0;
+                progressSrcRect.right = (int) (bitmapWidth * leftSB.currPercent);
             } else {
                 progressSrcRect.left = 0;
                 progressSrcRect.right = (int) (bitmapWidth * leftSB.currPercent);
@@ -489,6 +526,30 @@ public class RangeSeekBar extends View {
                 canvas.drawRoundRect(stepDivRect, stepsRadius, stepsRadius, paint);
             } else {
                 canvas.drawBitmap(stepsBitmaps.get(k), null, stepDivRect, paint);
+            }
+        }
+    }
+
+    protected void onDrawPressSteps(Canvas canvas, Paint paint) {
+        if (!verifyStepsMode()) return;
+        int stepMarks = getProgressWidth() / (steps);
+        float extHeight = (stepsProgressHeight - getProgressHeight()) / 2f;
+
+        for (int k = 0; k <= stepsProgress-1; k++) {
+            float x = getProgressLeft() + k * stepMarks + stepsProgressWidth/2;
+            progressDstRect.set(x, getProgressTop() , x + stepMarks, getProgressBottom() );
+            paint.setColor(progressColor);
+            canvas.drawRoundRect(progressDstRect, progressRadius, progressRadius, paint);
+        }
+
+        for (int k = 0; k <= stepsProgress; k++) {
+            float x = getProgressLeft() + k * stepMarks - stepsProgressWidth/ 2f;
+            stepDivRect.set(x, getProgressTop() - extHeight, x + stepsProgressWidth, getProgressBottom() + extHeight);
+            if (stepsBitmaps.isEmpty() || stepsBitmaps.size() <= k) {
+                paint.setColor(stepsColor);
+                canvas.drawRoundRect(stepDivRect, stepsRadius, stepsRadius, paint);
+            } else {
+                canvas.drawBitmap(stepsProgressBitmaps.get(k), null, stepDivRect, paint);
             }
         }
     }
@@ -584,7 +645,7 @@ public class RangeSeekBar extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!isEnable) return true;
+        if (!isEnable||seekBarMode==SEEKBAR_MODE_STEP) return true;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -615,6 +676,9 @@ public class RangeSeekBar extends View {
                         performClick = calculateCurrentSeekBarPercent(touchDownX);
                         currTouchSB.slide(performClick);
                     }
+                }else if (seekBarMode == SEEKBAR_MODE_SINGLE){
+                    currTouchSB = leftSB;
+                    scaleCurrentSeekBarThumb();
                 } else {
                     currTouchSB = leftSB;
                     scaleCurrentSeekBarThumb();

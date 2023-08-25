@@ -1,5 +1,6 @@
 package com.mbg.module.ui.view.layout.tab;
 
+import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -31,6 +32,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 
+import com.mbg.module.common.util.LogUtils;
 import com.mbg.module.ui.R;
 import com.mbg.module.ui.view.layout.tab.listener.OnBackgroundListener;
 import com.mbg.module.ui.view.layout.tab.listener.OnTabSelectListener;
@@ -110,6 +112,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     private int mLastScrollX;
     private int mHeight;
     private boolean mSnapOnTabClick;
+    private ArgbEvaluator mEvaluator = new ArgbEvaluator();
+
+
 
     public SlidingTabLayout(Context context) {
         this(context, null, 0);
@@ -370,16 +375,51 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         }
     }
 
+    private int mLastTab=-1;
+    private float mLastPositionOffset;
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         /**
          * position:当前View的位置
          * mCurrentPositionOffset:当前View的偏移量比例.[0,1)
          */
+        if (mLastTab==-1){
+            mLastTab=mCurrentTab;
+            mLastPositionOffset=mCurrentPositionOffset;
+        }
+        LogUtils.d("position="+position + "\n\rpix="+positionOffsetPixels+"State="+mPageScrollState);
         this.mCurrentTab = position;
         this.mCurrentPositionOffset =positionOffset;
         scrollToCurrentTab();
         invalidate();
+
+        animalTabs(position,0,false);
+        if (positionOffset < 1 && position < getTabCount() - 1) {
+            animalTabs(position + 1, positionOffset, true);
+        }
+
+    }
+    private void animalTabs(int position, float positionOffset,boolean isBigger){
+        if (mTabCount <= 0) {
+            return;
+        }
+
+        View currentView =  mTabsContainer.getChildAt(position);
+        TextView tv_tab_title =  currentView.findViewById(R.id.tv_tab_title);
+        float baseScale1;
+        int color;
+        if (isBigger){
+            baseScale1=1+0.3f*positionOffset;
+            color=(int)mEvaluator.evaluate(positionOffset,mTextUnSelectColor,mTextSelectColor);
+        }else {
+            baseScale1=1.3f-0.3f*positionOffset;
+            color=(int)mEvaluator.evaluate(positionOffset,mTextSelectColor,mTextUnSelectColor);
+        }
+
+        currentView.setScaleX(baseScale1);
+        currentView.setScaleY(baseScale1);
+        tv_tab_title.setTextColor(color);
     }
 
     @Override
@@ -387,8 +427,21 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         updateTabSelection(position);
     }
 
+    private int mPageScrollState=0;
     @Override
     public void onPageScrollStateChanged(int state) {
+        if (state == ViewPager.SCROLL_STATE_IDLE) {
+            for (int i = 0; i < getTabCount(); i++) {
+                View currentView =  mTabsContainer.getChildAt(i);
+                if (i==mCurrentTab){
+                   // currentView.setScaleX(1.3f);
+                    ///currentView.setScaleY(1.3f);
+                }else {
+                    currentView.setScaleX(1);
+                    currentView.setScaleY(1);
+                }
+            }
+        }
     }
 
     /** HorizontalScrollView滚到当前tab,并且居中显示 */

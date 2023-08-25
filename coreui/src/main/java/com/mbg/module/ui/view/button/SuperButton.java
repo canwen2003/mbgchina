@@ -12,8 +12,10 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ import com.mbg.module.ui.R;
  * @date 2019-07-01 20:08
  * @description 超级按钮
  */
-public class SuperButton extends LinearLayout {
+public class SuperButton extends FrameLayout {
     /**
      * 形状
      */
@@ -151,10 +153,12 @@ public class SuperButton extends LinearLayout {
      * 文字和图标容器
      */
     private TextView mTextIconContainer;
+    private View mViewContainer;
     /**
      * 按钮背景
      */
     private GradientDrawable mButtonBackground;
+    private GradientDrawable mButtonForeground;
     /**
      * 按钮是否可以点击
      */
@@ -205,12 +209,15 @@ public class SuperButton extends LinearLayout {
         mMovingThreshold= ViewConfiguration.get(context).getScaledTouchSlop();
 
         setClickable(true);
-        setGravity(Gravity.CENTER);
         mTextIconContainer = new TextView(context);
+        mViewContainer =new TextView(context);
+
         //解析属性
         parseAttrs(context, attrs);
         //按钮背景
         mButtonBackground = new GradientDrawable();
+        mButtonForeground = new GradientDrawable();
+
         //设置渐变色
         if (mColorStart != ResourceId.VALUE_NULL && mColorEnd != ResourceId.VALUE_NULL) {
             if (mColorDirection == TOP_BOTTOM) {
@@ -237,11 +244,15 @@ public class SuperButton extends LinearLayout {
             //设置填充颜色
             setButtonBackgroundColor(mColorNormal);
         }
+        mButtonForeground.setColor(Color.BLACK);
+
 
         if (mShape == CIRCLE) {
             mButtonBackground.setShape(GradientDrawable.OVAL);
+            mButtonForeground.setShape(GradientDrawable.OVAL);
         } else {
             mButtonBackground.setShape(GradientDrawable.RECTANGLE);
+            mButtonForeground.setShape(GradientDrawable.RECTANGLE);
         }
         //ordered top-left, top-right, bottom-right, bottom-left
         mButtonBackground.setCornerRadii(new float[]{
@@ -249,11 +260,17 @@ public class SuperButton extends LinearLayout {
                 mCornerRightTop != ResourceId.VALUE_NULL ? mCornerRightTop : mCorner, mCornerRightTop != ResourceId.VALUE_NULL ? mCornerRightTop : mCorner,
                 mCornerRightBottom != ResourceId.VALUE_NULL ? mCornerRightBottom : mCorner, mCornerRightBottom != ResourceId.VALUE_NULL ? mCornerRightBottom : mCorner,
                 mCornerLeftBottom != ResourceId.VALUE_NULL ? mCornerLeftBottom : mCorner, mCornerLeftBottom != ResourceId.VALUE_NULL ? mCornerLeftBottom : mCorner});
-
+        mButtonForeground.setCornerRadii(new float[]{
+                mCornerLeftTop != ResourceId.VALUE_NULL ? mCornerLeftTop : mCorner, mCornerLeftTop != ResourceId.VALUE_NULL ? mCornerLeftTop : mCorner,
+                mCornerRightTop != ResourceId.VALUE_NULL ? mCornerRightTop : mCorner, mCornerRightTop != ResourceId.VALUE_NULL ? mCornerRightTop : mCorner,
+                mCornerRightBottom != ResourceId.VALUE_NULL ? mCornerRightBottom : mCorner, mCornerRightBottom != ResourceId.VALUE_NULL ? mCornerRightBottom : mCorner,
+                mCornerLeftBottom != ResourceId.VALUE_NULL ? mCornerLeftBottom : mCorner, mCornerLeftBottom != ResourceId.VALUE_NULL ? mCornerLeftBottom : mCorner});
         //设置边框颜色和边框宽度
         mButtonBackground.setStroke(mBorderWidth, mBorderColor);
         //设置背景
         setBackground(mButtonBackground);
+        mViewContainer.setBackground(mButtonForeground);
+        mViewContainer.setAlpha(0.3f);
 
         //设置文字
         mTextIconContainer.setText(text);
@@ -281,7 +298,7 @@ public class SuperButton extends LinearLayout {
             mTextIconContainer.setCompoundDrawablesWithIntrinsicBounds(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
         }
 
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         if (mDrawableMiddle != null) {
             ImageView imageView = new ImageView(getContext());
             if (mDrawableMiddleWidth == ResourceId.VALUE_NULL || mDrawableMiddleHeight == ResourceId.VALUE_NULL) {
@@ -295,6 +312,7 @@ public class SuperButton extends LinearLayout {
             addView(imageView, layoutParams);
         } else {
             addView(mTextIconContainer, layoutParams);
+            addView(mViewContainer,layoutParams);
         }
 
         //当设置的有阴影效果时
@@ -307,6 +325,7 @@ public class SuperButton extends LinearLayout {
                     mShadowSize, mShadowSize);
             setBackground(shadowBackground);
         }
+        mViewContainer.setVisibility(GONE);
     }
 
 
@@ -383,16 +402,19 @@ public class SuperButton extends LinearLayout {
         }
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
+                mViewContainer.setVisibility(VISIBLE);
+               // setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
                 mXPos=event.getX();
                 mXPos=event.getY();
                 break;
             case MotionEvent.ACTION_UP:
-                setButtonBackgroundColor(mColorNormal);
+                mViewContainer.setVisibility(GONE);
+               // setButtonBackgroundColor(mColorNormal);
                 break;
             case MotionEvent.ACTION_MOVE:
                 if ((mCurrentColor!=mColorNormal)&&(Math.abs(event.getX()-mXPos)>mMovingThreshold||Math.abs(event.getX()- mYPos)>mMovingThreshold)) {
-                    setButtonBackgroundColor(mColorNormal);
+                    //setButtonBackgroundColor(mColorNormal);
+                    mViewContainer.setVisibility(GONE);
                 }
                 break;
             default:

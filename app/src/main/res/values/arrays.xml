@@ -52,4 +52,14 @@
         <item>Lv5</item>
     </string-array>
 
+    <string-array name="markArray7">
+        <item>D1</item>
+        <item>D2</item>
+        <item>D3</item>
+        <item>D4</item>
+        <item>D5</item>
+        <item>D6</item>
+        <item>D7</item>
+    </string-array>
+
 </resources>
